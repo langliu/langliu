@@ -1,0 +1,9 @@
+{
+  "name": "@langliu/eslint-config-react",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "dependencies": {
+    "@langliu/eslint-config": "^0.0.4",
+    "eslint-plugin-react": "^7.31.10"
+  }
+}

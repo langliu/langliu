@@ -16,6 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@langliu/eslint-config": ["packages/eslint-config/src/index.ts"],
+      "@langliu/eslint-config-react": [
+        "packages/eslint-config-react/src/index.ts"
+      ],
       "@langliu/example": ["packages/example/src/index.ts"]
     }
   },
