@@ -1,0 +1,18 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table td,
+.table th {
+  border: 1px solid #ddd;
+  padding: 8px 16px;
+}
+
+.table th {
+  background-color: #04aa6d;
+  color: white;
+  text-align: left;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
