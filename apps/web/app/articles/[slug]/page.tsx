@@ -20,11 +20,13 @@ export default async function Page({ params }: Props) {
   const data = await getData(slug);
 
   const pa = (content: string) => {
-    const arr = content.split('\n');
+    const arr = content?.split('\n') ?? [];
     return (
       <>
         {arr.map((item) => (
-          <p key={item}>{item.trim()}</p>
+          <p key={item} style={{ marginBottom: 12, fontSize: '1.1rem' }}>
+            {item.trim()}
+          </p>
         ))}
       </>
     );
