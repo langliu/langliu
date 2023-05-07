@@ -19,6 +19,7 @@ const Page = async () => {
           <tr>
             <th>书名</th>
             <th>作者</th>
+            <th>状态</th>
             <th>操作</th>
           </tr>
         </thead>
@@ -27,6 +28,7 @@ const Page = async () => {
             <tr key={country.id}>
               <td> {country.name}</td>
               <td> {country.author ?? '未知'}</td>
+              <td> {country.end ? '完结' : '连载'}</td>
               <td>
                 <Link href={`/books/${country.id}`}>查看</Link>
               </td>

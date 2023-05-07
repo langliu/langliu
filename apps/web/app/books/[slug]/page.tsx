@@ -8,10 +8,11 @@ type Props = {
 };
 
 export async function getData(bookId: string) {
-  const { data, error } = await supabase
+  const { data } = await supabase
     .from('articles')
     .select('id,title,serial,bookId')
-    .eq('bookId', bookId);
+    .eq('bookId', bookId)
+    .order('serial', { ascending: true });
   return data;
 }
 

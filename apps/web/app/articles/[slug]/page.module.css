@@ -1,4 +1,60 @@
+.wrapper {
+  background-color: #ece6d9;
+}
+
 .content {
-  max-width: 1000px;
+  max-width: 800px;
   margin: 0 auto;
+  background-color: rgb(247, 242, 232);
+  padding: 60px 64px;
+}
+
+.title {
+  margin-bottom: 1rem;
+}
+
+.paragraph {
+  line-height: 1.8;
+  margin: 0.8em 0;
+  font-size: 18px;
+}
+
+.chapterControl {
+  height: 70px;
+  margin-bottom: 24px;
+  text-align: center;
+  border: 1px solid #d8d8d8;
+  background-color: #f6f1e7;
+  max-width: 800px;
+  margin: 24px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 18px;
+}
+
+.divider {
+  display: inline-block;
+  vertical-align: middle;
+  letter-spacing: normal;
+  word-spacing: normal;
+  height: 32px;
+  border-right: 1px solid #d8d8d8;
+  font-size: 0;
+}
+
+.disable {
+  color:#ccc;
+  cursor: not-allowed;
+}
+
+@media screen and (max-width: 600px) {
+  .content {
+    padding: 20px 16px;
+  }
+
+  .chapterControl {
+    height: 54px;
+    margin-top: 12px;
+  }
 }
