@@ -1,0 +1,42 @@
+.wrapper {
+  background-color: #ece6d9;
+  min-height: 100svh;
+}
+
+.book {
+  padding: 12px 1rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.title {
+  margin: 0;
+}
+
+.list {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.listItem {
+  display: flex;
+  padding: 12px 1rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  background-color: rgb(247, 242, 232);
+  margin-bottom: 1px;
+}
+
+.listItem:hover {
+  color: blueviolet;
+}
+
+@media screen and (max-width: 600px) {
+  .list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
