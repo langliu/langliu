@@ -1,0 +1,92 @@
+.card {
+  -webkit-transform: translateY(0px);
+  -moz-transform: translateY(0px);
+  transform: translateY(0px);
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  background: white;
+  border-radius: 0.5rem;
+}
+
+.card:hover {
+  -webkit-transform: translateY(-6px);
+  -moz-transform: translateY(-6px);
+  transform: translateY(-6px);
+  -webkit-box-shadow: 0 26px 40px -24px rgba(0, 36, 100, 0.3);
+  -moz-box-shadow: 0 26px 40px -24px rgba(0, 36, 100, 0.3);
+  box-shadow: 0 26px 40px -24px rgba(0, 36, 100, 0.3);
+}
+
+.cardBody {
+  display: flex;
+  align-items: center;
+  padding: 0.938rem;
+  flex: 1 1 auto;
+  gap: 12px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  gap: 8px;
+}
+.cardBody h5 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.cardBody p {
+  color: #1d232b;
+  margin: 0;
+  white-space: normal;
+  word-break: break-all;
+}
+
+.tags {
+  display: flex;
+  gap: 6px;
+}
+
+.tag {
+  display: inline-block;
+  border-radius: 10rem;
+  padding: 0.35em 0.65em;
+  font-size: 0.75em;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  background-color: blueviolet;
+  font-size: 12px;
+}
+
+.tag:nth-child(2) {
+  background-color: green;
+}
+
+.tag:nth-child(3) {
+  background-color: yellowgreen;
+}
+
+.tag:nth-child(4) {
+  background-color: rebeccapurple;
+}
+
+.desc {
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 0.825rem;
+  color: rgb(108, 117, 125);
+}
+
+.icon {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 4rem;
+}
