@@ -1,0 +1,70 @@
+
+> web@1.0.0 build
+> next build
+
+- info Loaded env from D:\langliu\apps\web\.env
+- info Creating an optimized production build...
+- warn Compiled with warnings
+
+../../node_modules/node-fetch/lib/index.js
+Module not found: Can't resolve 'encoding' in 'D:\langliu\node_modules\node-fetch\lib'
+
+Import trace for requested module:
+../../node_modules/node-fetch/lib/index.js
+../../node_modules/cross-fetch/dist/node-ponyfill.js
+../../node_modules/@supabase/supabase-js/dist/main/lib/fetch.js
+../../node_modules/@supabase/supabase-js/dist/main/SupabaseClient.js
+../../node_modules/@supabase/supabase-js/dist/main/index.js
+./libs/supabaseClient.ts
+./app/articles/page.tsx
+
+../../node_modules/node-fetch/lib/index.js
+Module not found: Can't resolve 'encoding' in 'D:\langliu\node_modules\node-fetch\lib'
+
+Import trace for requested module:
+../../node_modules/node-fetch/lib/index.js
+../../node_modules/cross-fetch/dist/node-ponyfill.js
+../../node_modules/@supabase/supabase-js/dist/main/lib/fetch.js
+../../node_modules/@supabase/supabase-js/dist/main/SupabaseClient.js
+../../node_modules/@supabase/supabase-js/dist/main/index.js
+./libs/supabaseClient.ts
+./app/books/page.tsx
+
+- info Skipping validation of types
+- info Linting...
+- error ESLint: Failed to load config "../../.eslintrc.json" to extend from. Referenced from: D:\langliu\apps\web\.eslintrc.json
+- info Collecting page data...
+- info Generating static pages (0/10)
+- info Generating static pages (2/10)
+- info Generating static pages (4/10)
+- info Generating static pages (7/10)
+- info Generating static pages (10/10)
+- info Finalizing page optimization...
+
+Route (app)                                Size     First Load JS
+┌ ○ /                                      203 B          77.2 kB
+├ ○ /api/hello                             0 B                0 B
+├ ○ /articles                              135 B          77.2 kB
+├ λ /articles/[slug]                       316 B            83 kB
+├ ○ /articles/create                       5.89 kB         108 kB
+├ ○ /books                                 2.06 kB         143 kB
+├ λ /books/[slug]                          273 B            83 kB
+├ ○ /books/create                          66.2 kB         202 kB
+├ ○ /favicon.ico                           0 B                0 B
+└ ○ /personal                              339 B          77.4 kB
++ First Load JS shared by all              77 kB
+  ├ chunks/7fd0f9f1-69b358f7e6c05f46.js    50.5 kB
+  ├ chunks/9-8e9d095149b533d7.js           24.4 kB
+  ├ chunks/main-app-3a4f5833ec06e1d5.js    211 B
+  └ chunks/webpack-8b11c7c504652b31.js     1.88 kB
+
+Route (pages)                              Size     First Load JS
+─ ○ /404                                   178 B          86.2 kB
++ First Load JS shared by all              86 kB
+  ├ chunks/main-194cf0e446447ade.js        83.9 kB
+  ├ chunks/pages/_app-415a5670032b79f5.js  190 B
+  └ chunks/webpack-8b11c7c504652b31.js     1.88 kB
+
+λ  (Server)  server-side renders at runtime (uses getInitialProps or getServerSideProps)
+○  (Static)  automatically rendered as static HTML (uses no initial props)
+
