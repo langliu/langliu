@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import NavCard from 'apps/web/components/NavCard';
+import NavCard from '@/components/NavCard';
 import styles from './page.module.css';
 
 const PersonalPage: FC = () => {

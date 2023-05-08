@@ -1,4 +1,4 @@
-import { supabase } from 'apps/web/libs/supabaseClient';
+import { supabase } from '@/libs/supabaseClient';
 import Link from 'next/link';
 import styles from './page.module.css';
 

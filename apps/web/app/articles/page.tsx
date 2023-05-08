@@ -1,5 +1,5 @@
 import React from 'react';
-import { supabase } from '../../libs/supabaseClient';
+import { supabase } from '@/libs/supabaseClient';
 
 export async function getData() {
   const { data } = await supabase.from('books').select('*');

@@ -19,7 +19,16 @@
     "types": [
       "jest",
       "node"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": [
+        "./components/*"
+      ],
+      "@/libs/*": [
+        "./libs/*"
+      ]
+    }
   },
   "include": [
     "**/*.ts",

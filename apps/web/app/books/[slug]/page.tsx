@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { supabase } from 'apps/web/libs/supabaseClient';
+import { supabase } from '@/libs/supabaseClient';
 import styles from './page.module.css';
 
 type Props = {
