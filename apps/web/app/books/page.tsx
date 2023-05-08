@@ -1,5 +1,7 @@
+'use client';
 import React from 'react';
 import Link from 'next/link';
+import { Button, Space } from 'antd';
 import { supabase } from '../../libs/supabaseClient';
 import styles from './page.module.css';
 
@@ -13,7 +15,12 @@ const Page = async () => {
 
   return (
     <div>
-      <h1>书籍📕</h1>
+      <Space>
+        <h1>书籍📕</h1>
+        <Link href={'/books/create'}>
+          <Button type="primary">新建</Button>
+        </Link>
+      </Space>
       <table className={styles.table}>
         <thead>
           <tr>

@@ -18,7 +18,6 @@ export async function getData(id: string) {
     .select('id,serial')
     .eq('bookId', data?.[0].bookId)
     .order('serial', { ascending: true });
-  console.log('articles', articles);
   const currentIndex =
     articles?.findIndex((item) => item.serial === data?.[0].serial) ?? 0;
   return {
