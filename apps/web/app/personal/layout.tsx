@@ -1,12 +1,12 @@
-import React, { FC } from 'react';
-import styles from './page.module.css';
+import styles from './page.module.css'
+import React, { FC } from 'react'
 
 type Props = {
-  children: React.ReactNode;
-};
+  children: React.ReactNode
+}
 
 const Layout: FC<Props> = ({ children }) => {
-  return <div className={styles.page}>{children}</div>;
-};
+  return <div className={styles.page}>{children}</div>
+}
 
-export default Layout;
+export default Layout
