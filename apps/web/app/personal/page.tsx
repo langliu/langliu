@@ -12,6 +12,13 @@ const PersonalPage: FC = () => {
         </div>
         <div className={styles.navWrapper}>
           <NavCard
+            title="阿里云盘资源共享站"
+            href="https://pan666.net/"
+            tags={['电影', '电视剧', '下载']}
+            description="阿里云盘资源，很多精心整理的资源合集"
+            iconUrl="http://www.549.tv/icon/yunpan1.png"
+          />
+          <NavCard
             title="云盘资源社区"
             href="https://yunpan1.com/"
             tags={['动漫', '高清', '电影', '阿里云']}
@@ -31,13 +38,6 @@ const PersonalPage: FC = () => {
             tags={['高清', '电影', '电视剧', '下载']}
             description="1080P/4K高清片源下载"
             iconUrl="https://gaoqing.fm/favicon.ico"
-          />
-          <NavCard
-            title="阿里云盘资源共享站"
-            href="https://pan666.net/"
-            tags={['电影', '电视剧', '下载']}
-            description="阿里云盘资源，很多精心整理的资源合集"
-            iconUrl="http://www.549.tv/icon/yunpan1.png"
           />
         </div>
       </div>
