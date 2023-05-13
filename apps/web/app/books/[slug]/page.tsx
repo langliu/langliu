@@ -1,13 +1,13 @@
-import Link from 'next/link';
-import { supabase } from '@/libs/supabaseClient';
 import styles from './page.module.css';
+import { supabase } from '@/libs/supabaseClient';
+import Link from 'next/link';
 
 type Props = {
   params: {
     slug: string;
   };
 };
-
+export const runtime = 'edge'
 export async function getData(bookId: string) {
   const { data } = await supabase
     .from('articles')
