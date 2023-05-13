@@ -1,29 +1,30 @@
-import Link from 'next/link';
-import { supabase } from '@/libs/supabaseClient';
-import styles from './page.module.css';
+import styles from './page.module.css'
+import { supabase } from '@/libs/supabaseClient'
+import Link from 'next/link'
 
 type Props = {
   params: {
-    slug: string;
-  };
-};
+    slug: string
+  }
+}
 
+export const runtime = 'edge'
 export async function getData(bookId: string) {
   const { data } = await supabase
     .from('articles')
     .select('id,title,serial,bookId')
     .eq('bookId', bookId)
-    .order('serial', { ascending: true });
-  const { data: book } = await supabase.from('books').select().eq('id', bookId);
+    .order('serial', { ascending: true })
+  const { data: book } = await supabase.from('books').select().eq('id', bookId)
   return {
     data,
     book,
-  };
+  }
 }
 
 export default async function Page({ params }: Props) {
-  const { slug } = params;
-  const { data, book } = await getData(slug);
+  const { slug } = params
+  const { data, book } = await getData(slug)
 
   return (
     <div className={styles.wrapper}>
@@ -45,5 +46,5 @@ export default async function Page({ params }: Props) {
         ))}
       </ul>
     </div>
-  );
+  )
 }

@@ -1,7 +1,8 @@
 {
   "cSpell.words": [
     "langliu",
-    "supabase"
+    "supabase",
+    "tailwindcss"
   ],
   "[javascript]": {
     "editor.defaultFormatter": "rome.rome"

@@ -1,12 +1,14 @@
+import styles from './page.module.css';
 import { supabase } from '@/libs/supabaseClient';
 import Link from 'next/link';
-import styles from './page.module.css';
 
 type Props = {
   params: {
     slug: string;
   };
 };
+
+export const runtime = 'edge'
 
 export async function getData(id: string) {
   const { data } = await supabase
