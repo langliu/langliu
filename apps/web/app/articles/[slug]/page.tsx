@@ -3,7 +3,7 @@ import { supabase } from '@/libs/supabaseClient'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
-export const runtime = 'edge'
+// export const runtime = 'edge'
 
 export async function getData(id: string) {
   const { data } = await supabase

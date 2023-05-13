@@ -7,7 +7,7 @@ type Props = {
     slug: string;
   };
 };
-export const runtime = 'edge'
+// export const runtime = 'edge'
 export async function getData(bookId: string) {
   const { data } = await supabase
     .from('articles')
