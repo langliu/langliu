@@ -1,17 +1,17 @@
-import React from 'react';
-import { supabase } from '@/libs/supabaseClient';
+import { supabase } from '@/libs/supabaseClient'
+import React from 'react'
 
 export async function getData() {
-  const { data } = await supabase.from('books').select('*');
-  return data;
+  const { data } = await supabase.from('books').select('*')
+  return data
 }
 
 const Page = async () => {
-  const data = await getData();
+  const data = await getData()
 
   return (
     <div>
-      Pagehf
+      Page
       <ul>
         {data?.map((country) => (
           <li key={country.id}>
@@ -21,7 +21,7 @@ const Page = async () => {
         ))}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

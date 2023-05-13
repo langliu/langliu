@@ -1,17 +1,19 @@
-'use client';
-import React from 'react';
-import Link from 'next/link';
-import { Button, Space } from 'antd';
-import { supabase } from '../../libs/supabaseClient';
-import styles from './page.module.css';
+'use client'
+import { supabase } from '../../libs/supabaseClient'
+import styles from './page.module.css'
+import { Button, Space } from 'antd'
+import Link from 'next/link'
+import React from 'react'
+
+export const runtime = 'edge'
 
 export async function getData() {
-  const { data } = await supabase.from('books').select('*');
-  return data;
+  const { data } = await supabase.from('books').select('*')
+  return data
 }
 
 const Page = async () => {
-  const data = await getData();
+  const data = await getData()
 
   return (
     <div>
@@ -44,7 +46,7 @@ const Page = async () => {
         </tbody>
       </table>
     </div>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page
