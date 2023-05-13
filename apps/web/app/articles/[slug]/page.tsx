@@ -8,6 +8,8 @@ type Props = {
   };
 };
 
+export const runtime = 'edge'
+
 export async function getData(id: string) {
   const { data } = await supabase
     .from('articles')
