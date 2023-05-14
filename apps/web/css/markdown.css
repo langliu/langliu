@@ -1,0 +1,28 @@
+h2 {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+  margin-top: 0;
+  font-size: 700;
+  line-height: 1.3333333;
+  color: #f5f5f5;
+}
+
+p {
+  margin-bottom: 20px;
+  color: #d4d4d4;
+}
+
+pre {
+  margin-bottom: 20px;
+  background-color: #262626;
+  padding: 12px 16px;
+  border-radius: 6px;
+}
+
+code {
+  background-color: #262626;
+  color: #ec4899;
+  font-weight: 600;
+  padding: 2px 4px;
+  border-radius: 0.25rem;
+}

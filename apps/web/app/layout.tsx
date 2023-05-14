@@ -1,22 +1,31 @@
-import './global.css'
+'use client'
+// import '@/css/prism.css'
+import '@/css/tailwind.css'
+import 'katex/dist/katex.css'
+
+import '@fontsource/inter/variable-full.css'
+
+import { ThemeProvider } from 'next-themes'
+import type { AppProps } from 'next/app'
 import Head from 'next/head'
 
-export const metadata = {
-  title: '研之有物',
-  description: '刘浪的个人站',
-}
+import { ClientReload } from '@/components/ClientReload'
+import LayoutWrapper from '@/components/LayoutWrapper'
+import Analytics from '@/components/analytics'
+import siteMetadata from '@/data/siteMetadata'
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+const isDevelopment = process.env.NODE_ENV === 'development'
+const isSocket = process.env.SOCKET
+
+export default function App({ children, pageProps }: AppProps) {
   return (
-    <html lang="zh-CN">
+    <ThemeProvider attribute='class' defaultTheme={siteMetadata.theme}>
       <Head>
-        <title>Welcome to web!</title>
+        <meta content='width=device-width, initial-scale=1' name='viewport' />
       </Head>
-      <body>{children}</body>
-    </html>
+      {isDevelopment && isSocket && <ClientReload />}
+      <Analytics />
+      <LayoutWrapper>{children}</LayoutWrapper>
+    </ThemeProvider>
   )
 }
