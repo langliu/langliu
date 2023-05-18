@@ -1,7 +1,5 @@
-'use client'
-import { supabase } from '../../libs/supabaseClient'
 import styles from './page.module.css'
-import { Button, Space } from 'antd'
+import { supabase } from '@/libs/supabaseClient'
 import Link from 'next/link'
 import React from 'react'
 
@@ -17,12 +15,14 @@ const Page = async () => {
 
   return (
     <div>
-      <Space>
+      <div className='flex gap-2'>
         <h1>书籍📕</h1>
         <Link href={'/books/create'}>
-          <Button type="primary">新建</Button>
+          <button type='button' title='新建书籍'>
+            新建
+          </button>
         </Link>
-      </Space>
+      </div>
       <table className={styles.table}>
         <thead>
           <tr>

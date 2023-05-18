@@ -11,7 +11,7 @@ const Pre = ({ children }: Props) => {
   const [copied, setCopied] = useState(false)
 
   const onEnter = () => {
-    console.log('onMovieEnter');
+    console.log('onMovieEnter')
 
     setHovered(true)
   }
@@ -28,7 +28,11 @@ const Pre = ({ children }: Props) => {
   }
 
   return (
-    <div ref={textInput} onMouseEnter={onEnter} onMouseLeave={onExit} className='relative'>
+    <div
+      onMouseEnter={onEnter}
+      onMouseLeave={onExit}
+      className='relative'
+    >
       {hovered && (
         <button
           aria-label='Copy code'
@@ -71,7 +75,7 @@ const Pre = ({ children }: Props) => {
         </button>
       )}
 
-      <pre>{children}</pre>
+      <pre ref={textInput} className='overflow-x-auto'>{children}</pre>
     </div>
   )
 }
