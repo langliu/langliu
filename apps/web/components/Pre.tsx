@@ -1,18 +1,17 @@
 'use client'
-import { ReactNode, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
+import type { FC, ReactNode } from 'react'
 
 interface Props {
-  children: ReactNode
+  children?: ReactNode
 }
 
-const Pre = ({ children }: Props) => {
+const Pre: FC<Props> = ({ children }) => {
   const textInput = useRef(null)
   const [hovered, setHovered] = useState(false)
   const [copied, setCopied] = useState(false)
 
   const onEnter = () => {
-    console.log('onMovieEnter')
-
     setHovered(true)
   }
   const onExit = () => {
@@ -28,11 +27,7 @@ const Pre = ({ children }: Props) => {
   }
 
   return (
-    <div
-      onMouseEnter={onEnter}
-      onMouseLeave={onExit}
-      className='relative'
-    >
+    <div onMouseEnter={onEnter} onMouseLeave={onExit} className='relative'>
       {hovered && (
         <button
           aria-label='Copy code'
@@ -75,7 +70,9 @@ const Pre = ({ children }: Props) => {
         </button>
       )}
 
-      <pre ref={textInput} className='overflow-x-auto'>{children}</pre>
+      <pre ref={textInput} className='overflow-x-auto'>
+        {children}
+      </pre>
     </div>
   )
 }

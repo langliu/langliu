@@ -22,14 +22,14 @@ See [upgrade guide](#upgrade-guide) below if you are migrating from v0 version o
 
 You can easily modify the theme color by changing the primary attribute in the tailwind config file:
 
-```js:tailwind.config.js
-theme: {
+```js title="ts.js"
+const config = {
+  theme: {
     colors: {
       primary: colors.teal,
       gray: colors.neutral,
-      ...
     }
-  ...
+  }
 }
 ```
 
@@ -281,15 +281,14 @@ Line highlighting and line numbers are now supported out of the box thanks to th
 
 The following javascript code block:
 
-````
-```js {1, 3-4} showLineNumbers
+
+```js {1, 3-4}
 var num1, num2, sum
 num1 = prompt('Enter first number')
 num2 = prompt('Enter second number')
 sum = parseInt(num1) + parseInt(num2) // "+" means "add"
 alert('Sum = ' + sum) // "+" means combine into a string
 ```
-````
 
 will appear as:
 

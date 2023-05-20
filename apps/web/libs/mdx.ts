@@ -113,7 +113,6 @@ export async function getAllFilesFrontMatter(folder: 'blog') {
   const prefixPaths = path.join(root, 'data', folder)
 
   const files = getAllFilesRecursively(prefixPaths)
-  console.log(files);
 
 
   const allFrontMatter: PostFrontMatter[] = []

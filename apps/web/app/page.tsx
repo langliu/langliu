@@ -8,14 +8,11 @@ const MAX_DISPLAY = 5
 
 export const getData = async () => {
   const posts = await getAllFilesFrontMatter('blog')
-  console.log('posts', posts)
-
   return { posts }
 }
 
 export default async function Home() {
   const { posts = [] } = await getData()
-  console.log('posts', posts)
   return (
     <>
       {/* <PageSEO title={siteMetadata.title} description={siteMetadata.description} /> */}
