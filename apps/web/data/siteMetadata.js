@@ -2,7 +2,7 @@ const siteMetadata = {
   title: '刘浪的博客',
   author: '刘浪',
   headerTitle: '研之有物',
-  description: 'A blog created with Next.js and Tailwind.css',
+  description: '关于个人生活、技术学习的记录',
   language: 'zh-CN',
   theme: 'system', // system, dark or light
   siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
