@@ -1,6 +1,5 @@
 import ArticleItem from '@/components/ArticleItem'
 import { getAllFilesFrontMatter } from '@/libs/mdx'
-import Link from 'next/link'
 import React from 'react'
 
 export const getData = async () => {
@@ -13,7 +12,7 @@ type Props = {
     tag: string
   }
 }
-
+export const runtime = 'edge'
 const TagDetailPage = async ({ params }: Props) => {
   const { posts = [] } = await getData()
   const tagPosts = posts?.filter((post) => post.tags.includes(params.tag))

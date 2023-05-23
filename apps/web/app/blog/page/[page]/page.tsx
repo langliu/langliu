@@ -11,6 +11,8 @@ type Props = {
   }
 }
 
+export const runtime = 'edge'
+
 export const getData = async () => {
   const posts = await getAllFilesFrontMatter('blog')
   return { posts }

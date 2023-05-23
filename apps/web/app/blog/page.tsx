@@ -4,6 +4,7 @@ import { getAllFilesFrontMatter } from '@/libs/mdx'
 import Link from 'next/link'
 
 const MAX_DISPLAY = 5
+export const runtime = 'edge'
 
 export const getData = async () => {
   const posts = await getAllFilesFrontMatter('blog')

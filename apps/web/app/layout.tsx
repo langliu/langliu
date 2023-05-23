@@ -5,7 +5,6 @@ import 'katex/dist/katex.css'
 
 import '@fontsource/inter/variable-full.css'
 
-import { ThemeProvider } from 'next-themes'
 import Head from 'next/head'
 
 import { ClientReload } from '@/components/ClientReload'
@@ -23,17 +22,15 @@ const isSocket = process.env.SOCKET
 
 const RootLayout: FC<Props> = ({ children }) => {
   return (
-    <html lang='zh-CN'>
-      <ThemeProvider attribute='class' defaultTheme={siteMetadata.theme}>
-        <Head>
-          <meta content='width=device-width, initial-scale=1' name='viewport' />
-        </Head>
-        {isDevelopment && isSocket && <ClientReload />}
-        <Analytics />
-        <body>
-          <LayoutWrapper>{children}</LayoutWrapper>
-        </body>
-      </ThemeProvider>
+    <html lang='zh-CN' className={siteMetadata.theme}>
+      <Head>
+        <meta content='width=device-width, initial-scale=1' name='viewport' />
+      </Head>
+      {isDevelopment && isSocket && <ClientReload />}
+      <Analytics />
+      <body className='dark:bg-black'>
+        <LayoutWrapper>{children}</LayoutWrapper>
+      </body>
     </html>
   )
 }

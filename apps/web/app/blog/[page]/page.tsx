@@ -12,6 +12,7 @@ type Props = {
     page: string
   }
 }
+export const runtime = 'edge'
 
 export const getData = async (slug: string) => {
   const totalPosts = await getAllFilesFrontMatter('blog')
@@ -78,13 +79,11 @@ export default async function BlogPage({ params }: Props) {
 
   return (
     <Suspense>
-      <>
-        <div className='border-b border-b-slate-200 border-opacity-40 mb-6 text-center'>
-          <p>{date.format(new Date(current?.date))}</p>
-          <h1 className='text-5xl font-bold mb-8'>{current?.title}</h1>
-        </div>
-        <div className='markdown'>{content}</div>
-      </>
+      <div className='border-b border-b-slate-200 border-opacity-40 mb-6 text-center'>
+        <p>{date.format(new Date(current?.date ?? new Date()))}</p>
+        <h1 className='text-5xl font-bold mb-8'>{current?.title}</h1>
+      </div>
+      <div className='markdown'>{content}</div>
     </Suspense>
   )
 }
