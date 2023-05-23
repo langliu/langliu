@@ -3,7 +3,7 @@
 import '@/css/tailwind.css'
 import 'katex/dist/katex.css'
 
-import '@fontsource/inter/variable-full.css'
+import '@fontsource/inter'
 
 import Head from 'next/head'
 

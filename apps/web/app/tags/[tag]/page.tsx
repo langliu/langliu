@@ -12,7 +12,6 @@ type Props = {
     tag: string
   }
 }
-export const runtime = 'edge'
 const TagDetailPage = async ({ params }: Props) => {
   const { posts = [] } = await getData()
   const tagPosts = posts?.filter((post) => post.tags.includes(params.tag))

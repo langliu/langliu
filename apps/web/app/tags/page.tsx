@@ -2,7 +2,6 @@ import { getAllFilesFrontMatter } from '@/libs/mdx'
 import Link from 'next/link'
 import React from 'react'
 
-export const runtime = 'edge'
 
 export const getData = async () => {
   const posts = await getAllFilesFrontMatter('blog')

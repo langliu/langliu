@@ -12,7 +12,6 @@ type Props = {
     page: string
   }
 }
-export const runtime = 'edge'
 
 export const getData = async (slug: string) => {
   const totalPosts = await getAllFilesFrontMatter('blog')
