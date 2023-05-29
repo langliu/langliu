@@ -1,7 +1,7 @@
 import Image from './Image'
-// import { BlogNewsletterForm } from './NewsletterForm'
-import Pre from './Pre'
 import TOCInline from './TOCInline'
+// import { BlogNewsletterForm } from './NewsletterForm'
+import Pre from './markdown/Pre'
 import { ComponentMap, getMDXComponent } from 'mdx-bundler/client'
 import CustomLink from 'next/link'
 /* eslint-disable react/display-name */

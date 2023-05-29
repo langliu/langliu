@@ -1,4 +1,4 @@
-import Pre from '@/components/Pre'
+import { components } from '@/components/markdown'
 import '@/css/markdown.css'
 import { getAllFilesFrontMatter } from '@/libs/mdx'
 import { compileMDX } from 'next-mdx-remote/rsc'
@@ -65,9 +65,7 @@ export default async function BlogPage({ params }: Props) {
         remarkPlugins: [[remarkToc, { heading: 'contents' }]],
       },
     },
-    components: {
-      pre: Pre,
-    },
+    components,
   })
 
   const date = new Intl.DateTimeFormat('zh-CN', {

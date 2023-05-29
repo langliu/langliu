@@ -1,4 +1,4 @@
-import  Pre from '@/components/Pre'
+import  Pre from '@/components/markdown/Pre'
 import type { MDXComponents } from 'mdx/types'
 
 // This file allows you to provide custom React components

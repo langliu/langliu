@@ -9,6 +9,10 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+  images: {
+    loader: 'custom',
+    loaderFile: './supabase-image-loader.js',
+  },
 }
 
 const withMDX = nextMDX({

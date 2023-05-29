@@ -31,13 +31,6 @@
   overflow-x: auto;
 }
 
-.markdown code {
-  background-color: #262626;
-  color: #ec4899;
-  font-weight: 600;
-  border-radius: 0.25rem;
-}
-
 .markdown ul {
   margin-bottom: 20px;
 }
@@ -69,19 +62,19 @@
   border-top-right-radius: 0;
 }
 
-.light .markdown  h1 {
+.light .markdown h1 {
   color: black;
 }
 
-.light .markdown  h2 {
+.light .markdown h2 {
   color: black;
 }
 
-.light .markdown  p {
+.light .markdown p {
   color: black;
 }
 
-.light.markdown  p code {
+.light.markdown p code {
   background-color: white;
 }
 
