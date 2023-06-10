@@ -1,3 +1,4 @@
+import Photo from './Photo'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import Image from 'next/image'
@@ -12,20 +13,42 @@ export async function getData() {
   return { data }
 }
 
+// export async function insertPhoto(url: string) {
+//   const supabase = createServerComponentClient({ cookies })
+//   const { data } = await supabase.from('photos').insert({
+//     url,
+//     name: url,
+//   })
+//   return { data }
+// }
+
 const PhotosPage = async () => {
   const { data } = await getData()
 
+  const insertPhoto = async (url: string) => {
+    'use client'
+    const supabase = createServerComponentClient({ cookies })
+    const { data } = await supabase.from('photos').insert({
+      url,
+      name: url,
+    })
+    return { data }
+  }
+
   return (
-    <div className='grid gap-2 col-span-4 grid-cols-4'>
-      {data?.map((photo) => (
-        <Image
-          src={photo.signedUrl}
-          alt='asd'
-          className='object-cover w-full'
-          width={0}
-          height={0}
-        />
-      ))}
+    <div>
+      <Photo />
+      <div className='grid gap-2 col-span-4 grid-cols-4'>
+        {data?.map((photo) => (
+          <Image
+            src={photo.signedUrl}
+            alt='asd'
+            className='object-cover w-full'
+            width={0}
+            height={0}
+          />
+        ))}
+      </div>
     </div>
   )
 }
