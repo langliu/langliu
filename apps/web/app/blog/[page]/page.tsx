@@ -5,6 +5,8 @@ import { compileMDX } from 'next-mdx-remote/rsc'
 import { Suspense } from 'react'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypePrettyCode from 'rehype-pretty-code'
+import remarkGfm from 'remark-gfm'
+import remarkMath from 'remark-math'
 import remarkToc from 'remark-toc'
 
 type Props = {
@@ -62,7 +64,7 @@ export default async function BlogPage({ params }: Props) {
             },
           ],
         ],
-        remarkPlugins: [[remarkToc, { heading: 'contents' }]],
+        remarkPlugins: [[remarkToc, { heading: 'contents' }], [remarkGfm], [remarkMath]],
       },
     },
     components,

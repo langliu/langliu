@@ -1,0 +1,10 @@
+.wrapper {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.wrapper td,
+.wrapper th {
+  padding: 0.5em 1em;
+  border: 1px solid #ccc;
+}
