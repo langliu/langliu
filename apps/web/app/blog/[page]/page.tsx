@@ -4,6 +4,7 @@ import { getAllFilesFrontMatter } from '@/libs/mdx'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import { Suspense } from 'react'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeKatex from 'rehype-katex'
 import rehypePrettyCode from 'rehype-pretty-code'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
@@ -63,6 +64,7 @@ export default async function BlogPage({ params }: Props) {
               },
             },
           ],
+          [rehypeKatex],
         ],
         remarkPlugins: [[remarkToc, { heading: 'contents' }], [remarkGfm], [remarkMath]],
       },
