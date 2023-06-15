@@ -1,0 +1,55 @@
+[
+  {
+    "title": "Research Assistant",
+    "company": "Center for Computational & Data Sciences",
+    "companyURL": "http://ccds.ai/",
+    "companyLogo": "/images/ccds.png",
+    "location": "Plot 16, Aftabuddin Ahmed Road, Block B, Bashnudhara RA, Dhaka 1229, Bangladesh.",
+    "type": "Full-time",
+    "date": "Feb 2022 - Present",
+    "description": "At CCDS, my responsibilities include participating in research projects and generating new research ideas in the fields of computational science, artificial intelligence, and data science. I am also responsible for studying and implementing new algorithms, as well as understanding advanced mathematical and statistical concepts.",
+    "skills": [
+      "Artificial Intelligence (AI)",
+      "Machine Learning",
+      "Artificial Neural Networks",
+      "Data Science",
+      "Image Processing",
+      "Computer Vision",
+      "Deep Learning"
+    ]
+  },
+  {
+    "title": "Teaching Assistant",
+    "company": "Independent University, Bangladesh",
+    "companyURL": "https://iub.edu.bd/",
+    "companyLogo": "/images/iub.png",
+    "location": "Plot 16, Aftabuddin Ahmed Road, Block B, Bashnudhara RA, Dhaka 1229, Bangladesh.",
+    "type": "Part-time",
+    "date": "Sep 2021 - Jan 2022",
+    "description": "As a teaching assistant at IUB, I had the opportunity to collaborate with an assistant professor and teach a lab course on numerical methods. My responsibilities included introducing students to numerical approaches, demonstrating their application using Python, and redesigning the lab materials to be compatible with Python.",
+    "skills": [
+      "Numerical Methods",
+      "Numpy",
+      "Teaching",
+      "Management",
+      "Leadership"
+    ]
+  },
+  {
+    "title": "Undergraduate Teaching Assistant",
+    "company": "Independent University, Bangladesh",
+    "companyURL": "https://iub.edu.bd/",
+    "companyLogo": "/images/iub.png",
+    "location": "Plot 16, Aftabuddin Ahmed Road, Block B, Bashnudhara RA, Dhaka 1229, Bangladesh.",
+    "type": "Part-time",
+    "date": "Oct 2019 - Dec 2019",
+    "description": "As an undergraduate teaching assistant at IUB, I worked as a part-time tutor at the Math Tutorial Center, providing support to struggling students and managing the center. This experience allowed me to develop my skills in assisting students with their academic difficulties and gain valuable teaching experience.",
+    "skills": [
+      "Linear Algebra",
+      "Statistics",
+      "Differential Equations",
+      "Vector Calculus",
+      "Mathematical Modeling"
+    ]
+  }
+]
