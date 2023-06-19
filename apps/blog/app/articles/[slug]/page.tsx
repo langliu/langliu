@@ -1,9 +1,9 @@
+import ArticlePage from "./ArticlePage";
 import { Container } from "components/Container";
 import { server } from "config";
-import { allArticles, Article } from "contentlayer/generated";
+import { Article, allArticles } from "contentlayer/generated";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import ArticlePage from "./ArticlePage";
 
 // This is the function that Next.js will call to generate the static pages
 export async function generateStaticParams(): Promise<any> {
@@ -40,7 +40,7 @@ export async function generateMetadata({
       authors: [article?.author?.name],
       description: article?.description,
       url: `${server}/articles/${params.slug}`,
-      siteName: "Mir Sazzat Hossain - Innovative Researcher and Skilled Mentor",
+      siteName: "研之有物 - Innovative Researcher and Skilled Mentor",
       images: [
         {
           url: `${server}/images/${article?.covers[0].url}`,

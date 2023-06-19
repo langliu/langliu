@@ -1,6 +1,6 @@
 import { Container } from "components/Container";
 import { server } from "config";
-import { allArticles, Article, Tag } from "contentlayer/generated";
+import { Article, Tag, allArticles } from "contentlayer/generated";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -46,15 +46,15 @@ export async function generateMetadata({
     keywords: [...Object.keys(tags)],
     openGraph: {
       type: "website",
-      title: "Article Tags - Mir Sazzat Hossain",
+      title: "Article Tags - 研之有物",
       description:
         "This page contains all the tags of articles available on this website.",
       url: `${server}/articles/tags`,
-      siteName: "Mir Sazzat Hossain - Innovative Researcher and Skilled Mentor",
+      siteName: "研之有物 - Innovative Researcher and Skilled Mentor",
       images: [
         {
           url: `${server}/images/og-image.png`,
-          alt: "Mir Sazzat Hossain - Innovative Researcher and Skilled Mentor",
+          alt: "研之有物 - Innovative Researcher and Skilled Mentor",
           width: 1200,
           height: 630,
         },
@@ -65,13 +65,13 @@ export async function generateMetadata({
       card: "summary_large_image",
       site: "@mir_sazzat",
       creator: "@mir_sazzat",
-      title: "Article Tags - Mir Sazzat Hossain",
+      title: "Article Tags - 研之有物",
       description:
         "This page contains all the tags of articles available on this website.",
       images: [
         {
           url: `${server}/images/og-image.png`,
-          alt: "Mir Sazzat Hossain - Innovative Researcher and Skilled Mentor",
+          alt: "研之有物 - Innovative Researcher and Skilled Mentor",
           width: 1200,
           height: 630,
         },

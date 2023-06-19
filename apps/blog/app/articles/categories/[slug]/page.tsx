@@ -1,7 +1,7 @@
 import SearchArticles from "app/articles/SearchArticles";
 import SimpleLayout from "components/SimpleLayout";
 import { server } from "config";
-import { allArticles, Article, Category } from "contentlayer/generated";
+import { Article, Category, allArticles } from "contentlayer/generated";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -36,12 +36,12 @@ export async function generateMetadata({
     } available on this website.`,
     openGraph: {
       type: "website",
-      title: `Articles categorized as ${params.slug} - Mir Sazzat Hossain`,
+      title: `Articles categorized as ${params.slug} - 研之有物`,
       description: `This page contains all the articles ${
         params?.slug ? `categorized as ${params.slug}` : ""
       } available on this website.`,
       url: `${server}/articles/categories/${params.slug}`,
-      siteName: "Mir Sazzat Hossain - Innovative Researcher and Skilled Mentor",
+      siteName: "研之有物 - Innovative Researcher and Skilled Mentor",
       images: [
         {
           url: `${server}/images/cover.jpg`,
@@ -56,7 +56,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       site: "@mir_sazzat",
       creator: "@mir_sazzat",
-      title: `Articles categorized as ${params.slug} - Mir Sazzat Hossain`,
+      title: `Articles categorized as ${params.slug} - 研之有物`,
       description: `This page contains all the articles ${
         params?.slug ? `categorized as ${params.slug}` : ""
       } available on this website.`,

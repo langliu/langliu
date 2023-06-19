@@ -1,42 +1,39 @@
-import SimpleLayout from "components/SimpleLayout";
-import SnippetsPlaceholder from "components/skeleton/SnippetsPlaceholder";
-import { server } from "config";
-import type { Metadata } from "next";
-import { Suspense } from "react";
-import ListSnippets from "./ListSnippets";
+import ListSnippets from './ListSnippets'
+import SimpleLayout from 'components/SimpleLayout'
+import SnippetsPlaceholder from 'components/skeleton/SnippetsPlaceholder'
+import { server } from 'config'
+import type { Metadata } from 'next'
+import { Suspense } from 'react'
 
 export const metadata: Metadata = {
-  title: "Code Snippets",
-  description:
-    "I've been writing code for a long time. Here are some of the snippets I've found useful and reusable.",
+  title: '代码片段',
+  description: '我已经写了很长时间的代码。 以下是我发现有用且可重复使用的一些片段。',
   openGraph: {
-    title: "Code Snippets - Mir Sazzat Hossain",
-    description:
-      "I've been writing code for a long time. Here are some of the snippets I've found useful and reusable.",
+    title: '代码片段 - 研之有物',
+    description: '我已经写了很长时间的代码。 以下是我发现有用且可重复使用的一些片段。',
     url: `${server}/snippets`,
-    type: "website",
-    site_name: "Mir Sazzat Hossain - Innovative Researcher and Skilled Mentor",
+    type: 'website',
+    siteName: '研之有物 - Innovative Researcher and Skilled Mentor',
     images: [
       {
         url: `${server}/images/og-image.png`,
-        alt: "Mir Sazzat Hossain",
+        alt: '研之有物',
         width: 1200,
         height: 630,
       },
     ],
-    locale: "en_US",
+    locale: 'en_US',
   },
   twitter: {
-    card: "summary_large_image",
-    site: "@mir_sazzat",
-    creator: "@mir_sazzat",
-    title: "Code Snippets - Mir Sazzat Hossain",
-    description:
-      "I've been writing code for a long time. Here are some of the snippets I've found useful and reusable.",
+    card: 'summary_large_image',
+    site: '@mir_sazzat',
+    creator: '@mir_sazzat',
+    title: '代码片段 - 研之有物',
+    description: '我已经写了很长时间的代码。 以下是我发现有用且可重复使用的一些片段。',
     images: [
       {
         url: `${server}/images/og-image.png`,
-        alt: "Mir Sazzat Hossain",
+        alt: '研之有物',
         width: 1200,
         height: 630,
       },
@@ -45,23 +42,22 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${server}/snippets`,
     types: {
-      "application/rss+xml": `${server}/feed.xml`,
+      'application/rss+xml': `${server}/feed.xml`,
     },
   },
-};
+}
 
 export default function Snippets(): JSX.Element {
   return (
     <SimpleLayout
-      title="Snippets of Code I Find Useful"
-      intro="I've been writing code for a long time. Here are some of the snippets I've found useful and reusable."
+      title='我觉得有用的代码片段'
+      intro='我已经写了很长时间的代码。 以下是我发现有用且可重复使用的一些片段。'
     >
-      <div className="mt-16 sm:mt-20">
+      <div className='mt-16 sm:mt-20'>
         <Suspense fallback={<SnippetsPlaceholder />}>
-          {/* @ts-expect-error Server Component */}
           <ListSnippets />
         </Suspense>
       </div>
     </SimpleLayout>
-  );
+  )
 }

@@ -1,31 +1,31 @@
-import AnalyticsWrapper from "components/analytics";
-import Header from "components/Header";
-import type { Metadata } from "next";
 import Footer from "../components/Footer";
 import { server } from "../config";
 import "../styles/globals.css";
 import ClientThemeProvider from "./theme-provider";
+import Header from "components/Header";
+import AnalyticsWrapper from "components/analytics";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    default: "Mir Sazzat Hossain - Innovative Researcher and Skilled Mentor",
-    template: "%s - Mir Sazzat Hossain",
+    default: "研之有物 - Innovative Researcher and Skilled Mentor",
+    template: "%s - 研之有物",
   },
   description:
-    "Mir Sazzat Hossain is a recent college graduate with a solid foundation in computer science as well as competence in exploratory data analysis, machine learning, computer vision, and statistics. He is currently working as a Research Assistant at the Independent University, Bangladesh's Center for Computational and Data Sciences.",
-  generator: "Mir Sazzat Hossain - Personal Website",
-  applicationName: "Mir Sazzat Hossain - Personal Website",
+    "研之有物 is a recent college graduate with a solid foundation in computer science as well as competence in exploratory data analysis, 机器学习, 计算机视觉, and statistics. He is currently working as a Research Assistant at the Independent University, Bangladesh's Center for Computational and Data Sciences.",
+  generator: "研之有物 - Personal Website",
+  applicationName: "研之有物 - Personal Website",
   referrer: "origin-when-cross-origin",
   keywords: [
-    "Mir Sazzat Hossain",
+    "研之有物",
     "Mir Sazzat",
     "Sazzat",
     "Sazzat Hossain",
     "Mir",
     "Hossain",
-    "Mir Sazzat Hossain",
-    "Mir Sazzat Hossain - Innovative Researcher and Skilled Mentor",
-    "Mir Sazzat Hossain - Personal Website",
+    "研之有物",
+    "研之有物 - Innovative Researcher and Skilled Mentor",
+    "研之有物 - Personal Website",
     "Sajjad",
     "Sajjat",
     "Hossain",
@@ -34,31 +34,31 @@ export const metadata: Metadata = {
   ],
   authors: [
     {
-      name: "Mir Sazzat Hossain",
+      name: "研之有物",
       url: `${server}`,
     },
   ],
   themeColor: "#ffffff",
   colorScheme: "light",
-  creator: "Mir Sazzat Hossain",
-  publisher: "Mir Sazzat Hossain",
+  creator: "研之有物",
+  publisher: "研之有物",
   formatDetection: {
     telephone: true,
     address: true,
     email: true,
   },
   openGraph: {
-    title: "Mir Sazzat Hossain - Innovative Researcher and Skilled Mentor",
+    title: "研之有物 - Innovative Researcher and Skilled Mentor",
     description:
-      "Mir Sazzat Hossain is a recent college graduate with a solid foundation in computer science as well as competence in exploratory data analysis, machine learning, computer vision, and statistics. He is currently working as a Research Assistant at the Independent University, Bangladesh's Center for Computational and Data Sciences.",
+      "研之有物 is a recent college graduate with a solid foundation in computer science as well as competence in exploratory data analysis, 机器学习, 计算机视觉, and statistics. He is currently working as a Research Assistant at the Independent University, Bangladesh's Center for Computational and Data Sciences.",
     url: `${server}`,
-    siteName: "Mir Sazzat Hossain - Innovative Researcher and Skilled Mentor",
+    siteName: "研之有物 - Innovative Researcher and Skilled Mentor",
     images: [
       {
         url: `${server}/images/og-image.png`,
         width: 1200,
         height: 630,
-        alt: "Mir Sazzat Hossain - Innovative Researcher and Skilled Mentor",
+        alt: "研之有物 - Innovative Researcher and Skilled Mentor",
       },
     ],
     locale: "en_US",
@@ -114,16 +114,16 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@mir_sazzat",
-    title: "Mir Sazzat Hossain - Innovative Researcher and Skilled Mentor",
+    title: "研之有物 - Innovative Researcher and Skilled Mentor",
     description:
-      "Mir Sazzat Hossain is a recent college graduate with a solid foundation in computer science as well as competence in exploratory data analysis, machine learning, computer vision, and statistics. He is currently working as a Research Assistant at the Independent University, Bangladesh's Center for Computational and Data Sciences.",
+      "研之有物 is a recent college graduate with a solid foundation in computer science as well as competence in exploratory data analysis, 机器学习, 计算机视觉, and statistics. He is currently working as a Research Assistant at the Independent University, Bangladesh's Center for Computational and Data Sciences.",
     creator: "@mir_sazzat",
     images: [
       {
         url: `${server}/images/og-image.png`,
         width: 1200,
         height: 630,
-        alt: "Mir Sazzat Hossain - Innovative Researcher and Skilled Mentor",
+        alt: "研之有物 - Innovative Researcher and Skilled Mentor",
       },
     ],
   },

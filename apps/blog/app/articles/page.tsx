@@ -11,16 +11,16 @@ export const metadata: Metadata = {
 
   // Open Graph
   openGraph: {
-    title: 'Articles - Mir Sazzat Hossain',
+    title: 'Articles - 研之有物',
     description:
       'All my articles are written with the goal of helping you learn something new. I hope you enjoy them!',
     url: `${server}/articles`,
     type: 'website',
-    siteName: 'Mir Sazzat Hossain - Innovative Researcher and Skilled Mentor',
+    siteName: '研之有物 - Innovative Researcher and Skilled Mentor',
     images: [
       {
         url: `${server}/images/og-image.png`,
-        alt: 'Mir Sazzat Hossain - Innovative Researcher and Skilled Mentor',
+        alt: '研之有物 - Innovative Researcher and Skilled Mentor',
         width: 1200,
         height: 630,
       },
@@ -33,13 +33,13 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@mir_sazzat',
     creator: '@mir_sazzat',
-    title: 'Articles - Mir Sazzat Hossain',
+    title: 'Articles - 研之有物',
     description:
       'All my articles are written with the goal of helping you learn something new. I hope you enjoy them!',
     images: [
       {
         url: `${server}/images/og-image.png`,
-        alt: 'Mir Sazzat Hossain - Innovative Researcher and Skilled Mentor',
+        alt: '研之有物 - Innovative Researcher and Skilled Mentor',
         width: 1200,
         height: 630,
       },

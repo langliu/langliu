@@ -1,9 +1,9 @@
+import SnippetPage from "./Snippet";
 import { Container } from "components/Container";
 import { server } from "config";
-import { allSnippets, Snippet } from "contentlayer/generated";
+import { Snippet, allSnippets } from "contentlayer/generated";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import SnippetPage from "./Snippet";
 
 // get snippets from the contentlayer
 async function getAllSnippets(): Promise<Snippet[]> {
@@ -29,11 +29,11 @@ export async function generateMetadata({
       url: `${server}/snippets/${snippet?.slug}`,
       type: "website",
       site_name:
-        "Mir Sazzat Hossain - Innovative Researcher and Skilled Mentor",
+        "研之有物 - Innovative Researcher and Skilled Mentor",
       images: [
         {
           url: `${server}/images/og-image.png`,
-          alt: "Mir Sazzat Hossain",
+          alt: "研之有物",
           width: 1200,
           height: 630,
         },
@@ -49,7 +49,7 @@ export async function generateMetadata({
       images: [
         {
           url: `${server}/images/og-image.png`,
-          alt: "Mir Sazzat Hossain",
+          alt: "研之有物",
           width: 1200,
           height: 630,
         },

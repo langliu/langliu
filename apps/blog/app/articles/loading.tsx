@@ -5,7 +5,7 @@ import ArticleCardPlaceholder from "components/skeleton/ArticleCardPlaceholder";
 export default function loading(): JSX.Element {
   return (
     <SimpleLayout
-      title="Writing on Machine Learning, Advance Math, and Programming"
+      title="Writing on 机器学习, Advance Math, and Programming"
       intro="All my articles are written with the goal of helping you learn something new. I hope you enjoy them!"
     >
       <div className="relative max-w-3xl mb-12 sm:mb-16">
