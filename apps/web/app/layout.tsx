@@ -1,22 +1,38 @@
-import './global.css'
+'use client'
+import '@/css/prism.css'
+import '@/css/tailwind.css'
+import 'katex/dist/katex.css'
+
+import '@fontsource/inter'
+
 import Head from 'next/head'
 
-export const metadata = {
-  title: '研之有物',
-  description: '刘浪的个人站',
+import { ClientReload } from '@/components/ClientReload'
+import LayoutWrapper from '@/components/LayoutWrapper'
+import Analytics from '@/components/analytics'
+import siteMetadata from '@/data/siteMetadata'
+import type { FC, ReactNode } from 'react'
+
+type Props = {
+  children: ReactNode
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+const isDevelopment = process.env.NODE_ENV === 'development'
+const isSocket = process.env.SOCKET
+
+const RootLayout: FC<Props> = ({ children }) => {
   return (
-    <html lang="zh-CN">
+    <html lang='zh-CN' className={siteMetadata.theme}>
       <Head>
-        <title>Welcome to web!</title>
+        <meta content='width=device-width, initial-scale=1' name='viewport' />
       </Head>
-      <body>{children}</body>
+      {isDevelopment && isSocket && <ClientReload />}
+      <Analytics />
+      <body className='dark:bg-black'>
+        <LayoutWrapper>{children}</LayoutWrapper>
+      </body>
     </html>
   )
 }
+
+export default RootLayout

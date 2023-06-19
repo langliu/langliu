@@ -1,12 +1,12 @@
-import styles from './page.module.css';
-import { supabase } from '@/libs/supabaseClient';
-import Link from 'next/link';
+import styles from './page.module.css'
+import { supabase } from '@/libs/supabaseClient'
+import Link from 'next/link'
 
 type Props = {
   params: {
-    slug: string;
-  };
-};
+    slug: string
+  }
+}
 
 export const runtime = 'edge'
 
@@ -14,30 +14,28 @@ export async function getData(id: string) {
   const { data } = await supabase
     .from('articles')
     .select('id,title,content,bookId,serial')
-    .eq('id', id);
+    .eq('id', id)
   const { data: articles } = await supabase
     .from('articles')
     .select('id,serial')
     .eq('bookId', data?.[0].bookId)
-    .order('serial', { ascending: true });
-  const currentIndex =
-    articles?.findIndex((item) => item.serial === data?.[0].serial) ?? 0;
+    .order('serial', { ascending: true })
+  const currentIndex = articles?.findIndex((item) => item.serial === data?.[0].serial) ?? 0
   return {
     article: data?.[0],
     hasNextPage: currentIndex < (articles?.length ?? 0) - 1,
     nextPage: articles?.[currentIndex + 1]?.id,
     hasPreviousPage: currentIndex !== 0,
     previousPage: articles?.[currentIndex - 1]?.id,
-  };
+  }
 }
 
 export default async function Page({ params }: Props) {
-  const { slug } = params;
-  const { article, hasNextPage, hasPreviousPage, nextPage, previousPage } =
-    await getData(slug);
+  const { slug } = params
+  const { article, hasNextPage, hasPreviousPage, nextPage, previousPage } = await getData(slug)
 
   const pa = (content: string) => {
-    const arr = content?.split('\n') ?? [];
+    const arr = [...new Set(content?.split('\n') ?? [])]
     return (
       <>
         {arr.map((item) => (
@@ -46,12 +44,12 @@ export default async function Page({ params }: Props) {
           </p>
         ))}
       </>
-    );
-  };
+    )
+  }
   return (
     <div>
       <div className={styles.content}>
-        <h2 className={styles.title}>{article?.title}</h2>
+        <h2 className={'mb-4 text-2xl'}>{article?.title}</h2>
         <div key={article?.id}>{pa(article?.content)}</div>
       </div>
       <div className={styles.chapterControl}>
@@ -70,5 +68,5 @@ export default async function Page({ params }: Props) {
         )}
       </div>
     </div>
-  );
+  )
 }

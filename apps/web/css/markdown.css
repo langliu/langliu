@@ -1,0 +1,97 @@
+.markdown h1 {
+  font-size: 2em;
+  margin-bottom: 1em;
+  margin-top: 0;
+  font-size: 700;
+  line-height: 1.3333333;
+}
+
+.markdown h2 {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+  margin-top: 0;
+  font-size: 700;
+  line-height: 1.3333333;
+}
+
+.markdown h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.6em;
+}
+
+.markdown p {
+  margin-bottom: 20px;
+}
+
+.markdown pre {
+  margin-bottom: 20px;
+  background-color: #262626;
+  padding: 12px 16px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.markdown ul {
+  margin-bottom: 20px;
+}
+
+.markdown ul li {
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
+
+.markdown ul > li::before {
+  content: '•';
+  display: inline-flex;
+  margin-right: 4px;
+  align-items: center;
+}
+
+.markdown div[data-rehype-pretty-code-title] {
+  background-color: #404040;
+  font-size: 1rem;
+  font-weight: bold;
+  padding-left: 0.25rem;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  padding: 0.75rem 1.25rem;
+}
+
+.markdown div[data-rehype-pretty-code-title] + div > pre {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.light .markdown h1 {
+  color: black;
+}
+
+.light .markdown h2 {
+  color: black;
+}
+
+.light .markdown p {
+  color: black;
+}
+
+.light.markdown p code {
+  background-color: white;
+}
+
+.markdown a {
+  color: #14b8a6;
+  text-decoration: underline;
+}
+
+.markdown .line {
+  display: inline-block;
+}
+
+.markdown .highlighted {
+  border-left-width: 4px;
+  background-color: #333333;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding-left: calc(1rem - 4px);
+  border-color: #14b8a6;
+}

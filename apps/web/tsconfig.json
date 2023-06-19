@@ -11,6 +11,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "incremental": true,
+    "target": "ES2022",
     "plugins": [
       {
         "name": "next"
@@ -27,6 +28,15 @@
       ],
       "@/libs/*": [
         "./libs/*"
+      ],
+      "@/data/*": [
+        "data/*"
+      ],
+      "@/layouts/*": [
+        "layouts/*"
+      ],
+      "@/css/*": [
+        "css/*"
       ]
     }
   },
@@ -39,7 +49,7 @@
     "../../apps/web/.next/types/**/*.ts",
     "../../dist/apps/web/.next/types/**/*.ts",
     ".next/types/**/*.ts"
-  ],
+, "next.config.mjs"  ],
   "exclude": [
     "node_modules",
     "jest.config.ts",
