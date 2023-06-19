@@ -1,18 +1,18 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.SITE_URL || "https://mirsazzathossain.me",
+  siteUrl: process.env.SITE_URL || 'https://langliu.vercel.app',
   generateRobotsTxt: true,
   exclude: ['/server-sitemap.xml'],
   robotsTxtOptions: {
     policies: [
       {
-        userAgent: "*",
-        allow: "/",
+        userAgent: '*',
+        allow: '/',
       },
     ],
     additionalSitemaps: [
-      `${process.env.SITE_URL || "https://mirsazzathossain.me"}/sitemap.xml`,
-      `${process.env.SITE_URL || "https://mirsazzathossain.me"}/server-sitemap.xml`,
+      `${process.env.SITE_URL || 'https://langliu.vercel.app'}/sitemap.xml`,
+      `${process.env.SITE_URL || 'https://langliu.vercel.app'}/server-sitemap.xml`,
     ],
   },
-};
+}

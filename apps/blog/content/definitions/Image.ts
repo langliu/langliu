@@ -1,17 +1,17 @@
-import { defineNestedType } from "contentlayer/source-files";
+import { defineNestedType } from 'contentlayer/source-files'
 
 export const Image = defineNestedType(() => ({
-  name: "Image",
+  name: 'Image',
   fields: {
     url: {
-      type: "string",
-      description: "The URL of the image",
+      type: 'string',
+      description: 'The URL of the image',
       required: true,
     },
     alt: {
-      type: "string",
-      description: "The alt text of the image",
+      type: 'string',
+      description: 'The alt text of the image',
       required: true,
     },
   },
-}));
+}))

@@ -1,17 +1,17 @@
-import { defineNestedType } from "contentlayer/source-files";
+import { defineNestedType } from 'contentlayer/source-files'
 
 export const Series = defineNestedType(() => ({
-  name: "Series",
+  name: 'Series',
   fields: {
     title: {
-      type: "string",
-      description: "The title of the series",
+      type: 'string',
+      description: 'The title of the series',
       required: true,
     },
     order: {
-      type: "number",
-      description: "The order of the series",
+      type: 'number',
+      description: 'The order of the series',
       required: true,
     },
   },
-}));
+}))

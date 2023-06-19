@@ -1,5 +1,5 @@
 ---
-title: "Dockerize Your Data Science Workflow: A Step-by-Step Guide to Setting Up Jupyter Lab on Your Private Linux Machine"
+title: 'Dockerize Your Data Science Workflow: A Step-by-Step Guide to Setting Up Jupyter Lab on Your Private Linux Machine'
 tags:
   - title: Docker
   - title: Jupyter
@@ -18,8 +18,8 @@ author:
   avatar:
     url: user.png
     alt: 研之有物
-description: "Learn how to set up and deploy a Dockerized Jupyter Lab on a private Linux server, providing a secure environment for data science work. This step-by-step guide covers the installation and configuration of Docker, creation of a Jupyter Lab container, and tips for managing conda environments and accessing the Jupyter Lab interface."
-seoDescription: "Dockerizing Jupyter Lab: A Step-by-Step Guide to Hosting a Private Jupyter Server on Linux. Learn how to create a dockerized Jupyter server on your private Linux server to keep your notebooks secure and accessible only to you. This guide covers step-by-step instructions on how to set up the server, create and activate conda environments, and more."
+description: 'Learn how to set up and deploy a Dockerized Jupyter Lab on a private Linux server, providing a secure environment for data science work. This step-by-step guide covers the installation and configuration of Docker, creation of a Jupyter Lab container, and tips for managing conda environments and accessing the Jupyter Lab interface.'
+seoDescription: 'Dockerizing Jupyter Lab: A Step-by-Step Guide to Hosting a Private Jupyter Server on Linux. Learn how to create a dockerized Jupyter server on your private Linux server to keep your notebooks secure and accessible only to you. This guide covers step-by-step instructions on how to set up the server, create and activate conda environments, and more.'
 covers:
   - url: content/dockerizing-jupyter-notebook/dockerize-jupyter.jpg
     alt: Exploring Gaussian Distribution Cover
@@ -34,6 +34,7 @@ publishedAt: 2023-02-21
   width="100%"
   height="auto"
 />
+{/* ![](/images/content/dockerizing-jupyter-notebook/dockerize-jupyter.jpg) */}
 
 Jupyter notebook is a powerful tool for data scientists and 机器学习 engineers to develop and share their code and research. However, running a Jupyter server on your local machine can be challenging, especially if you're working with large datasets or complex models that require significant computing power. One solution is to run a Jupyter server in a private Linux server for better performance, increased security, and the ability to collaborate with other team members.
 
@@ -137,7 +138,7 @@ nano docker-compose.yml
 Add the following configuration to the file (we will explain each line in the next section):
 
 ```yaml title="docker-compose.yml" Show
-version: "3"
+version: '3'
 
 services:
   jupyter:
@@ -160,7 +161,7 @@ services:
       - NVIDIA_VISIBLE_DEVICES=all
     runtime: nvidia
     ports:
-      - "8888:8888"
+      - '8888:8888'
     volumes:
       - ${PWD}/work:/home/${NOTEBOOK_USER}/work
       - ${PWD}/work/environments:/home/${NOTEBOOK_USER}/work/environments

@@ -40,10 +40,10 @@ export default function SearchArticles({
     <>
       <div className='relative max-w-3xl mb-12 sm:mb-16'>
         <input
-          aria-label='Search articles'
+          aria-label='搜索文章'
           type='text'
           onChange={(e) => setSearchValue(e.target.value)}
-          placeholder='Search articles'
+          placeholder='搜索文章'
           className='block w-full px-4 py-2 text-gray-900 bg-white border border-gray-200 rounded-md dark:border-gray-700 focus:ring-blue-500 focus:border-blue-500 dark:bg-zinc-800/90 dark:text-zinc-400'
         />
 
@@ -51,7 +51,7 @@ export default function SearchArticles({
       </div>
       <div className='md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40'>
         <div className='flex max-w-3xl flex-col space-y-16'>
-          {currentArticles.map((article: any) => (
+          {currentArticles.map((article: Article) => (
             <ArticleCard key={article.slug} article={article} />
           ))}
         </div>
@@ -60,11 +60,8 @@ export default function SearchArticles({
         <div className='grid max-w-3xl space-y-16 content-center h-[20vh]'>
           <div className='text-center'>
             <NotFoundIcon className='w-20 h-20 mx-auto text-gray-500 dark:text-gray-400' />
-            <p className='text-xl font-medium text-gray-500 dark:text-gray-400'>
-              No articles found.
-            </p>
-
-            <p className='text-gray-500 dark:text-gray-400'>Try searching for something else.</p>
+            <p className='text-xl font-medium text-gray-500 dark:text-gray-400'>没有找到文章。</p>
+            <p className='text-gray-500 dark:text-gray-400'>尝试搜索其他内容。</p>
           </div>
         </div>
       )}

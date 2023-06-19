@@ -1,10 +1,10 @@
-import { Card } from "./Card";
-import { Article } from "contentlayer/generated";
+import { Card } from './Card'
+import { Article } from 'contentlayer/generated'
 
 export default function ArticleCard({
   article,
 }: {
-  article: Article;
+  article: Article
 }): JSX.Element {
   return (
     <article className='md:grid md:grid-cols-4 md:items-baseline'>
@@ -27,7 +27,7 @@ export default function ArticleCard({
           })}
         </Card.Eyebrow>
         <Card.Description>{article.description}</Card.Description>
-        <Card.Cta>Read article</Card.Cta>
+        <Card.Cta>阅读文章</Card.Cta>
       </Card>
       <Card.Eyebrow
         as='time'
