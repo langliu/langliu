@@ -4,9 +4,15 @@
     "paths": {
       "contentlayer/generated": [
         "./.contentlayer/generated"
+      ],
+      "~/models": [
+        "./models/index.ts"
+      ],
+      "~/components/*": [
+        "./components/*"
       ]
     },
-    "target": "es5",
+    "target": "ES2022",
     "lib": [
       "dom",
       "dom.iterable",

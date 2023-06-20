@@ -130,14 +130,14 @@ export default function ArticlePage({
               href={`/articles/${previousArticle?.slug}`}
             >
               <ArrowLeftIcon className='w-5 mr-2' />
-              <p className='ml-2'>Previous Article</p>
+              <p className='ml-2'>上一篇</p>
             </Link>
 
             <Link
               className='flex items-center justify-end text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300'
               href={`/articles/${nextArticle?.slug}`}
             >
-              <span className='mr-2'>Next Article</span>
+              <span className='mr-2'>下一篇</span>
               <ArrowRightIcon className='w-5 ml-2' />
             </Link>
           </div>
