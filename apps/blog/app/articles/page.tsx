@@ -73,7 +73,7 @@ export default async function Articles({
   params,
   searchParams,
 }: {
-  params?: any
+  params?: unknown
   searchParams?: { [key: string]: string | string[] | undefined }
 }): Promise<JSX.Element> {
   const articles = await getSortedArticles()

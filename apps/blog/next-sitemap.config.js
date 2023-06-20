@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://langliu.vercel.app',
+  siteUrl: process.env.SITE_URL || 'https://langliu.xyz',
   generateRobotsTxt: true,
   exclude: ['/server-sitemap.xml'],
   robotsTxtOptions: {
@@ -11,8 +11,8 @@ module.exports = {
       },
     ],
     additionalSitemaps: [
-      `${process.env.SITE_URL || 'https://langliu.vercel.app'}/sitemap.xml`,
-      `${process.env.SITE_URL || 'https://langliu.vercel.app'}/server-sitemap.xml`,
+      `${process.env.SITE_URL || 'https://langliu.xyz'}/sitemap.xml`,
+      `${process.env.SITE_URL || 'https://langliu.xyz'}/server-sitemap.xml`,
     ],
   },
 }
