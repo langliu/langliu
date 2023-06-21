@@ -1,47 +1,45 @@
-import SearchArticles from "app/articles/SearchArticles";
-import SimpleLayout from "components/SimpleLayout";
-import { server } from "config";
-import { Article, Category, allArticles } from "contentlayer/generated";
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import SearchArticles from 'app/articles/SearchArticles'
+import SimpleLayout from 'components/SimpleLayout'
+import { server } from 'config'
+import { Article, Category, allArticles } from 'contentlayer/generated'
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+
+export const runtime = 'edge'
 
 // Get sorted articles from the contentlayer
 async function getSortedArticles(): Promise<Article[]> {
-  let articles = await allArticles;
+  let articles = await allArticles
 
-  articles = articles.filter(
-    (article: Article) => article.status === "published"
-  );
+  articles = articles.filter((article: Article) => article.status === 'published')
 
   return articles.sort((a: Article, b: Article) => {
     if (a.publishedAt && b.publishedAt) {
-      return (
-        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-      );
+      return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
     }
-    return 0;
-  });
+    return 0
+  })
 }
 
 // Dynamic metadata for the page
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string }
 }): Promise<Metadata> {
   return {
     title: `Articles categorized as ${params.slug}`,
     description: `This page contains all the articles ${
-      params?.slug ? `categorized as ${params.slug}` : ""
+      params?.slug ? `categorized as ${params.slug}` : ''
     } available on this website.`,
     openGraph: {
-      type: "website",
+      type: 'website',
       title: `Articles categorized as ${params.slug} - 研之有物`,
       description: `This page contains all the articles ${
-        params?.slug ? `categorized as ${params.slug}` : ""
+        params?.slug ? `categorized as ${params.slug}` : ''
       } available on this website.`,
       url: `${server}/articles/categories/${params.slug}`,
-      siteName: "研之有物 - Innovative Researcher and Skilled Mentor",
+      siteName: '研之有物 - Innovative Researcher and Skilled Mentor',
       images: [
         {
           url: `${server}/images/cover.jpg`,
@@ -50,15 +48,15 @@ export async function generateMetadata({
           alt: `Articles categorized as ${params.slug}`,
         },
       ],
-      locals: ["en_US"],
+      locale: 'zh_CN',
     },
     twitter: {
-      card: "summary_large_image",
-      site: "@mir_sazzat",
-      creator: "@mir_sazzat",
+      card: 'summary_large_image',
+      site: '@mir_sazzat',
+      creator: '@mir_sazzat',
       title: `Articles categorized as ${params.slug} - 研之有物`,
       description: `This page contains all the articles ${
-        params?.slug ? `categorized as ${params.slug}` : ""
+        params?.slug ? `categorized as ${params.slug}` : ''
       } available on this website.`,
       images: [
         {
@@ -72,21 +70,21 @@ export async function generateMetadata({
     alternates: {
       canonical: `${server}/articles/categories/${params.slug}`,
       types: {
-        "application/rss+xml": `${server}/feed.xml`,
+        'application/rss+xml': `${server}/feed.xml`,
       },
     },
-  };
+  }
 }
 
 export default async function Articles({
   params,
   searchParams,
 }: {
-  params?: { slug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
+  params?: { slug: string }
+  searchParams?: { [key: string]: string | string[] | undefined }
 }): Promise<JSX.Element> {
-  let articles = await getSortedArticles();
-  const page = searchParams?.page ? parseInt(searchParams.page as string) : 1;
+  let articles = await getSortedArticles()
+  const page = searchParams?.page ? parseInt(searchParams.page as string) : 1
 
   // Filter articles by category title
   if (params?.slug) {
@@ -96,15 +94,15 @@ export default async function Articles({
           category.title
             .toLowerCase()
             .trim()
-            .replace(/[^\w\s-]/g, "")
-            .replace(/[\s_-]+/g, "-")
-            .replace(/^-+|-+$/g, "") === params.slug
-      )
-    );
+            .replace(/[^\w\s-]/g, '')
+            .replace(/[\s_-]+/g, '-')
+            .replace(/^-+|-+$/g, '') === params.slug,
+      ),
+    )
   }
 
   if (!articles || articles.length === 0) {
-    return notFound();
+    return notFound()
   }
 
   // Find category title from slug
@@ -113,16 +111,14 @@ export default async function Articles({
       category.title
         .toLowerCase()
         .trim()
-        .replace(/[^\w\s-]/g, "")
-        .replace(/[\s_-]+/g, "-")
-        .replace(/^-+|-+$/g, "") === params?.slug
-  )?.title;
+        .replace(/[^\w\s-]/g, '')
+        .replace(/[\s_-]+/g, '-')
+        .replace(/^-+|-+$/g, '') === params?.slug,
+  )?.title
 
   return (
-    <SimpleLayout
-      title={params?.slug ? `Articles categorized as ${catTitle}` : "Articles"}
-    >
-      <SearchArticles articles={articles} page={page} />
+    <SimpleLayout title={params?.slug ? `Articles categorized as ${catTitle}` : 'Articles'}>
+      <SearchArticles articles={articles} />
     </SimpleLayout>
-  );
+  )
 }

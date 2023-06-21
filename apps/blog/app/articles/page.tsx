@@ -4,6 +4,8 @@ import { server } from 'config'
 import { Article, allArticles } from 'contentlayer/generated'
 import type { Metadata } from 'next'
 
+export const runtime = 'edge'
+
 export const metadata: Metadata = {
   title: 'Articles',
   description:
