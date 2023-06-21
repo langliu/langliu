@@ -10,6 +10,21 @@
       ],
       "~/components/*": [
         "./components/*"
+      ],
+      "~/utils/*": [
+        "./utils/*"
+      ],
+      "~/content/*": [
+        "./content/*"
+      ],
+      "~/app/*": [
+        "./app/*"
+      ],
+      "~/styles/*": [
+        "./styles/*"
+      ],
+      "~/public/*": [
+        "./public/*"
       ]
     },
     "target": "ES2022",

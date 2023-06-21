@@ -27,8 +27,17 @@ const PrettyCodeOptions: Partial<Options> = {
     node.properties.className?.push('highlighted')
   },
 
-  onVisitHighlightedWord(node: VisitableElement) {
+  onVisitHighlightedWord(node: VisitableElement, id: string) {
     node.properties.className = ['word']
+    if (id) {
+      if (node.properties['data-rehype-pretty-code-wrapper']) {
+        node.children.forEach((child) => {
+          child.properties.style = ''
+        })
+      }
+      node.properties.style = ''
+      node.properties['data-word-id'] = id
+    }
   },
 }
 

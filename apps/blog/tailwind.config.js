@@ -1,26 +1,25 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+/** @type {import('tailwindcss').Config} */ module.exports = {
   content: [
-    "./app/**/*.{js,jsx,ts,tsx}",
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    './app/**/*.{js,jsx,ts,tsx}',
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
   ],
   darkMode: 'class',
   plugins: [require('@tailwindcss/typography')],
   theme: {
     extend: {
-        animation: {
-            background: 'background ease infinite',
+      animation: {
+        background: 'background ease infinite',
+      },
+      keyframes: {
+        background: {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
         },
-        keyframes: {
-            background: {
-                '0%, 100%': { backgroundPosition: '0% 50%' },
-                '50%': { backgroundPosition: '100% 50%' },
-            },
-        },
-        transitionProperty: {
-          'height': 'height',
-        }
+      },
+      transitionProperty: {
+        height: 'height',
+      },
     },
     fontSize: {
       xs: ['0.8125rem', { lineHeight: '1.5rem' }],
@@ -45,8 +44,7 @@ module.exports = {
           '--tw-prose-links': 'var(--tw-prose-invert-links)',
           '--tw-prose-links-hover': 'var(--tw-prose-invert-links-hover)',
           '--tw-prose-underline': 'var(--tw-prose-invert-underline)',
-          '--tw-prose-underline-hover':
-            'var(--tw-prose-invert-underline-hover)',
+          '--tw-prose-underline-hover': 'var(--tw-prose-invert-underline-hover)',
           '--tw-prose-bold': 'var(--tw-prose-invert-bold)',
           '--tw-prose-counters': 'var(--tw-prose-invert-counters)',
           '--tw-prose-bullets': 'var(--tw-prose-invert-bullets)',
@@ -92,24 +90,30 @@ module.exports = {
           // Base
           color: 'var(--tw-prose-body)',
           lineHeight: theme('lineHeight.7'),
-        //   '> *': {
-        //     marginTop: theme('spacing.10'),
-        //     marginBottom: theme('spacing.10'),
-        //   },
+          //   '> *': {
+          //     marginTop: theme('spacing.10'),
+          //     marginBottom: theme('spacing.10'),
+          //   },
           p: {
             marginTop: theme('spacing.5'),
             marginBottom: theme('spacing.5'),
           },
 
           // Headings
-          'h2, h3': {
+          'h1, h2, h3': {
             color: 'var(--tw-prose-headings)',
             fontWeight: theme('fontWeight.semibold'),
+          },
+          h1: {
+            fontSize: theme('fontSize.2xl')[0],
+            lineHeight: theme('lineHeight.7'),
+            marginTop: theme('spacing.10'),
+            marginBottom: theme('spacing.4'),
           },
           h2: {
             fontSize: theme('fontSize.xl')[0],
             lineHeight: theme('lineHeight.7'),
-            marginTop: theme('spacing.10'),
+            marginTop: theme('spacing.7'),
             marginBottom: theme('spacing.4'),
           },
           h3: {
