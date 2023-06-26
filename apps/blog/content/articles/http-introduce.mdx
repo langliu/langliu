@@ -14,7 +14,7 @@ author:
     url: user.png
     alt: 研之有物
 description: '在我们日常的生活与工作中离不开网络的支持，在这个过程中会不停的使用到 HTTP 请求，而作为一个前端开发更是会经常使用到 HTTP 与后端开发进行对接联调，HTTP 使用起来非常简单，如果有人问你 HTTP 相关的知识你也能说出不少内容来，但是我们日常接触到的仅仅是 HTTP 的冰山一角，本文从 HTTP 的历史出发，一步步讲解 HTTP 的演变过程，让你在这个过程中全面的了解 HTTP 为什么这么设计'
-seoDescription: 'The Poisson Distribution is a powerful statistical tool for predicting events that occur randomly over time, such as in the fields of finance, engineering, and astronomy. This blog post explores the basics of the Poisson Distribution, its properties, and real-world applications, including its use in astronomy to estimate the noise level in photoelectron counts. Learn how to visualize the Poisson Distribution with Python and discover how this probability distribution can help you predict the unpredictable.'
+seoDescription: '在我们日常的生活与工作中离不开网络的支持，在这个过程中会不停的使用到 HTTP 请求，而作为一个前端开发更是会经常使用到 HTTP 与后端开发进行对接联调，HTTP 使用起来非常简单，如果有人问你 HTTP 相关的知识你也能说出不少内容来，但是我们日常接触到的仅仅是 HTTP 的冰山一角，本文从 HTTP 的历史出发，一步步讲解 HTTP 的演变过程，让你在这个过程中全面的了解 HTTP 为什么这么设计'
 covers:
   - url: content/poisson-distribution/poisson_cover.jpg
     alt: The Poisson Distribution Cover
@@ -31,11 +31,11 @@ publishedAt: 2023-06-21
 在 HTTP/1.1 之前的版本中，每次发送请求前需要先与服务器建立连接，收到响应报文后会立即关闭连接。
 因为客户端与服务器的整个连接过程很短暂，不会与服务器保持长时间的连接状态，所以就被称为“**短连接**”（short-lived connections）。
 
-短连接的缺点相当严重，因为在TCP协议里，建立连接和关闭连接都是非常“昂贵”的操作。TCP建立连接要有“三次握手”，发送3个数据包，需要1.5个RTT；关闭连接是“四次挥手”，4个数据包需要2个RTT。
+短连接的缺点相当严重，因为在 TCP 协议里，建立连接和关闭连接都是非常“昂贵”的操作。TCP 建立连接要有“三次握手”，发送 3 个数据包，需要 1.5 个 RTT；关闭连接是“四次挥手”，4 个数据包需要 2 个 RTT。
 
 而 HTTP 的一次简单“请求 - 响应”通常只需要 4 个包，如果不算服务器内部的处理时间，最多是 2 个 RTT。这么算下来，浪费的时间就是“3.5÷5.5=64%”，有约三分之二的时间被浪费掉了，传输效率低得惊人。
 
-> RTT 指的是“**往返时延**”（Round-Trip Time），即从发送方发送数据开始，到发送方接收到来自接收方的确认消息所经过的时间。RTT时延通常由三部分决定：**链路的传播时间、末端系统的处理时间、路由器等网络中间节点的缓存和排队时间**。正常情况下报文的传输时间和在应用处理时间相对固定，在网络拥堵情况下会出现RTT时延的波动。
+> RTT 指的是“**往返时延**”（Round-Trip Time），即从发送方发送数据开始，到发送方接收到来自接收方的确认消息所经过的时间。RTT 时延通常由三部分决定：**链路的传播时间、末端系统的处理时间、路由器等网络中间节点的缓存和排队时间**。正常情况下报文的传输时间和在应用处理时间相对固定，在网络拥堵情况下会出现 RTT 时延的波动。
 
 ### 长连接
 
@@ -53,8 +53,8 @@ publishedAt: 2023-06-21
 
 在 Nginx 中提供了两种方式处理主动断开连接：
 
-1. 使用 `keepalive_timeout{:yaml}` 指令，设置长连接的超时时间，如果在一段时间内连接上没有任何数据收发就主动断开连接，避免空闲连接占用系统资源。（默认75s）
-2. 使用 `keepalive_requests{:yaml}` 指令，设置长连接上可发送的最大请求次数。比如设置成1000，那么当 Nginx 在这个连接上处理了1000个请求后，也会主动断开连接。（默认100）
+1. 使用 `keepalive_timeout{:yaml}` 指令，设置长连接的超时时间，如果在一段时间内连接上没有任何数据收发就主动断开连接，避免空闲连接占用系统资源。（默认 75s）
+2. 使用 `keepalive_requests{:yaml}` 指令，设置长连接上可发送的最大请求次数。比如设置成 1000，那么当 Nginx 在这个连接上处理了 1000 个请求后，也会主动断开连接。（默认 100）
 
 <img
   src="/images/content/http-introduce/短连接vs长连接.webp"
@@ -68,7 +68,7 @@ publishedAt: 2023-06-21
 
 作为 HTTP/1.x 的连接，请求是序列化的，哪怕本来是无序的，在没有足够庞大可用的带宽时，也无从优化。一个解决方案是，浏览器为每个域名建立多个连接，以实现并发请求。曾经默认的连接数量为 2 到 3 个，现在比较常用的并发连接数已经增加到 6 条。如果尝试大于这个数字，就有触发服务器 DoS 保护的风险。
 
-如果服务器端想要更快速的响应网站或应用程序的应答，它可以迫使客户端建立更多的连接。例如，不要在同一个域名下获取所有资源，假设有个域名是 `www.example.com` ，我们可以把它拆分成好几个域名：www1.example.com、www2.example.com、www3.example.com。所有这些域名都指向同一台服务器，浏览器会同时为每个域名建立6 条连接。这一技术被称作域名分片。
+如果服务器端想要更快速的响应网站或应用程序的应答，它可以迫使客户端建立更多的连接。例如，不要在同一个域名下获取所有资源，假设有个域名是 `www.example.com` ，我们可以把它拆分成好几个域名：www1.example.com、www2.example.com、www3.example.com。所有这些域名都指向同一台服务器，浏览器会同时为每个域名建立 6 条连接。这一技术被称作域名分片。
 
 > 除非你有紧急而迫切的需求，不要使用这一过时的技术；而是升级到 HTTP/2。在 HTTP/2 里，做域名分片就没必要了：HTTP/2 的连接可以很好的处理并发的无优先级的请求。域名分片甚至会影响性能。大多数 HTTP/2 的实现还会使用一种称作[连接聚合](https://daniel.haxx.se/blog/2016/08/18/http2-connection-coalescing/)的技术去尝试合并被分片的域名。
 
@@ -76,7 +76,7 @@ publishedAt: 2023-06-21
 
 队头阻塞与短连接和长连接无关，而是由 HTTP 基本的“请求-应答”模型所导致的。
 
-因为HTTP规定报文必须是“一发一收”，这就形成了一个先进先出的“串行”队列。队列里的请求没有轻重缓急的优先级，只有入队的先后顺序，排在最前面的请求被最优先处理。
+因为 HTTP 规定报文必须是“一发一收”，这就形成了一个先进先出的“串行”队列。队列里的请求没有轻重缓急的优先级，只有入队的先后顺序，排在最前面的请求被最优先处理。
 如果队首的请求因为处理的太慢耽误了时间，那么队列里后面的所有请求也不得不跟着一起等待，结果就是其他的请求承担了不应有的时间成本。
 
 <img
@@ -87,7 +87,7 @@ publishedAt: 2023-06-21
   height="auto"
 />
 
-# HTTP的重定向与跳转
+# HTTP 的重定向与跳转
 
 ## 跳转
 
@@ -98,11 +98,11 @@ publishedAt: 2023-06-21
 
 ## 重定向
 
-重定向按照时间的长短分为**永久重定向**和**临时重定向**，在HTTP的状态码中： `301{:bash}` 是永久重定向， `302{:bash}` 是临时重定向，浏览器收到这两个状态码就会跳转到新的URI。重定向的URI在 HTTP 请求的响应头中以 `Location{:yaml}` 来表示。
+重定向按照时间的长短分为**永久重定向**和**临时重定向**，在 HTTP 的状态码中： `301{:bash}` 是永久重定向， `302{:bash}` 是临时重定向，浏览器收到这两个状态码就会跳转到新的 URI。重定向的 URI 在 HTTP 请求的响应头中以 `Location{:yaml}` 来表示。
 
->  `Location{:yaml}` 字段必须配合 `3xx{:bash}` 状态码才会生效。
+> `Location{:yaml}` 字段必须配合 `3xx{:bash}` 状态码才会生效。
 
-在 `Location{:yaml}` 里的URI既可以使用绝对URI，也可以使用相对URI。所谓“绝对URI”，就是完整形式的URI，包括scheme、host:port、path等。所谓“相对URI”，就是省略了scheme和host:port，只有path和query部分，是不完整的，但可以从请求上下文里计算得到。
+在 `Location{:yaml}` 里的 URI 既可以使用绝对 URI，也可以使用相对 URI。所谓“绝对 URI”，就是完整形式的 URI，包括 scheme、host:port、path 等。所谓“相对 URI”，就是省略了 scheme 和 host:port，只有 path 和 query 部分，是不完整的，但可以从请求上下文里计算得到。
 
 ```yaml
 # 相对URI
@@ -139,10 +139,21 @@ HTTP Cookie（也叫 Web Cookie 或浏览器 Cookie）是服务器发送到用�
   height="auto"
 />
 
-Cookies 是由服务端设置值，然后发送到浏览器器由浏览器进行存储的。服务端在 HTTP 请求的响应头中通过 `Set-Cookie{:yaml}` 属性设置Cookie 的值，值的类型为 `key=value{:yaml}`，可以同时设置多个键值对，多个键值对之间以 `;{:bash}` 进行分割。浏览器发现请求的响应头中有 `Set-Cookie{:yaml}` 字段后会自动存储 Cookie 并且在下一次请求时将刚刚存储的 Cookie 放入 HTTP 请求头中的 `Cookie{:yaml}` 字段中，服务器在接收到请求时解析请求头中的 `Cookie{:yaml}` 字段就可以判别这个请求对应的用户身份了。
+Cookies 是由服务端设置值，然后发送到浏览器器由浏览器进行存储的。服务端在 HTTP 请求的响应头中通过 `Set-Cookie{:yaml}` 属性设置 Cookie 的值，值的类型为 `key=value{:yaml}`，可以同时设置多个键值对，多个键值对之间以 `;{:bash}` 进行分割。浏览器发现请求的响应头中有 `Set-Cookie{:yaml}` 字段后会自动存储 Cookie 并且在下一次请求时将刚刚存储的 Cookie 放入 HTTP 请求头中的 `Cookie{:yaml}` 字段中，服务器在接收到请求时解析请求头中的 `Cookie{:yaml}` 字段就可以判别这个请求对应的用户身份了。
 
 ## Cookie 的属性
 
+| 属性              | 描述                                                                                                                                                                                                   |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Expires{:yaml}`  | 过期时间                                                                                                                                                                                               |
+| `Max-Age{:yaml}`  | 有效期                                                                                                                                                                                                 |
+| `Secure{:yaml}`   | 标记为 Secure 的 Cookie 只应通过被 HTTPS 协议加密过的请求发送给服务端                                                                                                                                  |
+| `HttpOnly{:yaml}` | JavaScript Document.cookie API 无法访问带有 HttpOnly 属性的 cookie；此类 Cookie 仅作用于服务器。                                                                                                       |
+| `Domain{:yaml}`   | 指定了哪些主机可以接受 Cookie                                                                                                                                                                          |
+| `Path{:yaml}`     | Path 属性指定了一个 URL 路径，该 URL 路径必须存在于请求的 URL 中，以便发送 Cookie 标头。以字符 %x2F (“/”) 作为路径分隔符，并且子路径也会被匹配。                                                       |
+| `SameSite{:yaml}` | SameSite 属性允许服务器指定是否/何时通过跨站点请求发送（其中站点由注册的域和方案定义：http 或 https）。这提供了一些针对跨站点请求伪造攻击（CSRF）的保护。它采用三个可能的值：`Strict`、`Lax` 和 `None` |
+
 # 相关阅读 📖
 
-- [TCP中RTT时延的理解](https://www.modb.pro/db/616210)
+- [TCP 中 RTT 时延的理解](https://www.modb.pro/db/616210)
+- [什么是队头阻塞以及如何解决](https://juejin.cn/post/6844903853985366023)
