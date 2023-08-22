@@ -1,0 +1,81 @@
+---
+title: 'CSS 中的滚动进度动画'
+tags:
+  - title: 动画
+categories:
+  - title: CSS
+author:
+  name: 研之有物
+  designation: Research Assistant
+  url: https://langliu.xyz
+  avatar:
+    url: user.png
+    alt: 研之有物
+description: '当我们想到滚动驱动的动画时，我们通常指以下两件事之一：- **当用户滚动时**发生的动画，动画的进度显式链接到滚动进度。例如，长文章的进度条。- 当元素进入、退出或穿过可见区域（通常是视口）时在元素上发生的动画，但它可能是另一个可滚动容器的可见部分（这被定义为滚动端口）'
+seoDescription: '当我们想到滚动驱动的动画时，我们通常指以下两件事之一：- **当用户滚动时**发生的动画，动画的进度显式链接到滚动进度。例如，长文章的进度条。- 当元素进入、退出或穿过可见区域（通常是视口）时在元素上发生的动画，但它可能是另一个可滚动容器的可见部分（这被定义为滚动端口）'
+covers:
+  - url: content/poisson-distribution/poisson_cover.jpg
+    alt: The Poisson Distribution Cover
+status: published
+publishedAt: 2023-08-22
+---
+
+当我们想到滚动驱动的动画时，我们通常指以下两件事之一：
+
+- **当用户滚动时**发生的动画，动画的进度显式链接到滚动进度。例如，长文章的进度条。
+- 当元素进入、退出或穿过可见区域（通常是视口）时在元素上发生的动画，但它可能是另一个可滚动容器的可见部分（这被定义为滚动端口）
+
+## 使用动画时间轴
+
+在此示例中，我们将实现一个常见功能：当用户滚动网页时，将简单的进度条动画化以从左向右缩放。因为我们想要将动画链接到根滚动条的进度，所以我们可以使用匿名滚动进度时间轴。
+
+```css
+@keyframes scaleProgress {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+```
+
+为了将进度条元素的动画与滚动进度相关联，我们使用了该 [animation-timeline](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline) 属性并将 [scroll()](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline/scroll) 函数设置为其值。
+
+```css
+.progress {
+  animation-timeline: scroll();
+}
+```
+
+该`scroll()`函数允许我们指定滚动容器和轴。默认值为`scroll(nearest block)`，这意味着动画将链接到块轴上最近的可滚动祖先。这对于我们的目的来说已经足够了，尽管我们可以选择将根指定为滚动容器，因为我们希望将动画显式链接到视口滚动的进度。
+
+```css
+.progress {
+  animation-timeline: scroll(root block);
+}
+```
+
+最后，我们需要将动画添加到进度条元素，并将关键帧动画作为 [animation-name](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-name)。 我们需要将动画持续时间设置为`auto`，因为持续时间将由滚动进度决定。我们还设置了缓动 [animation-timing-function](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function)`，`linear` 以便它能够与滚动顺利进行。
+
+```css
+.progress {
+  animation: scaleProgress auto linear;
+  animation-timeline: scroll(root);
+}
+```
+
+> `animation-timeline` 目前不包含在简写中。但是，该 `animation` 属性重置 `animation-timeline` 为 `auto`（默认值），因此我们需要在简写 `animation-timeline` 之后 `animation` 声明。
+
+
+[Playground | MDN](https://developer.mozilla.org/en-US/play)
+
+# 兼容性
+
+目前兼用性还不好，只有 Chrome115 版本以上浏览器支持。
+
+["scroll()" | Can I use... Support tables for HTML5, CSS3, etc](<https://caniuse.com/?search=scroll()>)
+
+# 案例
+
+<https://codepen.io/michellebarker/pen/ZEmygMP>
