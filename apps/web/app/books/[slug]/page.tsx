@@ -1,5 +1,6 @@
 import styles from './page.module.css'
 import { supabase } from '@/libs/supabaseClient'
+import { unstable_noStore as noStore } from 'next/cache'
 import Link from 'next/link'
 
 type Props = {
@@ -10,6 +11,7 @@ type Props = {
 
 export const runtime = 'edge'
 export async function getData(bookId: string) {
+  noStore()
   const { data } = await supabase
     .from('articles')
     .select('id,title,serial,bookId')
@@ -34,6 +36,7 @@ export default async function Page({ params }: Props) {
         </Link>
         <h3 className={styles.title}>{book?.[0].name}</h3>
         <span>（共{data?.length}章）</span>
+        <Link href={`/articles/create?bookId=${slug}`}>新建章节</Link>
       </div>
       <ul className={styles.list}>
         {data?.map((country) => (

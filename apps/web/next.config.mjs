@@ -13,9 +13,6 @@ const nextConfig = {
     loader: 'custom',
     loaderFile: './supabase-image-loader.js',
   },
-  experimental: {
-    serverActions: true,
-  },
 }
 
 const withMDX = nextMDX({
