@@ -1,8 +1,9 @@
+import { CreateBook } from './components/CreateBook'
+import Search from './components/Search'
 import styles from './page.module.css'
 import { supabase } from '@/libs/supabaseClient'
 import Link from 'next/link'
 import React from 'react'
-
 export const runtime = 'edge'
 
 export async function getData() {
@@ -10,18 +11,15 @@ export async function getData() {
   return data
 }
 
-const Page = async () => {
+export default async function Page() {
   const data = await getData()
 
   return (
-    <div>
-      <div className='flex gap-2'>
-        <h1>书籍📕</h1>
-        <Link href={'/books/create'}>
-          <button type='button' title='新建书籍'>
-            新建
-          </button>
-        </Link>
+    <div className='py-6 px-8'>
+      <h1 className='text-2xl'>书籍管理</h1>
+      <div className='flex gap-4 mt-4 mb-6 items-center'>
+        <Search placeholder='请输入书籍名称进行搜索' />
+        <CreateBook />
       </div>
       <table className={styles.table}>
         <thead>
@@ -48,5 +46,3 @@ const Page = async () => {
     </div>
   )
 }
-
-export default Page

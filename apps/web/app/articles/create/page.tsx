@@ -1,7 +1,10 @@
 'use client'
 import { supabase } from '../../../libs/supabaseClient'
+import { useDebounceFn } from 'ahooks'
 import { Button, Collapse, Form, Input, InputNumber, message } from 'antd'
+import { Metadata } from 'next'
 import { unstable_noStore as noStore } from 'next/cache'
+import { useSearchParams } from 'next/navigation'
 import React, { ChangeEventHandler, useMemo, useState } from 'react'
 
 async function insertArticle(params: {
@@ -15,12 +18,8 @@ async function insertArticle(params: {
   return { data, error }
 }
 
-interface CreateBookProps {
-  searchParams: {
-    bookId: string
-  }
-}
-export default function CreateBook({ searchParams }: CreateBookProps) {
+export default function CreateBook() {
+  const searchParams = useSearchParams()
   const [content, setContent] = useState<string>('')
   const [form] = Form.useForm()
   const handleFileChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -35,7 +34,7 @@ export default function CreateBook({ searchParams }: CreateBookProps) {
       }
     }
   }
-  console.log('search', searchParams)
+  console.log('search', searchParams.values())
 
   const title = useMemo(() => {
     const titles = content.match(/第.+章、.+\r/g)
@@ -47,27 +46,36 @@ export default function CreateBook({ searchParams }: CreateBookProps) {
     }))
   }, [content])
 
-  const handleSubmit = async () => {
-    try {
-      const formData = form.getFieldsValue()
-      console.log({ ...formData, bookId: Number(searchParams.bookId) })
-      const resp = await insertArticle({ ...formData, bookId: Number(searchParams.bookId) })
-      console.warn('res', resp)
-      if (resp.error) {
-        message.error(resp.error.message)
-      } else {
-        message.success('新建成功')
-        form.setFieldsValue({
-          serial: formData.serial + 1,
-          title: undefined,
-          content: undefined
+  const { run: handleSubmit } = useDebounceFn(
+    async () => {
+      try {
+        const formData = form.getFieldsValue()
+        console.log({ ...formData, bookId: Number(searchParams.get('bookId')) })
+        const resp = await insertArticle({
+          ...formData,
+          bookId: Number(searchParams.get('bookId')),
         })
-      }
-    } catch (error) {}
-  }
+        console.warn('res', resp)
+        if (resp.error) {
+          message.error(resp.error.message)
+        } else {
+          message.success('新建成功')
+          form.setFieldsValue({
+            serial: formData.serial + 1,
+            title: undefined,
+            content: undefined,
+          })
+        }
+      } catch (error) {}
+    },
+    {
+      wait: 1000,
+    },
+  )
 
   return (
     <div className='pt-8 px-8'>
+      <h1 className='text-2xl mb-6'>新建章节</h1>
       <Form form={form} labelCol={{ span: 3 }} onFinish={handleSubmit}>
         <Form.Item
           label='章节序号'
@@ -93,7 +101,7 @@ export default function CreateBook({ searchParams }: CreateBookProps) {
         </Form.Item>
       </Form>
       CreateBook
-      <input type='file' placeholder='请选择文件' title='文件上传' onChange={handleFileChange} />
+      {/* <input type='file' placeholder='请选择文件' title='文件上传' onChange={handleFileChange} />
       <div>
         {title?.length}
         <Collapse>
@@ -103,7 +111,7 @@ export default function CreateBook({ searchParams }: CreateBookProps) {
             </Collapse.Panel>
           ))}
         </Collapse>
-      </div>
+      </div> */}
     </div>
   )
 }
