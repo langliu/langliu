@@ -1,5 +1,5 @@
 'use client'
-import { supabase } from '../../../libs/supabaseClient'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useDebounceFn } from 'ahooks'
 import { Button, Collapse, Form, Input, InputNumber, message } from 'antd'
 import { Metadata } from 'next'
@@ -14,6 +14,7 @@ async function insertArticle(params: {
   serial: number
 }) {
   noStore()
+  const supabase = createClientComponentClient()
   const { data, error } = await supabase.from('articles').insert([params]).select()
   return { data, error }
 }

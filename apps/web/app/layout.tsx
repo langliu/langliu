@@ -1,4 +1,5 @@
 import './global.css'
+import StyledComponentsRegistry from '@/libs/AntdRegistry'
 
 export interface RootLayoutProps {
   children: React.ReactNode
@@ -7,7 +8,9 @@ export interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='zh-CN'>
-      <body className={'antialiased'}>{children}</body>
+      <body className={'antialiased'}>
+        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+      </body>
     </html>
   )
 }
