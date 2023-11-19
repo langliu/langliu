@@ -30,49 +30,51 @@ export default function ModelsTable(params: ModelsTableProps) {
           </tr>
         </thead>
         <tbody className='bg-white'>
-          {params.data?.map((record) => (
+          {params?.data?.map((record) => (
             <tr
               key={record.id}
               className='w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg'
             >
               <td className='whitespace-nowrap py-3 pl-6 pr-3'>
                 <div className='flex items-center gap-3'>
-                  <Popover
-                    content={
+                  {record?.avatar && (
+                    <Popover
+                      content={
+                        <Image
+                          src={record?.avatar}
+                          width={400}
+                          height={400}
+                          alt={`${record.username}的头像`}
+                        />
+                      }
+                      title={record.username}
+                      placement='right'
+                    >
                       <Image
-                        src={record.avatar}
-                        width={400}
-                        height={400}
+                        src={record?.avatar}
+                        className='rounded-full'
+                        width={60}
+                        height={60}
                         alt={`${record.username}的头像`}
                       />
-                    }
-                    title={record.username}
-                    placement='right'
-                  >
-                    <Image
-                      src={record.avatar}
-                      className='rounded-full'
-                      width={60}
-                      height={60}
-                      alt={`${record.username}的头像`}
-                    />
-                  </Popover>
+                    </Popover>
+                  )}
                   <p>{record.username}</p>
                 </div>
               </td>
               <td className='whitespace-nowrap px-3 py-3'>
                 <span className='inline-flex items-center gap-2'>
-                  {record.homepage && (
+                  {record?.homepage && (
                     <Link href={record.homepage} target='_blank'>
                       <HomeOutlined className='text-xl' />
                     </Link>
                   )}
-                  {record.instagram && (
+                  {record?.instagram && (
                     <Link href={record.instagram} target='_blank'>
                       <InstagramOutlined className='text-xl' />
                     </Link>
                   )}
-                  {record.twitter && (
+                  {record?.twitter && (
                     <Link href={record.twitter} target='_blank'>
                       <TwitterOutlined className='text-xl' />
                     </Link>
