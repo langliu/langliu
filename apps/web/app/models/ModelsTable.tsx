@@ -52,9 +52,9 @@ export default function ModelsTable(params: ModelsTableProps) {
                     >
                       <Image
                         src={record?.avatar}
-                        className='rounded-full'
-                        width={60}
-                        height={60}
+                        className='rounded-full object-cover w-16 h-16'
+                        width={64}
+                        height={64}
                         alt={`${record.username}的头像`}
                       />
                     </Popover>

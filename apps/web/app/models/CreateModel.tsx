@@ -5,28 +5,28 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Drawer, Form, Input } from 'antd'
 import { useState } from 'react'
 
+import { createModel } from './services'
+
 export interface CreateModelProps {
   name?: string
-  onSuccess?: () => void
 }
 
-export default function CreateModel({ name, onSuccess }: CreateModelProps) {
+export default function CreateModel({ name }: CreateModelProps) {
   const [open, setOpen] = useState(false)
   const [form] = Form.useForm()
 
   const supabase = createClientComponentClient()
 
-  const createModel = async (formData: Object) => {
-    const { data, error } = await supabase.from('models').insert([formData]).select()
-    if (error) {
-    } else {
-      setOpen(false)
-      onSuccess?.()
-    }
-  }
-
   const handleSubmit = () => {
-    form.validateFields().then(createModel)
+    form
+      .validateFields()
+      .then(createModel)
+      .then((value) => {
+        if (value) {
+          setOpen(false)
+          form.resetFields()
+        }
+      })
   }
 
   return (

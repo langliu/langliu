@@ -1,6 +1,6 @@
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { message } from 'antd'
-import { revalidatePath } from 'next/cache'
+
 import { cookies } from 'next/headers'
 
 import CreateModel from './CreateModel'
@@ -10,7 +10,7 @@ import Search from './Search'
 async function getData() {
   const supabase = createServerComponentClient({ cookies })
   try {
-    const { data: models, error } = await supabase.from('models').select('*')
+    const { data: models, error } = await supabase.from('models').select('*').order('updated_at', { ascending: false })
     if (error) {
       throw error
     }
