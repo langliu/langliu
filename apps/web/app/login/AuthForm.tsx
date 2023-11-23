@@ -33,7 +33,7 @@ export default function AuthForm() {
         // "workos",
         // "zoom",
       ]}
-      redirectTo='http://localhost:3000/auth/callback'
+      redirectTo={process.env.NEXT_PUBLIC_REDIRECT_TO}
       localization={{
         variables: {
           sign_in: {

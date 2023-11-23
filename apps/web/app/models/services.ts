@@ -14,3 +14,14 @@ export async function createModel(formData: Object) {
     return true
   }
 }
+
+export async function updateModel(id: string, formData: Object) {
+  const supabase = createServerActionClient({ cookies })
+  const { data, error } = await supabase.from('models').update([formData]).eq('id', id).select()
+  if (error) {
+    return false
+  } else {
+    revalidatePath('/models')
+    return true
+  }
+}

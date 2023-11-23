@@ -1,11 +1,11 @@
-import Button from '@/components/Button'
 import { HomeOutlined, InstagramOutlined, TwitterOutlined } from '@ant-design/icons'
 import { Popover } from 'antd'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import UpdateModel from './UpdateModel'
 export interface ModelsTableProps {
-  data: any[]
+  record: any[]
 }
 
 export default function ModelsTable(params: ModelsTableProps) {
@@ -84,7 +84,7 @@ export default function ModelsTable(params: ModelsTableProps) {
               <td className='whitespace-nowrap px-3 py-3'>{record.created_at}</td>
               <td className='whitespace-nowrap px-3 py-3'>{record.updated_at}</td>
               <td className='whitespace-nowrap px-3 py-3'>
-                <Button>编辑</Button>
+                <UpdateModel record={record} />
               </td>
               {/* <td className='whitespace-nowrap px-3 py-3'>{formatCurrency(invoice.amount)}</td>
                   <td className='whitespace-nowrap px-3 py-3'>{formatDateToLocal(invoice.date)}</td> */}
