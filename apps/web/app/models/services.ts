@@ -15,12 +15,19 @@ export async function createModel(formData: Object) {
   }
 }
 
-export async function updateModel(id: string, formData: Object) {
+export async function updateModel(id: number, formData: Object) {
   const supabase = createServerActionClient({ cookies })
-  const { data, error } = await supabase.from('models').update([formData]).eq('id', id).select()
+  const { data, error } = await supabase
+    .from('models')
+    .update({ ...formData, updated_at: new Date().toUTCString() })
+    .eq('id', id)
+    .select()
+  console.log('id', id, typeof id)
   if (error) {
+    console.log('error', error)
     return false
   } else {
+    console.log('data', data)
     revalidatePath('/models')
     return true
   }

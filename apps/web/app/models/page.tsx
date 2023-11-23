@@ -10,11 +10,28 @@ import Search from './Search'
 async function getData() {
   const supabase = createServerComponentClient({ cookies })
   try {
-    const { data: models, error } = await supabase.from('models').select('*').order('updated_at', { ascending: false })
+    const { data: models, error } = await supabase
+      .from('models')
+      .select('*')
+      .order('updated_at', { ascending: false })
     if (error) {
       throw error
     }
-    return models
+
+    const results = await Promise.all(
+      models.map(async (item) => {
+        if (item.avatar && !item.avatar.startsWith('http')) {
+          const { data, error } = await supabase.storage
+            .from('langliu')
+            .createSignedUrl(item.avatar, 60)
+          if (!error) {
+            item.avatar = data.signedUrl
+          }
+        }
+        return item
+      }),
+    )
+    return results
   } catch (error) {
     if (error instanceof Error) {
       message.error(error?.message)
@@ -24,7 +41,6 @@ async function getData() {
 
 export default async function ModelsPage() {
   const data = await getData()
-  console.log('data', data)
   return (
     <div className='antialiased font-sans xl:px-20 px-2 flex flex-col gap-6 xl:pt-16 pt-2'>
       <div className='flex gap-4'>

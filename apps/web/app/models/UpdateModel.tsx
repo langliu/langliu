@@ -1,6 +1,6 @@
 'use client'
 import Button from '@/components/Button'
-import { PlusOutlined } from '@ant-design/icons'
+import { EditOutlined, PlusOutlined } from '@ant-design/icons'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Drawer, Form, Input, Upload } from 'antd'
 import { useEffect, useState } from 'react'
@@ -28,6 +28,7 @@ export default function UpdateModel({ record }: CreateModelProps) {
   }
 
   const handleSubmit = () => {
+    console.warn('record', record)
     form
       .validateFields()
       .then((value) => updateModel(record.id, value))
@@ -49,8 +50,8 @@ export default function UpdateModel({ record }: CreateModelProps) {
   return (
     <>
       <Button onClick={() => setOpen(true)}>
-        <PlusOutlined className='pr-2' />
-        添加
+        <EditOutlined className='pr-2' />
+        编辑
       </Button>
       <Drawer
         title='新增模特'
