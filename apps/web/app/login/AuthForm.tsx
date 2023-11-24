@@ -14,33 +14,15 @@ export default function AuthForm() {
       appearance={{ theme: ThemeSupa }}
       theme='dark'
       showLinks={false}
-      providers={[
-        'google',
-        // "facebook",
-        'twitter',
-        // "notion",
-        'github',
-        // "gitlab",
-        // "apple",
-        // "azure",
-        // "bitbucket",
-        // "discord",
-        // "keycloak",
-        // "linkedin",
-        // "slack",
-        // "spotify",
-        // "twitch",
-        // "workos",
-        // "zoom",
-      ]}
-      redirectTo={process.env.NEXT_PUBLIC_REDIRECT_TO}
+      providers={['google', 'twitter', 'github']}
+      redirectTo={`${origin}/auth/callback`}
       localization={{
         variables: {
           sign_in: {
             email_label: '邮件地址',
             password_label: '登录密码',
             email_input_placeholder: '请输入你的邮件地址',
-            password_input_placeholder: 'Your password',
+            password_input_placeholder: '请输入你的密码',
             button_label: '登录',
           },
           sign_up: {
