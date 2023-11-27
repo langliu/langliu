@@ -15,7 +15,7 @@ export default function AuthForm() {
       theme='dark'
       showLinks={false}
       providers={['google', 'twitter', 'github']}
-      redirectTo={`${window.location.origin}/auth/callback`}
+      redirectTo={`${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`}
       localization={{
         variables: {
           sign_in: {
