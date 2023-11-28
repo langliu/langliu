@@ -7,6 +7,8 @@ import { ThemeSupa } from '@supabase/auth-ui-shared'
 export default function AuthForm() {
   const supabase = createClientComponentClient<Database>()
 
+  console.log('redirectTo', `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`)
+
   return (
     <Auth
       supabaseClient={supabase}
