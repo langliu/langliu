@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 import UpdateModel from './UpdateModel'
 export interface ModelsTableProps {
-  record: any[]
+  data: any[]
 }
 
 export default function ModelsTable(params: ModelsTableProps) {

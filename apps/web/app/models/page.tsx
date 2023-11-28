@@ -7,12 +7,13 @@ import CreateModel from './CreateModel'
 import ModelsTable from './ModelsTable'
 import Search from './Search'
 
-async function getData() {
+async function getData(query?: string) {
   const supabase = createServerComponentClient({ cookies })
   try {
     const { data: models, error } = await supabase
       .from('models')
       .select('*')
+      .like('username', `%${query ?? ''}%`)
       .order('updated_at', { ascending: false })
     if (error) {
       throw error
@@ -39,8 +40,17 @@ async function getData() {
   }
 }
 
-export default async function ModelsPage() {
-  const data = await getData()
+interface ModelsPageProps {
+  searchParams: {
+    query?: string
+    page?: string
+  }
+}
+
+export default async function ModelsPage({ searchParams }: ModelsPageProps) {
+  const currentPage = Number(searchParams?.page) || 1
+  const data = await getData(searchParams?.query)
+
   return (
     <div className='antialiased font-sans xl:px-20 px-2 flex flex-col gap-6 xl:pt-16 pt-2'>
       <div className='flex gap-4'>
