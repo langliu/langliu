@@ -37,6 +37,12 @@
       ],
       "@/css/*": [
         "css/*"
+      ],
+      "@/ui/*": [
+        "ui/*"
+      ],
+      "@/types/*": [
+        "types/*"
       ]
     }
   },
@@ -48,8 +54,9 @@
     "next-env.d.ts",
     "../../apps/web/.next/types/**/*.ts",
     "../../dist/apps/web/.next/types/**/*.ts",
-    ".next/types/**/*.ts"
-, "next.config.mjs"  ],
+    ".next/types/**/*.ts",
+    "next.config.mjs"
+  ],
   "exclude": [
     "node_modules",
     "jest.config.ts",
