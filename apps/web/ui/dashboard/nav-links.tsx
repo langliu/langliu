@@ -13,7 +13,7 @@ const links = [
     href: '/dashboard/albums',
     icon: FilePptOutlined,
   },
-  { name: 'Customers', href: '/dashboard/customers', icon: UserOutlined },
+  { name: '模特管理', href: '/dashboard/models', icon: UserOutlined },
 ]
 
 export default function NavLinks() {

@@ -10,7 +10,7 @@ export async function createModel(formData: Object) {
   if (error) {
     return false
   } else {
-    revalidatePath('/models')
+    revalidatePath('/dashboard/models')
     return true
   }
 }
@@ -28,7 +28,7 @@ export async function updateModel(id: number, formData: Object) {
     return false
   } else {
     console.log('data', data)
-    revalidatePath('/models')
+    revalidatePath('/dashboard/models')
     return true
   }
 }

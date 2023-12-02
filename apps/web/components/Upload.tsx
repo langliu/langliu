@@ -2,7 +2,6 @@ import SupabaseImage from './SupabaseClientImage'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
 export interface UploadProps {
-  // children: React.ReactNode
   value?: string
   onChange?: (value?: string) => void
 }
@@ -11,11 +10,11 @@ export default function Upload({ value, onChange }: UploadProps) {
   const supabase = createClientComponentClient()
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
-    console.log(file)
+    console.log(file, crypto.randomUUID())
     if (file) {
       const { data, error } = await supabase.storage
         .from('langliu')
-        .upload(`album/${file.name}`, file)
+        .upload(`album/${crypto.randomUUID()}.${file.name.split('.').pop()}`, file)
       if (error) {
         console.error(error)
       } else {

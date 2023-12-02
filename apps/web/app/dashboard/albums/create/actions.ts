@@ -34,8 +34,8 @@ export async function createModel(formData: Database['public']['Tables']['albums
     .select()
   if (!error) {
     await supabase
-      .from('album_to_model')
-      .insert(formData?.models?.map((model: any) => ({ album: data[0].id, model: model })))
+      .from('models_albums')
+      .insert(formData?.models?.map((model: any) => ({ album_id: data[0].id, model_id: model })))
     revalidatePath('/dashboard/albums')
     redirect('/dashboard/albums')
   } else {

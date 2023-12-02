@@ -1,6 +1,6 @@
-// import { UpdateInvoice, DeleteInvoice } from '@/app/ui/invoices/buttons';
 import InvoiceStatus from './Status'
 import { fetchFilteredInvoices } from './actions'
+import Badge from '@/components/Badges'
 import SupabaseImage from '@/components/SupabaseImage'
 import { formatCurrency, formatDateToLocal } from '@/libs/utils'
 import Link from 'next/link'
@@ -24,23 +24,31 @@ export default async function InvoicesTable({
                 <div className='flex items-center justify-between border-b pb-4'>
                   <div>
                     <div className='mb-2 flex items-center'>
-                      {/* <Image
-                        src={invoice.image_url}
-                        className='mr-2 rounded-full'
-                        width={28}
-                        height={28}
+                      <SupabaseImage
+                        src={invoice.cover}
                         alt={`${invoice.name}'s profile picture`}
-                      /> */}
-                      <p>{invoice.name}</p>
+                      />
                     </div>
-                    <p className='text-sm text-gray-500'>{invoice.name}</p>
                   </div>
-                  <InvoiceStatus status={invoice.collected} />
                 </div>
                 <div className='flex w-full items-center justify-between pt-4'>
                   <div>
-                    <p className='text-xl font-medium'>{formatCurrency(invoice.amount)}</p>
-                    <p>{formatDateToLocal(invoice.created_at)}</p>
+                    <p className='text-xl font-medium flex gap-2 items-center'>
+                      {invoice.name}
+                      <span className='text-sm text-gray-400'>
+                        {invoice.picture_num}P {invoice.video_num}V
+                      </span>
+                    </p>
+                    <InvoiceStatus status={invoice.collected} />
+                    <div className='flex gap-2'>
+                      {invoice.models.map((model) => {
+                        return (
+                          <Link href={`/models?query=${model.username}`} key={model.id}>
+                            <Badge type='indigo'>{model.username}</Badge>
+                          </Link>
+                        )
+                      })}
+                    </div>
                   </div>
                   {/* <div className="flex justify-end gap-2">
                     <UpdateInvoice id={invoice.id} />
@@ -92,9 +100,15 @@ export default async function InvoicesTable({
                     </div>
                   </td>
                   <td className='whitespace-nowrap px-3 py-3'>
-                    {invoice.models.map((model) => {
-                      return <Link href={`/models?query=${model.username}`}>{model.username}</Link>
-                    })}
+                    <div className='flex gap-2'>
+                      {invoice.models.map((model) => {
+                        return (
+                          <Link href={`/models?query=${model.username}`} key={model.id}>
+                            <Badge type='indigo'>{model.username}</Badge>
+                          </Link>
+                        )
+                      })}
+                    </div>
                   </td>
                   <td className='whitespace-nowrap px-3 py-3'>{invoice.picture_num}</td>
                   <td className='whitespace-nowrap px-3 py-3'>{invoice.video_num}</td>

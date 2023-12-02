@@ -14,7 +14,7 @@ function SupabaseImage({ alt, src }: SupabaseImageProps) {
   useEffect(() => {
     supabase.storage
       .from('langliu')
-      .createSignedUrl(src, 60)
+      .createSignedUrl(src, 3600)
       .then((data) => {
         if (!data.error) {
           setUrl(data.data?.signedUrl)
