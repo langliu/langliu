@@ -14,18 +14,21 @@
     "tailwindcss"
   ],
   "[javascript]": {
-    "editor.defaultFormatter": "rome.rome"
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "rome.rome"
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "rome.rome"
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "[json]": {
-    "editor.defaultFormatter": "rome.rome"
+    "editor.defaultFormatter": "biomejs.biome"
   },
+  "css.validate": false,
   "editor.codeActionsOnSave": {
-    "source.organizeImports.rome": true
+    "quickfix.biome": true,
+    "source.organizeImports.biome": true,
+    "source.fixAll.stylelint": true
   }
 }

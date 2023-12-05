@@ -32,6 +32,7 @@ export default function Upload({ value, onChange }: UploadProps) {
         id='file_input'
         type='file'
         onChange={handleChange}
+        title='upload'
       />
     </div>
   )
