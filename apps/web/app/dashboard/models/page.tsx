@@ -1,11 +1,10 @@
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { message } from 'antd'
-
 import { cookies } from 'next/headers'
-
 import CreateModel from './CreateModel'
 import ModelsTable from './ModelsTable'
 import Search from './Search'
+
 
 async function getData(query?: string) {
   const supabase = createServerComponentClient({ cookies })
@@ -19,20 +18,7 @@ async function getData(query?: string) {
       throw error
     }
 
-    const results = await Promise.all(
-      models.map(async (item) => {
-        if (item.avatar && !item.avatar.startsWith('http')) {
-          const { data, error } = await supabase.storage
-            .from('langliu')
-            .createSignedUrl(item.avatar, 60)
-          if (!error) {
-            item.avatar = data.signedUrl
-          }
-        }
-        return item
-      }),
-    )
-    return results
+    return models
   } catch (error) {
     if (error instanceof Error) {
       message.error(error?.message)

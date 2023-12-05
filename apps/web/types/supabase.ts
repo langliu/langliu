@@ -16,6 +16,7 @@ export interface Database {
           created_at: string
           id: number
           name: string | null
+          organization: string | null
           picture_num: number | null
           updated_at: string | null
           video_num: number | null
@@ -26,6 +27,7 @@ export interface Database {
           created_at?: string
           id?: number
           name?: string | null
+          organization?: string | null
           picture_num?: number | null
           updated_at?: string | null
           video_num?: number | null
@@ -36,11 +38,20 @@ export interface Database {
           created_at?: string
           id?: number
           name?: string | null
+          organization?: string | null
           picture_num?: number | null
           updated_at?: string | null
           video_num?: number | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "albums_organization_fkey"
+            columns: ["organization"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       articles: {
         Row: {
@@ -193,6 +204,27 @@ export interface Database {
             referencedColumns: ["id"]
           }
         ]
+      }
+      organizations: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          url: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          url?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          url?: string | null
+        }
+        Relationships: []
       }
       photos: {
         Row: {
