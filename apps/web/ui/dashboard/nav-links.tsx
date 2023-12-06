@@ -13,7 +13,16 @@ const links = [
     href: '/dashboard/albums',
     icon: FilePptOutlined,
   },
-  { name: '模特管理', href: '/dashboard/models', icon: UserOutlined },
+  {
+    name: '模特管理',
+    href: '/dashboard/models',
+    icon: UserOutlined,
+  },
+  {
+    name: '机构管理',
+    href: '/dashboard/organizations',
+    icon: UserOutlined,
+  },
 ]
 
 export default function NavLinks() {
@@ -33,8 +42,8 @@ export default function NavLinks() {
               },
             )}
           >
-            <LinkIcon className='w-6' />
-            <p className='hidden md:block'>{link.name}</p>
+            <LinkIcon className="w-6" />
+            <p className="hidden md:block">{link.name}</p>
           </Link>
         )
       })}

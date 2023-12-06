@@ -4,7 +4,7 @@
   "description": "My personal portfolio website built with Next.js, Tailwind CSS, and Contentlayer",
   "private": false,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --port 4200",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
