@@ -12,7 +12,7 @@ div[data-rehype-pretty-code-fragment] pre {
 }
 
 div[data-rehype-pretty-code-fragment] .line {
-  @apply pl-2 pr-3 border-l-4 border-transparent block -mb-4;
+  @apply pl-2 pr-3 border-l-4 border-transparent block;
 }
 
 div[data-rehype-pretty-code-fragment] .line:last-child {
@@ -52,8 +52,9 @@ code[data-line-numbers] {
 }
 
 code[data-line-numbers] .line::before {
-  counter-increment: lineNumber;
   content: counter(lineNumber);
+  counter-increment: lineNumber;
+
   @apply text-zinc-500 dark:text-zinc-100 mr-3 w-4 text-right inline-block;
 }
 
