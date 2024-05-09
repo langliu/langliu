@@ -25,7 +25,6 @@
 .listItem {
   display: flex;
   padding: 12px 1rem;
-  white-space: nowrap;
   text-overflow: ellipsis;
   background-color: rgb(247, 242, 232);
   margin-bottom: 1px;
@@ -38,5 +37,11 @@
 @media screen and (max-width: 600px) {
   .list {
     grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .list {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

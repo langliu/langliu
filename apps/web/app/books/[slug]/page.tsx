@@ -40,8 +40,8 @@ export default async function Page({ params }: Props) {
       </div>
       <ul className={styles.list}>
         {data?.map((country) => (
-          <Link href={`/articles/${country.id}`}>
-            <li key={country.id} className={styles.listItem}>
+          <Link href={`/articles/${country.id}`} className={styles.listItem}>
+            <li key={country.id} >
               {country.title.includes('章') ? '' : `第${country.serial}章 `}
               {country.title}
             </li>
