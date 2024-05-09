@@ -1,4 +1,6 @@
-import { Revenue } from './definitions'
+
+import { type ClassValue, clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
 
 export const formatCurrency = (amount: number) => {
   return (amount / 100).toLocaleString('en-US', {
@@ -18,19 +20,6 @@ export const formatDateToLocal = (dateStr: string, locale = 'zh-CN') => {
   return formatter.format(date)
 }
 
-export const generateYAxis = (revenue: Revenue[]) => {
-  // Calculate what labels we need to display on the y-axis
-  // based on highest record and in 1000s
-  const yAxisLabels = []
-  const highestRecord = Math.max(...revenue.map((month) => month.revenue))
-  const topLabel = Math.ceil(highestRecord / 1000) * 1000
-
-  for (let i = topLabel; i >= 0; i -= 1000) {
-    yAxisLabels.push(`$${i / 1000}K`)
-  }
-
-  return { yAxisLabels, topLabel }
-}
 
 export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the total number of pages is 7 or less,
@@ -55,4 +44,9 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
   // show the first page, an ellipsis, the current page and its neighbors,
   // another ellipsis, and the last page.
   return [1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages]
+}
+
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
 }
