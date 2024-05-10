@@ -4,7 +4,6 @@ import styles from './page.module.css'
 import { supabase } from '@/libs/supabaseClient'
 import Link from 'next/link'
 import React from 'react'
-export const runtime = 'edge'
 
 export async function getData() {
   const { data } = await supabase.from('books').select('*')

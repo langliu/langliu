@@ -38,7 +38,7 @@ export default async function ModelsPage({ searchParams }: ModelsPageProps) {
   const data = await getData(searchParams?.query)
 
   return (
-    <div className='antialiased font-sans xl:px-20 px-2 flex flex-col gap-6 xl:pt-16 pt-2'>
+    <div className='antialiased font-sans px-2 flex flex-col gap-6 pt-2'>
       <div className='flex gap-4'>
         <Search placeholder='请输入模特名称' />
         <CreateModel />

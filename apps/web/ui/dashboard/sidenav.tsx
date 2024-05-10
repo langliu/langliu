@@ -1,4 +1,4 @@
-// import AcmeLogo from '@/app/ui/acme-logo';
+import { Nav } from '@/components/nav'
 import { PowerIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import NavLinks from './nav-links'

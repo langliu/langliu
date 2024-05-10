@@ -1,4 +1,3 @@
-'use client';
 import { supabase } from '@/libs/supabaseClient';
 
 export async function getData() {
@@ -24,13 +23,13 @@ export default async function Page() {
   return (
     <div>
       <h1>Countries</h1>
-      <button type="button" onClick={onClick}>
+      {/* <button type="button" onClick={onClick}>
         插入数据
       </button>
 
       <button type="button" onClick={signWithGithub}>
         Github登录
-      </button>
+      </button> */}
     </div>
   );
 }
