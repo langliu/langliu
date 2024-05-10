@@ -142,7 +142,7 @@ export interface Database {
           id: number
           instagram: string | null
           twitter: string | null
-          updated_at: string | null
+          updated_at: string
           username: string | null
           weibo: string | null
           youtube: string | null

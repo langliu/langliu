@@ -1,9 +1,9 @@
 'use client'
-import Button from '@/components/Button'
 import Upload from '@/components/Upload'
-import { Database } from '@/types/supabase'
-import { EditOutlined } from '@ant-design/icons'
+import { Button } from '@/components/ui/button'
+import type { Database } from '@/types/supabase'
 import { Drawer, Form, Input } from 'antd'
+import { Edit } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 import { updateModel } from './services'
@@ -38,8 +38,8 @@ export default function UpdateModel({ record }: CreateModelProps) {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)}>
-        <EditOutlined className="pr-2" />
+      <Button size={'sm'} onClick={() => setOpen(true)}>
+        <Edit className="mr-2 w-4 h-4" />
         编辑
       </Button>
       <Drawer

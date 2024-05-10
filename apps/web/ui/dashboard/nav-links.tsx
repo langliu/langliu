@@ -1,25 +1,16 @@
-'use client'
 import { Nav } from '@/components/nav'
 import {
   Archive,
   ArchiveX,
-  File,
   Home,
-  Inbox,
-  MessagesSquare,
-  Search,
   Send,
-  ShoppingCart,
   Trash2,
   Users,
 } from 'lucide-react'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
 
-export default function NavLinks() {
+export default function NavLinks({ isCollapsed = false }: { isCollapsed?: boolean }) {
   const pathname = usePathname()
-  console.log(pathname)
-  const [isCollapsed, setIsCollapsed] = useState(false)
   return (
     <Nav
       isCollapsed={isCollapsed}
