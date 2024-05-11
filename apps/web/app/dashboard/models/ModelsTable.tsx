@@ -10,11 +10,12 @@ export interface ModelsTableProps {
   data: Database['public']['Tables']['models']['Row'][]
 }
 
-export default function ModelsTable(params: ModelsTableProps) {
+export default function
+ModelsTable(params: ModelsTableProps) {
   return (
     <>
       <table className="hidden min-w-full text-gray-900 md:table">
-        <thead className="rounded-lg text-left text-sm bg-gray-100 font-bold">
+        <thead className="rounded-lg text-left text-sm bg-gray-100 font-bold sticky top-0">
           <tr>
             <th scope="col" className="px-4 py-5 sm:pl-6">
               模特

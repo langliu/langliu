@@ -8,7 +8,7 @@ import { useState } from 'react'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isCollapsed, setIsCollapsed] = useState(false)
-  const defaultLayout = [265, 440, 655]
+  const defaultLayout = [20, 80]
   return (
     <TooltipProvider delayDuration={0}>
       <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
@@ -23,7 +23,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             defaultSize={defaultLayout[0]}
             // collapsedSize={navCollapsedSize}
             collapsible={true}
-            minSize={15}
+            minSize={10}
             maxSize={20}
             onCollapse={() => {
               setIsCollapsed(true)

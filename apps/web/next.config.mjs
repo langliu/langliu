@@ -12,6 +12,7 @@ const nextConfig = {
   images: {
     loader: 'custom',
     loaderFile: './supabase-image-loader.js',
+    unoptimized: true,
   },
 }
 
