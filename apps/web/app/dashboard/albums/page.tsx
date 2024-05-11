@@ -1,21 +1,26 @@
+import DashboardHeader from '@/components/DashboardHeader'
 import { InvoicesTableSkeleton } from './Skeletons'
 import Table from './Table'
-// import { fetchInvoicesPages } from '@/app/lib/data'
-// import { lusitana } from '@/app/ui/fonts'
-// import { CreateInvoice } from '@/app/ui/invoices/buttons'
 import Pagination from '@/components/Pagination'
 import Search from '@/components/Search'
 import { PlusIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { Suspense } from 'react'
+import { buttonVariants } from '@/components/ui/button'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 export function CreateInvoice() {
   return (
     <Link
-      href='/dashboard/albums/create'
-      className='flex h-10 items-center rounded-lg bg-blue-600 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600'
+      href="/dashboard/albums/create"
+      className={buttonVariants({
+        variant: 'outline',
+        size: 'sm',
+        className: 'ml-auto gap-1.5',
+      })}
     >
-      <span className='hidden md:block'>新建专辑</span> <PlusIcon className='h-5 md:ml-4' />
+      <PlusIcon className="size-3.5" />
+      <span>新建专辑</span>
     </Link>
   )
 }
@@ -33,19 +38,17 @@ export default async function Page({
   // const totalPages = await fetchInvoicesPages(query)
 
   return (
-    <div className='w-full'>
-      <div className='flex w-full items-center justify-between'>
-        <h1 className={`text-2xl`}>专辑管理</h1>
-      </div>
-      <div className='mt-4 flex items-center justify-between gap-2 md:mt-8'>
-        <Search placeholder='搜索专辑' />
-        <CreateInvoice />
-      </div>
-      <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
-        <Table query={query} currentPage={currentPage} />
-      </Suspense>
-      <div className='mt-5 flex w-full justify-center'>
-        {/* <Pagination totalPages={totalPages} /> */}
+    <div className="h-screen flex flex-col">
+      <DashboardHeader title="专辑管理" extra={<CreateInvoice />} />
+      <div className="p-4 flex-1 flex flex-col gap-4 overflow-y-auto">
+        <div className="flex gap-4">
+          <Search placeholder="请输入专辑名称" />
+        </div>
+        <ScrollArea className="rounded-md border flex-1 relative h-screen">
+          <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
+            <Table query={query} currentPage={currentPage} />
+          </Suspense>
+        </ScrollArea>
       </div>
     </div>
   )

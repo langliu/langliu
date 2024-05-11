@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-export const createBook = async (formData: any) => {
+export const createBook = async (formData: object) => {
   const supabase = createServerActionClient({ cookies })
   const { data, error } = await supabase.from('books').insert({
     ...formData,
