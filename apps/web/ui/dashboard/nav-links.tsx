@@ -1,12 +1,5 @@
 import { Nav } from '@/components/nav'
-import {
-  Archive,
-  ArchiveX,
-  Home,
-  Send,
-  Trash2,
-  Users,
-} from 'lucide-react'
+import { Archive, ArchiveX, Home, Send, Users, Book } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 
 export default function NavLinks({ isCollapsed = false }: { isCollapsed?: boolean }) {
@@ -44,10 +37,11 @@ export default function NavLinks({ isCollapsed = false }: { isCollapsed?: boolea
           href: '/dashboard/organizations',
         },
         {
-          title: 'Trash',
+          title: '书籍管理',
           label: '',
-          icon: Trash2,
-          variant: 'ghost',
+          icon: Book,
+          variant: pathname.startsWith('/dashboard/books') ? 'default' : 'ghost',
+          href: '/dashboard/books',
         },
         {
           title: 'Archive',

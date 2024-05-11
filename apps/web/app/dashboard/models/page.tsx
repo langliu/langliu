@@ -59,7 +59,7 @@ export default async function ModelsPage({ searchParams }: ModelsPageProps) {
           <Search placeholder="请输入模特名称" />
           <CreateModel />
         </div>
-        <ScrollArea className="rounded-md border flex-1 h-full relative">
+        <ScrollArea className="rounded-md border flex-1 relative h-screen">
           <ModelsTable data={data ?? []} />
         </ScrollArea>
       </div>

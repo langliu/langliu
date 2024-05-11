@@ -8,7 +8,7 @@ import { useState } from 'react'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isCollapsed, setIsCollapsed] = useState(false)
-  const defaultLayout = [20, 80]
+  const defaultLayout = [15, 85]
   return (
     <TooltipProvider delayDuration={0}>
       <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
@@ -21,7 +21,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         >
           <ResizablePanel
             defaultSize={defaultLayout[0]}
-            // collapsedSize={navCollapsedSize}
             collapsible={true}
             minSize={10}
             maxSize={20}
@@ -41,7 +40,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 isCollapsed ? 'h-[52px]' : 'px-2',
               )}
             >
-              <div className="text-black text-lg font-bold cursor-pointer">
+              <div className="text-black text-xl font-semibold cursor-pointer">
                 研{isCollapsed ? '' : '之有物'}
               </div>
             </div>
