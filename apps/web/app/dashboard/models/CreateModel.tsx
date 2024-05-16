@@ -29,8 +29,8 @@ export default function CreateModel({ name }: CreateModelProps) {
 
   return (
     <>
-      <Button variant={'default'} onClick={() => setOpen(true)}>
-        <Plus className="mr-2 h-4 w-4" color="white" />
+      <Button variant={'outline'} className="gap-1.5" size="sm" onClick={() => setOpen(true)}>
+        <Plus className="size-3.5" />
         添加
       </Button>
       <Drawer

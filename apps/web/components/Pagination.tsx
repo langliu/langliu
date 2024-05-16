@@ -1,41 +1,57 @@
-import Link from 'next/link'
+'use client'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { ChevronLeft, ChevronRight, Replace } from 'lucide-react'
+import { Button } from './ui/button'
 
 interface Props {
-  totalPages: number
+  totalPages?: number
   currentPage: number
 }
 
-export default function Pagination({ totalPages, currentPage }: Props) {
-  const prevPage = currentPage - 1 > 0
-  const nextPage = currentPage + 1 <= totalPages
+export default function Pagination({ totalPages = 0, currentPage = 1 }: Props) {
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
+  const router = useRouter()
+  const hasPrev = currentPage > 1
+  const hasNext = currentPage <= (totalPages ?? 0)
+
+  const goToNextPage = () => {
+    const params = new URLSearchParams(searchParams)
+    params.set('page', `${currentPage + 1}`)
+    router.replace(`${pathname}?${params.toString()}`)
+  }
+
+  const goToPrevPage = () => {
+    const params = new URLSearchParams(searchParams)
+    params.set('page', `${currentPage - 1}`)
+    router.replace(`${pathname}?${params.toString()}`)
+  }
 
   return (
-    <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-      <nav className="flex justify-between">
-        {!prevPage && (
-          <button className="cursor-auto disabled:opacity-50" disabled={!prevPage}>
-            Previous
-          </button>
-        )}
-        {prevPage && (
-          <Link href={currentPage - 1 === 1 ? `/blog/` : `/blog/page/${currentPage - 1}`}>
-            <button>Previous</button>
-          </Link>
-        )}
+    <div className="mt-2 gap-2 flex justify-end items-center">
+      {totalPages !== 0 && (
         <span>
-          {currentPage} of {totalPages}
+          第{currentPage}/{totalPages}页
         </span>
-        {!nextPage && (
-          <button className="cursor-auto disabled:opacity-50" disabled={!nextPage}>
-            Next
-          </button>
-        )}
-        {nextPage && (
-          <Link href={`/blog/page/${currentPage + 1}`}>
-            <button>Next</button>
-          </Link>
-        )}
-      </nav>
+      )}
+      <Button
+        variant={'outline'}
+        size={'icon'}
+        disabled={!hasPrev}
+        className={'cursor-pointer disabled:cursor-not-allowed'}
+        onClick={goToPrevPage}
+      >
+        <ChevronLeft className="size-4" />
+      </Button>
+      <Button
+        variant={'outline'}
+        size={'icon'}
+        disabled={!hasNext}
+        className={'cursor-pointer disabled:cursor-not-allowed'}
+        onClick={goToNextPage}
+      >
+        <ChevronRight className="size-4" />
+      </Button>
     </div>
   )
 }
