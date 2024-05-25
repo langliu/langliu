@@ -1,5 +1,5 @@
 import styles from './page.module.css'
-import { supabase } from '@/libs/supabaseClient'
+import { createClient } from '@/libs/supabase/server'
 import { unstable_noStore as noStore } from 'next/cache'
 import Link from 'next/link'
 
@@ -11,6 +11,7 @@ type Props = {
 
 export const runtime = 'edge'
 export async function getData(bookId: string) {
+  const supabase = createClient()
   noStore()
   const { data } = await supabase
     .from('articles')
@@ -40,8 +41,8 @@ export default async function Page({ params }: Props) {
       </div>
       <ul className={styles.list}>
         {data?.map((country) => (
-          <Link href={`/articles/${country.id}`} className={styles.listItem}>
-            <li key={country.id} >
+          <Link href={`/articles/${country.id}`} key={country.id} className={styles.listItem}>
+            <li key={country.id}>
               {country.title.includes('章') ? '' : `第${country.serial}章 `}
               {country.title}
             </li>
