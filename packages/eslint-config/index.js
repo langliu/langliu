@@ -1,4 +1,3 @@
-import tsEslint from 'typescript-eslint'
 import globals from 'globals'
 import stylistic from '@stylistic/eslint-plugin'
 
@@ -15,5 +14,4 @@ export default [
       '@stylistic/semi': ['warn', 'never'],
     },
   },
-  ...tsEslint.configs.recommended,
 ]
