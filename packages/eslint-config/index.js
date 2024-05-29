@@ -276,6 +276,65 @@ export default [
       '@stylistic/yield-star-spacing': ['error', 'both'], // https://eslint.style/rules/default/yield-star-spacing
       yoda: ['error', 'never'], // https://eslint.org/docs/latest/rules/yoda
 
+      '@stylistic/jsx-closing-bracket-location': ['error', 'tag-aligned'], // https://eslint.style/rules/jsx/jsx-closing-bracket-location
+      '@stylistic/jsx-closing-tag-location': 'error', // https://eslint.style/rules/jsx/jsx-closing-tag-location
+      '@stylistic/jsx-curly-brace-presence': 'error', // https://eslint.style/rules/jsx/jsx-curly-brace-presence
+      '@stylistic/jsx-curly-newline': [
+        'error',
+        {
+          multiline: 'consistent',
+          singleline: 'consistent',
+        },
+      ], // https://eslint.style/rules/jsx/jsx-curly-newline
+      '@stylistic/jsx-curly-spacing': [
+        'error',
+        {
+          attributes: { when: 'never', allowMultiline: true },
+          children: { when: 'never', allowMultiline: true },
+        },
+      ], // https://eslint.style/rules/jsx/jsx-curly-spacing
+      '@stylistic/jsx-equals-spacing': ['error', 'never'], // https://eslint.style/rules/jsx/jsx-equals-spacing
+      '@stylistic/jsx-first-prop-new-line': ['error', 'multiline-multiprop'], // https://eslint.style/rules/jsx/jsx-first-prop-new-line
+      '@stylistic/jsx-indent': ['error', 2], // https://eslint.style/rules/jsx/jsx-indent
+      '@stylistic/jsx-indent-props': ['error', 2], // https://eslint.style/rules/jsx/jsx-indent-props
+      '@stylistic/jsx-max-props-per-line': [
+        'error',
+        { when: 'always', maximum: { single: 2, multi: 1 } },
+      ], // https://eslint.style/rules/jsx/jsx-max-props-per-line
+      '@stylistic/jsx-pascal-case': ['error', { allowAllCaps: false }], // https://eslint.style/rules/jsx/jsx-pascal-case
+      '@stylistic/jsx-props-no-multi-spaces': 'error', // https://eslint.style/rules/jsx/jsx-props-no-multi-spaces
+      '@stylistic/jsx-self-closing-comp': 'error', // https://eslint.style/rules/jsx/jsx-self-closing-comp
+      '@stylistic/jsx-one-expression-per-line': 'error', // https://eslint.style/rules/jsx/jsx-one-expression-per-line
+      '@stylistic/jsx-sort-props': [
+        'error',
+        {
+          callbacksLast: true,
+          shorthandFirst: true,
+          ignoreCase: false,
+        },
+      ], // https://eslint.style/rules/jsx/jsx-sort-props
+      '@stylistic/jsx-tag-spacing': [
+        'error',
+        {
+          closingSlash: 'never',
+          beforeSelfClosing: 'always',
+          afterOpening: 'never',
+          beforeClosing: 'never',
+        },
+      ], // https://eslint.style/rules/jsx/jsx-tag-spacing
+      '@stylistic/jsx-wrap-multilines': [
+        'error',
+        {
+          declaration: 'parens-new-line',
+          assignment: 'parens-new-line',
+          return: 'parens-new-line',
+          arrow: 'ignore',
+          condition: 'ignore',
+          logical: 'ignore',
+          prop: 'ignore',
+        },
+      ], // https://eslint.style/rules/jsx/jsx-wrap-multilines
+
       'import/export': 'error',
       'import/first': 'error',
       'import/no-absolute-path': ['error', { esmodule: true, commonjs: true, amd: false }],

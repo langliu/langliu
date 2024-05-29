@@ -1,12 +1,10 @@
 {
   "name": "@langliu/eslint-config",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "langliu's eslint config",
   "main": "index.js",
-  "keywords": [
-    "eslint",
-    "eslint-config"
-  ],
+  "type": "module",
+  "keywords": ["eslint", "eslint-config"],
   "author": {
     "name": "langliu",
     "email": "langliu1216@gmail.com",
