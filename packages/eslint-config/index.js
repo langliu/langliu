@@ -297,10 +297,7 @@ export default [
       '@stylistic/jsx-first-prop-new-line': ['error', 'multiline-multiprop'], // https://eslint.style/rules/jsx/jsx-first-prop-new-line
       '@stylistic/jsx-indent': ['error', 2], // https://eslint.style/rules/jsx/jsx-indent
       '@stylistic/jsx-indent-props': ['error', 2], // https://eslint.style/rules/jsx/jsx-indent-props
-      '@stylistic/jsx-max-props-per-line': [
-        'error',
-        { when: 'always', maximum: { single: 2, multi: 1 } },
-      ], // https://eslint.style/rules/jsx/jsx-max-props-per-line
+      '@stylistic/jsx-max-props-per-line': ['error', { maximum: { single: 2, multi: 1 } }], // https://eslint.style/rules/jsx/jsx-max-props-per-line
       '@stylistic/jsx-pascal-case': ['error', { allowAllCaps: false }], // https://eslint.style/rules/jsx/jsx-pascal-case
       '@stylistic/jsx-props-no-multi-spaces': 'error', // https://eslint.style/rules/jsx/jsx-props-no-multi-spaces
       '@stylistic/jsx-self-closing-comp': 'error', // https://eslint.style/rules/jsx/jsx-self-closing-comp
