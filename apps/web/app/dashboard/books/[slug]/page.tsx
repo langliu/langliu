@@ -41,21 +41,20 @@ export default async function Page({ params }: Props) {
             <span className="text-sm font-normal">（共{data?.length}章）</span>
           </>
         }
-        extra={<CreateDrawer bookId={slug} />}
+        extra={<CreateDrawer bookId={slug} last={(data?.length ?? 0) + 1} />}
       />
       <ScrollArea className="p-4 flex-1 overflow-y-auto">
         <ul className={'grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'}>
           {data?.map((country) => (
             <Link
               href={`/articles/${country.id}`}
-              className={
-                'h-10 rounded-lg px-4 flex items-center hover:bg-muted/50  text-ellipsis overflow-hidden whitespace-nowrap w-full'
-              }
+              className={'h-10 rounded-lg px-4 flex items-center hover:bg-muted/50  w-full'}
+              key={country.id}
             >
-              <li key={country.id}>
+              <span className="text-ellipsis overflow-hidden whitespace-nowrap">
                 {country.title.includes('章') ? '' : `第${country.serial}章 `}
                 {country.title}
-              </li>
+              </span>
             </Link>
           ))}
         </ul>

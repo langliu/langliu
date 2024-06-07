@@ -8,6 +8,7 @@ import { Suspense } from 'react'
 import { buttonVariants } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { supabase } from '@/libs/supabaseClient'
+import { CreateDrawer } from './(components)/CreateDrawer'
 
 export function CreateInvoice() {
   return (
@@ -40,7 +41,7 @@ export default async function Page({
 
   return (
     <div className="h-screen flex flex-col">
-      <DashboardHeader title="书籍管理" extra={<CreateInvoice />} />
+      <DashboardHeader title="书籍管理" extra={<CreateDrawer />} />
       <div className="p-4 flex-1 flex flex-col gap-4 overflow-y-auto">
         <div className="flex gap-4">
           <Search placeholder="请输入书籍名称" />

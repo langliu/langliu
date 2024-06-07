@@ -9,7 +9,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+import { Switch } from '@/components/ui/switch'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useDebounceFn } from 'ahooks'
@@ -20,38 +20,29 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 const formSchema = z.object({
-  serial: z.coerce
-    .number({
-      required_error: '请输入章节序号',
-    })
-    .min(1, '序号不能小于1'),
-  title: z.string({ required_error: '请输入标题' }).min(1, '请输入标题'),
-  content: z.string({ required_error: '请输入章节内容' }).min(1, '请输入章节内容'),
+  name: z.string({ required_error: '请输入书籍名称' }).min(1, '请输入书籍名称'),
+  author: z.string({ required_error: '请输入书籍作者' }).min(1, '请输入书籍作者'),
+  end: z.boolean(),
 })
 
-async function insertArticle(params: {
-  bookId: number
-  content: string
-  title: string
-  serial: number
+async function insertBook(params: {
+  name: string
+  author: string
+  end: boolean
 }) {
   noStore()
   const supabase = createClientComponentClient()
-  const { data, error } = await supabase.from('articles').insert([params]).select()
+  const { data, error } = await supabase.from('books').insert([params]).select()
   return { data, error }
 }
 
-export default function CreateArticle({
-  bookId,
-  onSuccess,
-  last,
-}: { bookId: number; onSuccess?: () => void; last?: number }) {
+export default function CreateBook({ onSuccess }: { onSuccess?: () => void }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: '',
-      content: '',
-      serial: last,
+      name: '',
+      author: '',
+      end: false,
     },
   })
 
@@ -59,9 +50,8 @@ export default function CreateArticle({
     async (values: z.infer<typeof formSchema>) => {
       console.log(values)
       try {
-        const resp = await insertArticle({
+        const resp = await insertBook({
           ...values,
-          bookId,
         })
         console.warn('res', resp)
         if (resp.error) {
@@ -69,10 +59,6 @@ export default function CreateArticle({
         } else {
           onSuccess?.()
           message.success('新建成功')
-          form.setValue('serial', values.serial + 1)
-          form.reset({
-            serial: values.serial + 1,
-          })
         }
       } catch (error) {}
     },
@@ -87,12 +73,12 @@ export default function CreateArticle({
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
           <FormField
             control={form.control}
-            name="serial"
+            name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>章节序号</FormLabel>
+                <FormLabel>书籍名称</FormLabel>
                 <FormControl>
-                  <Input placeholder="请输入章节序号" type="number" {...field} />
+                  <Input placeholder="请输入书籍名称" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -100,12 +86,12 @@ export default function CreateArticle({
           />
           <FormField
             control={form.control}
-            name="title"
+            name="author"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>标题</FormLabel>
+                <FormLabel>书籍作者</FormLabel>
                 <FormControl>
-                  <Input placeholder="请输入标题" {...field} />
+                  <Input placeholder="请输入书籍作者" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -113,12 +99,12 @@ export default function CreateArticle({
           />
           <FormField
             control={form.control}
-            name="content"
+            name="end"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>章节内容</FormLabel>
+                <FormLabel>已完结</FormLabel>
                 <FormControl>
-                  <Textarea placeholder="请输入章节内容" className="min-h-96" {...field} />
+                  <Switch {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

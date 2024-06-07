@@ -8,12 +8,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet'
-import CreateArticle from './CreateArticle'
+import CreateBook from './CreateBook'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Plus } from 'lucide-react'
 
-export function CreateDrawer({ bookId, last }: { bookId: string; last?: number }) {
+export function CreateDrawer() {
   const [open, setOpen] = useState(false)
   const router = useRouter()
 
@@ -32,16 +32,13 @@ export function CreateDrawer({ bookId, last }: { bookId: string; last?: number }
         })}
       >
         <Plus className="size-3.5" />
-        新建章节
+        新建书籍
       </SheetTrigger>
-      <SheetContent className="w-[540px] sm:w-[500px] sm:max-w-max">
+      <SheetContent className="w-[540px] sm:w-[500px] sm:max-w-7xl md:w-[680px]">
         <SheetHeader>
-          <SheetTitle>新建章节</SheetTitle>
-          <SheetDescription>
-            This action cannot be undone. This will permanently delete your account and remove your
-            data from our servers.
-          </SheetDescription>
-          <CreateArticle bookId={Number(bookId)} last={last} onSuccess={handleSuccess} />
+          <SheetTitle>新建书籍</SheetTitle>
+          <SheetDescription>请填写书籍相关信息</SheetDescription>
+          <CreateBook onSuccess={handleSuccess} />
         </SheetHeader>
       </SheetContent>
     </Sheet>
