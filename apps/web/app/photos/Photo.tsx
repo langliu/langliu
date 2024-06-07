@@ -1,11 +1,12 @@
 'use client'
 import { Database } from '../database.types'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import React, { useState } from 'react'
+import { createClient } from '@/libs/supabase/client'
+import type React from 'react'
+import { useState } from 'react'
 
 const insertPhoto = async (url: string) => {
   'use client'
-  const supabase = createClientComponentClient()
+  const supabase = createClient()
   const { data } = await supabase.from('photos').insert({
     url,
     name: url,
@@ -14,7 +15,7 @@ const insertPhoto = async (url: string) => {
 }
 
 export default function Avatar() {
-  const supabase = createClientComponentClient<Database>()
+  const supabase = createClient()
   const [uploading, setUploading] = useState(false)
 
   const uploadAvatar: React.ChangeEventHandler<HTMLInputElement> = async (event) => {
@@ -51,7 +52,7 @@ export default function Avatar() {
   return (
     <div>
       <div>
-        <label className='button primary block' htmlFor='single'>
+        <label className="button primary block" htmlFor="single">
           {uploading ? 'Uploading ...' : 'Upload'}
         </label>
         <input
@@ -59,9 +60,9 @@ export default function Avatar() {
             visibility: 'hidden',
             position: 'absolute',
           }}
-          type='file'
-          id='single'
-          accept='image/*'
+          type="file"
+          id="single"
+          accept="image/*"
           onChange={uploadAvatar}
           disabled={uploading}
         />

@@ -1,8 +1,7 @@
 'use server'
-import { Database } from '@/types/supabase'
-import { createServerActionClient } from '@supabase/auth-helpers-nextjs'
+import type { Database } from '@/types/supabase'
+import { createClient } from '@/libs/supabase/server'
 import { revalidatePath } from 'next/cache'
-import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 /**
@@ -10,7 +9,7 @@ import { redirect } from 'next/navigation'
  * @returns
  */
 export async function getAllModels() {
-  const supabase = createServerActionClient<Database>({ cookies })
+  const supabase = createClient()
 
   const { data: models, error } = await supabase.from('models').select('*')
 
@@ -20,7 +19,7 @@ export async function getAllModels() {
 export async function createModel(
   formData: Database['public']['Tables']['organizations']['Insert'],
 ) {
-  const supabase = createServerActionClient<Database>({ cookies })
+  const supabase = createClient()
 
   const { data, error } = await supabase
     .from('organizations')
