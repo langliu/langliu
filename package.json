@@ -29,16 +29,12 @@
     "tailwindcss": "^3.4.4",
     "ts-jest": "^29.1.4",
     "ts-node": "10.9.2",
-    "turbo": "^1.13.4",
+    "turbo": "^2.0.3",
     "typescript": "^5.4.5"
   },
   "packageManager": "npm@10.8.1",
   "workspaces": [
     "apps/*",
     "packages/*"
-  ],
-  "volta": {
-    "node": "20.9.0",
-    "npm": "10.2.4"
-  }
+  ]
 }
