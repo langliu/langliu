@@ -13,7 +13,8 @@
     "nextjs",
     "rehype",
     "supabase",
-    "tailwindcss"
+    "tailwindcss",
+    "tanstack"
   ],
   "[javascript]": {
     "editor.defaultFormatter": "biomejs.biome"
