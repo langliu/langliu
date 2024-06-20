@@ -1,4 +1,4 @@
-import { CheckIcon, ClockIcon } from '@heroicons/react/24/outline'
+import { Check, Clock } from 'lucide-react'
 import clsx from 'clsx'
 
 export default function InvoiceStatus({ status }: { status: boolean }) {
@@ -12,12 +12,12 @@ export default function InvoiceStatus({ status }: { status: boolean }) {
       {status ? (
         <>
           已收集
-          <CheckIcon className='ml-1 w-4 text-white' />
+          <Check className="ml-1 w-4 text-white" />
         </>
       ) : (
         <>
           未收集
-          <ClockIcon className='ml-1 w-4 text-gray-500' />
+          <Clock className="ml-1 w-4 text-gray-500" />
         </>
       )}
     </span>

@@ -3,7 +3,7 @@ import { InvoicesTableSkeleton } from './Skeletons'
 import Table from './Table'
 import Pagination from '@/components/Pagination'
 import Search from '@/components/Search'
-import { PlusIcon } from '@heroicons/react/24/outline'
+import { Plus } from 'lucide-react'
 import Link from 'next/link'
 import { Suspense } from 'react'
 import { buttonVariants } from '@/components/ui/button'
@@ -19,7 +19,7 @@ export function CreateInvoice() {
         className: 'ml-auto gap-1.5',
       })}
     >
-      <PlusIcon className="size-3.5" />
+      <Plus className="size-3.5" />
       <span>新建专辑</span>
     </Link>
   )

@@ -1,10 +1,7 @@
-// import { fetchInvoicesPages } from '@/app/lib/data'
-// import { lusitana } from '@/app/ui/fonts'
-// import { CreateInvoice } from '@/app/ui/invoices/buttons'
 import Pagination from '@/components/Pagination'
 import DashboardHeader from '@/components/DashboardHeader'
 import Search from '@/components/Search'
-import { PlusIcon } from '@heroicons/react/24/outline'
+import { Plus } from 'lucide-react'
 import Link from 'next/link'
 import { Suspense } from 'react'
 import { InvoicesTableSkeleton } from './Skeletons'
@@ -22,7 +19,7 @@ export function CreateInvoice() {
         className: 'ml-auto gap-1.5',
       })}
     >
-      <PlusIcon className="size-3.5" />
+      <Plus className="size-3.5" />
       <span>新建机构</span>
     </Link>
   )

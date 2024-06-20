@@ -1,17 +1,8 @@
 'use client'
-// import { createInvoice } from '@/app/lib/actions';
 import { createModel } from './actions'
 import Button from '@/components/Button'
 import Upload from '@/components/Upload'
-// import { useFormState } from 'react-dom';
-// import { CustomerField } from '@/app/lib/definitions';
-import { Database } from '@/types/supabase'
-import {
-  CheckIcon,
-  ClockIcon,
-  CurrencyDollarIcon,
-  UserCircleIcon,
-} from '@heroicons/react/24/outline'
+import type { Database } from '@/types/supabase'
 import { Form, Input, InputNumber, Select, Switch } from 'antd'
 import Link from 'next/link'
 
