@@ -1,7 +1,5 @@
-import { createServerActionClient } from '@supabase/auth-helpers-nextjs'
+import { createClient } from '@/libs/supabase/server'
 import { unstable_noStore as noStore } from 'next/cache'
-import { cookies } from 'next/headers'
-import { Database } from '../../../types/supabase'
 
 const ITEMS_PER_PAGE = 10
 export async function fetchFilteredInvoices(query: string, currentPage = 1) {
@@ -9,7 +7,7 @@ export async function fetchFilteredInvoices(query: string, currentPage = 1) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE
 
   try {
-    const supabase = createServerActionClient<Database>({ cookies })
+    const supabase = createClient()
 
     const { data: albums, error } = await supabase
       .from('organizations')

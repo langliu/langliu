@@ -1,4 +1,4 @@
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { createClient } from '@/libs/supabase/client'
 import SupabaseImage from './SupabaseClientImage'
 
 export interface UploadProps {
@@ -7,7 +7,7 @@ export interface UploadProps {
 }
 
 export default function Upload({ value, onChange }: UploadProps) {
-  const supabase = createClientComponentClient()
+  const supabase = createClient()
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     console.log(file, crypto.randomUUID())

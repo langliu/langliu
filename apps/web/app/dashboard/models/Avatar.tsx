@@ -1,7 +1,6 @@
-import { Database } from '@/types/supabase'
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import type { Database } from '@/types/supabase'
+import { createClient } from '@/libs/supabase/server'
 import { Popover } from 'antd'
-import { cookies } from 'next/headers'
 import Image from 'next/image'
 
 interface AvatarProps {
@@ -9,7 +8,7 @@ interface AvatarProps {
 }
 
 export default async function Avatar({ record }: AvatarProps) {
-  const supabase = createServerComponentClient({ cookies })
+  const supabase = createClient()
 
   if (!record?.avatar) {
     return null

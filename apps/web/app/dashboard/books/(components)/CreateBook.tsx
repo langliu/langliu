@@ -10,10 +10,10 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Switch } from '@/components/ui/switch'
+import { useToast } from '@/components/ui/use-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { createClient } from '@/libs/supabase/client'
 import { useDebounceFn } from 'ahooks'
-import { message } from 'antd'
 import { unstable_noStore as noStore } from 'next/cache'
 import { Suspense } from 'react'
 import { useForm } from 'react-hook-form'
@@ -31,12 +31,13 @@ async function insertBook(params: {
   end: boolean
 }) {
   noStore()
-  const supabase = createClientComponentClient()
+  const supabase = createClient()
   const { data, error } = await supabase.from('books').insert([params]).select()
   return { data, error }
 }
 
 export default function CreateBook({ onSuccess }: { onSuccess?: () => void }) {
+  const { toast } = useToast()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -55,10 +56,15 @@ export default function CreateBook({ onSuccess }: { onSuccess?: () => void }) {
         })
         console.warn('res', resp)
         if (resp.error) {
-          message.error(resp.error.message)
+          toast({
+            title: '错误',
+            description: resp.error.message,
+          })
         } else {
           onSuccess?.()
-          message.success('新建成功')
+          toast({
+            title: '新建成功',
+          })
         }
       } catch (error) {}
     },

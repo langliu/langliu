@@ -1,22 +1,19 @@
 'use server'
-
-import { createServerActionClient } from '@supabase/auth-helpers-nextjs'
+import { createClient } from '@/libs/supabase/server'
 import { revalidatePath } from 'next/cache'
-import { cookies } from 'next/headers'
 
-export async function createModel(formData: Object) {
-  const supabase = createServerActionClient({ cookies })
+export async function createModel(formData: Record<string, unknown>) {
+  const supabase = createClient()
   const { data, error } = await supabase.from('models').insert([formData]).select()
   if (error) {
     return false
-  } else {
-    revalidatePath('/dashboard/models')
-    return true
   }
+  revalidatePath('/dashboard/models')
+  return true
 }
 
-export async function updateModel(id: number, formData: Object) {
-  const supabase = createServerActionClient({ cookies })
+export async function updateModel(id: number, formData: Record<string, unknown>) {
+  const supabase = createClient()
   const { data, error } = await supabase
     .from('models')
     .update({ ...formData, updated_at: new Date().toUTCString() })
@@ -26,9 +23,8 @@ export async function updateModel(id: number, formData: Object) {
   if (error) {
     console.log('error', error)
     return false
-  } else {
-    console.log('data', data)
-    revalidatePath('/dashboard/models')
-    return true
   }
+  console.log('data', data)
+  revalidatePath('/dashboard/models')
+  return true
 }

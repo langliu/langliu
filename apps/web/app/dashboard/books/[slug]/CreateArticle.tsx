@@ -11,7 +11,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { createClient } from '@/libs/supabase/client'
 import { useDebounceFn } from 'ahooks'
 import { message } from 'antd'
 import { unstable_noStore as noStore } from 'next/cache'
@@ -36,7 +36,7 @@ async function insertArticle(params: {
   serial: number
 }) {
   noStore()
-  const supabase = createClientComponentClient()
+  const supabase = createClient()
   const { data, error } = await supabase.from('articles').insert([params]).select()
   return { data, error }
 }

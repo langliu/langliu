@@ -1,6 +1,5 @@
 'use server'
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
+import { createClient } from '@/libs/supabase/server'
 import Image from 'next/image'
 
 export interface SupabaseImageProps {
@@ -9,11 +8,11 @@ export interface SupabaseImageProps {
 }
 
 export default async function SupabaseImage({ alt, src }: SupabaseImageProps) {
-  const supabase = createServerComponentClient({ cookies })
+  const supabase = createClient()
   const { data, error } = await supabase.storage.from('langliu').createSignedUrl(src, 60)
   if (data?.signedUrl) {
     return (
-      <Image src={data?.signedUrl} className='mr-2 rounded' width={200} height={300} alt={alt} />
+      <Image src={data?.signedUrl} className="mr-2 rounded" width={200} height={300} alt={alt} />
     )
   }
   return null

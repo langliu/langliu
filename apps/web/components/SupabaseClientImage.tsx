@@ -1,7 +1,7 @@
 'use client'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { createClient } from '@/libs/supabase/client'
 import Image from 'next/image'
-import { FC, memo, useEffect, useState } from 'react'
+import { type FC, memo, useEffect, useState } from 'react'
 
 export interface SupabaseImageProps {
   src: string
@@ -9,7 +9,7 @@ export interface SupabaseImageProps {
 }
 
 const SupabaseImage: FC<SupabaseImageProps> = ({ alt, src }) => {
-  const supabase = createClientComponentClient()
+  const supabase = createClient()
   const [url, setUrl] = useState(src)
 
   useEffect(() => {

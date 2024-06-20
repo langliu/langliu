@@ -1,17 +1,14 @@
 import { DashboardHeader } from '@/components/DashboardHeader'
-import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { toast } from '@/components/ui/use-toast'
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import { Share } from 'lucide-react'
-import { cookies } from 'next/headers'
+import { createClient } from '@/libs/supabase/server'
 import CreateModel from './CreateModel'
 import ModelsTable from './ModelsTable'
 import Search from './Search'
 import Pagination from '@/components/Pagination'
 
 async function getData(query?: string, page = 1) {
-  const supabase = createServerComponentClient({ cookies })
+  const supabase = createClient()
   const start = (page - 1) * 10
   try {
     const {
