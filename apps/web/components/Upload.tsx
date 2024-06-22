@@ -1,5 +1,7 @@
+'use client'
 import { createClient } from '@/libs/supabase/client'
-import SupabaseImage from './SupabaseClientImage'
+import { Button } from '@/components/ui/button'
+import { CldUploadWidget, CldImage, type CldUploadWidgetProps } from 'next-cloudinary'
 
 export interface UploadProps {
   value?: string
@@ -24,16 +26,23 @@ export default function Upload({ value, onChange }: UploadProps) {
     }
   }
 
+  const handleSuccess: CldUploadWidgetProps['onSuccess'] = (result, options) => {
+    console.log(result, options)
+    if (result.event === 'success') {
+      if ('url' in result?.info) {
+        onChange?.(result?.info?.url)
+      }
+    }
+  }
+
   return (
     <div>
-      {value && <SupabaseImage src={value} alt="专辑封面" />}
-      <input
-        className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-        id="file_input"
-        type="file"
-        onChange={handleChange}
-        title="upload"
-      />
+      {value && <CldImage width={375} height={800} src={value} alt="专辑封面" />}
+      <CldUploadWidget uploadPreset="tflos5a3" onSuccess={handleSuccess}>
+        {({ open }) => {
+          return <Button onClick={() => open()}>Upload</Button>
+        }}
+      </CldUploadWidget>
     </div>
   )
 }

@@ -4,6 +4,7 @@ import Badge from '@/components/Badges'
 import SupabaseImage from '@/components/SupabaseImage'
 import { formatCurrency, formatDateToLocal } from '@/libs/utils'
 import Link from 'next/link'
+import Edit from './Edit'
 
 export default async function InvoicesTable({
   query,
@@ -119,6 +120,7 @@ export default async function InvoicesTable({
                     <InvoiceStatus status={invoice.collected} />
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
+                    <Edit id={invoice.id} />
                     {/* <div className="flex justify-end gap-3">
                       <UpdateInvoice id={invoice.id} />
                       <DeleteInvoice id={invoice.id} />

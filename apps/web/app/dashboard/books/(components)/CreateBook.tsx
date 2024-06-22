@@ -110,7 +110,7 @@ export default function CreateBook({ onSuccess }: { onSuccess?: () => void }) {
               <FormItem>
                 <FormLabel>已完结</FormLabel>
                 <FormControl>
-                  <Switch {...field} />
+                  <Switch checked={field.value} onCheckedChange={field.onChange} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
