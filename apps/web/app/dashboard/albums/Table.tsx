@@ -2,19 +2,24 @@ import InvoiceStatus from './Status'
 import { fetchFilteredInvoices } from './actions'
 import Badge from '@/components/Badges'
 import SupabaseImage from '@/components/SupabaseImage'
-import { formatCurrency, formatDateToLocal } from '@/libs/utils'
+import { formatDateToLocal } from '@/libs/utils'
 import Link from 'next/link'
 import Edit from './Edit'
+import type { Database } from '@/types/supabase'
+import  Pagination  from './Pagination'
 
 export default async function InvoicesTable({
   query,
   currentPage,
+  modelId,
+  models = [],
 }: {
   query: string
   currentPage: number
+  modelId?: string
+  models?: Database['public']['Tables']['models']['Row'][]
 }) {
-  const invoices = await fetchFilteredInvoices(query, currentPage)
-
+  const { albums: invoices, total } = await fetchFilteredInvoices(query, currentPage, modelId)
   return (
     <div className="flow-root">
       <div className="inline-block min-w-full align-middle">
@@ -59,7 +64,7 @@ export default async function InvoicesTable({
               </div>
             ))}
           </div>
-          <table className="hidden min-w-full text-gray-900 md:table sticky top-0">
+          <table className="hidden min-w-full text-gray-900 md:table">
             <thead className="rounded-lg text-left text-sm font-normal">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
@@ -120,7 +125,7 @@ export default async function InvoicesTable({
                     <InvoiceStatus status={invoice.collected} />
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    <Edit id={invoice.id} />
+                    <Edit id={invoice.id} models={models} />
                     {/* <div className="flex justify-end gap-3">
                       <UpdateInvoice id={invoice.id} />
                       <DeleteInvoice id={invoice.id} />
@@ -130,6 +135,7 @@ export default async function InvoicesTable({
               ))}
             </tbody>
           </table>
+          <Pagination total={total ?? 0} current={currentPage} />
         </div>
       </div>
     </div>

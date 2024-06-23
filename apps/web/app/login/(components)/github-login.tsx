@@ -14,7 +14,6 @@ export const GithubLogin = () => {
   async function loginWithGithub() {
     setIsLoading(true)
     const supabase = createClient()
-    console.log('github')
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'github',
       options: {

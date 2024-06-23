@@ -19,7 +19,7 @@ export async function fetchFilteredInvoices(query: string, currentPage = 1) {
     if (error) {
       console.log(error)
     }
-    console.log('albums', albums?.[0])
+    console.log('albums', albums)
     return albums
   } catch (error) {
     console.error('Database Error:', error)
