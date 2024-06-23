@@ -18,5 +18,13 @@ export default function Page(props: PaginationProps) {
       wait: 100,
     },
   )
-  return <Pagination total={props.total ?? 0} {...props} onChange={(page) => run(page)} />
+  return (
+    <Pagination
+      total={props.total ?? 0}
+      {...props}
+      onChange={(page) => run(page)}
+      showTotal={(total) => `共 ${total} 条`}
+      showSizeChanger={false}
+    />
+  )
 }

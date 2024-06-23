@@ -18,12 +18,12 @@ export default function Upload({ value, onChange }: UploadProps) {
 
   return (
     <div>
-      {value && <CldImage width={375} height={800} src={value} alt="专辑封面" />}
       <CldUploadWidget uploadPreset="tflos5a3" onSuccess={handleSuccess}>
         {({ open }) => {
           return <Button onClick={() => open()}>上传图片</Button>
         }}
       </CldUploadWidget>
+      {value && <CldImage width={300} height={600} src={value} alt="专辑封面" />}
     </div>
   )
 }
