@@ -14,11 +14,13 @@ export default async function InvoicesTable({
   currentPage,
   modelId,
   models = [],
+  organizations = [],
 }: {
   query: string
   currentPage: number
   modelId?: string
   models?: Database['public']['Tables']['models']['Row'][]
+  organizations: Database['public']['Tables']['organizations']['Row'][]
 }) {
   const { albums: invoices, total } = await fetchFilteredInvoices(query, currentPage, modelId)
   return (
@@ -73,6 +75,9 @@ export default async function InvoicesTable({
                 视频数量
               </th>
               <th scope="col" className="px-3 py-5 font-medium">
+                所属机构
+              </th>
+              <th scope="col" className="px-3 py-5 font-medium">
                 添加时间
               </th>
               <th scope="col" className="px-3 py-5 font-medium">
@@ -108,6 +113,7 @@ export default async function InvoicesTable({
                 </td>
                 <td className="whitespace-nowrap px-3 py-3">{invoice.picture_num}</td>
                 <td className="whitespace-nowrap px-3 py-3">{invoice.video_num}</td>
+                <td className="whitespace-nowrap px-3 py-3">{invoice.organizations?.name}</td>
                 <td className="whitespace-nowrap px-3 py-3">
                   {formatDateToLocal(invoice.created_at)}
                 </td>
@@ -115,7 +121,7 @@ export default async function InvoicesTable({
                   <InvoiceStatus status={invoice.collected} />
                 </td>
                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                  <Edit id={invoice.id} models={models} />
+                  <Edit id={invoice.id} models={models} organizations={organizations} />
                 </td>
               </tr>
             ))}

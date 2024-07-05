@@ -54,12 +54,17 @@ async function updateAlbum(params: Record<string, unknown>, id: number | string)
 export default function Edit({
   id,
   models = [],
-}: { id: string | number; models: Database['public']['Tables']['models']['Row'][] }) {
+  organizations = [],
+}: {
+  id: string | number
+  models: Database['public']['Tables']['models']['Row'][]
+  organizations: Database['public']['Tables']['organizations']['Row'][]
+}) {
   const [open, setOpen] = useState(false)
   const router = useRouter()
   const [form] = Form.useForm()
   const { toast } = useToast()
-  const { data } = useRequest(() => (open ? getAlbumDetail(id) : Promise.resolve(null)), {
+  useRequest(() => (open ? getAlbumDetail(id) : Promise.resolve(null)), {
     cacheKey: `album_detail${id}`,
     onSuccess: (data) => {
       form.setFieldsValue({ ...data, models: data?.models.map((model) => model.id) })
@@ -158,6 +163,12 @@ export default function Edit({
             </Form.Item>
             <Form.Item label="是否收藏" name={'collected'} valuePropName="checked">
               <Switch />
+            </Form.Item>
+            <Form.Item name={'organization'} label="所属机构">
+              <Select
+                optionFilterProp="label"
+                options={organizations.map((model) => ({ label: model.name, value: model.id }))}
+              />
             </Form.Item>
             <Form.Item name="cover" label="专辑封面">
               <Upload />

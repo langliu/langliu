@@ -13,7 +13,11 @@ type CreateAlbum = Database['public']['Tables']['albums']['Insert']
 
 export default function AlbumForm({
   models,
-}: { models: Database['public']['Tables']['models']['Row'][] }) {
+  organizations = [],
+}: {
+  models: Database['public']['Tables']['models']['Row'][]
+  organizations: Database['public']['Tables']['organizations']['Row'][]
+}) {
   const [open, setOpen] = useState(false)
   const router = useRouter()
   const initialState: CreateAlbum = {
@@ -94,6 +98,12 @@ export default function AlbumForm({
             </Form.Item>
             <Form.Item label="收集状态" name={'collected'} valuePropName="checked">
               <Switch />
+            </Form.Item>
+            <Form.Item name={'organization'} label="所属机构">
+              <Select
+                optionFilterProp="label"
+                options={organizations.map((model) => ({ label: model.name, value: model.id }))}
+              />
             </Form.Item>
             <Form.Item name="cover" label="专辑封面">
               <Upload />

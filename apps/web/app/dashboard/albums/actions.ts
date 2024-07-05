@@ -16,7 +16,7 @@ export async function fetchFilteredInvoices(query: string, currentPage = 1, mode
       count,
     } = await supabase
       .from('albums')
-      .select('*, models!inner(*)', { count: 'exact' })
+      .select('*, models!inner(*), organizations(*)', { count: 'exact' })
       .match(
         modelId
           ? {
@@ -80,4 +80,20 @@ export async function createModel(formData: Database['public']['Tables']['albums
   } else {
     console.log(error)
   }
+}
+
+/**
+ * 获取所有机构
+ * @returns
+ */
+export async function getAllOrganizations() {
+  const supabase = createClient()
+
+  const { data: models, error } = await supabase
+    .from('organizations')
+    .select('*')
+  if (error) {
+    throw new Error(error.message)
+  }
+  return models
 }
