@@ -70,6 +70,7 @@ export async function createModel(formData: Database['public']['Tables']['albums
         picture_num: formData.picture_num,
         video_num: formData.video_num,
         collected: formData.collected,
+        organization: formData.organization,
       },
     ])
     .select()
@@ -89,9 +90,7 @@ export async function createModel(formData: Database['public']['Tables']['albums
 export async function getAllOrganizations() {
   const supabase = createClient()
 
-  const { data: models, error } = await supabase
-    .from('organizations')
-    .select('*')
+  const { data: models, error } = await supabase.from('organizations').select('*')
   if (error) {
     throw new Error(error.message)
   }
