@@ -51,7 +51,7 @@ export async function getAllModels() {
   const { data: models, error } = await supabase
     .from('models')
     .select('*')
-    .order('updated_at', { ascending: false })
+    .order('username', { ascending: true })
   if (error) {
     throw new Error(error.message)
   }

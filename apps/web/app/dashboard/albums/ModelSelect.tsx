@@ -1,16 +1,10 @@
 'use client'
 
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 import type { Database } from '@/types/supabase'
 import { useDebounceFn } from 'ahooks'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { Button, Select } from 'antd'
+import { X } from 'lucide-react'
 
 export default function ModelSelect({
   models = [],
@@ -19,12 +13,14 @@ export default function ModelSelect({
   const pathname = usePathname()
   const { replace } = useRouter()
 
+  const query = searchParams.get('query') || ''
+  const modelId = searchParams.get('model')
   const { run: handleSearch } = useDebounceFn(
-    (term: string) => {
+    (modelId: string) => {
       const params = new URLSearchParams(searchParams)
       params.set('page', '1')
-      if (term) {
-        params.set('model', term)
+      if (modelId) {
+        params.set('model', modelId)
       } else {
         params.delete('model')
       }
@@ -35,20 +31,26 @@ export default function ModelSelect({
     },
   )
 
+  const handleReset = () => {
+    console.log('handleReset')
+    replace(pathname)
+  }
+
   return (
-    <Select onValueChange={handleSearch} defaultValue={searchParams.get('model')?.toString()}>
-      <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="选择模特" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          {models.map((model) => (
-            <SelectItem value={model.id.toString()} key={model.id}>
-              {model.username}
-            </SelectItem>
-          ))}
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+    <>
+      <Select
+        optionFilterProp="label"
+        options={models.map((model) => ({ label: model.username, value: model.id }))}
+        placeholder={'选择模特'}
+        className="w-[180px]"
+        onChange={handleSearch}
+        size="large"
+      />
+      {(!!query || !!modelId) && (
+        <Button ghost onClick={handleReset} icon={<X className="size-3.5" />}>
+          重置
+        </Button>
+      )}
+    </>
   )
 }

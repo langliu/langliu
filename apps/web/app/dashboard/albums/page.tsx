@@ -2,13 +2,14 @@ import DashboardHeader from '@/components/DashboardHeader'
 import { InvoicesTableSkeleton } from './Skeletons'
 import Table from './Table'
 import Search from '@/components/Search'
-import { Plus } from 'lucide-react'
+import { Plus, X } from 'lucide-react'
 import Link from 'next/link'
 import { Suspense } from 'react'
-import { buttonVariants } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { getAllModels, getAllOrganizations } from './actions'
 import ModelSelect from './ModelSelect'
 import Create from './Create'
+// import { useRouter } from 'next/navigation'
 
 export function CreateInvoice() {
   return (
@@ -35,6 +36,7 @@ export default async function Page({
     model?: string
   }
 }) {
+  // const { replace } = useRouter()
   const query = searchParams?.query || ''
   const modelId = searchParams?.model
   const currentPage = Number(searchParams?.page) || 1
