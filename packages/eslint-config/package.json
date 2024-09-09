@@ -1,6 +1,6 @@
 {
   "name": "@langliu/eslint-config",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "langliu's eslint config",
   "main": "index.js",
   "type": "module",
@@ -17,11 +17,11 @@
     "directory": "packages/eslint-config"
   },
   "dependencies": {
-    "@stylistic/eslint-plugin": "^2.3.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-n": "^17.9.0",
-    "eslint-plugin-promise": "^6.4.0",
-    "globals": "^15.8.0"
+    "@stylistic/eslint-plugin": "^2.7.2",
+    "eslint-plugin-import": "^2.30.0",
+    "eslint-plugin-n": "^17.10.2",
+    "eslint-plugin-promise": "^6.6.0",
+    "globals": "^15.9.0"
   },
   "peerDependencies": {
     "eslint": ">= 9"
