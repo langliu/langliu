@@ -1,5 +1,5 @@
-import globals from 'globals'
 import stylistic from '@stylistic/eslint-plugin'
+import globals from 'globals'
 import * as pluginImport from 'eslint-plugin-import'
 import pluginN from 'eslint-plugin-n'
 import pluginPromise from 'eslint-plugin-promise'

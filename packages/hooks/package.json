@@ -8,11 +8,11 @@
     "lint": "eslint \"**/*.ts*\""
   },
   "devDependencies": {
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
-    "eslint": "^7.32.0",
-    "eslint-config-custom": "*",
-    "typescript": "^5.5.4"
+    "@types/react": "^18.3.10",
+    "@types/react-dom": "^18.3.0",
+    "eslint": "^9.11.1",
+    "@langliu/eslint-config": "*",
+    "typescript": "^5.6.2"
   },
   "peerDependencies": {
     "react": "^18"

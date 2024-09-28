@@ -1,7 +1,12 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.4.0/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.9.2/schema.json",
   "organizeImports": {
     "enabled": false
+  },
+  "vcs": {
+    "useIgnoreFile": true,
+    "enabled": true,
+    "clientKind": "git"
   },
   "linter": {
     "enabled": true,
