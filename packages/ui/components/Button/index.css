@@ -1,16 +1,27 @@
 /*@layer button;*/
 
 /*@layer button {*/
-.button {
+.harmony-button {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 8px;
-  padding: 9px 32px;
+  padding: 9px 28px;
   border-radius: 20px;
-  background: rgba(0, 0, 0, 0.05);
   line-height: 22px;
+  font-weight: 500;
+}
+
+.harmony-button__small {
+  padding: 6px 18px;
+  border-radius: 14px;
+  line-height: 16px;
+}
+
+.harmony-button__normal {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #0a59f7;
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
@@ -18,4 +29,44 @@
     background-color: rgba(0, 0, 0, 0.15);
   }
 }
+
+.harmony-button__emphasized {
+  background-color: #0a59f7;
+  color: #fff;
+}
+
+.harmony-button__warning {
+  color: rgb(232, 64, 38);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.harmony-button__text {
+  color: #0a59f7;
+  background-color: transparent;
+}
+
+.harmony-button__selected {
+  padding: 6px 36px;
+  line-height: 16px;
+  font-size: 12px;
+  height: fit-content;
+  font-weight: normal;
+  background-color: rgba(10, 89, 247, 0.2);
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.harmony-button__unselected {
+  padding: 6px 36px;
+  line-height: 16px;
+  font-size: 12px;
+  height: fit-content;
+  font-weight: normal;
+  color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.harmony-button__shadow {
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
 /*}*/

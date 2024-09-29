@@ -45,3 +45,6 @@ Thumbs.db
 
 # Turbo
 .turbo
+
+# doc
+*/*/doc_build/*

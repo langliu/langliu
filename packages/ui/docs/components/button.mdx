@@ -1,4 +1,4 @@
-import { Button } from '@/components/Button';
+import { Button } from '../../components/Button';
 
 # 按钮
 
@@ -6,4 +6,11 @@ import { Button } from '@/components/Button';
 
 按钮组件
 
-<Button type="primary">按钮</Button>
+<div style={{display:'flex',gap:16,alignItems:'center',flexWrap:'wrap'}}>
+  <Button variant={'emphasized'}>强调按钮</Button>
+  <Button variant={'normal'}>普通按钮</Button>
+  <Button variant={'warning'}>警告按钮</Button>
+  <Button variant={'text'}>文本按钮</Button>
+  <Button variant={'selected'}>状态按钮</Button>
+  <Button variant={'unselected'}>状态按钮</Button>
+</div>
