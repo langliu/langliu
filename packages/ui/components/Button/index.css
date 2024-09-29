@@ -1,0 +1,21 @@
+/*@layer button;*/
+
+/*@layer button {*/
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 32px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.05);
+  line-height: 22px;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  &:focus {
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+}
+/*}*/
