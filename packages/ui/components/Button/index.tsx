@@ -1,6 +1,7 @@
 'use client'
 import { cva, type VariantProps } from 'class-variance-authority'
 import type { ButtonHTMLAttributes, FC, PropsWithChildren } from 'react'
+import '../../styles/index.css'
 import './index.css'
 
 const button = cva('harmony-button', {

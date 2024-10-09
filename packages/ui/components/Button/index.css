@@ -1,6 +1,5 @@
-/*@layer button;*/
+@import "../../styles/index.css";
 
-/*@layer button {*/
 .harmony-button {
   display: flex;
   flex-direction: row;
@@ -21,7 +20,7 @@
 
 .harmony-button__normal {
   background-color: rgba(0, 0, 0, 0.05);
-  color: #0a59f7;
+  color: var(--brand-color);
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
@@ -31,7 +30,7 @@
 }
 
 .harmony-button__emphasized {
-  background-color: #0a59f7;
+  background-color: var(--brand-color);
   color: #fff;
 }
 
@@ -41,7 +40,7 @@
 }
 
 .harmony-button__text {
-  color: #0a59f7;
+  color: var(--brand-color);
   background-color: transparent;
 }
 
@@ -68,5 +67,3 @@
 .harmony-button__shadow {
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
-
-/*}*/

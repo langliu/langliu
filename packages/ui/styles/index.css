@@ -1,0 +1,8 @@
+:root {
+  @property --brand-color {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #0a59f7;
+  }
+  --brand-color: #0a59f7;
+}
