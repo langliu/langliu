@@ -1,7 +1,7 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.9.2/schema.json",
   "organizeImports": {
-    "enabled": false
+    "enabled": true
   },
   "vcs": {
     "useIgnoreFile": true,
@@ -24,7 +24,8 @@
   "javascript": {
     "formatter": {
       "quoteStyle": "single",
-      "semicolons": "asNeeded"
+      "semicolons": "asNeeded",
+      "jsxQuoteStyle": "single"
     }
   }
 }

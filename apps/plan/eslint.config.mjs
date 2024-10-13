@@ -1,3 +1,3 @@
-import langliuESLintConfig from '@langliu/eslint-config';
+import langliuESLintConfig from '@langliu/eslint-config'
 
-export default [...langliuESLintConfig];
+export default [...langliuESLintConfig]
