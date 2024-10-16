@@ -1,5 +1,7 @@
 'use client'
 
+import { type FormEvent, useState } from 'react'
+
 export type TodoItemProps = {
   id: string
   value: string
@@ -7,20 +9,28 @@ export type TodoItemProps = {
   onDelete: (id: string) => void
 }
 
-export function TodoItem({ id, value, onChange, onDelete }: Readonly<TodoItemProps>) {
+export function TodoItem({ id, onChange, onDelete }: Readonly<TodoItemProps>) {
+  const [value, setValue] = useState<string | undefined>()
+
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    // e.preventDefault()
+    console.log(value)
+    onChange(value ?? '')
+  }
+
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <input
+        name={'todo'}
         className={
           'block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
         }
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
+        onChange={(event) => setValue(event.target.value)}
       />
       <span>{value}</span>
       <button type={'button'} onClick={() => onDelete(id)}>
         删除
       </button>
-    </div>
+    </form>
   )
 }

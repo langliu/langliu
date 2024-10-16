@@ -1,6 +1,8 @@
 'use client'
 
+import ResourceCard from '@/components/resource-card'
 import { TodoItem } from '@/components/todo-item'
+import { data } from '@/data'
 import Image from 'next/image'
 import { useState } from 'react'
 
@@ -11,6 +13,23 @@ export default function Home() {
   return (
     <div className='font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20'>
       <main className='flex flex-col gap-8 row-start-2 items-center sm:items-start'>
+        {/*<ResourceCard title={'阿里云小站'} />*/}
+        {data.map((item) => (
+          <div key={item.category}>
+            <h2 className='text-2xl font-bold mb-4'>{item.category}</h2>
+            <ul>
+              {item.data.map((item) => (
+                <ResourceCard
+                  title={item.title}
+                  key={item.id}
+                  description={item.description}
+                  tags={item.tags}
+                  href={item.link}
+                />
+              ))}
+            </ul>
+          </div>
+        ))}
         <Image
           className='dark:invert'
           src='/next.svg'
@@ -19,9 +38,7 @@ export default function Home() {
           height={38}
           priority
         />
-        <form>
-          <TodoItem id={'12312'} value={'sdgfaskdgjad'} onDelete={() => {}} onChange={() => {}} />
-        </form>
+        <TodoItem id={'12312'} value={'sdgfaskdgjad'} onDelete={() => {}} onChange={() => {}} />
         <ol className='font-mono list-inside list-decimal text-sm text-center sm:text-left'>
           <li className='mb-2'>
             Get started by editing{' '}
