@@ -15,7 +15,7 @@ export default function Home() {
         {data.map((item) => (
           <div key={item.category}>
             <h2 className='mb-4 font-bold text-2xl'>{item.category}</h2>
-            <ul className={'grid grid-cols-3 gap-4 sm:grid-cols-2 md:grid-cols-3'}>
+            <ul className={'grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3'}>
               {item.data.map((item) => (
                 <ResourceCard
                   title={item.title}

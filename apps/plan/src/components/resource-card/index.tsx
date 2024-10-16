@@ -16,11 +16,11 @@ export default function ResourceCard({
 }) {
   return (
     <Link href={href} target={'_blank'}>
-      <Card className={'min-w-52 cursor-pointer hover:bg-gray-50 hover:-translate-y-1'}>
+      <Card className={'hover:-translate-y-1 h-full min-w-52 cursor-pointer hover:bg-gray-50'}>
         <CardHeader className={'pb-1.5'}>
           <CardTitle className={'text-xl'}>{title}</CardTitle>
         </CardHeader>
-        <CardContent className={'gap-2 flex pb-1.5'}>
+        <CardContent className={'flex gap-2 pb-1.5'}>
           {tags.map((tag) => (
             <Badge key={tag}>{tag}</Badge>
           ))}
