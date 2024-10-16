@@ -16,7 +16,7 @@ export default function ResourceCard({
 }) {
   return (
     <Link href={href} target={'_blank'}>
-      <Card className={'min-w-96 cursor-pointer hover:bg-gray-50 hover:-translate-y-1'}>
+      <Card className={'min-w-52 cursor-pointer hover:bg-gray-50 hover:-translate-y-1'}>
         <CardHeader className={'pb-1.5'}>
           <CardTitle className={'text-xl'}>{title}</CardTitle>
         </CardHeader>

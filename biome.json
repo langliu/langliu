@@ -11,7 +11,17 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "style": {},
+      "nursery": {
+        "useSortedClasses": {
+          "options": {
+            "attributes": ["className"],
+            "functions": ["cva", "clsx", "tw"]
+          },
+          "level": "warn"
+        }
+      }
     }
   },
   "formatter": {
@@ -26,6 +36,12 @@
       "quoteStyle": "single",
       "semicolons": "asNeeded",
       "jsxQuoteStyle": "single"
+    }
+  },
+  "css": {
+    "formatter": {
+      "enabled": true,
+      "indentStyle": "space"
     }
   }
 }

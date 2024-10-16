@@ -12,8 +12,7 @@ export type TodoItemProps = {
 export function TodoItem({ id, onChange, onDelete }: Readonly<TodoItemProps>) {
   const [value, setValue] = useState<string | undefined>()
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    // e.preventDefault()
+  function handleSubmit() {
     console.log(value)
     onChange(value ?? '')
   }
