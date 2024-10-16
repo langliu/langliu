@@ -6,9 +6,8 @@ export default function Home() {
     <div className='min-h-screen items-center justify-items-center gap-16 p-4 pb-20 font-sans sm:p-8'>
       <h1
         className={
-          'mb-6 inline-block bg-gradient-to-r from-sky-500 to-indigo-500 bg-clip-text font-bold text-4xl'
+          'mb-6 inline-block bg-gradient-to-r from-sky-500 to-indigo-500 bg-clip-text font-bold text-4xl text-transparent'
         }
-        style={{ '-webkit-text-fill-color': 'transparent' }}
       >
         影视导航
       </h1>
