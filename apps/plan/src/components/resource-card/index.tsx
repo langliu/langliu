@@ -28,7 +28,13 @@ export default function ResourceCard({
           'hover:-translate-y-1 flex h-full min-w-52 cursor-pointer items-center hover:bg-gray-50'
         }
       >
-        <Image src={`${href}favicon.ico`} alt={'favicon'} width={50} height={50} />
+        <Image
+          src={`${href}favicon.ico`}
+          alt={'favicon'}
+          width={50}
+          height={50}
+          className={'pl-4'}
+        />
         <div>
           <CardHeader className={'pb-1.5'}>
             <CardTitle className={'text-xl'}>{title}</CardTitle>
