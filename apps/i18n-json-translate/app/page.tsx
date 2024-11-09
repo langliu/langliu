@@ -1,29 +1,12 @@
-// 'use client'
 'use server'
-import { isJSONStr } from '@/utils'
-import { CircleArrowRight } from 'lucide-react'
-import Form from 'next/form'
 import Image from 'next/image'
-import { translate } from './actions'
+import TranslateForm from './form'
+
 export default async function Home() {
   return (
     <div className='grid min-h-screen grid-rows-[1fr_20px] gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20'>
       <main className='w-full'>
-        <Form className={'flex h-full w-full items-center gap-8'} action={translate}>
-          <textarea
-            className={'h-full w-1/2 rounded-md border border-gray-200 p-4 align-top text-black'}
-            placeholder={'请输入JSON格式的字符串'}
-            name={'input'}
-          />
-          <button type={'submit'}>
-            <CircleArrowRight size={40} className={'text-gray-400'} strokeWidth={1} />
-          </button>
-          <textarea
-            className={'h-full w-1/2 cursor-not-allowed rounded-md text-black'}
-            disabled
-            name={'output'}
-          />
-        </Form>
+        <TranslateForm />
       </main>
       <footer className='flex flex-wrap items-center justify-center gap-6'>
         <a
