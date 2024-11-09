@@ -25,8 +25,11 @@ const initialState = {
 
 export default function TranslateForm() {
   const [input, setInput] = useState<string>('')
-  const [state, fromAction, isPending] = useActionState(
-    async (previousState: unknown, formData: FormData) => {
+  const [state, fromAction] = useActionState(
+    async (
+      previousState: { output: string; error: Record<string, string> },
+      formData: FormData,
+    ) => {
       const response = await translate(previousState, formData)
       return {
         output: response?.output || '',

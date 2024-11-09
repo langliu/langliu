@@ -14,7 +14,10 @@ function truncate(q = '') {
   return q.substring(0, 10) + len + q.substring(len - 10, len)
 }
 
-export async function translate(prevState: { input: string }, formData: FormData) {
+export async function translate(
+  prevState: { output: string; error: Record<string, string> },
+  formData: FormData,
+) {
   'use server'
   const query = formData.get('input') as string
   const FormSchema = z.object({
@@ -46,8 +49,6 @@ export async function translate(prevState: { input: string }, formData: FormData
       output: '',
     }
   }
-  // console.log(parseResult)
-  console.log(true)
   const appKey = process.env.NEXT_PUBLIC_YOUDAO_APP_KEY ?? ''
   const key = process.env.NEXT_PUBLIC_YOUDAO_APP_SECRET //注意：暴露appSecret，有被盗用造成损失的风险
   const salt = v7()
@@ -82,26 +83,3 @@ export async function translate(prevState: { input: string }, formData: FormData
     console.error(e)
   }
 }
-//
-// export async function translate(formData: FormData) {
-//   'use server'
-//   // const FormSchema = z.object({
-//   //   id: z.string(),
-//   //   customerId: z.string({
-//   //     invalid_type_error: 'Please select a customer.',
-//   //   }),
-//   //   amount: z.coerce.number().gt(0, { message: 'Please enter an amount greater than $0.' }),
-//   //   status: z.enum(['pending', 'paid'], {
-//   //     invalid_type_error: 'Please select an invoice status.',
-//   //   }),
-//   //   date: z.string(),
-//   // })
-//   //
-//   // const text = formData.get('input')
-//   // console.log(text)
-//   // if (isJSONStr(text)) {
-//   //   console.log(true)
-//   // } else {
-//   //   console.log(false)
-//   // }
-// }
