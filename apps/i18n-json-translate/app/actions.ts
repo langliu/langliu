@@ -4,10 +4,6 @@ import CryptoJS from 'crypto-js'
 import { v7 } from 'uuid'
 import { z } from 'zod'
 
-export type State = {
-  input?: string
-}
-
 function truncate(q = '') {
   const len = q.length
   if (len <= 20) return q
@@ -15,7 +11,7 @@ function truncate(q = '') {
 }
 
 export async function translate(
-  prevState: { output: string; error: Record<string, string> },
+  _: { output: string; error: Record<string, string> },
   formData: FormData,
 ) {
   'use server'
@@ -76,10 +72,15 @@ export async function translate(
     const res = await fetch(url).then((res) => res.json())
     if (res.errorCode === '0') {
       return {
-        output: res.translation[0],
+        output: JSON.stringify(JSON.parse(res.translation[0]), null, 2),
       }
     }
   } catch (e) {
-    console.error(e)
+    return {
+      output: '',
+      error: {
+        input: (e as Error)?.message || '接口调用失败',
+      },
+    }
   }
 }

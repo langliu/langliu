@@ -52,9 +52,10 @@ export default function TranslateForm() {
       </div>
       <SubmitButton />
       <textarea
-        className={'h-full w-1/2 rounded-md p-4 text-black'}
+        className={'h-full w-1/2 rounded-md border border-gray-200 p-4 text-black '}
         name={'output'}
         value={state.output}
+        readOnly
       />
     </form>
   )
