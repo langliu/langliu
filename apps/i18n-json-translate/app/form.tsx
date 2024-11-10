@@ -12,12 +12,12 @@ import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/hooks/use-toast'
 import { isJSONStr } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ArrowRightLeft, CircleArrowRight } from 'lucide-react'
-import { useActionState, useState } from 'react'
+import { ArrowRightLeft, CircleArrowRight, Clipboard } from 'lucide-react'
+import { useState } from 'react'
 import { useFormStatus } from 'react-dom'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { translate, translation } from './actions'
+import { translation } from './actions'
 import { LanguageSelect } from './language-select'
 
 function SubmitButton() {
@@ -27,15 +27,6 @@ function SubmitButton() {
       <CircleArrowRight size={40} className={'text-gray-400'} strokeWidth={1} />
     </button>
   )
-}
-
-const initialState = {
-  message: '',
-  output: '',
-  success: null,
-  error: {
-    input: '',
-  },
 }
 
 const formSchema = z.object({
@@ -60,40 +51,30 @@ export default function TranslateForm() {
     },
   })
   const { toast } = useToast()
-  const [state, fromAction] = useActionState(
-    async (
-      previousState: { output: string; error: Record<string, string> },
-      formData: FormData,
-    ) => {
-      try {
-        const response = await translate(previousState, formData)
-        return {
-          output: response?.output || '',
-          error: response?.error ?? {},
-        }
-      } catch (e) {
-        return {
-          output: '',
-          error: {
-            input: (e as Error)?.message ?? '未知错误',
-          },
-        }
-      }
-    },
-    initialState,
-  )
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
     try {
       const result = await translation(values)
-      console.log(result)
       setTranslateResult(result)
     } catch (e) {
       toast({
         title: '翻译失败',
+        description: (e as Error)?.message ?? '未知错误',
+        variant: 'destructive',
+      })
+    }
+  }
+
+  async function handleCopy() {
+    try {
+      await navigator.clipboard.writeText(translateResult)
+      toast({
+        title: '复制成功',
+        description: '已复制到剪贴板',
+      })
+    } catch (e) {
+      toast({
+        title: '复制失败',
         description: (e as Error)?.message ?? '未知错误',
         variant: 'destructive',
       })
@@ -151,7 +132,23 @@ export default function TranslateForm() {
             )}
           />
           <SubmitButton />
-          <Textarea className={'h-full w-full'} name={'output'} value={translateResult} readOnly />
+          <div className={'relative h-full w-full'}>
+            <button
+              type={'button'}
+              className={
+                'absolute top-4 right-4 z-10 inline-flex h-7 w-7 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-background font-medium text-foreground text-sm opacity-100 shadow-sm transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'
+              }
+              onClick={handleCopy}
+            >
+              <Clipboard className={'pointer-events-none size-3.5 shrink-0'} />
+            </button>
+            <Textarea
+              className={'h-full w-full'}
+              name={'output'}
+              value={translateResult}
+              readOnly
+            />
+          </div>
         </div>
       </form>
     </Form>
