@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model Book {
+  id           String              @id @default(uuid())
+  title        String              @db.VarChar(255)
+  introduction String              @db.Text
+  published    Boolean             @default(false)
+  createdAt    DateTime            @default(now()) @map(name: "created_at")
+  updatedAt    DateTime            @updatedAt @map(name: "updated_at")
+  author       Author?             @relation(fields: [authorId], references: [id])
+  authorId     String?
+  wordCount    Int                 @map(name: "word_count")
+  articles     Article[]
+  categories   CategoriesOnBooks[]
+  endStatus    Boolean             @default(false)
+
+  @@map("books")
+}
+
+model Author {
+  id        String   @id @default(uuid())
+  name      String?
+  email     String?  @unique
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  books     Book[]
+
+  @@map(name: "authors")
+}
+
+enum ArticleType {
+  TEXT
+  MARKDOWN
+  RICH
+}
+
+model Article {
+  id        String      @id @default(uuid())
+  type      ArticleType @default(TEXT)
+  order     Int         @default(0)
+  content   String      @db.Text
+  title     String      @default("") // 章节名称
+  wordCount Int         @map(name: "word_count") @db.Integer
+  createdAt DateTime    @default(now()) @map(name: "created_at")
+  updatedAt DateTime    @updatedAt @map(name: "updated_at")
+  book      Book        @relation(fields: [bookId], references: [id])
+  bookId    String
+
+  @@map("articles")
+}
+
+model Category {
+  id         String              @id @default(uuid())
+  name       String
+  categories CategoriesOnBooks[]
+
+  @@map("categorys")
+}
+
+model CategoriesOnBooks {
+  book       Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  bookId     String // relation scalar field (used in the `@relation` attribute above)
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId String // relation scalar field (used in the `@relation` attribute above)
+  assignedAt DateTime @default(now())
+  assignedBy String
+
+  @@id([bookId, categoryId])
+  @@map(name: "categories_on_books")
+}
