@@ -30,10 +30,19 @@ export default function TranslateForm() {
       previousState: { output: string; error: Record<string, string> },
       formData: FormData,
     ) => {
-      const response = await translate(previousState, formData)
-      return {
-        output: response?.output || '',
-        error: response?.error ?? {},
+      try {
+        const response = await translate(previousState, formData)
+        return {
+          output: response?.output || '',
+          error: response?.error ?? {},
+        }
+      } catch (e) {
+        return {
+          output: '',
+          error: {
+            input: (e as Error)?.message ?? '未知错误',
+          },
+        }
       }
     },
     initialState,

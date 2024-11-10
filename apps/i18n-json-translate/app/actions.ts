@@ -14,7 +14,6 @@ export async function translate(
   _: { output: string; error: Record<string, string> },
   formData: FormData,
 ) {
-  'use server'
   const query = formData.get('input') as string
   const FormSchema = z.object({
     input: z
