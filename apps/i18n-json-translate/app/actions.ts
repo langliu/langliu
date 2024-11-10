@@ -44,17 +44,18 @@ export async function translate(
       output: '',
     }
   }
-  const appKey = process.env.NEXT_PUBLIC_YOUDAO_APP_KEY ?? ''
-  const key = process.env.NEXT_PUBLIC_YOUDAO_APP_SECRET //注意：暴露appSecret，有被盗用造成损失的风险
-  const salt = v7()
-  const curtime = Math.round(new Date().getTime() / 1000).toString()
-  // 多个query可以用\n连接  如 query='apple\norange\nbanana\npear'
-  const from = 'auto'
-  const to = 'en'
-  const sign = CryptoJS.SHA256(appKey + truncate(query) + salt + curtime + key).toString(
-    CryptoJS.enc.Hex,
-  )
+
   try {
+    const appKey = process.env.NEXT_PUBLIC_YOUDAO_APP_KEY ?? ''
+    const key = process.env.NEXT_PUBLIC_YOUDAO_APP_SECRET //注意：暴露appSecret，有被盗用造成损失的风险
+    const salt = v7()
+    const curtime = Math.round(new Date().getTime() / 1000).toString()
+    // 多个query可以用\n连接  如 query='apple\norange\nbanana\npear'
+    const from = 'auto'
+    const to = 'en'
+    const sign = CryptoJS.SHA256(appKey + truncate(query) + salt + curtime + key).toString(
+      CryptoJS.enc.Hex,
+    )
     const params = {
       q: query,
       appKey: appKey,
@@ -72,6 +73,7 @@ export async function translate(
     if (res.errorCode === '0') {
       return {
         output: JSON.stringify(JSON.parse(res.translation[0]), null, 2),
+        error,
       }
     }
   } catch (e) {
@@ -81,5 +83,11 @@ export async function translate(
         input: (e as Error)?.message || '接口调用失败',
       },
     }
+  }
+  return {
+    output: '',
+    error: {
+      input: '接口调用失败',
+    },
   }
 }
