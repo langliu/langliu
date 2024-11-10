@@ -47,7 +47,7 @@ export async function translate(
 
   try {
     const appKey = process.env.NEXT_PUBLIC_YOUDAO_APP_KEY ?? ''
-    const key = process.env.NEXT_PUBLIC_YOUDAO_APP_SECRET //注意：暴露appSecret，有被盗用造成损失的风险
+    const key = process.env.NEXT_PUBLIC_YOUDAO_APP_SECRET ?? '' //注意：暴露appSecret，有被盗用造成损失的风险
     const salt = v7()
     const curtime = Math.round(new Date().getTime() / 1000).toString()
     // 多个query可以用\n连接  如 query='apple\norange\nbanana\npear'
@@ -89,5 +89,50 @@ export async function translate(
         input: (e as Error)?.message || '接口调用失败',
       },
     }
+  }
+}
+
+export async function translation({
+  input,
+  from,
+  to,
+}: {
+  input: string
+  from: string
+  to: string
+}) {
+  try {
+    const appKey = process.env.NEXT_PUBLIC_YOUDAO_APP_KEY ?? ''
+    const key = process.env.NEXT_PUBLIC_YOUDAO_APP_SECRET ?? '' //注意：暴露appSecret，有被盗用造成损失的风险
+    const salt = v7()
+    const curtime = Math.round(new Date().getTime() / 1000).toString()
+    // 多个query可以用\n连接  如 query='apple\norange\nbanana\npear'
+    const sign = CryptoJS.SHA256(appKey + truncate(input) + salt + curtime + key).toString(
+      CryptoJS.enc.Hex,
+    )
+    const params = {
+      q: input,
+      appKey: appKey,
+      salt: salt,
+      from: from,
+      to: to,
+      sign: sign,
+      signType: 'v3',
+      curtime: curtime,
+    }
+    const url = new URL('https://openapi.youdao.com/api')
+    url.search = new URLSearchParams(params).toString()
+
+    const res = await fetch(url).then((res) => res.json())
+    if (res.errorCode === '0') {
+      try {
+        return JSON.stringify(JSON.parse(res.translation[0]), null, 2)
+      } catch (_) {
+        return res.translation[0]
+      }
+    }
+    throw new Error(res.errorCode)
+  } catch (e) {
+    throw new Error((e as Error)?.message || '接口调用失败')
   }
 }
