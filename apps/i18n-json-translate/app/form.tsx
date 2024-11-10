@@ -9,10 +9,11 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Textarea } from '@/components/ui/textarea'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { useToast } from '@/hooks/use-toast'
 import { isJSONStr } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ArrowRightLeft, CircleArrowRight, Clipboard } from 'lucide-react'
+import { ArrowRightLeft, CircleArrowRight, Clipboard, Guitar } from 'lucide-react'
 import { useState } from 'react'
 import { useFormStatus } from 'react-dom'
 import { useForm } from 'react-hook-form'
@@ -81,6 +82,30 @@ export default function TranslateForm() {
     }
   }
 
+  /**
+   * Formats the input JSON string to make it more readable.
+   *
+   * @remarks
+   * This function is used to format the JSON string entered by the user.
+   * It first checks if the input is valid, and then parses the JSON string.
+   * Finally, it stringifies the parsed JSON object with a 2-space indentation.
+   *
+   * @throws {Error} If the input is not a valid JSON string.
+   */
+  function prettyInput() {
+    const input = form.getValues('input')
+    // Check if the input field is not invalid
+    if (input && isJSONStr(input)) {
+      // Get the value of the input field
+      // Parse the JSON string
+      const parsedInput = JSON.parse(input)
+      // Stringify the parsed JSON object with a 2-space indentation
+      const prettyInput = JSON.stringify(parsedInput, null, 2)
+      // Set the value of the input field to the formatted JSON string
+      form.setValue('input', prettyInput)
+    }
+  }
+
   return (
     <Form {...form}>
       <form className={'flex h-full flex-col'} onSubmit={form.handleSubmit(onSubmit)}>
@@ -118,34 +143,63 @@ export default function TranslateForm() {
             name={'input'}
             control={form.control}
             render={({ field }) => (
-              <FormItem className={'h-full'}>
+              <FormItem className={'relative h-full'}>
                 <FormControl>
                   <Textarea
                     {...field}
                     className={'h-full'}
-                    placeholder={'请输入JSON格式的字符串'}
+                    placeholder={'请输入JSON字符串，例如：\n{\n  "fast": "Fast"\n}'}
                     name={'input'}
                   />
                 </FormControl>
                 <FormMessage />
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <button
+                        type={'button'}
+                        className={
+                          'absolute top-4 right-4 z-10 inline-flex h-7 w-7 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-background font-medium text-foreground text-sm opacity-100 shadow-sm transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'
+                        }
+                        onClick={prettyInput}
+                      >
+                        <Guitar className={'pointer-events-none size-3.5 shrink-0'} />
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Format JSON Input</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               </FormItem>
             )}
           />
           <SubmitButton />
           <div className={'relative h-full w-full'}>
-            <button
-              type={'button'}
-              className={
-                'absolute top-4 right-4 z-10 inline-flex h-7 w-7 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-background font-medium text-foreground text-sm opacity-100 shadow-sm transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'
-              }
-              onClick={handleCopy}
-            >
-              <Clipboard className={'pointer-events-none size-3.5 shrink-0'} />
-            </button>
+            {translateResult && (
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <button
+                      type={'button'}
+                      className={
+                        'absolute top-4 right-4 z-10 inline-flex h-7 w-7 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-background font-medium text-foreground text-sm opacity-100 shadow-sm transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'
+                      }
+                      onClick={handleCopy}
+                    >
+                      <Clipboard className={'pointer-events-none size-3.5 shrink-0'} />
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Copy</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            )}
             <Textarea
               className={'h-full w-full'}
               name={'output'}
-              value={translateResult}
+              value={form.getValues('input') ? translateResult : ''}
               readOnly
             />
           </div>
