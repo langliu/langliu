@@ -4,11 +4,10 @@ import Link from 'web/components/Link'
 interface BookCardProps {
   title: string
   description: string
-  id: string
   href: string
 }
 
-export function BookCard({ title, description, id, href }: BookCardProps) {
+export function BookCard({ title, description, href }: BookCardProps) {
   return (
     <Link href={href}>
       <Card

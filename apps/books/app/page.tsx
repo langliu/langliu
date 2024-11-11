@@ -27,7 +27,12 @@ export default async function Home() {
         />
         <div>
           {books.map((book) => (
-            <BookCard title={book.title} description={book.introduction} key={book.id} />
+            <BookCard
+              title={book.title}
+              description={book.introduction}
+              key={book.id}
+              href={`/books/${book.id}`}
+            />
           ))}
         </div>
       </main>
