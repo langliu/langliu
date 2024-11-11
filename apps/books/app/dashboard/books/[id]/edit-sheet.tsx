@@ -13,12 +13,14 @@ import {
   Sheet,
   SheetContent,
   SheetDescription,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/hooks/use-toast'
+import { getWordCount } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useDebounceFn } from 'ahooks'
 import { useRouter } from 'next/navigation'
@@ -67,6 +69,7 @@ export function EditSheet({
         await updateArticle({
           ...values,
           id: bookId,
+          wordCount: getWordCount(values?.content),
         })
         form.reset()
         handleSuccess()
@@ -101,16 +104,19 @@ export function EditSheet({
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger>编辑</SheetTrigger>
-      <SheetContent className='w-[540px] sm:w-[500px] sm:max-w-max'>
+      <SheetContent className='flex w-[600px] flex-col sm:w-[800px] sm:max-w-max'>
         <SheetHeader>
-          <SheetTitle>新建章节</SheetTitle>
+          <SheetTitle>编辑章节</SheetTitle>
           <SheetDescription>
             This action cannot be undone. This will permanently delete your account and remove your
             data from our servers.
           </SheetDescription>
         </SheetHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(handleSubmit)} className='space-y-4'>
+          <form
+            onSubmit={form.handleSubmit(handleSubmit)}
+            className='flex h-full flex-col space-y-4'
+          >
             <FormField
               control={form.control}
               name='order'
@@ -118,7 +124,7 @@ export function EditSheet({
                 <FormItem>
                   <FormLabel>章节序号</FormLabel>
                   <FormControl>
-                    <Input placeholder='请输入章节序号' type='number' {...field} disabled />
+                    <Input placeholder='请输入章节序号' type='number' {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -141,12 +147,12 @@ export function EditSheet({
               control={form.control}
               name='content'
               render={({ field }) => (
-                <FormItem>
+                <FormItem className={'flex flex-1 flex-col'}>
                   <FormLabel>章节内容</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder='请输入章节内容'
-                      className='min-h-96 leading-6 md:leading-6'
+                      className='min-h-96 flex-1 leading-6 md:leading-6'
                       {...field}
                     />
                   </FormControl>
@@ -154,9 +160,11 @@ export function EditSheet({
                 </FormItem>
               )}
             />
-            <Button type='submit' className='px-8'>
-              提交
-            </Button>
+            <SheetFooter>
+              <Button type='submit' className='px-8'>
+                提交
+              </Button>
+            </SheetFooter>
           </form>
         </Form>
       </SheetContent>

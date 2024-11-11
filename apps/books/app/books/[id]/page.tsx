@@ -29,7 +29,7 @@ export default async function Page({
         {bookArticles.map((article) => (
           <Link href={`/articles/${article.id}`} key={article.id}>
             <p>
-              第{article.order}章{article.title ? '.' : ''} {article.title}
+              第{article.order}章&nbsp;{article.title}
             </p>
           </Link>
         ))}

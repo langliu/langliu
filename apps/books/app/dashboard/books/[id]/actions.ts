@@ -1,5 +1,6 @@
 'use server'
 import prisma from '@/lib/prisma'
+import { getWordCount } from '@/lib/utils'
 
 export async function insertArticle(params: {
   bookId: string
@@ -13,7 +14,7 @@ export async function insertArticle(params: {
       bookId: params.bookId,
       content: params.content,
       order: params.serial,
-      wordCount: params.content.length || 0,
+      wordCount: getWordCount(params.content),
     },
   })
 }

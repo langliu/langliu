@@ -23,11 +23,11 @@ export default async function Page({
       <h1 className={'sticky top-0 mb-2 bg-white pt-4 pb-2 font-bold text-xl'}>
         第{article?.order ?? 1}章 {article?.title ?? ''}
       </h1>
-      <div className={'mb-2 whitespace-break-spaces leading-8'}>
-        {(article?.content.split(' 　　 　　') ?? []).map((p, index) => {
+      <div className={'mb-2 whitespace-break-spaces leading-6'}>
+        {(article?.content.split('\n') ?? []).map((p, index) => {
           const key = p + index
           return (
-            <p key={key} className={'mb-3'}>
+            <p key={key} className={'mb-3 font-normal text-lg'}>
               {p}
             </p>
           )

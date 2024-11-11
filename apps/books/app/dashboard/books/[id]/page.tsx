@@ -16,6 +16,7 @@ function getBookArticles(bookId: string) {
       id: true,
       title: true,
       order: true,
+      wordCount: true,
     },
   })
 }
@@ -40,12 +41,16 @@ export default async function BookDetailPage({
   console.log(bookArticles)
   return (
     <div className={'w-full p-4'}>
-      <h1 className={'mb-4 text-2xl'}>{book?.title}</h1>
+      <div className={'flex items-center justify-between'}>
+        <h1 className={'mb-4 text-2xl'}>{book?.title}</h1>
+        <CreateSheet bookId={bookId} />
+      </div>
       <Table className={'border'}>
         <TableHeader>
           <TableRow>
             <TableCell>序号</TableCell>
             <TableCell>章节名称</TableCell>
+            <TableCell>字数统计</TableCell>
             <TableCell className={'w-[150px]'}>操作</TableCell>
           </TableRow>
         </TableHeader>
@@ -54,8 +59,8 @@ export default async function BookDetailPage({
             <TableRow key={bookArticle.id}>
               <TableCell>{bookArticle.order}</TableCell>
               <TableCell>{bookArticle.title}</TableCell>
+              <TableCell>{bookArticle.wordCount}</TableCell>
               <TableCell className={'flex w-[150px] gap-2'}>
-                <CreateSheet bookId={bookId} />
                 <EditSheet bookId={bookArticle.id} />
               </TableCell>
             </TableRow>

@@ -13,6 +13,7 @@ import {
   Sheet,
   SheetContent,
   SheetDescription,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -87,7 +88,7 @@ export function CreateSheet({
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger>新建章节</SheetTrigger>
-      <SheetContent className='w-[540px] sm:w-[500px] sm:max-w-max'>
+      <SheetContent className='flex w-[600px] flex-col sm:w-[800px] sm:max-w-max'>
         <SheetHeader>
           <SheetTitle>新建章节</SheetTitle>
           <SheetDescription>
@@ -96,7 +97,10 @@ export function CreateSheet({
           </SheetDescription>
         </SheetHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(handleSubmit)} className='space-y-4'>
+          <form
+            onSubmit={form.handleSubmit(handleSubmit)}
+            className='flex h-full flex-col space-y-4'
+          >
             <FormField
               control={form.control}
               name='serial'
@@ -127,18 +131,18 @@ export function CreateSheet({
               control={form.control}
               name='content'
               render={({ field }) => (
-                <FormItem>
+                <FormItem className={'flex flex-1 flex-col'}>
                   <FormLabel>章节内容</FormLabel>
                   <FormControl>
-                    <Textarea placeholder='请输入章节内容' className='min-h-96' {...field} />
+                    <Textarea placeholder='请输入章节内容' className='min-h-96 flex-1' {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type='submit' className='px-8'>
-              提交
-            </Button>
+            <SheetFooter>
+              <Button type='submit'>提交</Button>
+            </SheetFooter>
           </form>
         </Form>
       </SheetContent>
