@@ -1,6 +1,7 @@
 import { Table, TableBody, TableCell, TableHeader, TableRow } from '@/components/ui/table'
 import prisma from '@/lib/prisma'
 import { CreateSheet } from './create-sheet'
+import { EditSheet } from './edit-sheet'
 
 function getBookArticles(bookId: string) {
   // 使用 bookId 过滤 article
@@ -45,7 +46,7 @@ export default async function BookDetailPage({
           <TableRow>
             <TableCell>序号</TableCell>
             <TableCell>章节名称</TableCell>
-            <TableCell>操作</TableCell>
+            <TableCell className={'w-[150px]'}>操作</TableCell>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -53,8 +54,9 @@ export default async function BookDetailPage({
             <TableRow key={bookArticle.id}>
               <TableCell>{bookArticle.order}</TableCell>
               <TableCell>{bookArticle.title}</TableCell>
-              <TableCell>
+              <TableCell className={'flex w-[150px] gap-2'}>
                 <CreateSheet bookId={bookId} />
+                <EditSheet bookId={bookArticle.id} />
               </TableCell>
             </TableRow>
           ))}

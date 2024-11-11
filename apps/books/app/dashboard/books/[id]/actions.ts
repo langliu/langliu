@@ -17,3 +17,28 @@ export async function insertArticle(params: {
     },
   })
 }
+
+/**
+ * 获取章节详情
+ * @param id 章节ID
+ */
+export async function getArticle(id: string) {
+  return prisma.article.findUnique({
+    where: {
+      id: id,
+    },
+  })
+}
+
+/**
+ * 获取章节详情
+ * @param data 章节ID
+ */
+export async function updateArticle(data: Record<string, string | number>) {
+  return prisma.article.update({
+    where: {
+      id: data.id,
+    },
+    data: data,
+  })
+}
