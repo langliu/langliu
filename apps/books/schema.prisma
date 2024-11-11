@@ -54,7 +54,7 @@ model Article {
   book      Book        @relation(fields: [bookId], references: [id])
   bookId    String
 
-  @@map("articles")
+  @@map("books")
 }
 
 model Category {
