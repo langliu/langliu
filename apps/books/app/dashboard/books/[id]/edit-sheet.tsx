@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -23,11 +24,13 @@ import { useToast } from '@/hooks/use-toast'
 import { getWordCount } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useDebounceFn } from 'ahooks'
+import { clsx } from 'clsx'
+import { Guitar } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { getArticle, insertArticle, updateArticle } from './actions'
+import { getArticle, updateArticle } from './actions'
 
 const formSchema = z.object({
   order: z.coerce
@@ -47,6 +50,7 @@ export function EditSheet({
   last?: number
 }) {
   const [open, setOpen] = useState(false)
+  const [preview, setPreview] = useState(false)
   const router = useRouter()
   const { toast } = useToast()
   const handleSuccess = () => {
@@ -104,7 +108,11 @@ export function EditSheet({
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger>编辑</SheetTrigger>
-      <SheetContent className='flex w-[600px] flex-col sm:w-[800px] sm:max-w-max'>
+      <SheetContent
+        className={clsx('flex w-[600px] flex-col sm:w-[800px] sm:max-w-full', {
+          'sm:w-screen': preview,
+        })}
+      >
         <SheetHeader>
           <SheetTitle>编辑章节</SheetTitle>
           <SheetDescription>
@@ -115,7 +123,7 @@ export function EditSheet({
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleSubmit)}
-            className='flex h-full flex-col space-y-4'
+            className='flex flex-1 flex-col space-y-4 overflow-hidden'
           >
             <FormField
               control={form.control}
@@ -147,15 +155,47 @@ export function EditSheet({
               control={form.control}
               name='content'
               render={({ field }) => (
-                <FormItem className={'flex flex-1 flex-col'}>
+                <FormItem className={'flex flex-1 flex-col overflow-hidden'}>
                   <FormLabel>章节内容</FormLabel>
                   <FormControl>
-                    <Textarea
-                      placeholder='请输入章节内容'
-                      className='min-h-96 flex-1 leading-6 md:leading-6'
-                      {...field}
-                    />
+                    <div className={'relative flex flex-1 gap-8 overflow-hidden'}>
+                      <Textarea
+                        placeholder='请输入章节内容'
+                        className={clsx('h-full min-h-96 leading-6 md:leading-6', {
+                          'w-1/2': preview,
+                        })}
+                        {...field}
+                      />
+                      <div
+                        className='h-full min-h-96 flex-1 overflow-auto whitespace-pre-line rounded-lg border p-4 text-sm leading-6 md:leading-6'
+                        style={preview ? { display: 'block' } : { display: 'none' }}
+                      >
+                        {form
+                          .watch('content')
+                          .split('\n')
+                          .map((p: string, index: number) => {
+                            const key = p.slice(0, 5) + index
+                            return (
+                              <p className={'mb-2'} key={key}>
+                                {p}
+                              </p>
+                            )
+                          })}
+                      </div>
+                      <button
+                        type={'button'}
+                        className={
+                          'absolute top-4 right-4 z-10 inline-flex h-7 w-7 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-background font-medium text-foreground text-sm opacity-100 shadow-sm transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'
+                        }
+                        onClick={() => setPreview((prevState) => !prevState)}
+                      >
+                        <Guitar className={'pointer-events-none size-3.5 shrink-0'} />
+                      </button>
+                    </div>
                   </FormControl>
+                  <FormDescription>
+                    共记有 {getWordCount(form.watch('content') ?? '')} 字
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
