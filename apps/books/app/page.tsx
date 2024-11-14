@@ -2,7 +2,7 @@ import { BookCard } from '@/components/book-card'
 import prisma from '@/lib/prisma'
 import Image from 'next/image'
 
-export async function getBooks() {
+async function getBooks() {
   const books = await prisma.book.findMany()
 
   return {
