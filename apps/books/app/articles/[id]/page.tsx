@@ -38,7 +38,10 @@ export default async function Page({
   const articleId = (await params).id
   // 获取关联的文章
   const article = await getBookArticles(articleId)
-  const prevAndNextPage = await gerPrevAndNextPage(article.bookId, article?.order ?? 0)
+  if (!article) {
+    return null
+  }
+  const prevAndNextPage = await gerPrevAndNextPage(article?.bookId, article?.order ?? 0)
   console.log('prevAndNextPage', prevAndNextPage)
   return (
     <div className={'p-4 pt-0'}>

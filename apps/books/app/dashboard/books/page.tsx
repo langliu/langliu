@@ -1,10 +1,8 @@
-import { BookCard } from '@/components/book-card'
 import { Table, TableBody, TableCell, TableHeader, TableRow } from '@/components/ui/table'
 import prisma from '@/lib/prisma'
-import Image from 'next/image'
 import Link from 'next/link'
 
-export async function getBooks() {
+async function getBooks() {
   const books = await prisma.book.findMany()
 
   return {

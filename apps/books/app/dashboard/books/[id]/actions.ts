@@ -38,7 +38,7 @@ export async function getArticle(id: string) {
 export async function updateArticle(data: Record<string, string | number>) {
   return prisma.article.update({
     where: {
-      id: data.id,
+      id: data.id as string,
     },
     data: data,
   })
