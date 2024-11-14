@@ -1,6 +1,8 @@
 import { BookCard } from '@/components/book-card'
+import { Table, TableBody, TableCell, TableHeader, TableRow } from '@/components/ui/table'
 import prisma from '@/lib/prisma'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export async function getBooks() {
   const books = await prisma.book.findMany()
@@ -15,57 +17,34 @@ export default async function Home() {
   console.log(books)
 
   return (
-    <div className='grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20'>
-      <main className='row-start-2 flex flex-col gap-8 sm:items-start'>
-        <Image
-          className='dark:invert'
-          src='/next.svg'
-          alt='Next.js logo'
-          width={180}
-          height={38}
-          priority
-        />
-        <div>
+    <main className='row-start-2 flex flex-col gap-8 p-4 sm:items-start'>
+      <h1 className={'font-bold text-2xl'}>书籍管理</h1>
+      <Table className={'border'}>
+        <TableHeader>
+          <TableRow className={'font-bold'}>
+            <TableCell>书籍名称</TableCell>
+            <TableCell>字数</TableCell>
+            <TableCell>创建时间</TableCell>
+            <TableCell>更新时间</TableCell>
+            <TableCell className={'w-[120px]'}>操作</TableCell>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {books.map((book) => (
-            <BookCard
-              title={book.title}
-              description={book.introduction}
-              key={book.id}
-              id={book.id}
-              href={`/dashboard/books/${book.id}`}
-            />
+            <TableRow key={book.id}>
+              <TableCell>
+                <Link href={`/dashboard/books/${book.id}`}>{book.title}</Link>
+              </TableCell>
+              <TableCell>{book.wordCount}</TableCell>
+              <TableCell>{book.createdAt.toLocaleString()}</TableCell>
+              <TableCell>{book.updatedAt.toLocaleString()}</TableCell>
+              <TableCell className={'w-[120px]'}>
+                <span>编辑</span>
+              </TableCell>
+            </TableRow>
           ))}
-        </div>
-      </main>
-      <footer className='row-start-3 flex flex-wrap items-center justify-center gap-6'>
-        <a
-          className='flex items-center gap-2 hover:underline hover:underline-offset-4'
-          href='https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <Image aria-hidden src='/file.svg' alt='File icon' width={16} height={16} />
-          Learn
-        </a>
-        <a
-          className='flex items-center gap-2 hover:underline hover:underline-offset-4'
-          href='https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <Image aria-hidden src='/window.svg' alt='Window icon' width={16} height={16} />
-          Examples
-        </a>
-        <a
-          className='flex items-center gap-2 hover:underline hover:underline-offset-4'
-          href='https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <Image aria-hidden src='/globe.svg' alt='Globe icon' width={16} height={16} />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        </TableBody>
+      </Table>
+    </main>
   )
 }
