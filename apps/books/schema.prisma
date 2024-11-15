@@ -21,6 +21,7 @@ model Book {
   articles     Article[]
   categories   CategoriesOnBooks[]
   endStatus    Boolean             @default(false)
+  chapters     Int                 @default(0) // 书籍章节数目
 
   @@map("books")
 }

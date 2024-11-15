@@ -30,7 +30,8 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { getArticle, updateArticle } from './actions'
+import { getArticle, insertArticle, updateArticle } from './actions'
+import type { Article } from '@prisma/client'
 
 const formSchema = z.object({
   order: z.coerce
@@ -45,12 +46,16 @@ const formSchema = z.object({
 export function EditSheet({
   bookId,
   last,
+  type = 'edit',
 }: {
   bookId: string
   last?: number
+  /** 编辑还是创建 */
+  type?: 'edit' | 'create'
 }) {
   const [open, setOpen] = useState(false)
   const [preview, setPreview] = useState(false)
+  const [article, setArticle] = useState<Article | null>(null)
   const router = useRouter()
   const { toast } = useToast()
   const handleSuccess = () => {
@@ -70,11 +75,25 @@ export function EditSheet({
     async (values: z.infer<typeof formSchema>) => {
       console.log(values)
       try {
-        await updateArticle({
-          ...values,
-          id: bookId,
-          wordCount: getWordCount(values?.content),
-        })
+        if (type === 'create') {
+          await insertArticle({
+            ...values,
+            bookId,
+            wordCount: getWordCount(values?.content),
+          })
+          form.reset()
+          handleSuccess()
+        } else {
+          await updateArticle(
+            {
+              ...values,
+              id: bookId,
+              wordCount: getWordCount(values?.content),
+              bookId,
+            },
+            article?.wordCount ?? 0,
+          )
+        }
         form.reset()
         handleSuccess()
       } catch (error) {
@@ -92,38 +111,38 @@ export function EditSheet({
   )
 
   useEffect(() => {
-    if (open) {
+    if (open && type === 'edit') {
       getArticle(bookId)
         .then((res) => {
           form.setValue('title', res?.title ?? '')
           form.setValue('content', res?.content ?? '')
           form.setValue('order', res?.order ?? 0)
+          setArticle(res)
         })
         .catch((e) => {
           console.error(e)
         })
     }
-  }, [bookId, open, form])
+  }, [bookId, open, form, type])
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger>编辑</SheetTrigger>
+      <SheetTrigger>{type === 'edit' ? '编辑' : '新建'}</SheetTrigger>
       <SheetContent
         className={clsx('flex w-[600px] flex-col sm:w-[800px] sm:max-w-full', {
           'sm:w-screen': preview,
         })}
       >
         <SheetHeader>
-          <SheetTitle>编辑章节</SheetTitle>
+          <SheetTitle>{type === 'edit' ? '编辑章节' : '新建章节'}</SheetTitle>
           <SheetDescription>
-            This action cannot be undone. This will permanently delete your account and remove your
-            data from our servers.
+            请注意，新建或编辑章节后，您的内容将被保存并可能对其他读者可见。请确保您的内容符合相关法律法规和社区准则。如果您需要删除章节，请联系管理员。
           </SheetDescription>
         </SheetHeader>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleSubmit)}
-            className='flex flex-1 flex-col space-y-4 overflow-hidden'
+            className='flex flex-1 flex-col space-y-4 overflow-y-hidden px-0.5'
           >
             <FormField
               control={form.control}
@@ -155,10 +174,10 @@ export function EditSheet({
               control={form.control}
               name='content'
               render={({ field }) => (
-                <FormItem className={'flex flex-1 flex-col overflow-hidden'}>
+                <FormItem className={'flex flex-1 flex-col overflow-y-hidden'}>
                   <FormLabel>章节内容</FormLabel>
                   <FormControl>
-                    <div className={'relative flex flex-1 gap-8 overflow-hidden'}>
+                    <div className={'relative flex flex-1 gap-8 overflow-y-hidden p-0.5'}>
                       <Textarea
                         placeholder='请输入章节内容'
                         className={clsx('h-full min-h-96 leading-6 md:leading-6', {

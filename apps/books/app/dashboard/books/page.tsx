@@ -21,10 +21,11 @@ export default async function Home() {
         <TableHeader>
           <TableRow className={'font-bold'}>
             <TableCell>书籍名称</TableCell>
+            <TableCell>章节数</TableCell>
             <TableCell>字数</TableCell>
             <TableCell>创建时间</TableCell>
             <TableCell>更新时间</TableCell>
-            <TableCell className={'w-[120px]'}>操作</TableCell>
+            <TableCell className={'w-[80px]'}>操作</TableCell>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -33,10 +34,11 @@ export default async function Home() {
               <TableCell>
                 <Link href={`/dashboard/books/${book.id}`}>{book.title}</Link>
               </TableCell>
+              <TableCell>{book.chapters}</TableCell>
               <TableCell>{book.wordCount}</TableCell>
               <TableCell>{book.createdAt.toLocaleString()}</TableCell>
               <TableCell>{book.updatedAt.toLocaleString()}</TableCell>
-              <TableCell className={'w-[120px]'}>
+              <TableCell className={'w-[80px]'}>
                 <span>编辑</span>
               </TableCell>
             </TableRow>

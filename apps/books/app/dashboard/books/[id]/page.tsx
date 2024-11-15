@@ -1,6 +1,5 @@
 import { Table, TableBody, TableCell, TableHeader, TableRow } from '@/components/ui/table'
 import prisma from '@/lib/prisma'
-import { CreateSheet } from './create-sheet'
 import { EditSheet } from './edit-sheet'
 
 function getBookArticles(bookId: string) {
@@ -43,7 +42,7 @@ export default async function BookDetailPage({
     <div className={'w-full p-4'}>
       <div className={'flex items-center justify-between'}>
         <h1 className={'mb-4 text-2xl'}>{book?.title}</h1>
-        <CreateSheet bookId={bookId} />
+        <EditSheet type={'create'} bookId={bookId} />
       </div>
       <Table className={'border'}>
         <TableHeader>

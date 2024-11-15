@@ -1,20 +1,41 @@
 'use server'
+import { getBook } from '@/actions/books'
 import prisma from '@/lib/prisma'
-import { getWordCount } from '@/lib/utils'
 
-export async function insertArticle(params: {
+type InsertArticleParams = {
   bookId: string
-  content: string
   title: string
-  serial: number
-}) {
+  content: string
+  order: number
+  wordCount: number
+}
+
+type UpdateArticleParams = InsertArticleParams & {
+  id: string
+}
+
+export async function insertArticle(params: InsertArticleParams) {
+  const book = await getBook(params.bookId)
+  console.log('book', book)
+  if (!book) {
+    throw new Error('书籍不存在')
+  }
+  await prisma.book.update({
+    where: {
+      id: params.bookId,
+    },
+    data: {
+      wordCount: book.wordCount + params.wordCount,
+      chapters: book.chapters + 1,
+    },
+  })
   return prisma.article.create({
     data: {
       title: params.title,
       bookId: params.bookId,
       content: params.content,
-      order: params.serial,
-      wordCount: getWordCount(params.content),
+      order: params.order,
+      wordCount: params.wordCount,
     },
   })
 }
@@ -34,8 +55,21 @@ export async function getArticle(id: string) {
 /**
  * 获取章节详情
  * @param data 章节ID
+ * @param prevWordCount 修改之前的章节字数
  */
-export async function updateArticle(data: Record<string, string | number>) {
+export async function updateArticle(data: UpdateArticleParams, prevWordCount: number) {
+  const book = await getBook(data.bookId)
+  if (!book) {
+    throw new Error('书籍不存在')
+  }
+  await prisma.book.update({
+    where: {
+      id: data.bookId,
+    },
+    data: {
+      wordCount: book.wordCount + (data.wordCount - prevWordCount),
+    },
+  })
   return prisma.article.update({
     where: {
       id: data.id as string,
