@@ -63,7 +63,6 @@ export function CreateSheet({
 
   const { run: handleSubmit } = useDebounceFn(
     async (values: z.infer<typeof formSchema>) => {
-      console.log(values)
       try {
         await insertArticle({
           ...values,
@@ -72,7 +71,6 @@ export function CreateSheet({
         form.reset()
         handleSuccess()
       } catch (error) {
-        console.error(error)
         toast({
           title: '新建失败',
           description: (error as Error)?.message ?? '',
