@@ -77,7 +77,7 @@ export function EditSheet({
     defaultValues: {
       title: '',
       content: '',
-      order: last,
+      order: last ?? 1,
     },
   })
 

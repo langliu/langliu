@@ -3,6 +3,7 @@ import { Table, TableBody, TableCell, TableHeader, TableRow } from '@/components
 import prisma from '@/lib/prisma'
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { EditSheet } from './edit-sheet'
 
 export const metadata: Metadata = {
   title: '书籍管理',
@@ -12,14 +13,16 @@ export const dynamic = 'force-dynamic'
 
 async function getBooks() {
   const books = await prisma.book.findMany()
+  const authors = await prisma.author.findMany()
 
   return {
     books,
+    authors,
   }
 }
 
 export default async function Home() {
-  const { books } = await getBooks()
+  const { books, authors } = await getBooks()
   console.log(books)
   const breadcrumbList = [
     {
@@ -30,9 +33,10 @@ export default async function Home() {
       title: '书籍列表',
     },
   ]
+
   return (
     <>
-      <NavBreadcrumb breadcrumbList={breadcrumbList} />
+      <NavBreadcrumb breadcrumbList={breadcrumbList} addonAfter={<EditSheet authors={authors} />} />
       <main className='row-start-2 flex flex-col gap-8 p-4 pt-0 sm:items-start'>
         <Table className={'border'}>
           <TableHeader>
@@ -56,7 +60,7 @@ export default async function Home() {
                 <TableCell>{book.createdAt.toLocaleString()}</TableCell>
                 <TableCell>{book.updatedAt.toLocaleString()}</TableCell>
                 <TableCell className={'w-[80px]'}>
-                  <span>编辑</span>
+                  <EditSheet book={book} authors={authors} />
                 </TableCell>
               </TableRow>
             ))}

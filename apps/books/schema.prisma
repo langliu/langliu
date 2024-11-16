@@ -17,7 +17,7 @@ model Book {
   updatedAt    DateTime            @updatedAt @map(name: "updated_at")
   author       Author?             @relation(fields: [authorId], references: [id])
   authorId     String?
-  wordCount    Int                 @map(name: "word_count")
+  wordCount    Int?                 @map(name: "word_count") @default(0)
   articles     Article[]
   categories   CategoriesOnBooks[]
   endStatus    Boolean             @default(false)
