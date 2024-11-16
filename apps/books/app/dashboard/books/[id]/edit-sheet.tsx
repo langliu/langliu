@@ -23,15 +23,15 @@ import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/hooks/use-toast'
 import { getWordCount } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
+import type { Article } from '@prisma/client'
 import { useDebounceFn } from 'ahooks'
 import { clsx } from 'clsx'
 import { Guitar } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { type ReactNode, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { getArticle, insertArticle, updateArticle } from './actions'
-import type { Article } from '@prisma/client'
 
 const formSchema = z.object({
   order: z.coerce
@@ -47,11 +47,15 @@ export function EditSheet({
   bookId,
   last,
   type = 'edit',
+  customTrigger,
+  onOpenChange,
 }: {
   bookId: string
   last?: number
   /** 编辑还是创建 */
   type?: 'edit' | 'create'
+  customTrigger?: ReactNode
+  onOpenChange?: (open: boolean) => void
 }) {
   const [open, setOpen] = useState(false)
   const [preview, setPreview] = useState(false)
@@ -127,7 +131,9 @@ export function EditSheet({
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger>{type === 'edit' ? '编辑' : '新建'}</SheetTrigger>
+      <SheetTrigger className={'w-full'}>
+        {customTrigger ? customTrigger : type === 'edit' ? '编辑' : '新建'}
+      </SheetTrigger>
       <SheetContent
         className={clsx('flex w-[600px] flex-col sm:w-[800px] sm:max-w-full', {
           'sm:w-screen': preview,
