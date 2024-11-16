@@ -67,7 +67,7 @@ export default async function BookDetailPage({
                 <TableCell>{bookArticle.title}</TableCell>
                 <TableCell>{bookArticle.wordCount}</TableCell>
                 <TableCell className={'flex w-[150px] gap-2'}>
-                  <EditSheet bookId={bookArticle.id} />
+                  <EditSheet id={bookArticle.id} bookId={bookId} />
                 </TableCell>
               </TableRow>
             ))}

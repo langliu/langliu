@@ -45,12 +45,14 @@ const formSchema = z.object({
 
 export function EditSheet({
   bookId,
+  id,
   last,
   type = 'edit',
   customTrigger,
-  onOpenChange,
 }: {
   bookId: string
+  /** 文章ID */
+  id?: string
   last?: number
   /** 编辑还是创建 */
   type?: 'edit' | 'create'
@@ -91,7 +93,7 @@ export function EditSheet({
           await updateArticle(
             {
               ...values,
-              id: bookId,
+              id: id,
               wordCount: getWordCount(values?.content),
               bookId,
             },
@@ -116,7 +118,7 @@ export function EditSheet({
 
   useEffect(() => {
     if (open && type === 'edit') {
-      getArticle(bookId)
+      getArticle(id)
         .then((res) => {
           form.setValue('title', res?.title ?? '')
           form.setValue('content', res?.content ?? '')
@@ -127,7 +129,7 @@ export function EditSheet({
           console.error(e)
         })
     }
-  }, [bookId, open, form, type])
+  }, [id, open, form, type])
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>

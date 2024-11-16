@@ -72,7 +72,7 @@ export async function updateArticle(data: UpdateArticleParams, prevWordCount: nu
   })
   return prisma.article.update({
     where: {
-      id: data.id as string,
+      id: data.id,
     },
     data: data,
   })
