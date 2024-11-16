@@ -25,7 +25,7 @@ export async function insertArticle(params: InsertArticleParams) {
       id: params.bookId,
     },
     data: {
-      wordCount: book.wordCount + params.wordCount,
+      wordCount: (book.wordCount ?? 0) + params.wordCount,
       chapters: book.chapters + 1,
     },
   })
@@ -67,7 +67,7 @@ export async function updateArticle(data: UpdateArticleParams, prevWordCount: nu
       id: data.bookId,
     },
     data: {
-      wordCount: book.wordCount + (data.wordCount - prevWordCount),
+      wordCount: (book?.wordCount ?? 0) + (data.wordCount - prevWordCount),
     },
   })
   return prisma.article.update({

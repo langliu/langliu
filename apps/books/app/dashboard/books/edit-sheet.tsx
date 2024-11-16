@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Select } from '@/components/ui/select'
+import { SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import {
   Sheet,
   SheetContent,
@@ -20,6 +21,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet'
+import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/hooks/use-toast'
 import { getWordCount } from '@/lib/utils'
@@ -27,16 +29,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import type { Author, Book } from '@prisma/client'
 import { useDebounceFn } from 'ahooks'
 import { clsx } from 'clsx'
-import {
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from 'i18n-json-translate/components/ui/select'
 import { useRouter } from 'next/navigation'
 import { type ReactNode, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Switch } from 'web/components/ui/switch'
 import { z } from 'zod'
 import { insertBook, updateBook } from './actions'
 
