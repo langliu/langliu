@@ -43,22 +43,26 @@ const formSchema = z.object({
   content: z.string({ required_error: '请输入章节内容' }).min(1, '请输入章节内容'),
 })
 
+export type CreateSheetProps = {
+  bookId: string
+  id?: string
+  last?: number
+  type?: 'edit' | 'create'
+  customTrigger?: ReactNode
+  onOpenChange?: (open: boolean) => void
+}
+
+export type EditSheetProps = CreateSheetProps & {
+  id: string
+}
+
 export function EditSheet({
   bookId,
   id,
   last,
   type = 'edit',
   customTrigger,
-}: {
-  bookId: string
-  /** 文章ID */
-  id?: string
-  last?: number
-  /** 编辑还是创建 */
-  type?: 'edit' | 'create'
-  customTrigger?: ReactNode
-  onOpenChange?: (open: boolean) => void
-}) {
+}: CreateSheetProps | EditSheetProps) {
   const [open, setOpen] = useState(false)
   const [preview, setPreview] = useState(false)
   const [article, setArticle] = useState<Article | null>(null)
@@ -89,7 +93,7 @@ export function EditSheet({
           })
           form.reset()
           handleSuccess()
-        } else {
+        } else if (id) {
           await updateArticle(
             {
               ...values,
@@ -117,7 +121,7 @@ export function EditSheet({
   )
 
   useEffect(() => {
-    if (open && type === 'edit') {
+    if (open && id && type === 'edit') {
       getArticle(id)
         .then((res) => {
           form.setValue('title', res?.title ?? '')
