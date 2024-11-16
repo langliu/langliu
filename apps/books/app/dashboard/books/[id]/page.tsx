@@ -2,7 +2,12 @@ import { NavActions } from '@/app/dashboard/books/[id]/anv-actions'
 import { NavBreadcrumb } from '@/components/nav-breadcrumb'
 import { Table, TableBody, TableCell, TableHeader, TableRow } from '@/components/ui/table'
 import prisma from '@/lib/prisma'
+import type { Metadata } from 'next'
 import { EditSheet } from './edit-sheet'
+
+export const metadata: Metadata = {
+  title: '书籍详情',
+}
 
 function getBookArticles(bookId: string) {
   // 使用 bookId 过滤 article

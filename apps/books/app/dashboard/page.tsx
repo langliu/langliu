@@ -1,4 +1,9 @@
 import { NavBreadcrumb } from '@/components/nav-breadcrumb'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: '管理端',
+}
 
 export default function Page() {
   return (

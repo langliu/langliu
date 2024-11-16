@@ -1,7 +1,14 @@
 import { NavBreadcrumb } from '@/components/nav-breadcrumb'
 import { Table, TableBody, TableCell, TableHeader, TableRow } from '@/components/ui/table'
 import prisma from '@/lib/prisma'
+import type { Metadata } from 'next'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: '书籍管理',
+}
+
+export const dynamic = 'force-dynamic'
 
 async function getBooks() {
   const books = await prisma.book.findMany()
