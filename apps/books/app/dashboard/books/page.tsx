@@ -2,6 +2,7 @@ import { NavBreadcrumb } from '@/components/nav-breadcrumb'
 import { Table, TableBody, TableCell, TableHeader, TableRow } from '@/components/ui/table'
 import prisma from '@/lib/prisma'
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { EditSheet } from './edit-sheet'
 
@@ -36,11 +37,15 @@ export default async function Home() {
 
   return (
     <>
-      <NavBreadcrumb breadcrumbList={breadcrumbList} addonAfter={<EditSheet authors={authors} />} />
+      <NavBreadcrumb
+        breadcrumbList={breadcrumbList}
+        addonAfter={<Link href={'/dashboard/books/create'}>Create</Link>}
+      />
       <main className='row-start-2 flex flex-col gap-8 p-4 pt-0 sm:items-start'>
         <Table className={'border'}>
           <TableHeader>
             <TableRow className={'font-bold'}>
+              <TableCell>书籍封面</TableCell>
               <TableCell>书籍名称</TableCell>
               <TableCell>章节数</TableCell>
               <TableCell>字数</TableCell>
@@ -52,6 +57,9 @@ export default async function Home() {
           <TableBody>
             {books.map((book) => (
               <TableRow key={book.id}>
+                <TableCell>
+                  <Image src={book.cover} alt={book.title} width={90} height={160} />
+                </TableCell>
                 <TableCell>
                   <Link href={`/dashboard/books/${book.id}`}>{book.title}</Link>
                 </TableCell>

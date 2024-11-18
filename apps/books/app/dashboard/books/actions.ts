@@ -2,11 +2,15 @@
 import prisma from '@/lib/prisma'
 import type { Book } from '@prisma/client'
 
-export async function insertBook(data: Pick<Book, 'title' | 'introduction' | 'endStatus'>) {
+export async function insertBook(
+  data: Pick<Book, 'title' | 'introduction' | 'endStatus' | 'cover' | 'authorId'>,
+) {
+  const { authorId, ...rest } = data
   return prisma.book.create({
     data: {
-      ...data,
+      ...rest,
       wordCount: 0,
+      authorId: data.authorId,
     },
   })
 }

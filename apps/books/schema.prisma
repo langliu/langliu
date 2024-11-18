@@ -11,13 +11,14 @@ datasource db {
 model Book {
   id           String              @id @default(uuid())
   title        String              @db.VarChar(255)
+  cover        String?             @db.Text // 书籍封面
   introduction String              @db.Text
   published    Boolean             @default(false)
   createdAt    DateTime            @default(now()) @map(name: "created_at")
   updatedAt    DateTime            @updatedAt @map(name: "updated_at")
   author       Author?             @relation(fields: [authorId], references: [id])
   authorId     String?
-  wordCount    Int?                 @map(name: "word_count") @default(0)
+  wordCount    Int?                @default(0) @map(name: "word_count")
   articles     Article[]
   categories   CategoriesOnBooks[]
   endStatus    Boolean             @default(false)
