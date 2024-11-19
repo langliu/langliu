@@ -63,7 +63,7 @@ export default async function AuthorsPage() {
                 <TableCell>{book.createdAt.toLocaleString()}</TableCell>
                 <TableCell>{book.updatedAt.toLocaleString()}</TableCell>
                 <TableCell className={'w-[80px]'}>
-                  {/*<EditSheet book={book} authors={authors} />*/}
+                  <Link href={`/dashboard/authors/${book.id}`}>编辑</Link>
                 </TableCell>
               </TableRow>
             ))}

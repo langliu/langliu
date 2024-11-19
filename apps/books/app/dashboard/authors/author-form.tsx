@@ -11,24 +11,35 @@ import {
 import { Input } from '@/components/ui/input'
 import { SheetFooter } from '@/components/ui/sheet'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 const AuthorFormSchema = z.object({
   name: z.string({ required_error: '请输入作家名称' }).min(1, '请输入作家名称'),
+  email: z.string().nullable(),
 })
 
 interface AuthorFormProps {
   onSubmit: (form: z.infer<typeof AuthorFormSchema>) => void
+  values?: z.infer<typeof AuthorFormSchema> | null
 }
 
-export default function AuthorForm({ onSubmit }: AuthorFormProps) {
+export default function AuthorForm({ onSubmit, values }: AuthorFormProps) {
   const form = useForm<z.infer<typeof AuthorFormSchema>>({
     resolver: zodResolver(AuthorFormSchema),
     defaultValues: {
       name: '',
+      email: null,
     },
   })
+
+  useEffect(() => {
+    if (values) {
+      form.setValue('name', values.name)
+      form.setValue('email', values.email)
+    }
+  }, [form, values])
 
   return (
     <Form {...form}>
