@@ -1,4 +1,5 @@
 'use client'
+import ImageUploader from '@/components/image-uploader'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -40,6 +41,7 @@ const formSchema = z.object({
   introduction: z.string({ required_error: '请输入书籍简介' }).min(1, '请输入书籍简介'),
   authorId: z.string().nullable(),
   endStatus: z.boolean(),
+  cover: z.string().nullable(),
 })
 
 export type CreateSheetProps = {
@@ -99,6 +101,7 @@ export function EditSheet({ book, customTrigger, authors = [] }: CreateSheetProp
       form.setValue('introduction', book?.introduction ?? '')
       form.setValue('endStatus', book?.endStatus ?? false)
       form.setValue('authorId', book?.authorId ?? null)
+      form.setValue('cover', book?.cover ?? null)
     }
   }, [form, book])
 
@@ -127,6 +130,19 @@ export function EditSheet({ book, customTrigger, authors = [] }: CreateSheetProp
                   <FormLabel>书籍名称</FormLabel>
                   <FormControl>
                     <Input placeholder='请输入书籍名称' {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name='cover'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>书籍封面</FormLabel>
+                  <FormControl>
+                    <ImageUploader {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

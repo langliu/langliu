@@ -46,8 +46,8 @@ const data = {
           url: '/dashboard/books',
         },
         {
-          title: 'Starred',
-          url: '#',
+          title: '作者列表',
+          url: '/dashboard/authors',
         },
         {
           title: 'Settings',
