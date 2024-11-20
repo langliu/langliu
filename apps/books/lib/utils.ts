@@ -14,3 +14,15 @@ export function cn(...inputs: ClassValue[]) {
 export function getWordCount(inputs: string) {
   return Array.from(inputs).filter((text) => !['\n', ' '].includes(text)).length
 }
+
+export function dateFormat(date: Date) {
+  const intl = new Intl.DateTimeFormat('zh-CN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+  })
+  return intl.format(date)
+}

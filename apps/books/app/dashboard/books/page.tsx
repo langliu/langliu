@@ -1,6 +1,9 @@
 import { NavBreadcrumb } from '@/components/nav-breadcrumb'
+import { Button } from '@/components/ui/button'
 import { Table, TableBody, TableCell, TableHeader, TableRow } from '@/components/ui/table'
 import prisma from '@/lib/prisma'
+import { dateFormat } from '@/lib/utils'
+import { PlusCircle } from 'lucide-react'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -24,7 +27,6 @@ async function getBooks() {
 
 export default async function Home() {
   const { books, authors } = await getBooks()
-  console.log(books)
   const breadcrumbList = [
     {
       title: '书籍管理',
@@ -39,7 +41,14 @@ export default async function Home() {
     <>
       <NavBreadcrumb
         breadcrumbList={breadcrumbList}
-        addonAfter={<Link href={'/dashboard/books/create'}>Create</Link>}
+        addonAfter={
+          <Link href={'/dashboard/books/create'}>
+            <Button variant={'outline'}>
+              <PlusCircle />
+              新建书籍
+            </Button>
+          </Link>
+        }
       />
       <main className='row-start-2 flex flex-col gap-8 p-4 pt-0 sm:items-start'>
         <Table className={'border'}>
@@ -67,8 +76,8 @@ export default async function Home() {
                 </TableCell>
                 <TableCell>{book.chapters}</TableCell>
                 <TableCell>{book.wordCount}</TableCell>
-                <TableCell>{book.createdAt.toLocaleString()}</TableCell>
-                <TableCell>{book.updatedAt.toLocaleString()}</TableCell>
+                <TableCell>{dateFormat(book.createdAt)}</TableCell>
+                <TableCell>{dateFormat(book.updatedAt)}</TableCell>
                 <TableCell className={'w-[80px]'}>
                   <EditSheet book={book} authors={authors} />
                 </TableCell>

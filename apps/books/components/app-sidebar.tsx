@@ -50,8 +50,8 @@ const data = {
           url: '/dashboard/authors',
         },
         {
-          title: 'Settings',
-          url: '#',
+          title: '标签管理',
+          url: '/dashboard/categories',
         },
       ],
     },
