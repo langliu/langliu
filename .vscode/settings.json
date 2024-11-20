@@ -15,7 +15,8 @@
     "rehype",
     "supabase",
     "tailwindcss",
-    "tanstack"
+    "tanstack",
+    "turbopack"
   ],
   "[javascript]": {
     "editor.defaultFormatter": "biomejs.biome"
