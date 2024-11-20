@@ -23,13 +23,12 @@ export default function DashboardBookCreatePage() {
     },
   ]
 
-  function handleSubmit(author: Pick<Author, 'name'>) {
+  function handleSubmit(author: Pick<Author, 'name' | 'email'>) {
     createAuthor(author)
       .then(() => {
         toast({
           title: '创建成功',
           description: '创建作家成功',
-          status: 'success',
         })
         router.back()
       })

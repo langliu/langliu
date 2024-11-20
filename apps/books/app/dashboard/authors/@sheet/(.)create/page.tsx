@@ -1,5 +1,5 @@
 'use client'
-import { createAuthor, getAuthors } from '@/actions/authors'
+import { createAuthor } from '@/actions/authors'
 import AuthorForm from '@/app/dashboard/authors/author-form'
 import {
   Sheet,
@@ -23,7 +23,7 @@ export default function EditSheet() {
     }
   }
 
-  function handleSubmit(author: Author) {
+  function handleSubmit(author: Pick<Author, 'name' | 'email'>) {
     createAuthor(author)
       .then(() => {
         toast({
