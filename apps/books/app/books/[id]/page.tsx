@@ -31,6 +31,9 @@ export default async function Page({
   const bookId = (await params).id
   // 获取关联的文章
   const book = await getBookArticles(bookId)
+  if (!book) {
+    return null
+  }
   return (
     <div className={'p-4 pb-10'}>
       <div className={'mb-4 flex gap-3'}>
