@@ -9,7 +9,9 @@ interface BookCardProps {
 export function BookCard({ book }: BookCardProps) {
   return (
     <Link href={`/books/${book.id}`} className={'flex gap-3'}>
-      <Image alt={book.title} src={book.cover} width={90} height={160} className={'rounded'} />
+      {book.cover && (
+        <Image alt={book.title} src={book.cover} width={90} height={160} className={'rounded'} />
+      )}
       <div className={'flex-1'}>
         <h3 className={'mb-3 font-medium text-base'}>{book.title}</h3>
         <p className={'line-clamp-2 overflow-hidden text-ellipsis text-muted-foreground text-sm'}>

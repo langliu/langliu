@@ -37,7 +37,9 @@ export default async function Page({
   return (
     <div className={'p-4 pb-10'}>
       <div className={'mb-4 flex gap-3'}>
-        <Image alt={book.title} src={book.cover} width={80} height={160} className={'rounded'} />
+        {book.cover && (
+          <Image alt={book.title} src={book.cover} width={80} height={160} className={'rounded'} />
+        )}
         <div className={'flex-1'}>
           <h3 className={'mb-2 font-medium text-base'}>{book.title}</h3>
           <p className={'line-clamp-2 overflow-hidden text-ellipsis text-muted-foreground text-sm'}>
