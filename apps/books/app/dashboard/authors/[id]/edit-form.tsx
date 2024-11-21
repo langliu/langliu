@@ -3,18 +3,18 @@
 import { updateAuthor } from '@/actions/authors'
 import AuthorForm from '@/app/dashboard/authors/author-form'
 import { useToast } from '@/hooks/use-toast'
-import type { Author, Category } from '@prisma/client'
+import type { Author } from '@prisma/client'
 import { useRouter } from 'next/navigation'
 
 interface EditFormProps {
-  value: Category | null
+  value: Author | null
 }
 
 export function EditForm({ value }: EditFormProps) {
   const router = useRouter()
   const { toast } = useToast()
 
-  function handleSubmit(author: Pick<Category, 'name'>) {
+  function handleSubmit(author: Pick<Author, 'name' | 'email'>) {
     if (!value) {
       return
     }

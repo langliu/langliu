@@ -82,8 +82,7 @@ export function EditSheet({
   })
 
   const { run: handleSubmit } = useDebounceFn(
-    async (values: z.infer<typeof formSchema>) => {
-      console.log(values)
+    async (values: z.infer<typeof formSchema>, close = true) => {
       try {
         if (type === 'create') {
           await insertArticle({
@@ -91,8 +90,14 @@ export function EditSheet({
             bookId,
             wordCount: getWordCount(values?.content),
           })
-          form.reset()
-          handleSuccess()
+          if (close) {
+            form.reset()
+            handleSuccess()
+          } else {
+            form.setValue('title', '')
+            form.setValue('content', '')
+            form.setValue('order', Number.parseInt(form.getValues('order')) + 1)
+          }
         } else if (id) {
           await updateArticle(
             {
@@ -104,8 +109,10 @@ export function EditSheet({
             article?.wordCount ?? 0,
           )
         }
-        form.reset()
-        handleSuccess()
+        if (close) {
+          form.reset()
+          handleSuccess()
+        }
       } catch (error) {
         console.error(error)
         toast({
@@ -119,6 +126,11 @@ export function EditSheet({
       wait: 1000,
     },
   )
+
+  const submitAndContinue = () => {
+    const formData = form.getValues()
+    handleSubmit({ ...formData, order: Number.parseInt(formData.order) }, false)
+  }
 
   useEffect(() => {
     if (open && id && type === 'edit') {
@@ -234,6 +246,9 @@ export function EditSheet({
             <SheetFooter>
               <Button type='submit' className='px-8'>
                 提交
+              </Button>
+              <Button type='button' className='px-8' onClick={submitAndContinue}>
+                提交并继续
               </Button>
             </SheetFooter>
           </form>

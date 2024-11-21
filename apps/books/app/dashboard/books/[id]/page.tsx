@@ -9,28 +9,23 @@ export const metadata: Metadata = {
   title: '书籍详情',
 }
 
-function getBookArticles(bookId: string) {
-  // 使用 bookId 过滤 article
-  return prisma.article.findMany({
-    where: {
-      bookId: bookId,
-    },
-    orderBy: {
-      order: 'desc',
-    },
-    select: {
-      id: true,
-      title: true,
-      order: true,
-      wordCount: true,
-    },
-  })
-}
-
 function getBookDetail(bookId: string) {
   return prisma.book.findUnique({
     where: {
       id: bookId,
+    },
+    include: {
+      articles: {
+        orderBy: {
+          order: 'desc',
+        },
+        select: {
+          id: true,
+          title: true,
+          order: true,
+          wordCount: true,
+        },
+      },
     },
   })
 }
@@ -42,9 +37,8 @@ export default async function BookDetailPage({
 }) {
   const bookId = (await params).id
   // 获取关联的文章
-  const bookArticles = await getBookArticles(bookId)
   const book = await getBookDetail(bookId)
-  console.log(bookArticles)
+  console.log(book.chapters)
   return (
     <>
       <NavBreadcrumb
@@ -53,7 +47,7 @@ export default async function BookDetailPage({
           { title: '书籍列表', href: '/dashboard/books' },
           { title: book?.title ?? '' },
         ]}
-        addonAfter={<NavActions bookId={bookId} />}
+        addonAfter={<NavActions bookId={bookId} chapters={book.chapters} />}
       />
       <div className={'w-full p-4 pt-0'}>
         <Table className={'border'}>
@@ -66,7 +60,7 @@ export default async function BookDetailPage({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {bookArticles?.map((bookArticle) => (
+            {book.articles?.map((bookArticle) => (
               <TableRow key={bookArticle.id}>
                 <TableCell>{bookArticle.order}</TableCell>
                 <TableCell>{bookArticle.title}</TableCell>

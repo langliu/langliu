@@ -1,25 +1,21 @@
-import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import type { Book } from '@prisma/client'
+import Image from 'next/image'
 import Link from 'web/components/Link'
 
 interface BookCardProps {
-  title: string
-  description: string
-  href: string
+  book: Book
 }
 
-export function BookCard({ title, description, href }: BookCardProps) {
+export function BookCard({ book }: BookCardProps) {
   return (
-    <Link href={href}>
-      <Card
-        className={'hover:-translate-y-0.5 max-w-[1200px] cursor-pointer hover:translate-x-0.5'}
-      >
-        <CardHeader>
-          <CardTitle>{title}</CardTitle>
-          <CardDescription className={'line-clamp-2 overflow-hidden text-ellipsis'}>
-            {description}
-          </CardDescription>
-        </CardHeader>
-      </Card>
+    <Link href={`/books/${book.id}`} className={'flex gap-3'}>
+      <Image alt={book.title} src={book.cover} width={90} height={160} className={'rounded'} />
+      <div className={'flex-1'}>
+        <h3 className={'mb-3 font-medium text-base'}>{book.title}</h3>
+        <p className={'line-clamp-2 overflow-hidden text-ellipsis text-muted-foreground text-sm'}>
+          {book.introduction}
+        </p>
+      </div>
     </Link>
   )
 }

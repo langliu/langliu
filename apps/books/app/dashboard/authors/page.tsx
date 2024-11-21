@@ -2,6 +2,7 @@ import { NavBreadcrumb } from '@/components/nav-breadcrumb'
 import { Button } from '@/components/ui/button'
 import { Table, TableBody, TableCell, TableHeader, TableRow } from '@/components/ui/table'
 import prisma from '@/lib/prisma'
+import { dateFormat } from '@/lib/utils'
 import { PlusCircle } from 'lucide-react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
@@ -59,8 +60,8 @@ export default async function AuthorsPage() {
             {authors.map((book) => (
               <TableRow key={book.id}>
                 <TableCell>{book.name}</TableCell>
-                <TableCell>{book.createdAt.toLocaleString()}</TableCell>
-                <TableCell>{book.updatedAt.toLocaleString()}</TableCell>
+                <TableCell>{dateFormat(book.createdAt)}</TableCell>
+                <TableCell>{dateFormat(book.updatedAt)}</TableCell>
                 <TableCell className={'w-[80px]'}>
                   <Link href={`/dashboard/authors/${book.id}`}>编辑</Link>
                 </TableCell>
