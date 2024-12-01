@@ -10,12 +10,14 @@ export default function ResourceCard({
   description,
   tags,
   href,
+  icon,
 }: {
   /** 资源标题 */
   title: string
   description: string
   tags: string[]
   href: string
+  icon?: string
 }) {
   return (
     <Link
@@ -29,14 +31,14 @@ export default function ResourceCard({
         }
       >
         <Image
-          src={`${href}favicon.ico`}
+          src={icon || `${href}favicon.ico`}
           alt={'favicon'}
           width={50}
           height={50}
           className={'pl-4'}
         />
         <div>
-          <CardHeader className={'pb-1.5'}>
+          <CardHeader className={'pt-4 pb-1.5'}>
             <CardTitle className={'text-xl'}>{title}</CardTitle>
           </CardHeader>
           <CardContent className={'flex gap-2 pb-1.5'}>
@@ -44,7 +46,7 @@ export default function ResourceCard({
               <Badge key={tag}>{tag}</Badge>
             ))}
           </CardContent>
-          <CardFooter>
+          <CardFooter className={'pb-4'}>
             <p className={'text-gray-600'}>{description}</p>
           </CardFooter>
         </div>
