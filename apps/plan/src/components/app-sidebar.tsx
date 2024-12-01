@@ -9,7 +9,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
-import { Baby, Cloud, Command, Database, Map, Tv } from 'lucide-react'
+import { Baby, Cloud, Database, MapIcon, Tv } from 'lucide-react'
 import Link from 'next/link'
 
 const items = [
@@ -44,10 +44,10 @@ export function AppSidebar() {
             <SidebarMenuButton size='lg' asChild>
               <Link href='#'>
                 <div className='flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground'>
-                  <Map className='size-4' />
+                  <MapIcon className='size-4' />
                 </div>
                 <div className='grid flex-1 text-left text-sm leading-tight'>
-                  <span className='truncate font-semibold'>影视导航</span>
+                  <h1 className='truncate font-semibold'>影视导航</h1>
                   <span className='truncate text-xs'>Video Navigation</span>
                 </div>
               </Link>
