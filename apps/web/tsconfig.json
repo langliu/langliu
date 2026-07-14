@@ -18,7 +18,7 @@
         "name": "next"
       }
     ],
-    "types": ["jest", "node"],
+    "types": ["node"],
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["./components/*"],

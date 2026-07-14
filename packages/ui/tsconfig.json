@@ -21,7 +21,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "ES2022",
-    "types": ["jest", "node"],
+    "types": ["node"],
     "useDefineForClassFields": true
   },
   "exclude": ["dist", "build", "node_modules"],

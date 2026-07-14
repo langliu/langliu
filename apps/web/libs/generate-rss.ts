@@ -1,14 +1,14 @@
-import { escape } from '@/libs/utils/htmlEscaper'
+import type { PostFrontMatter } from 'types/PostFrontMatter'
 
 import siteMetadata from '@/data/siteMetadata'
-import { PostFrontMatter } from 'types/PostFrontMatter'
+import { escapeHtml } from '@/libs/utils/htmlEscaper'
 
 const generateRssItem = (post: PostFrontMatter) => `
   <item>
     <guid>${siteMetadata.siteUrl}/blog/${post.slug}</guid>
-    <title>${escape(post.title)}</title>
+    <title>${escapeHtml(post.title)}</title>
     <link>${siteMetadata.siteUrl}/blog/${post.slug}</link>
-    ${post.summary && `<description>${escape(post.summary)}</description>`}
+    ${post.summary && `<description>${escapeHtml(post.summary)}</description>`}
     <pubDate>${new Date(post.date).toUTCString()}</pubDate>
     <author>${siteMetadata.email} (${siteMetadata.author})</author>
     ${post.tags && post.tags.map((t) => `<category>${t}</category>`).join('')}
@@ -18,9 +18,9 @@ const generateRssItem = (post: PostFrontMatter) => `
 const generateRss = (posts: PostFrontMatter[], page = 'feed.xml') => `
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-      <title>${escape(siteMetadata.title)}</title>
+      <title>${escapeHtml(siteMetadata.title)}</title>
       <link>${siteMetadata.siteUrl}/blog</link>
-      <description>${escape(siteMetadata.description)}</description>
+      <description>${escapeHtml(siteMetadata.description)}</description>
       <language>${siteMetadata.language}</language>
       <managingEditor>${siteMetadata.email} (${siteMetadata.author})</managingEditor>
       <webMaster>${siteMetadata.email} (${siteMetadata.author})</webMaster>

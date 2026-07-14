@@ -22,12 +22,11 @@
 
 .chapterControl {
   height: 70px;
-  margin-bottom: 24px;
+  margin: 24px auto 0;
   text-align: center;
   border: 1px solid #d8d8d8;
   background-color: #f6f1e7;
   max-width: 800px;
-  margin: 24px auto 0;
   display: flex;
   align-items: center;
   justify-content: space-evenly;

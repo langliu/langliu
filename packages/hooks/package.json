@@ -5,13 +5,11 @@
   "types": "./src/index.ts",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint \"**/*.ts*\""
+    "lint": "biome lint . --files-ignore-unknown=true"
   },
   "devDependencies": {
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
-    "eslint": "^9.11.1",
-    "@langliu/eslint-config": "*",
     "typescript": "^5.6.2"
   },
   "peerDependencies": {

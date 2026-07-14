@@ -1,5 +1,11 @@
 'use client'
 
+import { zodResolver } from '@hookform/resolvers/zod'
+import { ArrowRightLeft, CircleArrowRight, Clipboard, Guitar } from 'lucide-react'
+import { useState } from 'react'
+import { useFormStatus } from 'react-dom'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 import {
   Form,
   FormControl,
@@ -12,12 +18,6 @@ import { Textarea } from '@/components/ui/textarea'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { useToast } from '@/hooks/use-toast'
 import { isJSONStr } from '@/utils'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { ArrowRightLeft, CircleArrowRight, Clipboard, Guitar } from 'lucide-react'
-import { useState } from 'react'
-import { useFormStatus } from 'react-dom'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 import { translation } from './actions'
 import { LanguageSelect } from './language-select'
 
@@ -34,9 +34,7 @@ const formSchema = z.object({
   from: z.string(),
   to: z.string(),
   input: z
-    .string({
-      required_error: '请输入JSON字符串',
-    })
+    .string({ error: '请输入JSON字符串' })
     .min(1, '请输入 JSON 字符串')
     .refine((val) => isJSONStr(val), '请输入正确的JSON字符串'),
 })

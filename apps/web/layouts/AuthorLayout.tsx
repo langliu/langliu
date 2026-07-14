@@ -40,7 +40,9 @@ export default function AuthorLayout({ children, frontMatter }: Props) {
               <SocialIcon kind='twitter' href={twitter} />
             </div>
           </div>
-          <div className='prose dark:prose-dark max-w-none pt-8 pb-8 xl:col-span-2'>{children}</div>
+          <div className='prose dark:prose-invert max-w-none pt-8 pb-8 xl:col-span-2'>
+            {children}
+          </div>
         </div>
       </div>
     </>

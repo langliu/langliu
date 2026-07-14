@@ -30,9 +30,12 @@
   "[json]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
-  "css.validate": false,
+  "[css]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "css.validate": true,
+  "css.lint.unknownAtRules": "ignore",
   "editor.codeActionsOnSave": {
-    "quickfix.biome": "explicit",
-    "source.fixAll.stylelint": "explicit"
+    "source.fixAll.biome": "explicit"
   }
 }

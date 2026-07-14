@@ -6,11 +6,27 @@
     "enabled": true,
     "clientKind": "git"
   },
+  "files": {
+    "includes": [
+      "**",
+      "!**/node_modules",
+      "!**/.next",
+      "!**/dist",
+      "!**/public/**/*.svg",
+      "!**/public/static"
+    ]
+  },
   "linter": {
     "enabled": true,
     "rules": {
       "preset": "recommended",
       "style": {},
+      "a11y": {
+        "noSvgWithoutTitle": "off"
+      },
+      "suspicious": {
+        "noUnknownAtRules": "off"
+      },
       "nursery": {
         "useSortedClasses": {
           "options": {

@@ -1,8 +1,3 @@
 {
-  "recommendations": [
-    "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint",
-    "firsttris.vscode-jest-runner",
-    "biomejs.biome"
-  ]
+  "recommendations": ["biomejs.biome"]
 }

@@ -6,12 +6,13 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "lint": "biome format \"**/*.ts*\"",
+    "lint": "biome lint . --files-ignore-unknown=true",
     "docs:dev": "rspress dev",
     "docs:build": "rspress build",
     "docs:preview": "rspress preview"
   },
   "devDependencies": {
+    "@types/node": "^26.1.1",
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
     "class-variance-authority": "^0.7.0",
