@@ -14,8 +14,7 @@
       "nursery": {
         "useSortedClasses": {
           "options": {
-            "attributes": ["className"],
-            "functions": ["cva", "clsx", "tw"]
+            "functions": ["cn", "cva", "clsx", "twMerge", "tw", "tw.*"]
           },
           "level": "warn"
         }

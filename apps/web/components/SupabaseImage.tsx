@@ -1,6 +1,6 @@
 'use server'
-import { createClient } from '@/libs/supabase/server'
 import Image from 'next/image'
+import { createClient } from '@/libs/supabase/server'
 import CldImage from './CldImage'
 
 export interface SupabaseImageProps {
@@ -16,7 +16,7 @@ export default async function SupabaseImage({ alt, src }: SupabaseImageProps) {
   const { data, error } = await supabase.storage.from('langliu').createSignedUrl(src ?? '', 60)
   if (data?.signedUrl) {
     return (
-      <Image src={data?.signedUrl} className="mr-2 rounded" width={200} height={300} alt={alt} />
+      <Image src={data?.signedUrl} className='mr-2 rounded' width={200} height={300} alt={alt} />
     )
   }
   return null

@@ -1,10 +1,27 @@
 'use client'
+import { useState } from 'react'
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable'
 import { Separator } from '@/components/ui/separator'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { cn } from '@/libs/utils'
 import SideNav from '@/ui/dashboard/sidenav'
-import { useState } from 'react'
+
+type CookieStoreApi = {
+  set(options: { name: string; value: string; path: string }): Promise<void>
+}
+
+function savePanelCookie(name: string, value: unknown) {
+  const serializedValue = JSON.stringify(value)
+  const cookieStore = (window as typeof window & { cookieStore?: CookieStoreApi }).cookieStore
+
+  if (cookieStore) {
+    void cookieStore.set({ name, value: serializedValue, path: '/dashboard' })
+    return
+  }
+
+  // biome-ignore lint/suspicious/noDocumentCookie: Required as a fallback for browsers without the Cookie Store API.
+  document.cookie = `${name}=${serializedValue}; Path=/dashboard; SameSite=Lax`
+}
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isCollapsed, setIsCollapsed] = useState(false)
@@ -12,13 +29,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <TooltipProvider delayDuration={0}>
-      <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
+      <div className='flex h-screen flex-col md:flex-row md:overflow-hidden'>
         <ResizablePanelGroup
-          direction="horizontal"
+          direction='horizontal'
           onLayout={(sizes: number[]) => {
-            document.cookie = `react-resizable-panels:layout=${JSON.stringify(sizes)}`
+            savePanelCookie('react-resizable-panels:layout', sizes)
           }}
-          className="h-full items-stretch"
+          className='h-full items-stretch'
         >
           <ResizablePanel
             defaultSize={defaultLayout[0]}
@@ -27,11 +44,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             maxSize={20}
             onCollapse={() => {
               setIsCollapsed(true)
-              document.cookie = `react-resizable-panels:collapsed=${JSON.stringify(true)}`
+              savePanelCookie('react-resizable-panels:collapsed', true)
             }}
             onExpand={() => {
               setIsCollapsed(false)
-              document.cookie = `react-resizable-panels:collapsed=${JSON.stringify(false)}`
+              savePanelCookie('react-resizable-panels:collapsed', false)
             }}
             className={cn(isCollapsed && 'min-w-[50px] transition-all duration-300 ease-in-out')}
           >
@@ -41,7 +58,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 isCollapsed ? 'h-[52px]' : 'px-2',
               )}
             >
-              <div className="text-black text-xl font-semibold cursor-pointer">
+              <div className='cursor-pointer font-semibold text-black text-xl'>
                 研{isCollapsed ? '' : '之有物'}
               </div>
             </div>

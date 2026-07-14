@@ -1,3 +1,12 @@
+packages:
+  - 'apps/*'
+  - 'packages/*'
+
 allowBuilds:
-  '@biomejs/biome': set this to true or false
+  '@biomejs/biome': true
+  '@parcel/watcher': true
+  core-js: false
+  esbuild: true
   lefthook: true
+  sharp: true
+  supabase: true

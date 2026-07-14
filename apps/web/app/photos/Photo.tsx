@@ -1,8 +1,8 @@
 'use client'
-import { Database } from '../database.types'
-import { createClient } from '@/libs/supabase/client'
 import type React from 'react'
 import { useState } from 'react'
+import { createClient } from '@/libs/supabase/client'
+import { Database } from '../database.types'
 
 const insertPhoto = async (url: string) => {
   'use client'
@@ -52,7 +52,7 @@ export default function Avatar() {
   return (
     <div>
       <div>
-        <label className="button primary block" htmlFor="single">
+        <label className='button primary block' htmlFor='single'>
           {uploading ? 'Uploading ...' : 'Upload'}
         </label>
         <input
@@ -60,9 +60,9 @@ export default function Avatar() {
             visibility: 'hidden',
             position: 'absolute',
           }}
-          type="file"
-          id="single"
-          accept="image/*"
+          type='file'
+          id='single'
+          accept='image/*'
           onChange={uploadAvatar}
           disabled={uploading}
         />

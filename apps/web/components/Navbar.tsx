@@ -1,6 +1,6 @@
 'use client'
-import Link from 'next/link'
 import clsx from 'clsx'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 export const Navbar = () => {
@@ -16,12 +16,12 @@ export const Navbar = () => {
     },
   ]
   return (
-    <div className="border-b">
-      <div className="flex h-16 items-center px-4">
-        <nav className="flex items-center space-x-4 lg:space-x-6 mx-6">
+    <div className='border-b'>
+      <div className='flex h-16 items-center px-4'>
+        <nav className='mx-6 flex items-center space-x-4 lg:space-x-6'>
           {links.map((link) => (
             <Link
-              className={clsx('text-sm font-medium transition-colors hover:text-primary', {
+              className={clsx('font-medium text-sm transition-colors hover:text-primary', {
                 'text-muted-foreground': pathname !== link.href,
               })}
               href={link.href}

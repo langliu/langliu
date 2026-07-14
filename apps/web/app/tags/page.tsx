@@ -1,7 +1,6 @@
-import { getAllFilesFrontMatter } from '@/libs/mdx'
 import Link from 'next/link'
 import React from 'react'
-
+import { getAllFilesFrontMatter } from '@/libs/mdx'
 
 export const getData = async () => {
   const posts = await getAllFilesFrontMatter('blog')
@@ -22,8 +21,8 @@ const TagsPage = async () => {
 
   return (
     <div>
-      <h1 className='text-6xl font-black mt-8 mb-8'>标签🏷</h1>
-      <div className='flex gap-4 flex-wrap'>
+      <h1 className='mt-8 mb-8 font-black text-6xl'>标签🏷</h1>
+      <div className='flex flex-wrap gap-4'>
         {Object.entries(tagCount).map(([tag, count]) => (
           <Link href={`/tags/${tag}`} key={tag} className='inline-block'>
             <span className='text-primary-400'>{tag.toLocaleUpperCase()}</span>

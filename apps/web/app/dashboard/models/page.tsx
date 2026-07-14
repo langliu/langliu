@@ -1,11 +1,11 @@
 import { DashboardHeader } from '@/components/DashboardHeader'
+import Pagination from '@/components/Pagination'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { toast } from '@/components/ui/use-toast'
 import { createClient } from '@/libs/supabase/server'
 import CreateModel from './CreateModel'
 import ModelsTable from './ModelsTable'
 import Search from './Search'
-import Pagination from '@/components/Pagination'
 
 async function getData(query?: string, page = 1) {
   const supabase = createClient()
@@ -52,13 +52,13 @@ export default async function ModelsPage({ searchParams }: ModelsPageProps) {
   const { list, total } = await getData(searchParams?.query, currentPage)
 
   return (
-    <div className="antialiased font-sans flex flex-col gap-2 h-screen">
-      <DashboardHeader title="模特管理" extra={<CreateModel />} />
-      <div className="p-4 flex-1 flex flex-col gap-4 overflow-y-auto">
-        <div className="flex gap-4">
-          <Search placeholder="请输入模特名称" />
+    <div className='flex h-screen flex-col gap-2 font-sans antialiased'>
+      <DashboardHeader title='模特管理' extra={<CreateModel />} />
+      <div className='flex flex-1 flex-col gap-4 overflow-y-auto p-4'>
+        <div className='flex gap-4'>
+          <Search placeholder='请输入模特名称' />
         </div>
-        <ScrollArea className="rounded-md border flex-1 relative h-screen">
+        <ScrollArea className='relative h-screen flex-1 rounded-md border'>
           <ModelsTable data={list ?? []} />
         </ScrollArea>
         <Pagination currentPage={currentPage} totalPages={Math.round((total ?? 0) / 10)} />

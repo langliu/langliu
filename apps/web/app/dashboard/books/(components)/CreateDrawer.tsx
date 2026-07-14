@@ -1,4 +1,7 @@
 'use client'
+import { Plus } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { buttonVariants } from '@/components/ui/button'
 import {
   Sheet,
@@ -9,9 +12,6 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import CreateBook from './CreateBook'
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { Plus } from 'lucide-react'
 
 export function CreateDrawer() {
   const [open, setOpen] = useState(false)
@@ -31,10 +31,10 @@ export function CreateDrawer() {
           variant: 'outline',
         })}
       >
-        <Plus className="size-3.5" />
+        <Plus className='size-3.5' />
         新建书籍
       </SheetTrigger>
-      <SheetContent className="w-[540px] sm:w-[500px] sm:max-w-7xl md:w-[680px]">
+      <SheetContent className='w-[540px] sm:w-[500px] sm:max-w-7xl md:w-[680px]'>
         <SheetHeader>
           <SheetTitle>新建书籍</SheetTitle>
           <SheetDescription>请填写书籍相关信息</SheetDescription>

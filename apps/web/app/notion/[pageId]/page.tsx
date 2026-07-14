@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import { notion } from '@/libs/notion'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { notion } from '@/libs/notion'
 
 async function getData(page_id: string) {
   try {
@@ -18,20 +18,20 @@ async function getData(page_id: string) {
 export default async function Page({ params }: { params: { pageId: string } }) {
   const res = await getData(params.pageId)
   return (
-    <ScrollArea className="rounded-md border flex-1 h-screen w-screen">
-      <div className="flex flex-col gap-2 md:gap-4 items-center">
-        <h2 className="mt-4 text-lg font-bold text-ellipsis overflow-hidden whitespace-nowrap max-w-[100vw]">
+    <ScrollArea className='h-screen w-screen flex-1 rounded-md border'>
+      <div className='flex flex-col items-center gap-2 md:gap-4'>
+        <h2 className='mt-4 max-w-[100vw] overflow-hidden text-ellipsis whitespace-nowrap font-bold text-lg'>
           {res?.title}
         </h2>
         {res?.images?.map((image) => (
           <Image
-            alt=""
+            alt=''
             src={image}
             width={300}
             height={600}
             key={image}
-            className="w-full xl:w-[50%]"
-            loading="lazy"
+            className='w-full xl:w-[50%]'
+            loading='lazy'
           />
         ))}
       </div>

@@ -1,6 +1,6 @@
 'use client'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { ChevronLeft, ChevronRight, Replace } from 'lucide-react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { Button } from './ui/button'
 
 interface Props {
@@ -28,7 +28,7 @@ export default function Pagination({ totalPages = 0, currentPage = 1 }: Props) {
   }
 
   return (
-    <div className="mt-2 gap-2 flex justify-end items-center">
+    <div className='mt-2 flex items-center justify-end gap-2'>
       {totalPages !== 0 && (
         <span>
           第{currentPage}/{totalPages}页
@@ -41,7 +41,7 @@ export default function Pagination({ totalPages = 0, currentPage = 1 }: Props) {
         className={'cursor-pointer disabled:cursor-not-allowed'}
         onClick={goToPrevPage}
       >
-        <ChevronLeft className="size-4" />
+        <ChevronLeft className='size-4' />
       </Button>
       <Button
         variant={'outline'}
@@ -50,7 +50,7 @@ export default function Pagination({ totalPages = 0, currentPage = 1 }: Props) {
         className={'cursor-pointer disabled:cursor-not-allowed'}
         onClick={goToNextPage}
       >
-        <ChevronRight className="size-4" />
+        <ChevronRight className='size-4' />
       </Button>
     </div>
   )

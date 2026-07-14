@@ -1,8 +1,9 @@
+// biome-ignore-all lint/security/noDangerouslySetInnerHtml: This file injects JSON-LD generated from serialized structured data.
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import type { AuthorFrontMatter } from 'types/AuthorFrontMatter'
+import type { PostFrontMatter } from 'types/PostFrontMatter'
 import siteMetadata from '@/data/siteMetadata'
-import { AuthorFrontMatter } from 'types/AuthorFrontMatter'
-import { PostFrontMatter } from 'types/PostFrontMatter'
 
 interface CommonSEOProps {
   title: string
@@ -30,25 +31,25 @@ const CommonSEO = ({
   return (
     <Head>
       <title>{title}</title>
-      <meta name="robots" content="follow, index" />
-      <meta name="description" content={description} />
-      <meta property="og:url" content={`${siteMetadata.siteUrl}${router.asPath}`} />
-      <meta property="og:type" content={ogType} />
-      <meta property="og:site_name" content={siteMetadata.title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:title" content={title} />
+      <meta name='robots' content='follow, index' />
+      <meta name='description' content={description} />
+      <meta property='og:url' content={`${siteMetadata.siteUrl}${router.asPath}`} />
+      <meta property='og:type' content={ogType} />
+      <meta property='og:site_name' content={siteMetadata.title} />
+      <meta property='og:description' content={description} />
+      <meta property='og:title' content={title} />
       {Array.isArray(ogImage) ? (
-        ogImage.map(({ url }) => <meta property="og:image" content={url} key={url} />)
+        ogImage.map(({ url }) => <meta property='og:image' content={url} key={url} />)
       ) : (
-        <meta property="og:image" content={ogImage} key={ogImage} />
+        <meta property='og:image' content={ogImage} key={ogImage} />
       )}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content={siteMetadata.twitter} />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={twImage} />
+      <meta name='twitter:card' content='summary_large_image' />
+      <meta name='twitter:site' content={siteMetadata.twitter} />
+      <meta name='twitter:title' content={title} />
+      <meta name='twitter:description' content={description} />
+      <meta name='twitter:image' content={twImage} />
       <link
-        rel="canonical"
+        rel='canonical'
         href={canonicalUrl ? canonicalUrl : `${siteMetadata.siteUrl}${router.asPath}`}
       />
     </Head>
@@ -67,7 +68,7 @@ export const PageSEO = ({ title, description }: PageSEOProps) => {
     <CommonSEO
       title={title}
       description={description}
-      ogType="website"
+      ogType='website'
       ogImage={ogImageUrl}
       twImage={twImageUrl}
     />
@@ -83,14 +84,14 @@ export const TagSEO = ({ title, description }: PageSEOProps) => {
       <CommonSEO
         title={title}
         description={description}
-        ogType="website"
+        ogType='website'
         ogImage={ogImageUrl}
         twImage={twImageUrl}
       />
       <Head>
         <link
-          rel="alternate"
-          type="application/rss+xml"
+          rel='alternate'
+          type='application/rss+xml'
           title={`${description} - RSS feed`}
           href={`${siteMetadata.siteUrl}${router.asPath}/feed.xml`}
         />
@@ -120,8 +121,8 @@ export const BlogSEO = ({
     images.length === 0
       ? [siteMetadata.socialBanner]
       : typeof images === 'string'
-      ? [images]
-      : images
+        ? [images]
+        : images
 
   const featuredImages = imagesArr.map((img) => {
     return {
@@ -130,20 +131,17 @@ export const BlogSEO = ({
     }
   })
 
-  let authorList
-  if (authorDetails) {
-    authorList = authorDetails.map((author) => {
-      return {
+  const authorList = authorDetails
+    ? authorDetails.map((author) => {
+        return {
+          '@type': 'Person',
+          name: author.name,
+        }
+      })
+    : {
         '@type': 'Person',
-        name: author.name,
+        name: siteMetadata.author,
       }
-    })
-  } else {
-    authorList = {
-      '@type': 'Person',
-      name: siteMetadata.author,
-    }
-  }
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -175,16 +173,16 @@ export const BlogSEO = ({
       <CommonSEO
         title={title}
         description={summary}
-        ogType="article"
+        ogType='article'
         ogImage={featuredImages}
         twImage={twImageUrl}
         canonicalUrl={canonicalUrl}
       />
       <Head>
-        {date && <meta property="article:published_time" content={publishedAt} />}
-        {lastmod && <meta property="article:modified_time" content={modifiedAt} />}
+        {date && <meta property='article:published_time' content={publishedAt} />}
+        {lastmod && <meta property='article:modified_time' content={modifiedAt} />}
         <script
-          type="application/ld+json"
+          type='application/ld+json'
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(structuredData, null, 2),
           }}

@@ -1,7 +1,6 @@
 'use client'
+import { Form, Input, message, Switch } from 'antd'
 import Button from '@/components/Button'
-import { Form, Input, Switch, message } from 'antd'
-import React from 'react'
 
 import { createBook } from '../actions'
 
@@ -35,7 +34,9 @@ const CreateBook = () => {
           <Switch checkedChildren='完结' unCheckedChildren='连载' />
         </Form.Item>
         <Form.Item>
-          <Button type='submit' block>提交</Button>
+          <Button type='submit' block>
+            提交
+          </Button>
         </Form.Item>
       </Form>
     </div>

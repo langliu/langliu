@@ -1,6 +1,6 @@
-import styles from './page.module.css'
-import { supabase } from '@/libs/supabaseClient'
 import Link from 'next/link'
+import { supabase } from '@/libs/supabaseClient'
+import styles from './page.module.css'
 
 type Props = {
   params: {
@@ -49,7 +49,9 @@ export default async function Page({ params }: Props) {
   return (
     <div>
       <div className={styles.content}>
-        <h2 className={'mb-4 text-2xl'}>第{article?.serial}章 {article?.title}</h2>
+        <h2 className={'mb-4 text-2xl'}>
+          第{article?.serial}章 {article?.title}
+        </h2>
         <div key={article?.id}>{pa(article?.content)}</div>
       </div>
       <div className={styles.chapterControl}>

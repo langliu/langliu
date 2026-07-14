@@ -1,9 +1,9 @@
-import getAllFilesRecursively from './utils/files'
 import fs from 'fs'
 import * as matter from 'gray-matter'
 import { join } from 'path'
+import getAllFilesRecursively from './utils/files'
 
-const postsDirectory = join(process.cwd(), )
+const postsDirectory = join(process.cwd())
 
 export function getPostSlugs() {
   return fs.readdirSync(postsDirectory)
@@ -38,7 +38,7 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
 
   return {
     data,
-    content
+    content,
   }
 }
 

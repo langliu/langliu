@@ -1,7 +1,7 @@
 'use client'
-import { createClient } from '@/libs/supabase/client'
 import Image from 'next/image'
 import { type FC, memo, useEffect, useState } from 'react'
+import { createClient } from '@/libs/supabase/client'
 
 export interface SupabaseImageProps {
   src: string
@@ -24,7 +24,7 @@ const SupabaseImage: FC<SupabaseImageProps> = ({ alt, src }) => {
   }, [supabase, src])
 
   if (url.startsWith('http')) {
-    return <Image src={url} className="mr-2 rounded" width={200} height={300} alt={alt} />
+    return <Image src={url} className='mr-2 rounded' width={200} height={300} alt={alt} />
   }
   return null
 }

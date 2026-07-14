@@ -1,8 +1,7 @@
 export default async function Loading() {
   return (
-    <div
-      className='h-screen flex items-center justify-center p-4 border border-gray-200 rounded shadow animate-pulse md:p-6 dark:border-gray-700'>
-      <div className='h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4'></div>
+    <div className='flex h-screen animate-pulse items-center justify-center rounded border border-gray-200 p-4 shadow md:p-6 dark:border-gray-700'>
+      <div className='mb-4 h-4 w-48 rounded-full bg-gray-200 dark:bg-gray-700'></div>
     </div>
-  );
+  )
 }

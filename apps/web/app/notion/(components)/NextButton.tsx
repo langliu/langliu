@@ -1,8 +1,8 @@
 'use client'
-import { Button } from '@/components/ui/button'
 import { useDebounceFn } from 'ahooks'
 import { Search as SearchIcon } from 'lucide-react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { Button } from '@/components/ui/button'
 
 export default function NextButton({ nextCursor }: { nextCursor?: string | null }) {
   const searchParams = useSearchParams()
@@ -25,8 +25,8 @@ export default function NextButton({ nextCursor }: { nextCursor?: string | null 
   )
 
   return (
-    <Button onClick={run} className="mt-4 gap-1.5" variant={'outline'}>
-      <SearchIcon className="size-3.5" />
+    <Button onClick={run} className='mt-4 gap-1.5' variant={'outline'}>
+      <SearchIcon className='size-3.5' />
       下一页
     </Button>
   )

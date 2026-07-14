@@ -1,21 +1,15 @@
-import React, { FC } from 'react';
-import styles from './index.module.css';
+import React, { type FC } from 'react'
+import styles from './index.module.css'
 
 type Props = {
-  href: string;
-  title: string;
-  tags?: string[];
-  description: string;
-  iconUrl: string;
-};
+  href: string
+  title: string
+  tags?: string[]
+  description: string
+  iconUrl: string
+}
 
-const NavCard: FC<Props> = ({
-  href,
-  title,
-  tags = [],
-  description,
-  iconUrl,
-}) => {
+const NavCard: FC<Props> = ({ href, title, tags = [], description, iconUrl }) => {
   return (
     <div className={styles.card}>
       <a href={href} title={title} className={styles.cardBody}>
@@ -25,7 +19,7 @@ const NavCard: FC<Props> = ({
             className={styles.icon}
             alt={title}
             src={iconUrl}
-            loading="lazy"
+            loading='lazy'
           ></img>
         </div>
         <div className={styles.content}>
@@ -41,7 +35,7 @@ const NavCard: FC<Props> = ({
         </div>
       </a>
     </div>
-  );
-};
+  )
+}
 
-export default NavCard;
+export default NavCard

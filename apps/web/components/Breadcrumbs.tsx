@@ -7,11 +7,7 @@ interface Breadcrumb {
   active?: boolean
 }
 
-export default function Breadcrumbs({
-  breadcrumbs,
-}: {
-  breadcrumbs: Breadcrumb[]
-}) {
+export default function Breadcrumbs({ breadcrumbs }: { breadcrumbs: Breadcrumb[] }) {
   return (
     <nav aria-label='Breadcrumb' className='mb-6 block'>
       <ol className={clsx('flex text-xl md:text-2xl')}>

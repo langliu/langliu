@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-
-import { cn } from '@/libs/utils'
 import { buttonVariants } from '@/components/ui/button'
+import { cn } from '@/libs/utils'
 import { UserAuthForm } from './(components)/user-auth-form'
 
 export const metadata: Metadata = {
@@ -35,14 +34,14 @@ export default function AuthenticationPage() {
           href='/examples/authentication'
           className={cn(
             buttonVariants({ variant: 'ghost' }),
-            'absolute right-4 top-4 md:right-8 md:top-8',
+            'absolute top-4 right-4 md:top-8 md:right-8',
           )}
         >
           注册
         </Link>
         <div className='relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r'>
           <div className='absolute inset-0 bg-zinc-900' />
-          <div className='relative z-20 flex items-center text-lg font-medium'>
+          <div className='relative z-20 flex items-center font-medium text-lg'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               viewBox='0 0 24 24'
@@ -71,13 +70,11 @@ export default function AuthenticationPage() {
         <div className='lg:p-8'>
           <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]'>
             <div className='flex flex-col space-y-2 text-center'>
-              <h1 className='text-2xl font-semibold tracking-tight'>登录</h1>
-              <p className='text-sm text-muted-foreground'>
-                在下方输入你的账号密码进行登录
-              </p>
+              <h1 className='font-semibold text-2xl tracking-tight'>登录</h1>
+              <p className='text-muted-foreground text-sm'>在下方输入你的账号密码进行登录</p>
             </div>
             <UserAuthForm />
-            <p className='px-8 text-center text-sm text-muted-foreground'>
+            <p className='px-8 text-center text-muted-foreground text-sm'>
               By clicking continue, you agree to our{' '}
               <Link href='/terms' className='underline underline-offset-4 hover:text-primary'>
                 Terms of Service

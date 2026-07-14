@@ -1,12 +1,12 @@
+import Image from 'next/image'
+import Link from 'next/link'
+import type { ReactNode } from 'react'
+import headerNavLinks from '@/data/headerNavLinks'
+import siteMetadata from '@/data/siteMetadata'
 import Footer from './Footer'
 import MobileNav from './MobileNav'
 import SectionContainer from './SectionContainer'
 import ThemeSwitch from './ThemeSwitch'
-import headerNavLinks from '@/data/headerNavLinks'
-import siteMetadata from '@/data/siteMetadata'
-import Image from 'next/image'
-import Link from 'next/link'
-import { ReactNode } from 'react'
 
 interface Props {
   children: ReactNode
@@ -24,7 +24,7 @@ const LayoutWrapper = ({ children }: Props) => {
                   <Image src={'/logo.svg'} alt='logo' width={32} height={32} />
                 </div>
                 {typeof siteMetadata.headerTitle === 'string' ? (
-                  <div className='hidden h-6 text-2xl font-semibold sm:block'>
+                  <div className='hidden h-6 font-semibold text-2xl sm:block'>
                     {siteMetadata.headerTitle}
                   </div>
                 ) : (
@@ -33,13 +33,13 @@ const LayoutWrapper = ({ children }: Props) => {
               </div>
             </Link>
           </div>
-          <div className="flex items-center text-base leading-5">
-            <div className="hidden sm:block">
+          <div className='flex items-center text-base leading-5'>
+            <div className='hidden sm:block'>
               {headerNavLinks.map((link) => (
                 <Link
                   key={link.title}
                   href={link.href}
-                  className="p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4"
+                  className='p-1 font-medium text-gray-900 sm:p-4 dark:text-gray-100'
                 >
                   {link.title}
                 </Link>

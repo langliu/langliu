@@ -1,6 +1,4 @@
-import { formatDateToLocal } from '@/libs/utils'
 import Link from 'next/link'
-import { fetchFilteredInvoices } from './actions'
 import {
   Table,
   TableBody,
@@ -9,6 +7,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { formatDateToLocal } from '@/libs/utils'
+import { fetchFilteredInvoices } from './actions'
 
 export type OrganizationsTableProps = {
   query: string
@@ -29,11 +29,11 @@ export default async function OrganizationsTable({ query, currentPage }: Organiz
       </TableHeader>
       <TableBody>
         {invoices?.map((invoice) => (
-          <TableRow>
+          <TableRow key={invoice.id}>
             <TableCell>{invoice.name}</TableCell>
             <TableCell>
               {invoice.url && (
-                <Link href={invoice.url} key={invoice.url} target="_blank">
+                <Link href={invoice.url} key={invoice.url} target='_blank'>
                   访问地址
                 </Link>
               )}

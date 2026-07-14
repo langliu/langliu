@@ -1,11 +1,11 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { useToast } from '@/components/ui/use-toast'
-import { ToastAction } from '@/components/ui/toast'
-import { createClient } from '@/libs/supabase/client'
 import { Github, Loader } from 'lucide-react'
 import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { ToastAction } from '@/components/ui/toast'
+import { useToast } from '@/components/ui/use-toast'
+import { createClient } from '@/libs/supabase/client'
 
 export const GithubLogin = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -27,7 +27,7 @@ export const GithubLogin = () => {
         title: error.name,
         variant: 'destructive',
         action: (
-          <ToastAction altText="重试" onClick={loginWithGithub}>
+          <ToastAction altText='重试' onClick={loginWithGithub}>
             重试
           </ToastAction>
         ),
@@ -36,11 +36,11 @@ export const GithubLogin = () => {
   }
 
   return (
-    <Button variant="outline" className="w-full" onClick={loginWithGithub} disabled={isLoading}>
+    <Button variant='outline' className='w-full' onClick={loginWithGithub} disabled={isLoading}>
       {isLoading ? (
-        <Loader className="mr-2 h-4 w-4 animate-spin" />
+        <Loader className='mr-2 h-4 w-4 animate-spin' />
       ) : (
-        <Github className="mr-2 h-4 w-4" />
+        <Github className='mr-2 h-4 w-4' />
       )}{' '}
       GitHub
     </Button>

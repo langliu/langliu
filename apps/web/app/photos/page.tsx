@@ -1,7 +1,7 @@
-import Photo from './Photo'
-import { createClient } from '@/libs/supabase/server'
 import Image from 'next/image'
 import React from 'react'
+import { createClient } from '@/libs/supabase/server'
+import Photo from './Photo'
 
 export async function getData() {
   const supabase = createClient()
@@ -27,12 +27,12 @@ const PhotosPage = async () => {
   return (
     <div>
       <Photo />
-      <div className="grid gap-2 col-span-4 grid-cols-4">
+      <div className='col-span-4 grid grid-cols-4 gap-2'>
         {data?.map((photo) => (
           <Image
             src={photo.signedUrl}
-            alt="asd"
-            className="object-cover w-full"
+            alt='asd'
+            className='w-full object-cover'
             width={0}
             height={0}
             key={photo.signedUrl}

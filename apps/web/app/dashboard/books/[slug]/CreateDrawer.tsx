@@ -1,4 +1,7 @@
 'use client'
+import { Plus } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { buttonVariants } from '@/components/ui/button'
 import {
   Sheet,
@@ -9,9 +12,6 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import CreateArticle from './CreateArticle'
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { Plus } from 'lucide-react'
 
 export function CreateDrawer({ bookId, last }: { bookId: string; last?: number }) {
   const [open, setOpen] = useState(false)
@@ -31,10 +31,10 @@ export function CreateDrawer({ bookId, last }: { bookId: string; last?: number }
           variant: 'outline',
         })}
       >
-        <Plus className="size-3.5" />
+        <Plus className='size-3.5' />
         新建章节
       </SheetTrigger>
-      <SheetContent className="w-[540px] sm:w-[500px] sm:max-w-max">
+      <SheetContent className='w-[540px] sm:w-[500px] sm:max-w-max'>
         <SheetHeader>
           <SheetTitle>新建章节</SheetTitle>
           <SheetDescription>

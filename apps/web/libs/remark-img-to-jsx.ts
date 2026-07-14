@@ -1,7 +1,7 @@
-import { Parent, Node, Literal } from 'unist'
-import { visit } from 'unist-util-visit'
+import fs from 'node:fs'
 import sizeOf from 'image-size'
-import fs from 'fs'
+import type { Literal, Node, Parent } from 'unist'
+import { visit } from 'unist-util-visit'
 
 type ImageNode = Parent & {
   url: string
@@ -38,7 +38,7 @@ export default function remarkImgToJsx() {
           node.type = 'div'
           node.children = [imageNode]
         }
-      }
+      },
     )
   }
 }

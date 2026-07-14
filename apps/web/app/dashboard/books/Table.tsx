@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { supabase } from '@/libs/supabaseClient'
+import { buttonVariants } from '@/components/ui/button'
 import {
   Table,
   TableBody,
@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { buttonVariants } from '@/components/ui/button'
+import { supabase } from '@/libs/supabaseClient'
 
 export async function getData(query: unknown, current: string | number) {
   const { data } = await supabase.from('books').select('*')
@@ -24,13 +24,13 @@ export default async function OrganizationsTable({ query, currentPage }: Organiz
   const invoices = await getData(query, currentPage)
 
   return (
-    <Table className="flex-1">
-      <TableHeader className="sticky top-0">
+    <Table className='flex-1'>
+      <TableHeader className='sticky top-0'>
         <TableRow>
           <TableHead>书名</TableHead>
           <TableHead>作者</TableHead>
           <TableHead>状态</TableHead>
-          <TableHead className="w-[120px]">操作</TableHead>
+          <TableHead className='w-[120px]'>操作</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>

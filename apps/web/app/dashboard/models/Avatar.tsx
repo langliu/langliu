@@ -1,7 +1,7 @@
-import type { Database } from '@/types/supabase'
-import { createClient } from '@/libs/supabase/server'
 import { Popover } from 'antd'
 import Image from 'next/image'
+import { createClient } from '@/libs/supabase/server'
+import type { Database } from '@/types/supabase'
 
 interface AvatarProps {
   record: Database['public']['Tables']['models']['Row']
@@ -29,11 +29,11 @@ export default async function Avatar({ record }: AvatarProps) {
         <Image src={record?.avatar} width={400} height={400} alt={`${record.username}的头像`} />
       }
       title={record.username}
-      placement="right"
+      placement='right'
     >
       <Image
         src={record?.avatar}
-        className="rounded-full object-cover w-16 h-16"
+        className='h-16 w-16 rounded-full object-cover'
         width={64}
         height={64}
         alt={`${record.username}的头像`}

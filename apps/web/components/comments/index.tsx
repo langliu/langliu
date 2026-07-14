@@ -1,6 +1,6 @@
-import siteMetadata from '@/data/siteMetadata'
 import dynamic from 'next/dynamic'
-import { PostFrontMatter } from 'types/PostFrontMatter'
+import type { PostFrontMatter } from 'types/PostFrontMatter'
+import siteMetadata from '@/data/siteMetadata'
 
 interface Props {
   frontMatter: PostFrontMatter
@@ -10,23 +10,23 @@ const UtterancesComponent = dynamic(
   () => {
     return import('@/components/comments/Utterances')
   },
-  { ssr: false }
+  { ssr: false },
 )
 const GiscusComponent = dynamic(
   () => {
     return import('@/components/comments/Giscus')
   },
-  { ssr: false }
+  { ssr: false },
 )
 const DisqusComponent = dynamic(
   () => {
     return import('@/components/comments/Disqus')
   },
-  { ssr: false }
+  { ssr: false },
 )
 
 const Comments = ({ frontMatter }: Props) => {
-  let term
+  let term = frontMatter.slug
   switch (
     siteMetadata.comment.giscusConfig.mapping ||
     siteMetadata.comment.utterancesConfig.issueTerm
@@ -42,7 +42,7 @@ const Comments = ({ frontMatter }: Props) => {
       break
   }
   return (
-    <div id="comment">
+    <div id='comment'>
       {siteMetadata.comment && siteMetadata.comment.provider === 'giscus' && (
         <GiscusComponent mapping={term} />
       )}

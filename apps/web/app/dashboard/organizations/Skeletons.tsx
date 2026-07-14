@@ -1,7 +1,7 @@
 export function InvoicesMobileSkeleton() {
   return (
     <div className='mb-2 w-full rounded-md bg-white p-4'>
-      <div className='flex items-center justify-between border-b border-gray-100 pb-8'>
+      <div className='flex items-center justify-between border-gray-100 border-b pb-8'>
         <div className='flex items-center'>
           <div className='mr-2 h-8 w-8 rounded-full bg-gray-100'></div>
           <div className='h-6 w-16 rounded bg-gray-100'></div>
@@ -24,9 +24,9 @@ export function InvoicesMobileSkeleton() {
 
 export function TableRowSkeleton() {
   return (
-    <tr className='w-full border-b border-gray-100 last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg'>
+    <tr className='w-full border-gray-100 border-b last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg'>
       {/* Customer Name and Image */}
-      <td className='relative overflow-hidden whitespace-nowrap py-3 pl-6 pr-3'>
+      <td className='relative overflow-hidden whitespace-nowrap py-3 pr-3 pl-6'>
         <div className='flex items-center gap-3'>
           <div className='h-8 w-8 rounded-full bg-gray-100'></div>
           <div className='h-6 w-24 rounded bg-gray-100'></div>
@@ -49,7 +49,7 @@ export function TableRowSkeleton() {
         <div className='h-6 w-16 rounded bg-gray-100'></div>
       </td>
       {/* Actions */}
-      <td className='whitespace-nowrap py-3 pl-6 pr-3'>
+      <td className='whitespace-nowrap py-3 pr-3 pl-6'>
         <div className='flex justify-end gap-3'>
           <div className='h-[38px] w-[38px] rounded bg-gray-100'></div>
           <div className='h-[38px] w-[38px] rounded bg-gray-100'></div>
@@ -73,9 +73,9 @@ export function InvoicesTableSkeleton() {
             <InvoicesMobileSkeleton />
           </div>
           <table className='hidden min-w-full text-gray-900 md:table'>
-            <thead className='rounded-lg text-left text-sm font-normal'>
+            <thead className='rounded-lg text-left font-normal text-sm'>
               <tr>
-              <th scope='col' className='px-4 py-5 font-medium sm:pl-6'>
+                <th scope='col' className='px-4 py-5 font-medium sm:pl-6'>
                   专辑
                 </th>
                 <th scope='col' className='px-4 py-5 font-medium sm:pl-6'>
@@ -93,7 +93,7 @@ export function InvoicesTableSkeleton() {
                 <th scope='col' className='px-3 py-5 font-medium'>
                   状态
                 </th>
-                <th scope='col' className='relative py-3 pl-6 pr-3'>
+                <th scope='col' className='relative py-3 pr-3 pl-6'>
                   <span className='sr-only'>Edit</span>
                 </th>
               </tr>

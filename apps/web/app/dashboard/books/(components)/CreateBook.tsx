@@ -1,4 +1,10 @@
 'use client'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useDebounceFn } from 'ahooks'
+import { unstable_noStore as noStore } from 'next/cache'
+import { Suspense } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -11,13 +17,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Switch } from '@/components/ui/switch'
 import { useToast } from '@/components/ui/use-toast'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { createClient } from '@/libs/supabase/client'
-import { useDebounceFn } from 'ahooks'
-import { unstable_noStore as noStore } from 'next/cache'
-import { Suspense } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 
 const formSchema = z.object({
   name: z.string({ required_error: '请输入书籍名称' }).min(1, '请输入书籍名称'),
@@ -25,11 +25,7 @@ const formSchema = z.object({
   end: z.boolean(),
 })
 
-async function insertBook(params: {
-  name: string
-  author: string
-  end: boolean
-}) {
+async function insertBook(params: { name: string; author: string; end: boolean }) {
   noStore()
   const supabase = createClient()
   const { data, error } = await supabase.from('books').insert([params]).select()
@@ -76,15 +72,15 @@ export default function CreateBook({ onSuccess }: { onSuccess?: () => void }) {
   return (
     <Suspense>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(handleSubmit)} className='space-y-4'>
           <FormField
             control={form.control}
-            name="name"
+            name='name'
             render={({ field }) => (
               <FormItem>
                 <FormLabel>书籍名称</FormLabel>
                 <FormControl>
-                  <Input placeholder="请输入书籍名称" {...field} />
+                  <Input placeholder='请输入书籍名称' {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -92,12 +88,12 @@ export default function CreateBook({ onSuccess }: { onSuccess?: () => void }) {
           />
           <FormField
             control={form.control}
-            name="author"
+            name='author'
             render={({ field }) => (
               <FormItem>
                 <FormLabel>书籍作者</FormLabel>
                 <FormControl>
-                  <Input placeholder="请输入书籍作者" {...field} />
+                  <Input placeholder='请输入书籍作者' {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -105,7 +101,7 @@ export default function CreateBook({ onSuccess }: { onSuccess?: () => void }) {
           />
           <FormField
             control={form.control}
-            name="end"
+            name='end'
             render={({ field }) => (
               <FormItem>
                 <FormLabel>已完结</FormLabel>
@@ -116,7 +112,7 @@ export default function CreateBook({ onSuccess }: { onSuccess?: () => void }) {
               </FormItem>
             )}
           />
-          <Button type="submit" className="px-8">
+          <Button type='submit' className='px-8'>
             提交
           </Button>
         </form>

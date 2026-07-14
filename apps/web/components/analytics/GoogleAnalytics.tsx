@@ -6,11 +6,11 @@ const GAScript = () => {
   return (
     <>
       <Script
-        strategy="lazyOnload"
+        strategy='lazyOnload'
         src={`https://www.googletagmanager.com/gtag/js?id=${siteMetadata.analytics.googleAnalyticsId}`}
       />
 
-      <Script strategy="lazyOnload" id="ga-script">
+      <Script strategy='lazyOnload' id='ga-script'>
         {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}

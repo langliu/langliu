@@ -1,4 +1,11 @@
 'use client'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useDebounceFn } from 'ahooks'
+import { message } from 'antd'
+import { unstable_noStore as noStore } from 'next/cache'
+import { Suspense } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -10,14 +17,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { createClient } from '@/libs/supabase/client'
-import { useDebounceFn } from 'ahooks'
-import { message } from 'antd'
-import { unstable_noStore as noStore } from 'next/cache'
-import { Suspense } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 
 const formSchema = z.object({
   serial: z.coerce
@@ -45,7 +45,11 @@ export default function CreateArticle({
   bookId,
   onSuccess,
   last,
-}: { bookId: number; onSuccess?: () => void; last?: number }) {
+}: {
+  bookId: number
+  onSuccess?: () => void
+  last?: number
+}) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -84,15 +88,15 @@ export default function CreateArticle({
   return (
     <Suspense>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(handleSubmit)} className='space-y-4'>
           <FormField
             control={form.control}
-            name="serial"
+            name='serial'
             render={({ field }) => (
               <FormItem>
                 <FormLabel>章节序号</FormLabel>
                 <FormControl>
-                  <Input placeholder="请输入章节序号" type="number" {...field} />
+                  <Input placeholder='请输入章节序号' type='number' {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -100,12 +104,12 @@ export default function CreateArticle({
           />
           <FormField
             control={form.control}
-            name="title"
+            name='title'
             render={({ field }) => (
               <FormItem>
                 <FormLabel>标题</FormLabel>
                 <FormControl>
-                  <Input placeholder="请输入标题" {...field} />
+                  <Input placeholder='请输入标题' {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -113,18 +117,18 @@ export default function CreateArticle({
           />
           <FormField
             control={form.control}
-            name="content"
+            name='content'
             render={({ field }) => (
               <FormItem>
                 <FormLabel>章节内容</FormLabel>
                 <FormControl>
-                  <Textarea placeholder="请输入章节内容" className="min-h-96" {...field} />
+                  <Textarea placeholder='请输入章节内容' className='min-h-96' {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit" className="px-8">
+          <Button type='submit' className='px-8'>
             提交
           </Button>
         </form>

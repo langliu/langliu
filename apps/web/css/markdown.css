@@ -41,7 +41,7 @@
 }
 
 .markdown ul > li::before {
-  content: '•';
+  content: "•";
   display: inline-flex;
   margin-right: 4px;
   align-items: center;

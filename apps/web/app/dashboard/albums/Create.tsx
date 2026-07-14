@@ -1,13 +1,13 @@
 'use client'
-import { createModel } from './actions'
+import { useRequest } from 'ahooks'
+import { Button, Drawer, Form, Input, InputNumber, Select, Switch } from 'antd'
+import { EditIcon } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import Upload from '@/components/Upload'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import type { Database } from '@/types/supabase'
-import { Button, Drawer, Form, Input, InputNumber, Select, Switch } from 'antd'
-import { EditIcon } from 'lucide-react'
-import { useState } from 'react'
-import { useRequest } from 'ahooks'
-import { useRouter } from 'next/navigation'
+import { createModel } from './actions'
 
 type CreateAlbum = Database['public']['Tables']['albums']['Insert']
 
@@ -46,10 +46,10 @@ export default function AlbumForm({
   return (
     <>
       <Button
-        type="default"
-        className="ml-auto gap-1.5"
+        type='default'
+        className='ml-auto gap-1.5'
         onClick={() => setOpen(true)}
-        icon={<EditIcon className="size-3.5" />}
+        icon={<EditIcon className='size-3.5' />}
       >
         新建专辑
       </Button>
@@ -66,46 +66,46 @@ export default function AlbumForm({
           </Button>
         }
       >
-        <ScrollArea className="flex-1">
-          <Form form={form} layout="vertical" initialValues={initialState}>
+        <ScrollArea className='flex-1'>
+          <Form form={form} layout='vertical' initialValues={initialState}>
             <Form.Item
               name={'name'}
-              label="专辑名称"
+              label='专辑名称'
               rules={[{ required: true, message: '请输入专辑名称' }]}
             >
               <Input />
             </Form.Item>
             <Form.Item
               name={'models'}
-              label="模特"
+              label='模特'
               rules={[{ required: true, message: '请选择模特' }]}
             >
               <Select
-                optionFilterProp="label"
-                mode="multiple"
+                optionFilterProp='label'
+                mode='multiple'
                 options={models.map((model) => ({ label: model.username, value: model.id }))}
               />
             </Form.Item>
             <Form.Item
               name={'picture_num'}
-              label="图片数量"
+              label='图片数量'
               rules={[{ required: true, message: '请输入图片数量' }]}
             >
-              <InputNumber step={1} min={0} className="w-full" />
+              <InputNumber step={1} min={0} className='w-full' />
             </Form.Item>
-            <Form.Item name={'video_num'} label="视频数量">
-              <InputNumber step={1} min={0} className="w-full" />
+            <Form.Item name={'video_num'} label='视频数量'>
+              <InputNumber step={1} min={0} className='w-full' />
             </Form.Item>
-            <Form.Item label="收集状态" name={'collected'} valuePropName="checked">
+            <Form.Item label='收集状态' name={'collected'} valuePropName='checked'>
               <Switch />
             </Form.Item>
-            <Form.Item name={'organization'} label="所属机构">
+            <Form.Item name={'organization'} label='所属机构'>
               <Select
-                optionFilterProp="label"
+                optionFilterProp='label'
                 options={organizations.map((model) => ({ label: model.name, value: model.id }))}
               />
             </Form.Item>
-            <Form.Item name="cover" label="专辑封面">
+            <Form.Item name='cover' label='专辑封面'>
               <Upload />
             </Form.Item>
           </Form>

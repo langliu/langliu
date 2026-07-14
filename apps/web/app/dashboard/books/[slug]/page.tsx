@@ -1,12 +1,12 @@
-import styles from './page.module.css'
-import { supabase } from '@/libs/supabaseClient'
+import { Plus } from 'lucide-react'
 import { unstable_noStore as noStore } from 'next/cache'
 import Link from 'next/link'
 import { DashboardHeader } from '@/components/DashboardHeader'
 import { Button, buttonVariants } from '@/components/ui/button'
-import { Plus } from 'lucide-react'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { supabase } from '@/libs/supabaseClient'
 import { CreateDrawer } from './CreateDrawer'
+import styles from './page.module.css'
 
 type Props = {
   params: {
@@ -33,25 +33,25 @@ export default async function Page({ params }: Props) {
   const { data, book } = await getData(slug)
 
   return (
-    <div className={'h-screen flex flex-col'}>
+    <div className={'flex h-screen flex-col'}>
       <DashboardHeader
         title={
           <>
             {book?.[0].name}
-            <span className="text-sm font-normal">（共{data?.length}章）</span>
+            <span className='font-normal text-sm'>（共{data?.length}章）</span>
           </>
         }
         extra={<CreateDrawer bookId={slug} last={(data?.length ?? 0) + 1} />}
       />
-      <ScrollArea className="p-4 flex-1 overflow-y-auto">
+      <ScrollArea className='flex-1 overflow-y-auto p-4'>
         <ul className={'grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'}>
           {data?.map((country) => (
             <Link
               href={`/articles/${country.id}`}
-              className={'h-10 rounded-lg px-4 flex items-center hover:bg-muted/50  w-full'}
+              className={'flex h-10 w-full items-center rounded-lg px-4 hover:bg-muted/50'}
               key={country.id}
             >
-              <span className="text-ellipsis overflow-hidden whitespace-nowrap">
+              <span className='overflow-hidden text-ellipsis whitespace-nowrap'>
                 {country.title.includes('章') ? '' : `第${country.serial}章 `}
                 {country.title}
               </span>

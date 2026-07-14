@@ -1,10 +1,10 @@
 'use client'
-import Upload from '@/components/Upload'
-import { Button } from '@/components/ui/button'
-import type { Database } from '@/types/supabase'
 import { Drawer, Form, Input } from 'antd'
 import { Edit } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import Upload from '@/components/Upload'
+import { Button } from '@/components/ui/button'
+import type { Database } from '@/types/supabase'
 
 import { updateModel } from './services'
 
@@ -39,38 +39,38 @@ export default function UpdateModel({ record }: CreateModelProps) {
   return (
     <>
       <Button size={'sm'} onClick={() => setOpen(true)}>
-        <Edit className="mr-2 w-4 h-4" />
+        <Edit className='mr-2 h-4 w-4' />
         编辑
       </Button>
       <Drawer
-        title="新增模特"
+        title='新增模特'
         width={600}
-        placement="right"
+        placement='right'
         onClose={() => setOpen(false)}
         open={open}
         extra={<Button onClick={handleSubmit}>提交</Button>}
       >
-        <Form form={form} layout="vertical">
+        <Form form={form} layout='vertical'>
           <Form.Item
-            label="名称"
+            label='名称'
             name={'username'}
             rules={[{ required: true, message: '请输入模特名称' }]}
           >
-            <Input placeholder="请输入模特名称" />
+            <Input placeholder='请输入模特名称' />
           </Form.Item>
-          <Form.Item label="个人主页" name={'homepage'}>
-            <Input placeholder="请输入模特的个人主页" />
+          <Form.Item label='个人主页' name={'homepage'}>
+            <Input placeholder='请输入模特的个人主页' />
           </Form.Item>
-          <Form.Item label="X" name={'twitter'}>
-            <Input placeholder="请输入模特在X的链接" />
+          <Form.Item label='X' name={'twitter'}>
+            <Input placeholder='请输入模特在X的链接' />
           </Form.Item>
-          <Form.Item label="Instagram" name={'instagram'}>
-            <Input placeholder="请输入模特在微博的链接" />
+          <Form.Item label='Instagram' name={'instagram'}>
+            <Input placeholder='请输入模特在微博的链接' />
           </Form.Item>
-          <Form.Item label="微博" name={'weibo'}>
-            <Input placeholder="请输入模特在微博的链接" />
+          <Form.Item label='微博' name={'weibo'}>
+            <Input placeholder='请输入模特在微博的链接' />
           </Form.Item>
-          <Form.Item label="头像" name={'avatar'}>
+          <Form.Item label='头像' name={'avatar'}>
             <Upload />
           </Form.Item>
         </Form>

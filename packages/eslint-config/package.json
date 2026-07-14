@@ -4,7 +4,10 @@
   "description": "langliu's eslint config",
   "main": "index.js",
   "type": "module",
-  "keywords": ["eslint", "eslint-config"],
+  "keywords": [
+    "eslint",
+    "eslint-config"
+  ],
   "author": {
     "name": "langliu",
     "email": "langliu1216@gmail.com",

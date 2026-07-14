@@ -1,6 +1,5 @@
-
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { type ClassValue, clsx } from 'clsx'
+import { twMerge } from 'tailwind-merge'
 
 export const formatCurrency = (amount: number) => {
   return (amount / 100).toLocaleString('en-US', {
@@ -19,7 +18,6 @@ export const formatDateToLocal = (dateStr: string, locale = 'zh-CN') => {
   const formatter = new Intl.DateTimeFormat(locale, options)
   return formatter.format(date)
 }
-
 
 export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the total number of pages is 7 or less,
@@ -45,7 +43,6 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
   // another ellipsis, and the last page.
   return [1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages]
 }
-
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
