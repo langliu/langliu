@@ -16,9 +16,9 @@
     "@radix-ui/react-slot": "catalog:",
     "@radix-ui/react-toast": "catalog:",
     "@radix-ui/react-tooltip": "catalog:",
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.1.1",
-    "crypto-js": "^4.2.0",
+    "class-variance-authority": "catalog:",
+    "clsx": "catalog:",
+    "crypto-js": "catalog:",
     "lucide-react": "catalog:",
     "next": "catalog:",
     "react": "catalog:",
@@ -26,17 +26,17 @@
     "react-hook-form": "catalog:",
     "tailwind-merge": "catalog:",
     "tw-animate-css": "catalog:",
-    "uuid": "^11.0.2",
+    "uuid": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@types/crypto-js": "^4.2.0",
-    "@types/node": "^22.10.1",
+    "@types/crypto-js": "catalog:",
+    "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "postcss": "^8",
+    "postcss": "catalog:",
     "@tailwindcss/postcss": "catalog:",
     "tailwindcss": "catalog:",
-    "typescript": "^5"
+    "typescript": "catalog:"
   }
 }

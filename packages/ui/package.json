@@ -12,12 +12,12 @@
     "docs:preview": "rspress preview"
   },
   "devDependencies": {
-    "@types/node": "^26.1.1",
-    "@types/react": "^18.3.10",
-    "@types/react-dom": "^18.3.0",
-    "class-variance-authority": "^0.7.0",
-    "react": "^18.3.1",
-    "rspress": "^1.31.1",
-    "typescript": "^5.6.2"
+    "@types/node": "catalog:",
+    "@types/react": "catalog:react18",
+    "@types/react-dom": "catalog:react18",
+    "class-variance-authority": "catalog:",
+    "react": "catalog:react18",
+    "rspress": "catalog:",
+    "typescript": "catalog:"
   }
 }
