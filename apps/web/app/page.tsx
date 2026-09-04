@@ -1,6 +1,5 @@
 'use client'
-import Link from 'next/link'
-import { CldImage } from 'next-cloudinary'
+import Image from 'next/image'
 import { Navbar } from '@/components/Navbar'
 import NewsletterForm from '@/components/NewsletterForm'
 import siteMetadata from '@/data/siteMetadata'
@@ -9,15 +8,12 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <CldImage
-        src='https://res.cloudinary.com/dvlxngmeg/image/upload/v1719110496/photo/0014_ieq1qg.avif' // Use this sample image or upload your own via the Media Explorer
-        width='500' // Transform the image: auto-crop to square aspect_ratio
-        height='500'
+      <Image
+        src='https://res.cloudinary.com/dvlxngmeg/image/upload/v1719110496/photo/0014_ieq1qg.avif'
+        width={500}
+        height={500}
         alt=''
-        // crop={{
-        //   type: 'auto',
-        //   source: true,
-        // }}
+        unoptimized
       />
       {/* <PageSEO title={siteMetadata.title} description={siteMetadata.description} /> */}
       <div className='divide-y divide-gray-200 dark:divide-gray-700'>

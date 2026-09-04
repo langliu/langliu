@@ -30,13 +30,14 @@ export async function getData() {
 export default async function Page({
   searchParams,
 }: {
-  searchParams?: {
+  searchParams: Promise<{
     query?: string
     page?: string
-  }
+  }>
 }) {
-  const query = searchParams?.query || ''
-  const currentPage = Number(searchParams?.page) || 1
+  const resolvedSearchParams = await searchParams
+  const query = resolvedSearchParams?.query || ''
+  const currentPage = Number(resolvedSearchParams?.page) || 1
   // const totalPages = await fetchInvoicesPages(query)
 
   return (

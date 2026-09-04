@@ -15,8 +15,9 @@ async function getData(page_id: string) {
     }
   } catch (error) {}
 }
-export default async function Page({ params }: { params: { pageId: string } }) {
-  const res = await getData(params.pageId)
+export default async function Page({ params }: { params: Promise<{ pageId: string }> }) {
+  const { pageId } = await params
+  const res = await getData(pageId)
   return (
     <ScrollArea className='h-screen w-screen flex-1 rounded-md border'>
       <div className='flex flex-col items-center gap-2 md:gap-4'>

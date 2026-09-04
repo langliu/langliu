@@ -1,6 +1,7 @@
 // biome-ignore-all lint/security/noDangerouslySetInnerHtml: This file injects JSON-LD generated from serialized structured data.
-import Head from 'next/head'
-import { useRouter } from 'next/router'
+'use client'
+
+import { usePathname } from 'next/navigation'
 import type { AuthorFrontMatter } from 'types/AuthorFrontMatter'
 import type { PostFrontMatter } from 'types/PostFrontMatter'
 import siteMetadata from '@/data/siteMetadata'
@@ -27,19 +28,22 @@ const CommonSEO = ({
   twImage,
   canonicalUrl,
 }: CommonSEOProps) => {
-  const router = useRouter()
+  const pathname = usePathname() || '/'
+  const url = `${siteMetadata.siteUrl}${pathname}`
   return (
-    <Head>
+    <>
       <title>{title}</title>
       <meta name='robots' content='follow, index' />
       <meta name='description' content={description} />
-      <meta property='og:url' content={`${siteMetadata.siteUrl}${router.asPath}`} />
+      <meta property='og:url' content={url} />
       <meta property='og:type' content={ogType} />
       <meta property='og:site_name' content={siteMetadata.title} />
       <meta property='og:description' content={description} />
       <meta property='og:title' content={title} />
       {Array.isArray(ogImage) ? (
-        ogImage.map(({ url }) => <meta property='og:image' content={url} key={url} />)
+        ogImage.map(({ url: imageUrl }) => (
+          <meta property='og:image' content={imageUrl} key={imageUrl} />
+        ))
       ) : (
         <meta property='og:image' content={ogImage} key={ogImage} />
       )}
@@ -48,11 +52,8 @@ const CommonSEO = ({
       <meta name='twitter:title' content={title} />
       <meta name='twitter:description' content={description} />
       <meta name='twitter:image' content={twImage} />
-      <link
-        rel='canonical'
-        href={canonicalUrl ? canonicalUrl : `${siteMetadata.siteUrl}${router.asPath}`}
-      />
-    </Head>
+      <link rel='canonical' href={canonicalUrl ? canonicalUrl : url} />
+    </>
   )
 }
 
@@ -78,7 +79,7 @@ export const PageSEO = ({ title, description }: PageSEOProps) => {
 export const TagSEO = ({ title, description }: PageSEOProps) => {
   const ogImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
   const twImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
-  const router = useRouter()
+  const pathname = usePathname() || '/'
   return (
     <>
       <CommonSEO
@@ -88,14 +89,12 @@ export const TagSEO = ({ title, description }: PageSEOProps) => {
         ogImage={ogImageUrl}
         twImage={twImageUrl}
       />
-      <Head>
-        <link
-          rel='alternate'
-          type='application/rss+xml'
-          title={`${description} - RSS feed`}
-          href={`${siteMetadata.siteUrl}${router.asPath}/feed.xml`}
-        />
-      </Head>
+      <link
+        rel='alternate'
+        type='application/rss+xml'
+        title={`${description} - RSS feed`}
+        href={`${siteMetadata.siteUrl}${pathname}/feed.xml`}
+      />
     </>
   )
 }
@@ -178,16 +177,14 @@ export const BlogSEO = ({
         twImage={twImageUrl}
         canonicalUrl={canonicalUrl}
       />
-      <Head>
-        {date && <meta property='article:published_time' content={publishedAt} />}
-        {lastmod && <meta property='article:modified_time' content={modifiedAt} />}
-        <script
-          type='application/ld+json'
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredData, null, 2),
-          }}
-        />
-      </Head>
+      {date && <meta property='article:published_time' content={publishedAt} />}
+      {lastmod && <meta property='article:modified_time' content={modifiedAt} />}
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData, null, 2),
+        }}
+      />
     </>
   )
 }

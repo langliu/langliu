@@ -1,15 +1,15 @@
 'use server'
-import type { Database } from '@/types/supabase'
-import { createClient } from '@/libs/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { createClient } from '@/libs/supabase/server'
+import type { Database } from '@/types/supabase'
 
 /**
  * 获取所有模特
  * @returns
  */
 export async function getAllModels() {
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { data: models, error } = await supabase.from('models').select('*')
 
@@ -19,7 +19,7 @@ export async function getAllModels() {
 export async function createModel(
   formData: Database['public']['Tables']['organizations']['Insert'],
 ) {
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { data, error } = await supabase
     .from('organizations')

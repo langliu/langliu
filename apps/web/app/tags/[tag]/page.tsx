@@ -1,6 +1,6 @@
+import React from 'react'
 import ArticleItem from '@/components/ArticleItem'
 import { getAllFilesFrontMatter } from '@/libs/mdx'
-import React from 'react'
 
 export const getData = async () => {
   const posts = await getAllFilesFrontMatter('blog')
@@ -8,17 +8,18 @@ export const getData = async () => {
 }
 
 type Props = {
-  params: {
+  params: Promise<{
     tag: string
-  }
+  }>
 }
 const TagDetailPage = async ({ params }: Props) => {
+  const { tag } = await params
   const { posts = [] } = await getData()
-  const tagPosts = posts?.filter((post) => post.tags.includes(params.tag))
+  const tagPosts = posts?.filter((post) => post.tags.includes(tag))
   return (
     <div>
-      <div className='text-6xl font-black mt-6 pb-6 border-b border-gray-300 border-opacity-50'>
-        {params.tag.toLocaleUpperCase()} （{posts.length}）
+      <div className='mt-6 border-gray-300 border-b border-opacity-50 pb-6 font-black text-6xl'>
+        {tag.toLocaleUpperCase()} （{posts.length}）
       </div>
       <div>
         <ul className='divide-y divide-gray-200 dark:divide-gray-700'>

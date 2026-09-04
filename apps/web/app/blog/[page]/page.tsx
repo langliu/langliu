@@ -1,6 +1,5 @@
 import { components } from '@/components/markdown'
 import '@/css/markdown.css'
-import { getAllFilesFrontMatter } from '@/libs/mdx'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import { Suspense } from 'react'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
@@ -9,11 +8,12 @@ import rehypePrettyCode from 'rehype-pretty-code'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkToc from 'remark-toc'
+import { getAllFilesFrontMatter } from '@/libs/mdx'
 
 type Props = {
-  params: {
+  params: Promise<{
     page: string
-  }
+  }>
 }
 
 export const getData = async (slug: string) => {
@@ -32,7 +32,7 @@ export const getData = async (slug: string) => {
 }
 
 export default async function BlogPage({ params }: Props) {
-  const { page } = params
+  const { page } = await params
   const { current } = await getData(page)
   console.log(current?.title)
 
@@ -80,9 +80,9 @@ export default async function BlogPage({ params }: Props) {
 
   return (
     <Suspense>
-      <div className='border-b border-b-slate-200 border-opacity-40 mb-6 text-center'>
+      <div className='mb-6 border-b border-b-slate-200 border-opacity-40 text-center'>
         <p>{date.format(new Date(current?.date ?? new Date()))}</p>
-        <h1 className='text-5xl font-bold mb-8'>{current?.title}</h1>
+        <h1 className='mb-8 font-bold text-5xl'>{current?.title}</h1>
       </div>
       <div className='markdown'>{content}</div>
     </Suspense>

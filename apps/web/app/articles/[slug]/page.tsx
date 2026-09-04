@@ -3,9 +3,9 @@ import { supabase } from '@/libs/supabaseClient'
 import styles from './page.module.css'
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export const runtime = 'edge'
@@ -31,7 +31,7 @@ export async function getData(id: string) {
 }
 
 export default async function Page({ params }: Props) {
-  const { slug } = params
+  const { slug } = await params
   const { article, hasNextPage, hasPreviousPage, nextPage, previousPage } = await getData(slug)
 
   const pa = (content: string) => {

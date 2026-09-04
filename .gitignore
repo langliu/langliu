@@ -48,3 +48,5 @@ Thumbs.db
 
 # doc
 */*/doc_build/*
+# next-agents-md
+.next-docs/

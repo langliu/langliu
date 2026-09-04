@@ -4,7 +4,7 @@ import { createClient } from '@/libs/supabase/server'
 import Photo from './Photo'
 
 export async function getData() {
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data: photos } = await supabase.from('photos').select()
   const { data } = await supabase.storage
     .from('langliu')

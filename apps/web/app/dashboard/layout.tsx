@@ -4,7 +4,7 @@ import { createClient } from '@/libs/supabase/server'
 import Panel from './(components)/Panel'
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const {
     data: { user },

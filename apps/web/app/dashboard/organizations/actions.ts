@@ -1,5 +1,5 @@
-import { createClient } from '@/libs/supabase/server'
 import { unstable_noStore as noStore } from 'next/cache'
+import { createClient } from '@/libs/supabase/server'
 
 const ITEMS_PER_PAGE = 10
 export async function fetchFilteredInvoices(query: string, currentPage = 1) {
@@ -7,7 +7,7 @@ export async function fetchFilteredInvoices(query: string, currentPage = 1) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE
 
   try {
-    const supabase = createClient()
+    const supabase = await createClient()
 
     const { data: albums, error } = await supabase
       .from('organizations')

@@ -9,7 +9,7 @@ export interface SupabaseImageProps {
 }
 
 export default async function SupabaseImage({ alt, src }: SupabaseImageProps) {
-  const supabase = createClient()
+  const supabase = await createClient()
   if (src?.startsWith('http')) {
     return <CldImage src={src} alt={alt} />
   }

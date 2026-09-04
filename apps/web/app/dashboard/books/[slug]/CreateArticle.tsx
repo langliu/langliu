@@ -20,13 +20,9 @@ import { Textarea } from '@/components/ui/textarea'
 import { createClient } from '@/libs/supabase/client'
 
 const formSchema = z.object({
-  serial: z.coerce
-    .number({
-      required_error: '请输入章节序号',
-    })
-    .min(1, '序号不能小于1'),
-  title: z.string({ required_error: '请输入标题' }).min(1, '请输入标题'),
-  content: z.string({ required_error: '请输入章节内容' }).min(1, '请输入章节内容'),
+  serial: z.coerce.number({ error: '请输入章节序号' }).min(1, '序号不能小于1'),
+  title: z.string({ error: '请输入标题' }).min(1, '请输入标题'),
+  content: z.string({ error: '请输入章节内容' }).min(1, '请输入章节内容'),
 })
 
 async function insertArticle(params: {

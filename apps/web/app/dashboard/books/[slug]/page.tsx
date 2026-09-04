@@ -9,9 +9,9 @@ import { CreateDrawer } from './CreateDrawer'
 import styles from './page.module.css'
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export async function getData(bookId: string) {
@@ -29,7 +29,7 @@ export async function getData(bookId: string) {
 }
 
 export default async function Page({ params }: Props) {
-  const { slug } = params
+  const { slug } = await params
   const { data, book } = await getData(slug)
 
   return (

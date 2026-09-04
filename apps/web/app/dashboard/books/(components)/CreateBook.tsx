@@ -20,8 +20,8 @@ import { useToast } from '@/components/ui/use-toast'
 import { createClient } from '@/libs/supabase/client'
 
 const formSchema = z.object({
-  name: z.string({ required_error: '请输入书籍名称' }).min(1, '请输入书籍名称'),
-  author: z.string({ required_error: '请输入书籍作者' }).min(1, '请输入书籍作者'),
+  name: z.string({ error: '请输入书籍名称' }).min(1, '请输入书籍名称'),
+  author: z.string({ error: '请输入书籍作者' }).min(1, '请输入书籍作者'),
   end: z.boolean(),
 })
 

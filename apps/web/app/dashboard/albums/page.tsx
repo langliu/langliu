@@ -30,16 +30,16 @@ export function CreateInvoice() {
 export default async function Page({
   searchParams,
 }: {
-  searchParams?: {
+  searchParams: Promise<{
     query?: string
     page?: string
     model?: string
-  }
+  }>
 }) {
-  // const { replace } = useRouter()
-  const query = searchParams?.query || ''
-  const modelId = searchParams?.model
-  const currentPage = Number(searchParams?.page) || 1
+  const resolvedSearchParams = await searchParams
+  const query = resolvedSearchParams?.query || ''
+  const modelId = resolvedSearchParams?.model
+  const currentPage = Number(resolvedSearchParams?.page) || 1
   const models = await getAllModels()
   const organizations = await getAllOrganizations()
 

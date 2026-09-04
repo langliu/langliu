@@ -1,17 +1,17 @@
-import styles from './page.module.css'
-import { createClient } from '@/libs/supabase/server'
 import { unstable_noStore as noStore } from 'next/cache'
 import Link from 'next/link'
+import { createClient } from '@/libs/supabase/server'
+import styles from './page.module.css'
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export const runtime = 'edge'
 export async function getData(bookId: string) {
-  const supabase = createClient()
+  const supabase = await createClient()
   noStore()
   const { data } = await supabase
     .from('articles')
@@ -26,7 +26,7 @@ export async function getData(bookId: string) {
 }
 
 export default async function Page({ params }: Props) {
-  const { slug } = params
+  const { slug } = await params
   const { data, book } = await getData(slug)
 
   return (

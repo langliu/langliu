@@ -1,15 +1,22 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import { supabase } from '@/libs/supabaseClient'
 
-export async function getData() {
-  const { data, error } = await supabase.from('countries').select()
-  return { data, error }
-}
-export default async function Page() {
-  const { data } = await getData()
-  console.table(data)
+export default function Page() {
+  const [rows, setRows] = useState<{ id?: string; name?: string; asd?: string }[] | null>(null)
+
+  useEffect(() => {
+    void supabase
+      .from('countries')
+      .select()
+      .then(({ data }) => setRows(data))
+  }, [])
 
   const onClick = async () => {
     await supabase.from('countries').insert([{ name: 'someValue', asd: 'otherValue' }])
+    const { data } = await supabase.from('countries').select()
+    setRows(data)
   }
 
   const signWithGithub = async () => {
@@ -18,6 +25,7 @@ export default async function Page() {
     })
     console.log(data)
   }
+
   return (
     <div>
       <h1>Countries</h1>
@@ -28,6 +36,15 @@ export default async function Page() {
       <button type='button' onClick={signWithGithub}>
         Github登录
       </button>
+
+      <ul>
+        {rows?.map((country) => (
+          <li key={country.id ?? `${country.name}-${country.asd}`}>
+            {country.name}
+            {country.asd}
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

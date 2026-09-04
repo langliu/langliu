@@ -1,7 +1,7 @@
 'use server'
+import { unstable_noStore as noStore } from 'next/cache'
 import { createClient } from '@/libs/supabase/server'
 import type { Database } from '@/types/supabase'
-import { unstable_noStore as noStore } from 'next/cache'
 
 const ITEMS_PER_PAGE = 10
 export async function fetchFilteredInvoices(query: string, currentPage = 1, modelId?: string) {
@@ -9,7 +9,7 @@ export async function fetchFilteredInvoices(query: string, currentPage = 1, mode
   const offset = (currentPage - 1) * ITEMS_PER_PAGE
 
   try {
-    const supabase = createClient()
+    const supabase = await createClient()
     const {
       data: albums,
       error,
@@ -46,7 +46,7 @@ export async function fetchFilteredInvoices(query: string, currentPage = 1, mode
  * @returns
  */
 export async function getAllModels() {
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { data: models, error } = await supabase
     .from('models')
@@ -59,7 +59,7 @@ export async function getAllModels() {
 }
 
 export async function createModel(formData: Database['public']['Tables']['albums']['Insert']) {
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { data, error } = await supabase
     .from('albums')
@@ -88,7 +88,7 @@ export async function createModel(formData: Database['public']['Tables']['albums
  * @returns
  */
 export async function getAllOrganizations() {
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { data: models, error } = await supabase.from('organizations').select('*')
   if (error) {

@@ -1,9 +1,9 @@
 'use server'
-import { createClient } from '@/libs/supabase/server'
 import { revalidatePath } from 'next/cache'
+import { createClient } from '@/libs/supabase/server'
 
 export async function createModel(formData: Record<string, unknown>) {
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data, error } = await supabase.from('models').insert([formData]).select()
   if (error) {
     return false
@@ -13,7 +13,7 @@ export async function createModel(formData: Record<string, unknown>) {
 }
 
 export async function updateModel(id: number, formData: Record<string, unknown>) {
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data, error } = await supabase
     .from('models')
     .update({ ...formData, updated_at: new Date().toUTCString() })

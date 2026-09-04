@@ -8,7 +8,7 @@ interface AvatarProps {
 }
 
 export default async function Avatar({ record }: AvatarProps) {
-  const supabase = createClient()
+  const supabase = await createClient()
 
   if (!record?.avatar) {
     return null

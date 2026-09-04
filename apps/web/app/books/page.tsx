@@ -5,7 +5,7 @@ import Search from './components/Search'
 import styles from './page.module.css'
 
 export async function getData() {
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data } = await supabase.from('books').select('*')
   return data
 }

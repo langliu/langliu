@@ -1,4 +1,5 @@
-import { notion } from '@/libs/notion'
+import Link from 'next/link'
+import { Navbar } from '@/components/Navbar'
 import {
   Table,
   TableBody,
@@ -7,8 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import Link from 'next/link'
-import { Navbar } from '@/components/Navbar'
+import { notion } from '@/libs/notion'
 import NextButton from './(components)/NextButton'
 
 async function getData(start_cursor?: string) {
@@ -29,8 +29,13 @@ async function getData(start_cursor?: string) {
   }
 }
 
-export default async function Page({ searchParams }: { searchParams: { nextCursor?: string } }) {
-  const res = await getData(searchParams.nextCursor)
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ nextCursor?: string }>
+}) {
+  const { nextCursor } = await searchParams
+  const res = await getData(nextCursor)
   return (
     <div>
       <Navbar />

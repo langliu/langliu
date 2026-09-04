@@ -8,7 +8,7 @@ import ModelsTable from './ModelsTable'
 import Search from './Search'
 
 async function getData(query?: string, page = 1) {
-  const supabase = createClient()
+  const supabase = await createClient()
   const start = (page - 1) * 10
   try {
     const {
@@ -41,15 +41,19 @@ async function getData(query?: string, page = 1) {
 }
 
 interface ModelsPageProps {
-  searchParams: {
+  searchParams: Promise<{
     query?: string
     page?: string
-  }
+  }>
 }
 
 export default async function ModelsPage({ searchParams }: ModelsPageProps) {
-  const currentPage = Number(searchParams?.page) || 1
-  const { list, total } = await getData(searchParams?.query, currentPage)
+  const resolvedSearchParams = await searchParams
+  const currentPage = Number(resolvedSearchParams?.page) || 1
+  const { list, total } = (await getData(resolvedSearchParams?.query, currentPage)) ?? {
+    list: [],
+    total: 0,
+  }
 
   return (
     <div className='flex h-screen flex-col gap-2 font-sans antialiased'>
