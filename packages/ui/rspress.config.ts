@@ -1,20 +1,18 @@
-import { defineConfig } from 'rspress/config'
+import { defineConfig } from '@rspress/core'
 
 export default defineConfig({
   // 文档根目录
   root: 'docs',
   themeConfig: {
     nav: [
-      { text: '首页', link: '/', position: 'left' },
+      { text: '首页', link: '/' },
       {
         text: '指南',
         link: '/guide/introduction',
-        position: 'right',
       },
       {
         text: '组件',
         link: '/components/button',
-        position: 'right',
       },
     ],
     sidebar: {

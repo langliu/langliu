@@ -13,11 +13,12 @@
   },
   "devDependencies": {
     "@types/node": "catalog:",
-    "@types/react": "catalog:react18",
-    "@types/react-dom": "catalog:react18",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@rspress/core": "catalog:",
     "class-variance-authority": "catalog:",
-    "react": "catalog:react18",
-    "rspress": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "typescript": "catalog:"
   }
 }
