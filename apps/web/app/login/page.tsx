@@ -1,7 +1,7 @@
+import { buttonVariants } from '@langliu/ui/ui/button'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/libs/utils'
 import { UserAuthForm } from './(components)/user-auth-form'
 

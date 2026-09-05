@@ -1,10 +1,9 @@
 'use client'
 
+import { useToast } from '@langliu/ui/hooks/use-toast'
+import { Button } from '@langliu/ui/ui/button'
 import { Loader2 } from 'lucide-react'
 import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { ToastAction } from '@/components/ui/toast'
-import { useToast } from '@/components/ui/use-toast'
 import { createClient } from '@/libs/supabase/client'
 
 export const GithubLogin = () => {
@@ -26,11 +25,6 @@ export const GithubLogin = () => {
         description: error.message,
         title: error.name,
         variant: 'destructive',
-        action: (
-          <ToastAction altText='重试' onClick={loginWithGithub}>
-            重试
-          </ToastAction>
-        ),
       })
     }
   }

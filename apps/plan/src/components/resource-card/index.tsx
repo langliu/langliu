@@ -1,6 +1,6 @@
 'use client'
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@langliu/ui/ui/badge'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@langliu/ui/ui/card'
 import { sendGTMEvent } from '@next/third-parties/google'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -27,7 +27,7 @@ export default function ResourceCard({
     >
       <Card
         className={
-          'hover:-translate-y-1 flex h-full min-w-52 cursor-pointer items-center hover:bg-gray-50'
+          'flex h-full min-w-52 cursor-pointer items-center hover:-translate-y-1 hover:bg-gray-50'
         }
       >
         <Image

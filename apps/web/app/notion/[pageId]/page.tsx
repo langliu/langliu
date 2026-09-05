@@ -1,5 +1,5 @@
+import { ScrollArea } from '@langliu/ui/ui/scroll-area'
 import Image from 'next/image'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import { notion } from '@/libs/notion'
 
 async function getData(page_id: string) {

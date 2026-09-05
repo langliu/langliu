@@ -1,22 +1,15 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useToast } from '@langliu/ui/hooks/use-toast'
+import { Button } from '@langliu/ui/ui/button'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@langliu/ui/ui/form'
+import { Input } from '@langliu/ui/ui/input'
+import { Switch } from '@langliu/ui/ui/switch'
 import { useDebounceFn } from 'ahooks'
 import { unstable_noStore as noStore } from 'next/cache'
 import { Suspense } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { Button } from '@/components/ui/button'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Switch } from '@/components/ui/switch'
-import { useToast } from '@/components/ui/use-toast'
 import { createClient } from '@/libs/supabase/client'
 
 const formSchema = z.object({

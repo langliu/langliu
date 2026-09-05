@@ -1,11 +1,11 @@
+import { buttonVariants } from '@langliu/ui/ui/button'
+import { ScrollArea } from '@langliu/ui/ui/scroll-area'
 import { Plus } from 'lucide-react'
 import Link from 'next/link'
 import { Suspense } from 'react'
 import DashboardHeader from '@/components/DashboardHeader'
 import Pagination from '@/components/Pagination'
 import Search from '@/components/Search'
-import { buttonVariants } from '@/components/ui/button'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import { InvoicesTableSkeleton } from './Skeletons'
 import Table from './Table'
 

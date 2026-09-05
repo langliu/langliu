@@ -1,12 +1,5 @@
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@langliu/ui/ui/table'
 import Link from 'next/link'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
 import { formatDateToLocal } from '@/libs/utils'
 import { fetchFilteredInvoices } from './actions'
 

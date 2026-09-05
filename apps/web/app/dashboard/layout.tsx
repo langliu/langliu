@@ -1,5 +1,5 @@
+import { TooltipProvider } from '@langliu/ui/ui/tooltip'
 import { redirect } from 'next/navigation'
-import { TooltipProvider } from '@/components/ui/tooltip'
 import { createClient } from '@/libs/supabase/server'
 import Panel from './(components)/Panel'
 
@@ -14,7 +14,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
   }
 
   return (
-    <TooltipProvider delayDuration={0}>
+    <TooltipProvider delay={0}>
       <div className='flex h-screen flex-col md:overflow-hidden'>
         <Panel>{children}</Panel>
       </div>

@@ -1,8 +1,8 @@
 'use client'
+import { Input } from '@langliu/ui/ui/input'
 import { useDebounceFn } from 'ahooks'
 import { Search as SearchIcon } from 'lucide-react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { Input } from '@/components/ui/input'
 
 export default function Search({ placeholder }: { placeholder: string }) {
   const searchParams = useSearchParams()

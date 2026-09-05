@@ -1,8 +1,8 @@
 'use client'
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@langliu/ui/ui/resizable'
+import { Separator } from '@langliu/ui/ui/separator'
+import { TooltipProvider } from '@langliu/ui/ui/tooltip'
 import { useState } from 'react'
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable'
-import { Separator } from '@/components/ui/separator'
-import { TooltipProvider } from '@/components/ui/tooltip'
 import { cn } from '@/libs/utils'
 import SideNav from '@/ui/dashboard/sidenav'
 
@@ -28,7 +28,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const defaultLayout = [15, 85]
 
   return (
-    <TooltipProvider delayDuration={0}>
+    <TooltipProvider delay={0}>
       <div className='flex h-screen flex-col md:flex-row md:overflow-hidden'>
         <ResizablePanelGroup
           direction='horizontal'

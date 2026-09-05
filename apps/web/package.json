@@ -2,6 +2,7 @@
   "name": "web",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack -p 3000",
     "build": "next build",
@@ -13,6 +14,7 @@
     "@ant-design/cssinjs": "catalog:",
     "@fontsource/inter": "catalog:",
     "@hookform/resolvers": "catalog:",
+    "@langliu/ui": "workspace:*",
     "@mdx-js/loader": "catalog:",
     "@mdx-js/react": "catalog:",
     "@next/mdx": "catalog:",

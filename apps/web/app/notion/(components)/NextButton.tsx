@@ -1,8 +1,8 @@
 'use client'
+import { Button } from '@langliu/ui/ui/button'
 import { useDebounceFn } from 'ahooks'
 import { Search as SearchIcon } from 'lucide-react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { Button } from '@/components/ui/button'
 
 export default function NextButton({ nextCursor }: { nextCursor?: string | null }) {
   const searchParams = useSearchParams()

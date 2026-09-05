@@ -1,6 +1,6 @@
 'use client'
+import { Button } from '@langliu/ui/ui/button'
 import { CldImage, CldUploadWidget, type CldUploadWidgetProps } from 'next-cloudinary'
-import { Button } from '@/components/ui/button'
 
 export interface UploadProps {
   value?: string

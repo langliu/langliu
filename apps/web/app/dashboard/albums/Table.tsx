@@ -1,7 +1,7 @@
+import { ScrollArea } from '@langliu/ui/ui/scroll-area'
 import Link from 'next/link'
 import Badge from '@/components/Badges'
 import SupabaseImage from '@/components/SupabaseImage'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import { formatDateToLocal } from '@/libs/utils'
 import type { Database } from '@/types/supabase'
 import { fetchFilteredInvoices } from './actions'

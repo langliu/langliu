@@ -10,6 +10,7 @@
     "lint": "biome lint . --files-ignore-unknown=true"
   },
   "dependencies": {
+    "@langliu/ui": "workspace:*",
     "@next/third-parties": "catalog:",
     "@radix-ui/react-dialog": "catalog:",
     "@radix-ui/react-separator": "catalog:",

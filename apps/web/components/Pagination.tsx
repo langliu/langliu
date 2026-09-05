@@ -1,7 +1,7 @@
 'use client'
+import { Button } from '@langliu/ui/ui/button'
 import { ChevronLeft, ChevronRight, Replace } from 'lucide-react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { Button } from './ui/button'
 
 interface Props {
   totalPages?: number

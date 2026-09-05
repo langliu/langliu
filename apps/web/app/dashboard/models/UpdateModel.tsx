@@ -1,9 +1,9 @@
 'use client'
+import { Button } from '@langliu/ui/ui/button'
 import { Drawer, Form, Input } from 'antd'
 import { Edit } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import Upload from '@/components/Upload'
-import { Button } from '@/components/ui/button'
 import type { Database } from '@/types/supabase'
 
 import { updateModel } from './services'

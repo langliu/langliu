@@ -1,4 +1,5 @@
 import './global.css'
+import { Toaster } from '@langliu/ui/ui/toast'
 import type { ReactNode } from 'react'
 import StyledComponentsRegistry from '@/libs/AntdRegistry'
 import Providers from './providers'
@@ -12,7 +13,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang='zh-CN'>
       <body className={'antialiased'}>
         <Providers>
-          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+          <StyledComponentsRegistry>
+            {children}
+            <Toaster />
+          </StyledComponentsRegistry>
         </Providers>
       </body>
     </html>

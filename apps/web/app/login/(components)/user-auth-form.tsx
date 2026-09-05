@@ -1,10 +1,10 @@
 'use client'
 
+import { Button } from '@langliu/ui/ui/button'
+import { Input } from '@langliu/ui/ui/input'
+import { Label } from '@langliu/ui/ui/label'
 import { Loader } from 'lucide-react'
 import * as React from 'react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { cn } from '@/libs/utils'
 import { login } from '../actions'
 import { GithubLogin } from './github-login'

@@ -1,8 +1,8 @@
+import { buttonVariants } from '@langliu/ui/ui/button'
+import { Separator } from '@langliu/ui/ui/separator'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@langliu/ui/ui/tooltip'
 import { LogOut } from 'lucide-react'
 import Link from 'next/link'
-import { buttonVariants } from '@/components/ui/button'
-import { Separator } from '@/components/ui/separator'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/libs/utils'
 import NavLinks from './nav-links'
 
@@ -19,15 +19,17 @@ export default function SideNav({ isCollapsed = false }: { isCollapsed?: boolean
         >
           <nav className='mt-auto grid gap-1 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2'>
             {isCollapsed ? (
-              <Tooltip delayDuration={0}>
-                <TooltipTrigger asChild>
-                  <Link
-                    href={'#'}
-                    className={cn(buttonVariants({ variant: 'ghost', size: 'icon' }), 'h-9 w-9')}
-                  >
-                    <LogOut className='h-4 w-4' />
-                    <span className='sr-only'>退出登录</span>
-                  </Link>
+              <Tooltip>
+                <TooltipTrigger
+                  render={
+                    <Link
+                      href={'#'}
+                      className={cn(buttonVariants({ variant: 'ghost', size: 'icon' }), 'h-9 w-9')}
+                    />
+                  }
+                >
+                  <LogOut className='h-4 w-4' />
+                  <span className='sr-only'>退出登录</span>
                 </TooltipTrigger>
                 <TooltipContent side='right' className='flex items-center gap-4'>
                   退出登录

@@ -4,7 +4,7 @@ import rehypePrettyCode from 'rehype-pretty-code'
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ['ui'],
+  transpilePackages: ['@langliu/ui'],
   typescript: {
     ignoreBuildErrors: true,
   },

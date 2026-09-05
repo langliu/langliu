@@ -1,13 +1,6 @@
+import { buttonVariants } from '@langliu/ui/ui/button'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@langliu/ui/ui/table'
 import Link from 'next/link'
-import { buttonVariants } from '@/components/ui/button'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
 import { supabase } from '@/libs/supabaseClient'
 
 export async function getData(query: unknown, current: string | number) {

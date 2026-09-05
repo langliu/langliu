@@ -1,13 +1,6 @@
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@langliu/ui/ui/table'
 import Link from 'next/link'
 import { Navbar } from '@/components/Navbar'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
 import { notion } from '@/libs/notion'
 import NextButton from './(components)/NextButton'
 

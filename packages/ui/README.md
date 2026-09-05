@@ -1,6 +1,16 @@
-# harmony design react components
+# @langliu/ui
 
-## 相关资源
+Monorepo 公共组件包。shadcn/ui 基于 **Base UI**（`style: base-nova`）。
 
-- [设计规范](https://pixso.cn/community/file/zoDbWPVHGRrMnX8gLL7Zcg)
-- [设计资源](https://developer.huawei.com/consumer/cn/design/resource/)
+```ts
+import { Button } from '@langliu/ui/ui/button'
+import { cn } from '@langliu/ui/lib/utils'
+```
+
+新增组件（在仓库根目录）：
+
+```bash
+pnpm dlx shadcn@latest add dialog -c packages/ui
+```
+
+各应用的 `components.json` 已把 `ui` / `utils` 指到本包，从 app 里 `shadcn add` 也会写到 `packages/ui`。

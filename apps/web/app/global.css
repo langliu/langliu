@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@source '../../../packages/ui/src';
 @plugin '@tailwindcss/typography';
 @plugin '@tailwindcss/forms';
 @config '../tailwind.config.js';

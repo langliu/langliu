@@ -1,22 +1,15 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useToast } from '@langliu/ui/hooks/use-toast'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@langliu/ui/ui/form'
+import { Textarea } from '@langliu/ui/ui/textarea'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@langliu/ui/ui/tooltip'
 import { ArrowRightLeft, CircleArrowRight, Clipboard, Guitar } from 'lucide-react'
 import { useState } from 'react'
 import { useFormStatus } from 'react-dom'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
-import { Textarea } from '@/components/ui/textarea'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { useToast } from '@/hooks/use-toast'
 import { isJSONStr } from '@/utils'
 import { translation } from './actions'
 import { LanguageSelect } from './language-select'
@@ -153,16 +146,18 @@ export default function TranslateForm() {
                 <FormMessage />
                 <TooltipProvider>
                   <Tooltip>
-                    <TooltipTrigger asChild>
-                      <button
-                        type={'button'}
-                        className={
-                          'absolute top-4 right-4 z-10 inline-flex h-7 w-7 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-background font-medium text-foreground text-sm opacity-100 shadow-sm transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'
-                        }
-                        onClick={prettyInput}
-                      >
-                        <Guitar className={'pointer-events-none size-3.5 shrink-0'} />
-                      </button>
+                    <TooltipTrigger
+                      render={
+                        <button
+                          type={'button'}
+                          className={
+                            'absolute top-4 right-4 z-10 inline-flex h-7 w-7 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-background font-medium text-foreground text-sm opacity-100 shadow-sm transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'
+                          }
+                          onClick={prettyInput}
+                        />
+                      }
+                    >
+                      <Guitar className={'pointer-events-none size-3.5 shrink-0'} />
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>Format JSON Input</p>
@@ -177,16 +172,18 @@ export default function TranslateForm() {
             {translateResult && (
               <TooltipProvider>
                 <Tooltip>
-                  <TooltipTrigger asChild>
-                    <button
-                      type={'button'}
-                      className={
-                        'absolute top-4 right-4 z-10 inline-flex h-7 w-7 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-background font-medium text-foreground text-sm opacity-100 shadow-sm transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'
-                      }
-                      onClick={handleCopy}
-                    >
-                      <Clipboard className={'pointer-events-none size-3.5 shrink-0'} />
-                    </button>
+                  <TooltipTrigger
+                    render={
+                      <button
+                        type={'button'}
+                        className={
+                          'absolute top-4 right-4 z-10 inline-flex h-7 w-7 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-background font-medium text-foreground text-sm opacity-100 shadow-sm transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'
+                        }
+                        onClick={handleCopy}
+                      />
+                    }
+                  >
+                    <Clipboard className={'pointer-events-none size-3.5 shrink-0'} />
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>Copy</p>

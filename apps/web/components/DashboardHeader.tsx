@@ -1,5 +1,5 @@
+import { Separator } from '@langliu/ui/ui/separator'
 import type { FC, ReactNode } from 'react'
-import { Separator } from '@/components/ui/separator'
 
 export type DashboardHeaderProps = {
   children?: ReactNode

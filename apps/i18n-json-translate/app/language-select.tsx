@@ -1,11 +1,11 @@
-import { FormControl } from '@/components/ui/form'
+import { FormControl } from '@langliu/ui/ui/form'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
+} from '@langliu/ui/ui/select'
 
 export interface LanguageSelectProps {
   /** 是否允许自动检测 */
@@ -19,7 +19,12 @@ export function LanguageSelect({
   allowAuto = false,
 }: LanguageSelectProps) {
   return (
-    <Select onValueChange={onValueChange} defaultValue={defaultValue}>
+    <Select
+      defaultValue={defaultValue}
+      onValueChange={(value) => {
+        if (value != null) onValueChange?.(value)
+      }}
+    >
       <FormControl>
         <SelectTrigger className={'w-[180px]'}>
           <SelectValue placeholder='Select a verified email to display' />

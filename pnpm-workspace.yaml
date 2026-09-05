@@ -6,6 +6,7 @@ catalogMode: strict
 
 catalog:
   '@ant-design/cssinjs': ^1.21.0
+  '@base-ui/react': ^1.8.0
   '@biomejs/biome': ^2.5.12
   '@fontsource/inter': ^5.2.8
   '@hookform/resolvers': ^5.4.0
@@ -59,7 +60,7 @@ catalog:
   react: ^19.2.8
   react-dom: ^19.2.8
   react-hook-form: ^7.81.0
-  react-resizable-panels: ^2.0.19
+  react-resizable-panels: ^4.12.3
   reading-time: ^1.5.0
   rehype-autolink-headings: ^7.1.0
   rehype-citation: ^2.3.2
@@ -72,7 +73,6 @@ catalog:
   remark-gfm: ^4.0.1
   remark-math: ^6.0.0
   remark-toc: ^9.0.0
-  '@rspress/core': ^2.0.21
   shiki: ^1.7.0
   socket.io: ^4.8.3
   socket.io-client: ^4.8.3
@@ -87,6 +87,7 @@ catalog:
   uuid: ^14.0.1
   vaul: ^0.9.9
   zod: ^4.4.3
+  cn: ^0.2.5
 
 allowBuilds:
   '@biomejs/biome': true

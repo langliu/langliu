@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import type { ReactNode } from 'react'
 import './globals.css'
-import { AppSidebar } from '@/components/app-sidebar'
-import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
+import { SidebarProvider, SidebarTrigger } from '@langliu/ui/ui/sidebar'
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
+import { AppSidebar } from '@/components/app-sidebar'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',

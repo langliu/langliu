@@ -1,11 +1,11 @@
 'use client'
+import { ScrollArea } from '@langliu/ui/ui/scroll-area'
 import { useRequest } from 'ahooks'
 import { Button, Drawer, Form, Input, InputNumber, Select, Switch } from 'antd'
 import { EditIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import Upload from '@/components/Upload'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import type { Database } from '@/types/supabase'
 import { createModel } from './actions'
 

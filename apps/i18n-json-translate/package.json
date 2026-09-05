@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "catalog:",
+    "@langliu/ui": "workspace:*",
     "@next/third-parties": "catalog:",
     "@radix-ui/react-label": "catalog:",
     "@radix-ui/react-select": "catalog:",
