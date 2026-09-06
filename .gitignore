@@ -41,7 +41,11 @@ Thumbs.db
 # Next.js
 .next
 .env
+.env*.local
 .vercel
+
+# TypeScript
+*.tsbuildinfo
 
 # Turbo
 .turbo

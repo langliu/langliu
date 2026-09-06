@@ -1,19 +1,17 @@
-import kebabCase from '@/libs/utils/kebabCase'
 import Link from 'next/link'
 
 interface Props {
   text: string
 }
 
-const Tag = ({ text }: Props) => {
+export default function Tag({ text }: Props) {
+  const formatted = text.split(' ').join('-').toLowerCase()
   return (
     <Link
-      className='mr-3 text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400'
-      href={`/tags/${kebabCase(text)}`}
+      href={`/tags/${formatted}`}
+      className='mr-3 font-medium text-primary-500 text-sm uppercase hover:text-primary-600 dark:hover:text-primary-400'
     >
       {text.split(' ').join('-')}
     </Link>
   )
 }
-
-export default Tag
