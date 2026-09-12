@@ -50,6 +50,10 @@ Thumbs.db
 # Turbo
 .turbo
 
+# Cloudflare / Wrangler
+.wrangler
+.dev.vars
+
 # doc
 */*/doc_build/*
 # next-agents-md

@@ -12,6 +12,8 @@
       "!**/node_modules",
       "!**/.next",
       "!**/dist",
+      "!**/worker-configuration.d.ts",
+      "!**/routeTree.gen.ts",
       "!**/public/**/*.svg",
       "!**/public/static"
     ]
