@@ -120,9 +120,6 @@ catalogs:
     clsx:
       specifier: ^2.1.1
       version: 2.1.1
-    cn:
-      specifier: ^0.2.6
-      version: 0.2.6
     crypto-js:
       specifier: ^4.2.0
       version: 4.2.0
@@ -661,9 +658,6 @@ importers:
       clsx:
         specifier: 'catalog:'
         version: 2.1.1
-      cn:
-        specifier: 'catalog:'
-        version: 0.2.6
       lucide-react:
         specifier: 'catalog:'
         version: 1.24.0(react@19.2.8)
@@ -3289,11 +3283,6 @@ packages:
   cmd-shim@6.0.0:
     resolution: {integrity: sha512-wx+RWLgiSU6SCDzMtxG0Dv1lsuOcEfqq5SbqAViezaJIkR5sbveKzFU31YnWhqrJx3o3Iu3H0Rq8R00OS3oI+Q==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
-
-  cn@0.2.6:
-    resolution: {integrity: sha512-+i4L0zUGgRcEnhsxueVrP7iBGxBx5iD0WOTYg1MwFEu2ZyCmH5Ov2V1cul2Ht5UchRQQgftCf4be/RxspuW6QQ==}
-    engines: {node: '>=20'}
-    hasBin: true
 
   collapse-white-space@2.1.0:
     resolution: {integrity: sha512-loKTxY1zCOuG4j9f6EPnuyyYkf58RnhhWTvRoZEokgB+WbdXehfjFviyOVYkqzEWz1Q5kRiZdBYS5SwxbQYwzw==}
@@ -7376,8 +7365,6 @@ snapshots:
   clsx@2.1.1: {}
 
   cmd-shim@6.0.0: {}
-
-  cn@0.2.6: {}
 
   collapse-white-space@2.1.0: {}
 
