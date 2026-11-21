@@ -14,7 +14,9 @@
   },
   "dependencies": {
     "@hookform/resolvers": "catalog:",
+    "@cfworker/json-schema": "catalog:",
     "@langliu/ui": "workspace:*",
+    "@modelcontextprotocol/sdk": "catalog:",
     "@tanstack/react-router": "catalog:",
     "@tanstack/react-router-devtools": "catalog:",
     "@tanstack/react-start": "catalog:",

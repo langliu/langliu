@@ -22,3 +22,30 @@ pnpm --filter nav exec wrangler d1 create nav
 pnpm --filter nav exec wrangler d1 migrations apply DB --remote
 pnpm --filter nav exec wrangler secret put BETTER_AUTH_SECRET
 ```
+
+## MCP
+
+`/mcp` 提供无状态 Streamable HTTP 的 MCP 服务，用 Bearer Token 鉴权（对应 secret `MCP_TOKEN`）：
+
+```bash
+pnpm --filter nav exec wrangler secret put MCP_TOKEN
+pnpm --filter nav deploy
+```
+
+可用工具：`list_categories`、`search_links`、`list_links`、`create_link`。
+
+MCP 客户端配置（例如 Claude Code / Cursor）：
+
+```json
+{
+  "mcpServers": {
+    "nav": {
+      "type": "http",
+      "url": "https://nav.langliu1216.workers.dev/mcp",
+      "headers": { "Authorization": "Bearer <MCP_TOKEN>" }
+    }
+  }
+}
+```
+
+本地开发时 Token 读 `apps/nav/.dev.vars` 里的 `MCP_TOKEN`。
