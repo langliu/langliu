@@ -1,0 +1,192 @@
+export type PlanResource = {
+  /** 资源标题 */
+  title: string
+  description: string
+  tags: string[]
+  link: string
+  icon?: string
+}
+
+export type PlanSection = {
+  /** 页内锚点 */
+  id: string
+  category: string
+  data: PlanResource[]
+}
+
+export const plan: PlanSection[] = [
+  {
+    category: '在线视频',
+    id: 'online',
+    data: [
+      {
+        title: '磁力熊',
+        link: 'https://www.cilixiong.cc/',
+        description: '纯净的1080P高分电影网站',
+        tags: ['电影', '动漫', '美剧', '极速'],
+        icon: 'https://www.cilixiong.cc/apple-touch-icon.png',
+      },
+      {
+        title: '低端影视',
+        link: 'https://ddys.pro/',
+        description: '超清在线视频',
+        tags: ['电影', '动漫', '美剧', '极速'],
+        icon: 'https://ddys.pro/favicon-32x32.png',
+      },
+      {
+        title: 'NO 视频',
+        link: 'https://www.novipnoad.net/',
+        description: '超清在线视频',
+        tags: ['电影', '动漫', '美剧', '在线'],
+        icon: 'https://img.548549.xyz/file/1ee9a08d870dc8607c217.png',
+      },
+      {
+        title: 'HDmoli',
+        link: 'https://www.hdmoli.pro/',
+        description: '自建片源，部分源跟低端相同，速度不错',
+        tags: ['电影', '动漫', '美剧', '在线'],
+        icon: 'https://www.hdmoli.com/favicon.ico',
+      },
+      {
+        title: 'Auete',
+        link: 'https://auete.pro/',
+        description: '自建片源，部分源跟低端相同，速度不错',
+        tags: ['电影', '动漫', '电视剧'],
+      },
+      {
+        title: 'Libvio',
+        link: 'https://www.libvio.me/',
+        description: '自建片源，热门影视剧的速度不错',
+        tags: ['电影', '动漫', '电视剧'],
+        icon: 'https://xiaoxiaojia.oss-cn-shanghai.aliyuncs.com/statics/img/favicon.ico',
+      },
+      {
+        title: '在线之家',
+        link: 'https://www.zxzj.pro/',
+        description: '自建片源，只做海外影视剧',
+        tags: ['电影', '动漫', '电视剧'],
+        icon: 'https://www.zxzj.pro/statics/img/favicon.ico',
+      },
+      {
+        title: '厂长资源',
+        link: 'https://www.czzy77.com/',
+        description: '海量1080p经典影视免费观看',
+        tags: ['电影', '海外剧', '电视剧'],
+        icon: 'https://gimg2.baidu.com/gimg/app=2028&src=img.czzy66.com/2020/05/cropped-90b07fe57d6142-32x32.png',
+      },
+      {
+        title: '橘子动漫',
+        link: 'https://www.mgnacg.com/',
+        description: '海量1080p经典影视免费观看',
+        tags: ['动漫', '番剧', '日漫'],
+        icon: 'https://r2img.nanoacg.com/favicon.png',
+      },
+      {
+        title: '番薯动漫',
+        link: 'https://www.fsdm02.com/',
+        description: '您追番的最佳归属',
+        tags: ['动漫', '番剧', '日漫'],
+        icon: 'https://p0.ssl.qhimg.com/t016852bd7df93fb9de.png',
+      },
+      {
+        title: '奈飞工厂',
+        link: 'https://www.netflixgc.com/',
+        description: '自建片源部分速度比较快，但有些失效的',
+        tags: ['电影', '海外剧', '日剧', '美剧'],
+        icon: 'https://www.netflixgc.com/upload/site/20241029-1/a3066e37a45ef286668060443b4de885.png',
+      },
+      {
+        title: '皮皮影视',
+        link: 'https://www.pipi14.tv/',
+        description: '自建片源部分速度比较快，但有些失效的',
+        tags: ['电影', '电视剧', '综艺', '短剧'],
+        icon: 'https://www.pipi14.tv/mxtheme/images/favicon.png',
+      },
+    ],
+  },
+  {
+    category: '影视数据库',
+    id: 'database',
+    data: [
+      {
+        title: 'The Movie Database (TMDB)',
+        description: '在线的电影和电视节目数据库，提供了广泛的电影和电视节目信息',
+        link: 'https://www.themoviedb.org/',
+        tags: ['TMDB'],
+      },
+    ],
+  },
+  {
+    category: '云盘资源',
+    id: 'cloud',
+    data: [
+      {
+        link: 'https://www.taijuwang.cc/',
+        title: '钛聚网',
+        description: '免费分享百万级网盘资源，无广告，无跳转，一站直达！',
+        tags: ['夸克盘'],
+        icon: 'https://so.taijuwang.cc/uploads/image/20241101/9673882b276bf13008fa805ca63c7e0e.png',
+      },
+      {
+        link: 'https://www.xinjufang.com/',
+        title: '新剧坊',
+        description: '免费分享百万级网盘资源，无广告，无跳转，一站直达！',
+        tags: ['百度网盘'],
+        icon: 'https://www.xinjuc.com/wp-content/uploads/2021/12/logo1.png',
+      },
+      {
+        link: 'https://www.rrdynb.com/index.html',
+        title: '人人电影网',
+        description: '网盘下载站，资源还算丰富',
+        tags: ['百度网盘', '阿里云盘'],
+        icon: 'https://www.rrdynb.com/favicon.ico',
+      },
+      {
+        title: '阿里云盘资源共享站',
+        description: '人人为我，我为人人的共享资源社区',
+        link: 'https://pan666.net/',
+        tags: ['阿里云盘'],
+      },
+      {
+        title: '兄弟盘',
+        description: '可快速搜索百度网盘资源中的有效连接',
+        link: 'https://xiongdipan.com/',
+        tags: ['百度网盘'],
+      },
+      {
+        link: 'https://yunpan1.cc/',
+        title: '云盘资源分享社区',
+        description: '提供不限于阿里云盘资源\\夸克网盘资源等的各类网盘资源',
+        icon: 'https://yunpan1.cc/assets/logo-waxo11on.png',
+        tags: ['百度网盘', '夸克盘'],
+      },
+    ],
+  },
+  {
+    category: 'Korean BJ',
+    id: 'korean',
+    data: [
+      {
+        title: 'Korean BJ Club',
+        description: '最大的 Korean BJ 录播合集',
+        link: 'https://koreanbj.club/',
+        tags: ['Korean BJ', '18X'],
+        icon: 'https://koreanbj.club/wp-content/uploads/2021/08/cooltext390578551305383.png',
+      },
+      {
+        title: 'sexBJcam',
+        description: 'sexBJcam 是一个 Korean BJ 直播录屏视频合集',
+        link: 'https://sexbjcam.com/',
+        tags: ['Korean BJ', '18X'],
+        icon: 'https://sexbjcam.com/wp-content/uploads/2020/03/icon.png',
+      },
+      {
+        title: 'SexKBJ',
+        description: '在此观看免费性感高级韩国 BJ 摄像头！',
+        link: 'https://sexkbj.com/',
+        tags: ['Korean BJ', '18X'],
+        icon: 'https://sexkbj.com/wp-content/uploads/2021/01/logoicon.png',
+      },
+    ],
+  },
+]

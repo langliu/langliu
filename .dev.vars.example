@@ -1,0 +1,8 @@
+BETTER_AUTH_SECRET=replace-with-at-least-32-random-characters
+BETTER_AUTH_URL=http://localhost:3000
+
+MCP_TOKEN=dev-token
+
+# 可选：影视导航页的统计脚本，不配置则不注入
+# GOOGLE_ANALYTICS_ID=G-XXXXXXXXXX
+# GOOGLE_TAG_MANAGER_ID=GTM-XXXXXXX

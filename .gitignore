@@ -38,23 +38,16 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Next.js
-.next
+# env
 .env
 .env*.local
-.vercel
 
 # TypeScript
 *.tsbuildinfo
 
-# Turbo
-.turbo
+# TanStack Start
+.tanstack
 
 # Cloudflare / Wrangler
 .wrangler
 .dev.vars
-
-# doc
-*/*/doc_build/*
-# next-agents-md
-.next-docs/

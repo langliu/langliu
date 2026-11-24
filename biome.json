@@ -9,8 +9,8 @@
   "files": {
     "includes": [
       "**",
+      "!**/.agents",
       "!**/node_modules",
-      "!**/.next",
       "!**/dist",
       "!**/worker-configuration.d.ts",
       "!**/routeTree.gen.ts",
