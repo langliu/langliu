@@ -1,4 +1,5 @@
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
+import { novelStatuses } from './novel-utils'
 
 export const user = sqliteTable('user', {
   id: text('id').primaryKey(),
@@ -75,4 +76,39 @@ export const navLink = sqliteTable('nav_link', {
   url: text('url').notNull(),
   description: text('description'),
   sortOrder: integer('sort_order').notNull().default(0),
+})
+
+export const novel = sqliteTable('novel', {
+  id: text('id').primaryKey(),
+  name: text('name').notNull(),
+  author: text('author'),
+  cover: text('cover'),
+  intro: text('intro'),
+  status: text('status', { enum: novelStatuses }).notNull().default('serializing'),
+  createdAt: integer('created_at', { mode: 'timestamp' }).notNull(),
+  updatedAt: integer('updated_at', { mode: 'timestamp' }).notNull(),
+})
+
+export const novelVolume = sqliteTable('novel_volume', {
+  id: text('id').primaryKey(),
+  novelId: text('novel_id')
+    .notNull()
+    .references(() => novel.id, { onDelete: 'cascade' }),
+  name: text('name').notNull(),
+  sortOrder: integer('sort_order').notNull().default(0),
+})
+
+// volumeId 为空表示这一章没有分卷；sortOrder 只在同一小说的同一组（未分卷或某一卷）内比较
+export const novelChapter = sqliteTable('novel_chapter', {
+  id: text('id').primaryKey(),
+  novelId: text('novel_id')
+    .notNull()
+    .references(() => novel.id, { onDelete: 'cascade' }),
+  volumeId: text('volume_id').references(() => novelVolume.id, { onDelete: 'set null' }),
+  title: text('title').notNull(),
+  content: text('content').notNull().default(''),
+  wordCount: integer('word_count').notNull().default(0),
+  sortOrder: integer('sort_order').notNull().default(0),
+  createdAt: integer('created_at', { mode: 'timestamp' }).notNull(),
+  updatedAt: integer('updated_at', { mode: 'timestamp' }).notNull(),
 })

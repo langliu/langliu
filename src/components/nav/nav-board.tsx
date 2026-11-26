@@ -1,16 +1,7 @@
 import { useRouter } from '@tanstack/react-router'
-import {
-  Clapperboard,
-  Compass,
-  ExternalLink,
-  Folder,
-  LayoutGrid,
-  LogOut,
-  Pencil,
-  Plus,
-  Trash2,
-} from 'lucide-react'
+import { ExternalLink, Folder, LayoutGrid, Pencil, Plus, Trash2 } from 'lucide-react'
 import { useMemo, useState } from 'react'
+import { AppShell } from '~/components/app-shell'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -26,23 +17,15 @@ import { Button } from '~/components/ui/button'
 import { Label } from '~/components/ui/label'
 import { Separator } from '~/components/ui/separator'
 import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
-  SidebarHeader,
-  SidebarInset,
   SidebarMenu,
   SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarProvider,
-  SidebarTrigger,
 } from '~/components/ui/sidebar'
 import { Switch } from '~/components/ui/switch'
-import { authClient } from '~/lib/auth-client'
 import { deleteLink, type NavCategory, type NavLinkItem } from '~/lib/nav'
 import { AddDrawer } from './add-drawer'
 
@@ -76,11 +59,6 @@ export function NavBoard({ board, email }: { board: NavCategory[]; email: string
     activeId === 'all' ? '全部' : (board.find((cat) => cat.id === activeId)?.name ?? '全部')
   const visibleCount = visible.reduce((total, cat) => total + countLinks(cat), 0)
 
-  async function signOut() {
-    await authClient.signOut()
-    await router.navigate({ to: '/login' })
-  }
-
   function openCreate() {
     setEditingLink(null)
     setSheetOpen(true)
@@ -106,159 +84,108 @@ export function NavBoard({ board, email }: { board: NavCategory[]; email: string
   }
 
   return (
-    <SidebarProvider>
-      <Sidebar variant='inset' collapsible='icon'>
-        <SidebarHeader>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton size='lg'>
-                <div className='flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground'>
-                  <Compass className='size-4' />
-                </div>
-                <div className='grid flex-1 text-left text-sm leading-tight'>
-                  <span className='truncate font-semibold'>导航</span>
-                  <span className='truncate text-xs'>个人书签</span>
-                </div>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-          <Button
-            className='w-full justify-start bg-background text-foreground hover:bg-background/90'
-            size='sm'
-            onClick={openCreate}
-          >
+    <AppShell
+      email={email}
+      headerAction={
+        <Button
+          className='w-full justify-start bg-background text-foreground hover:bg-background/90'
+          size='sm'
+          onClick={openCreate}
+        >
+          <Plus />
+          新增
+        </Button>
+      }
+      groups={
+        <SidebarGroup>
+          <SidebarGroupLabel>分类</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton isActive={activeId === 'all'} onClick={() => setActiveId('all')}>
+                  <LayoutGrid />
+                  <span>全部</span>
+                  <SidebarMenuBadge>
+                    {board.reduce((total, cat) => total + countLinks(cat), 0)}
+                  </SidebarMenuBadge>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              {board.map((cat) => (
+                <SidebarMenuItem key={cat.id}>
+                  <SidebarMenuButton
+                    isActive={activeId === cat.id}
+                    onClick={() => setActiveId(cat.id)}
+                  >
+                    <Folder />
+                    <span>{cat.name}</span>
+                    <SidebarMenuBadge>{countLinks(cat)}</SidebarMenuBadge>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      }
+      title={activeName}
+      description={`${visibleCount} 个站点`}
+      actions={
+        <>
+          <div className='flex items-center gap-2'>
+            <Switch
+              id='edit-mode'
+              checked={editing}
+              onCheckedChange={(checked) => setEditing(Boolean(checked))}
+            />
+            <Label htmlFor='edit-mode' className='text-sm'>
+              编辑
+            </Label>
+          </div>
+          <Button size='sm' variant='outline' onClick={openCreate} className='md:hidden'>
             <Plus />
             新增
           </Button>
-        </SidebarHeader>
-        <SidebarContent>
-          <SidebarGroup>
-            <SidebarGroupLabel>分类</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                <SidebarMenuItem>
-                  <SidebarMenuButton
-                    isActive={activeId === 'all'}
-                    onClick={() => setActiveId('all')}
-                  >
-                    <LayoutGrid />
-                    <span>全部</span>
-                    <SidebarMenuBadge>
-                      {board.reduce((total, cat) => total + countLinks(cat), 0)}
-                    </SidebarMenuBadge>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-                {board.map((cat) => (
-                  <SidebarMenuItem key={cat.id}>
-                    <SidebarMenuButton
-                      isActive={activeId === cat.id}
-                      onClick={() => setActiveId(cat.id)}
-                    >
-                      <Folder />
-                      <span>{cat.name}</span>
-                      <SidebarMenuBadge>{countLinks(cat)}</SidebarMenuBadge>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-          <SidebarGroup>
-            <SidebarGroupLabel>站点</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                <SidebarMenuItem>
-                  {/* 整页跳转：影视导航是公开页面，带着自己的统计脚本，不进入导航的登录态 */}
-                  <SidebarMenuButton render={<a href='/plan' />} tooltip='影视导航'>
-                    <Clapperboard />
-                    <span>影视导航</span>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        </SidebarContent>
-        <SidebarFooter>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton onClick={signOut} tooltip='登出'>
-                <LogOut />
-                <span className='truncate'>{email}</span>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarFooter>
-      </Sidebar>
-
-      <SidebarInset>
-        <header className='sticky top-0 z-10 flex h-14 items-center justify-between gap-2 border-b bg-background/80 px-4 backdrop-blur'>
-          <div className='flex min-w-0 items-center gap-2'>
-            <SidebarTrigger />
-            <Separator orientation='vertical' className='h-4' />
-            <div className='min-w-0'>
-              <h1 className='font-medium text-sm'>{activeName}</h1>
-              <p className='text-muted-foreground text-xs'>{visibleCount} 个站点</p>
-            </div>
-          </div>
-          <div className='flex items-center gap-3'>
-            <div className='flex items-center gap-2'>
-              <Switch
-                id='edit-mode'
-                checked={editing}
-                onCheckedChange={(checked) => setEditing(Boolean(checked))}
-              />
-              <Label htmlFor='edit-mode' className='text-sm'>
-                编辑
-              </Label>
-            </div>
-            <Button size='sm' variant='outline' onClick={openCreate} className='md:hidden'>
-              <Plus />
-              新增
-            </Button>
-          </div>
-        </header>
-
-        <div className='mx-auto w-full max-w-6xl flex-1 space-y-10 p-6'>
-          {visible.length === 0 ? <EmptyState onAdd={openCreate} /> : null}
-          {visible.map((cat) => (
-            <section key={cat.id} className='space-y-5'>
-              {activeId === 'all' ? (
+        </>
+      }
+    >
+      <div className='mx-auto w-full max-w-6xl flex-1 space-y-10 p-6'>
+        {visible.length === 0 ? <EmptyState onAdd={openCreate} /> : null}
+        {visible.map((cat) => (
+          <section key={cat.id} className='space-y-5'>
+            {activeId === 'all' ? (
+              <div className='flex items-center gap-2'>
+                <h2 className='font-semibold text-base'>{cat.name}</h2>
+                <Badge variant='secondary'>{countLinks(cat)}</Badge>
+              </div>
+            ) : null}
+            {cat.subcategories.length === 0 ? (
+              <p className='text-muted-foreground text-sm'>这个分类还没有小分类。</p>
+            ) : null}
+            {cat.subcategories.map((sub) => (
+              <div key={sub.id} className='space-y-3'>
                 <div className='flex items-center gap-2'>
-                  <h2 className='font-semibold text-base'>{cat.name}</h2>
-                  <Badge variant='secondary'>{countLinks(cat)}</Badge>
+                  <h3 className='font-medium text-muted-foreground text-sm'>{sub.name}</h3>
+                  <Separator className='flex-1' />
                 </div>
-              ) : null}
-              {cat.subcategories.length === 0 ? (
-                <p className='text-muted-foreground text-sm'>这个分类还没有小分类。</p>
-              ) : null}
-              {cat.subcategories.map((sub) => (
-                <div key={sub.id} className='space-y-3'>
-                  <div className='flex items-center gap-2'>
-                    <h3 className='font-medium text-muted-foreground text-sm'>{sub.name}</h3>
-                    <Separator className='flex-1' />
+                {sub.links.length === 0 ? (
+                  <p className='text-muted-foreground text-sm'>还没有站点。</p>
+                ) : (
+                  <div className='grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-3'>
+                    {sub.links.map((link) => (
+                      <LinkCard
+                        key={link.id}
+                        link={link}
+                        editing={editing}
+                        onEdit={() => openEdit(link)}
+                        onDelete={() => setDeletingLink(link)}
+                      />
+                    ))}
                   </div>
-                  {sub.links.length === 0 ? (
-                    <p className='text-muted-foreground text-sm'>还没有站点。</p>
-                  ) : (
-                    <div className='grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-3'>
-                      {sub.links.map((link) => (
-                        <LinkCard
-                          key={link.id}
-                          link={link}
-                          editing={editing}
-                          onEdit={() => openEdit(link)}
-                          onDelete={() => setDeletingLink(link)}
-                        />
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </section>
-          ))}
-        </div>
-      </SidebarInset>
-
+                )}
+              </div>
+            ))}
+          </section>
+        ))}
+      </div>
       <AddDrawer
         open={sheetOpen}
         onOpenChange={(open) => {
@@ -290,7 +217,7 @@ export function NavBoard({ board, email }: { board: NavCategory[]; email: string
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </SidebarProvider>
+    </AppShell>
   )
 }
 

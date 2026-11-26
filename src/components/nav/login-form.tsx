@@ -5,7 +5,7 @@ import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label'
 import { authClient } from '~/lib/auth-client'
 
-export function LoginForm({ setup }: { setup: boolean }) {
+export function LoginForm({ setup, redirectTo = '/' }: { setup: boolean; redirectTo?: string }) {
   const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -33,7 +33,7 @@ export function LoginForm({ setup }: { setup: boolean }) {
     }
 
     await router.invalidate()
-    await router.navigate({ to: '/' })
+    await router.navigate({ href: redirectTo })
   }
 
   return (
