@@ -1,4 +1,5 @@
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
+
 import { novelStatuses } from './novel-utils'
 
 export const user = sqliteTable('user', {

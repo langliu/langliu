@@ -2,6 +2,7 @@ import { useRouter } from '@tanstack/react-router'
 import { useServerFn } from '@tanstack/react-start'
 import { FileUp, TriangleAlert } from 'lucide-react'
 import { useRef, useState } from 'react'
+
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label'
@@ -280,7 +281,7 @@ export function TxtImport({
               {fileInfo ? `${fileInfo.name}（${fileInfo.encoding}）` : '选择 .txt 文件'}
             </Button>
             <div className='flex items-center gap-2'>
-              <Label htmlFor='txt-split-size' className='text-muted-foreground shrink-0 text-xs'>
+              <Label htmlFor='txt-split-size' className='shrink-0 text-xs text-muted-foreground'>
                 识别不到目录时按字数切分
               </Label>
               <Input
@@ -291,7 +292,7 @@ export function TxtImport({
                 value={splitSize}
                 onChange={(event) => setSplitSize(event.target.value)}
               />
-              <span className='text-muted-foreground text-xs'>字</span>
+              <span className='text-xs text-muted-foreground'>字</span>
               {fileInfo ? (
                 <Button size='xs' variant='ghost' onClick={reSplit} disabled={progress != null}>
                   重新识别
@@ -302,26 +303,26 @@ export function TxtImport({
 
           {result ? (
             <>
-              <div className='bg-muted/50 space-y-1.5 rounded-lg p-3 text-xs'>
+              <div className='space-y-1.5 rounded-lg bg-muted/50 p-3 text-xs'>
                 <p>
                   识别方式：<span className='font-medium'>{result.rule ?? '按字数切分'}</span> · 共{' '}
                   {groups.filter((g) => g.isVolume).length} 卷 {totalChapters} 章 · 约{' '}
                   {formatWords(selectedWords)} 字
                 </p>
                 {result.warnings.map((warning) => (
-                  <p key={warning} className='text-destructive flex items-start gap-1'>
+                  <p key={warning} className='flex items-start gap-1 text-destructive'>
                     <TriangleAlert className='mt-0.5 size-3 shrink-0' />
                     {warning}
                   </p>
                 ))}
                 {overCap ? (
-                  <p className='text-destructive flex items-start gap-1'>
+                  <p className='flex items-start gap-1 text-destructive'>
                     <TriangleAlert className='mt-0.5 size-3 shrink-0' />
                     一本书最多 {MAX_IMPORT_CHAPTERS} 章，当前已选超出上限。
                   </p>
                 ) : null}
                 {hasOversized ? (
-                  <p className='text-destructive flex items-start gap-1'>
+                  <p className='flex items-start gap-1 text-destructive'>
                     <TriangleAlert className='mt-0.5 size-3 shrink-0' />
                     已选内容包含超过 30 万字的章节，请先取消勾选或丢弃超长序章后再导入。
                   </p>
@@ -330,7 +331,7 @@ export function TxtImport({
 
               {result.preamble ? (
                 <div className='space-y-2'>
-                  <Label className='text-muted-foreground text-xs'>
+                  <Label className='text-xs text-muted-foreground'>
                     第一个章节之前还有 {formatWords(result.preambleWordCount)} 字内容
                     {preambleOversized ? '（超过单章 30 万字上限，无法保留）' : ''}
                   </Label>
@@ -356,12 +357,12 @@ export function TxtImport({
                   return (
                     <div key={group.key}>
                       <div className='flex items-center justify-between gap-2 px-1 py-1'>
-                        <span className='text-muted-foreground truncate text-xs font-medium'>
+                        <span className='truncate text-xs font-medium text-muted-foreground'>
                           {group.name} · {group.items.length} 章
                         </span>
                         <button
                           type='button'
-                          className='text-muted-foreground hover:text-foreground text-xs'
+                          className='text-xs text-muted-foreground hover:text-foreground'
                           onClick={() =>
                             setSelected((current) => {
                               const next = new Set(current)
@@ -379,7 +380,7 @@ export function TxtImport({
                           {allOn ? '全不选' : '全选'}
                         </button>
                       </div>
-                      <ul className='bg-card ring-foreground/10 divide-y rounded-lg ring-1'>
+                      <ul className='divide-y rounded-lg bg-card ring-1 ring-foreground/10'>
                         {group.items.map((item) => (
                           <li
                             key={item.key}
@@ -401,9 +402,9 @@ export function TxtImport({
                             />
                             <span className='min-w-0 flex-1 truncate'>{item.chapter.title}</span>
                             {item.chapter.oversized ? (
-                              <span className='text-destructive shrink-0 text-xs'>超长</span>
+                              <span className='shrink-0 text-xs text-destructive'>超长</span>
                             ) : (
-                              <span className='text-muted-foreground shrink-0 text-xs tabular-nums'>
+                              <span className='shrink-0 text-xs text-muted-foreground tabular-nums'>
                                 {formatWords(item.chapter.wordCount)} 字
                               </span>
                             )}
@@ -417,16 +418,16 @@ export function TxtImport({
             </>
           ) : null}
 
-          {error ? <p className='text-destructive text-sm'>{error}</p> : null}
+          {error ? <p className='text-sm text-destructive'>{error}</p> : null}
           {progress ? (
             <div className='space-y-1'>
-              <div className='bg-muted h-1.5 overflow-hidden rounded-full'>
+              <div className='h-1.5 overflow-hidden rounded-full bg-muted'>
                 <div
-                  className='bg-primary h-full rounded-full transition-all'
+                  className='h-full rounded-full bg-primary transition-all'
                   style={{ width: `${Math.round((progress.imported / progress.total) * 100)}%` }}
                 />
               </div>
-              <p className='text-muted-foreground text-xs tabular-nums'>
+              <p className='text-xs text-muted-foreground tabular-nums'>
                 正在导入 {progress.imported} / {progress.total} 章…
               </p>
             </div>

@@ -1,5 +1,6 @@
 import { createMiddleware, createServerFn } from '@tanstack/react-start'
 import { count } from 'drizzle-orm'
+
 import { user } from './schema'
 
 export const getSession = createServerFn({ method: 'GET' }).handler(async () => {

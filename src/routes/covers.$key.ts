@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+
 import { getCoverBucket } from '~/lib/covers'
 
 const notFound = () => new Response('Not Found', { status: 404 })

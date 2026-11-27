@@ -1,4 +1,5 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router'
+
 import { AppShell } from '~/components/app-shell'
 import { getNavBoard } from '~/lib/nav'
 import { listNovels } from '~/lib/novels'

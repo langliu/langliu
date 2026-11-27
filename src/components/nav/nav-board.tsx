@@ -1,6 +1,7 @@
 import { useRouter } from '@tanstack/react-router'
 import { ExternalLink, Pencil, Plus, Trash2 } from 'lucide-react'
 import { useMemo, useState } from 'react'
+
 import { PageHeader } from '~/components/app-shell'
 import {
   AlertDialog,
@@ -18,6 +19,7 @@ import { Label } from '~/components/ui/label'
 import { Separator } from '~/components/ui/separator'
 import { Switch } from '~/components/ui/switch'
 import { deleteLink, type NavCategory, type NavLinkItem } from '~/lib/nav'
+
 import { AddDrawer } from './add-drawer'
 
 function countLinks(cat: NavCategory) {
@@ -111,16 +113,16 @@ export function NavBoard({ board, activeCat }: { board: NavCategory[]; activeCat
               </div>
             ) : null}
             {cat.subcategories.length === 0 ? (
-              <p className='text-muted-foreground text-sm'>这个分类还没有小分类。</p>
+              <p className='text-sm text-muted-foreground'>这个分类还没有小分类。</p>
             ) : null}
             {cat.subcategories.map((sub) => (
               <div key={sub.id} className='space-y-3'>
                 <div className='flex items-center gap-2'>
-                  <h3 className='text-muted-foreground text-sm font-medium'>{sub.name}</h3>
+                  <h3 className='text-sm font-medium text-muted-foreground'>{sub.name}</h3>
                   <Separator className='flex-1' />
                 </div>
                 {sub.links.length === 0 ? (
-                  <p className='text-muted-foreground text-sm'>还没有站点。</p>
+                  <p className='text-sm text-muted-foreground'>还没有站点。</p>
                 ) : (
                   <div className='grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-3'>
                     {sub.links.map((link) => (
@@ -194,23 +196,23 @@ function LinkCard({
         href={link.url}
         target='_blank'
         rel='noreferrer'
-        className='bg-card ring-foreground/10 hover:bg-muted/50 flex items-start gap-3 rounded-xl p-3 ring-1 transition-colors'
+        className='flex items-start gap-3 rounded-xl bg-card p-3 ring-1 ring-foreground/10 transition-colors hover:bg-muted/50'
       >
         <img
           src={`https://www.google.com/s2/favicons?domain=${host}&sz=64`}
           alt=''
           width={32}
           height={32}
-          className='bg-muted mt-0.5 size-8 rounded-md'
+          className='mt-0.5 size-8 rounded-md bg-muted'
         />
         <div className='min-w-0 flex-1'>
           <div className='flex items-center gap-1.5'>
             <span className='truncate text-sm font-medium'>{link.title}</span>
-            <ExternalLink className='text-muted-foreground size-3 shrink-0 opacity-0 transition-opacity group-hover:opacity-100' />
+            <ExternalLink className='size-3 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100' />
           </div>
-          <p className='text-muted-foreground truncate text-xs'>{host}</p>
+          <p className='truncate text-xs text-muted-foreground'>{host}</p>
           {link.description ? (
-            <p className='text-muted-foreground mt-1 line-clamp-2 text-xs'>{link.description}</p>
+            <p className='mt-1 line-clamp-2 text-xs text-muted-foreground'>{link.description}</p>
           ) : null}
         </div>
       </a>
@@ -253,7 +255,7 @@ function EmptyState({ onAdd }: { onAdd: () => void }) {
   return (
     <div className='flex flex-col items-center justify-center rounded-xl border border-dashed py-16 text-center'>
       <p className='text-sm font-medium'>还没有导航</p>
-      <p className='text-muted-foreground mt-1 text-sm'>先新增一个分类或站点。</p>
+      <p className='mt-1 text-sm text-muted-foreground'>先新增一个分类或站点。</p>
       <Button className='mt-4' size='sm' onClick={onAdd}>
         <Plus />
         新增

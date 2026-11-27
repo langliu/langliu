@@ -1,5 +1,6 @@
 import { ExternalLink } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
+
 import { Badge } from '~/components/ui/badge'
 import { sendGTMEvent } from '~/lib/analytics'
 
@@ -27,13 +28,13 @@ export function ResourceCard({
       target='_blank'
       rel='noreferrer'
       onClick={() => sendGTMEvent({ event: 'link_click', value: href })}
-      className='group bg-card ring-foreground/10 hover:bg-muted/50 flex h-full items-start gap-3 rounded-xl p-4 ring-1 transition-colors'
+      className='group flex h-full items-start gap-3 rounded-xl bg-card p-4 ring-1 ring-foreground/10 transition-colors hover:bg-muted/50'
     >
       <ResourceIcon src={icon || `${href}favicon.ico`} />
       <div className='min-w-0 flex-1 space-y-1.5'>
         <div className='flex items-center gap-1.5'>
           <span className='truncate text-sm font-medium'>{title}</span>
-          <ExternalLink className='text-muted-foreground size-3 shrink-0 opacity-0 transition-opacity group-hover:opacity-100' />
+          <ExternalLink className='size-3 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100' />
         </div>
         {tags.length > 0 ? (
           <div className='flex flex-wrap gap-1.5'>
@@ -44,7 +45,7 @@ export function ResourceCard({
             ))}
           </div>
         ) : null}
-        <p className='text-muted-foreground line-clamp-2 text-xs'>{description}</p>
+        <p className='line-clamp-2 text-xs text-muted-foreground'>{description}</p>
       </div>
     </a>
   )
@@ -95,7 +96,7 @@ function IconImage({
       className={
         hidden
           ? 'invisible mt-0.5 size-9 shrink-0 rounded-md object-contain'
-          : 'bg-muted mt-0.5 size-9 shrink-0 rounded-md object-contain p-1'
+          : 'mt-0.5 size-9 shrink-0 rounded-md bg-muted object-contain p-1'
       }
       onError={onError}
     />

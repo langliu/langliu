@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+
 import { AppShell, PageHeader } from '~/components/app-shell'
 import { ResourceCard } from '~/components/plan/resource-card'
 import { Badge } from '~/components/ui/badge'
@@ -43,8 +44,8 @@ function PlanPage() {
       <div id='top' className='mx-auto w-full max-w-6xl flex-1 space-y-10 p-6'>
         {analytics.gtmId ? (
           <noscript>
-            {/* biome-ignore lint/a11y/useIframeTitle: GTM 官方回退片段，iframe 始终不可见 */}
             <iframe
+              title='Google Tag Manager'
               src={`https://www.googletagmanager.com/ns.html?id=${analytics.gtmId}`}
               height={0}
               width={0}

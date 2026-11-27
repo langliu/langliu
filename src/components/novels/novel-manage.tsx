@@ -2,6 +2,7 @@ import { Link, useRouter } from '@tanstack/react-router'
 import { useServerFn } from '@tanstack/react-start'
 import { BookOpen, ChevronDown, ChevronUp, FileUp, Pencil, Plus, Trash2 } from 'lucide-react'
 import { useState } from 'react'
+
 import { ChapterGroup } from '~/components/novels/chapter-group'
 import { ConfirmDialog } from '~/components/novels/confirm-dialog'
 import { NovelCover } from '~/components/novels/novel-cover'
@@ -74,12 +75,12 @@ export function NovelManage({ detail }: { detail: NovelDetail }) {
             <h2 className='text-xl font-semibold'>{detail.name}</h2>
             <Badge variant='secondary'>{novelStatusLabels[detail.status]}</Badge>
           </div>
-          <p className='text-muted-foreground text-sm'>
+          <p className='text-sm text-muted-foreground'>
             {detail.author ?? '佚名'} · {detail.chapterCount} 章 · {formatWords(detail.wordCount)}{' '}
             字
           </p>
           {detail.intro ? (
-            <p className='text-muted-foreground line-clamp-3 text-sm whitespace-pre-line'>
+            <p className='line-clamp-3 text-sm whitespace-pre-line text-muted-foreground'>
               {detail.intro}
             </p>
           ) : null}
@@ -133,12 +134,12 @@ export function NovelManage({ detail }: { detail: NovelDetail }) {
           </div>
         </div>
 
-        {error ? <p className='text-destructive text-sm'>{error}</p> : null}
+        {error ? <p className='text-sm text-destructive'>{error}</p> : null}
 
         {detail.chapterCount === 0 && detail.volumes.length === 0 ? (
           <div className='rounded-xl border border-dashed py-12 text-center'>
             <p className='text-sm font-medium'>还没有章节</p>
-            <p className='text-muted-foreground mt-1 text-sm'>
+            <p className='mt-1 text-sm text-muted-foreground'>
               可以直接新增章节，也可以先建分卷再往卷里加。
             </p>
             <Button className='mt-4' size='sm' onClick={() => openNewChapter()}>

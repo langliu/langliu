@@ -1,5 +1,6 @@
 import { createFileRoute, Link, useLoaderData, useNavigate } from '@tanstack/react-router'
 import { useEffect } from 'react'
+
 import { Button } from '~/components/ui/button'
 import { readingOrder } from '~/lib/novel-utils'
 
@@ -27,12 +28,12 @@ function StartPage() {
   }, [detail, navigate])
 
   if (detail.chapterCount > 0) {
-    return <p className='p-6 text-muted-foreground text-sm'>正在打开…</p>
+    return <p className='p-6 text-sm text-muted-foreground'>正在打开…</p>
   }
 
   return (
     <div className='flex flex-col items-center justify-center gap-3 p-6 py-24 text-center'>
-      <p className='font-medium text-sm'>《{detail.name}》还没有章节</p>
+      <p className='text-sm font-medium'>《{detail.name}》还没有章节</p>
       <Button
         size='sm'
         variant='outline'

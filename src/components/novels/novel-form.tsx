@@ -1,5 +1,6 @@
 import { useServerFn } from '@tanstack/react-start'
 import { type ChangeEvent, type FormEvent, useEffect, useRef, useState } from 'react'
+
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label'
@@ -222,7 +223,7 @@ export function NovelForm({
               onChange={(event) => setDraft({ ...draft, cover: event.target.value })}
             />
             <div className='flex items-center justify-between gap-2'>
-              <Label htmlFor='novel-cover-file' className='text-muted-foreground text-xs'>
+              <Label htmlFor='novel-cover-file' className='text-xs text-muted-foreground'>
                 或上传本地图片（PNG/JPG/WebP/GIF，≤2MB）
               </Label>
               <Button
@@ -244,7 +245,7 @@ export function NovelForm({
               onChange={onCoverFile}
             />
             {coverFile ? (
-              <div className='text-muted-foreground flex items-center justify-between gap-2 text-xs'>
+              <div className='flex items-center justify-between gap-2 text-xs text-muted-foreground'>
                 <p className='min-w-0 truncate'>已选文件：{coverFile.name}</p>
                 <Button
                   type='button'
@@ -269,7 +270,7 @@ export function NovelForm({
             />
           </div>
 
-          {error ? <p className='text-destructive text-sm'>{error}</p> : null}
+          {error ? <p className='text-sm text-destructive'>{error}</p> : null}
 
           <SheetFooter className='px-0'>
             <Button type='submit' disabled={pending}>

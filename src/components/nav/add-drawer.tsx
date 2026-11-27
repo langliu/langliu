@@ -1,5 +1,6 @@
 import { useRouter } from '@tanstack/react-router'
 import { type FormEvent, useEffect, useMemo, useState } from 'react'
+
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label'
@@ -254,7 +255,7 @@ export function AddDrawer({
             </>
           ) : null}
 
-          {error ? <p className='text-destructive text-sm'>{error}</p> : null}
+          {error ? <p className='text-sm text-destructive'>{error}</p> : null}
 
           <SheetFooter className='px-0'>
             <Button type='submit' disabled={pending}>

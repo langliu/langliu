@@ -1,5 +1,6 @@
 import { useRouter } from '@tanstack/react-router'
 import { type FormEvent, useState } from 'react'
+
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label'
@@ -62,7 +63,7 @@ export function LoginForm({ setup, redirectTo = '/' }: { setup: boolean; redirec
           onChange={(event) => setPassword(event.target.value)}
         />
       </div>
-      {error ? <p className='text-destructive text-sm'>{error}</p> : null}
+      {error ? <p className='text-sm text-destructive'>{error}</p> : null}
       <Button type='submit' className='w-full' disabled={pending}>
         {pending ? '请稍候…' : setup ? '创建账号' : '登录'}
       </Button>

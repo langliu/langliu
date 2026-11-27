@@ -12,6 +12,7 @@ import {
   MapIcon,
 } from 'lucide-react'
 import { type ComponentProps, type CSSProperties, type ReactNode, useEffect, useState } from 'react'
+
 import { Separator } from '~/components/ui/separator'
 import {
   Sidebar,
@@ -88,14 +89,14 @@ export function PageHeader({
   actions?: ReactNode
 }) {
   return (
-    <header className='bg-background/80 sticky top-0 z-10 flex h-14 items-center justify-between gap-2 border-b px-4 backdrop-blur'>
+    <header className='sticky top-0 z-10 flex h-14 items-center justify-between gap-2 border-b bg-background/80 px-4 backdrop-blur'>
       <div className='flex min-w-0 items-center gap-2'>
         <SidebarTrigger />
         <Separator orientation='vertical' className='h-4' />
         <div className='min-w-0'>
           <h1 className='truncate text-sm font-medium'>{title}</h1>
           {description ? (
-            <p className='text-muted-foreground truncate text-xs'>{description}</p>
+            <p className='truncate text-xs text-muted-foreground'>{description}</p>
           ) : null}
         </div>
       </div>
@@ -184,7 +185,7 @@ function AppSidebar({
         {/* 一级菜单：最左侧独立的纯图标栏 */}
         <Sidebar
           collapsible='none'
-          className='border-sidebar-border w-[calc(var(--sidebar-width-icon)+1px)]! shrink-0 border-r group-data-[collapsible=icon]:border-r-0'
+          className='w-[calc(var(--sidebar-width-icon)+1px)]! shrink-0 border-r border-sidebar-border group-data-[collapsible=icon]:border-r-0'
         >
           <SidebarHeader className='items-center p-2'>
             <SidebarMenu>
@@ -212,7 +213,7 @@ function AppSidebar({
                     )
                   }
                 >
-                  <div className='bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg'>
+                  <div className='flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground'>
                     <Command className='size-4' />
                   </div>
                   <span className='sr-only'>langliu</span>
@@ -275,11 +276,11 @@ function AppSidebar({
           collapsible='none'
           className='w-auto min-w-0 flex-1 group-data-[collapsible=icon]:hidden'
         >
-          <SidebarHeader className='border-sidebar-border h-12 flex-row items-center justify-between border-b px-3.5 py-0'>
-            <span className='text-foreground truncate text-sm font-semibold'>
+          <SidebarHeader className='h-12 flex-row items-center justify-between border-b border-sidebar-border px-3.5 py-0'>
+            <span className='truncate text-sm font-semibold text-foreground'>
               {activeMeta.label}
             </span>
-            <span className='text-muted-foreground text-xs tabular-nums'>
+            <span className='text-xs text-muted-foreground tabular-nums'>
               {selectedApp === 'nav'
                 ? `${totalLinks} 个站点`
                 : selectedApp === 'novels'

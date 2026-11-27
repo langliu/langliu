@@ -1,6 +1,7 @@
 import { Link, useRouter } from '@tanstack/react-router'
 import { BookOpen, Plus } from 'lucide-react'
 import { useState } from 'react'
+
 import { ClientDate } from '~/components/novels/client-date'
 import { NovelCover } from '~/components/novels/novel-cover'
 import { NovelForm } from '~/components/novels/novel-form'
@@ -20,7 +21,7 @@ export function NovelList({ novels }: { novels: NovelSummary[] }) {
   return (
     <div className='mx-auto w-full max-w-6xl flex-1 space-y-4 p-6'>
       <div className='flex items-center justify-between'>
-        <h2 className='font-semibold text-base'>书架</h2>
+        <h2 className='text-base font-semibold'>书架</h2>
         <Button size='sm' onClick={() => setCreating(true)}>
           <Plus />
           新增小说
@@ -30,8 +31,8 @@ export function NovelList({ novels }: { novels: NovelSummary[] }) {
       {novels.length === 0 ? (
         <div className='flex flex-col items-center justify-center rounded-xl border border-dashed py-16 text-center'>
           <BookOpen className='size-8 text-muted-foreground' />
-          <p className='mt-3 font-medium text-sm'>书架还是空的</p>
-          <p className='mt-1 text-muted-foreground text-sm'>先新增一本小说，再往里加分卷和章节。</p>
+          <p className='mt-3 text-sm font-medium'>书架还是空的</p>
+          <p className='mt-1 text-sm text-muted-foreground'>先新增一本小说，再往里加分卷和章节。</p>
           <Button className='mt-4' size='sm' onClick={() => setCreating(true)}>
             <Plus />
             新增小说
@@ -52,12 +53,12 @@ export function NovelList({ novels }: { novels: NovelSummary[] }) {
                 className='w-full transition-opacity group-hover:opacity-85'
               />
               <div>
-                <span className='block truncate font-medium text-sm'>{novel.name}</span>
-                <div className='mt-1 flex items-center gap-2 text-muted-foreground text-xs'>
+                <span className='block truncate text-sm font-medium'>{novel.name}</span>
+                <div className='mt-1 flex items-center gap-2 text-xs text-muted-foreground'>
                   <Badge variant='secondary'>{novelStatusLabels[novel.status]}</Badge>
                   <span className='truncate'>{novel.author ?? '佚名'}</span>
                 </div>
-                <p className='mt-1 text-muted-foreground text-xs'>
+                <p className='mt-1 text-xs text-muted-foreground'>
                   {novel.chapterCount} 章 · {formatWords(novel.wordCount)} 字 · 更新于{' '}
                   <ClientDate time={novel.updatedAt} />
                 </p>

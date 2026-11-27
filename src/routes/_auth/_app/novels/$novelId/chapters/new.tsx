@@ -1,5 +1,6 @@
 import { createFileRoute, useLoaderData } from '@tanstack/react-router'
 import { z } from 'zod'
+
 import { ChapterEditor } from '~/components/novels/chapter-editor'
 
 export const Route = createFileRoute('/_auth/_app/novels/$novelId/chapters/new')({

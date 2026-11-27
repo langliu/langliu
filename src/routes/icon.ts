@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+
 import { plan } from '~/data/plan'
 
 // 只代取影视导航数据里声明过的图标地址，避免变成任意 URL 的开放代理

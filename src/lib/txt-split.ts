@@ -223,7 +223,7 @@ function dominantFamilies(candidates: Candidate[]) {
   const max = Math.max(0, ...counts.values())
   return new Set(
     [...counts.entries()]
-      .filter(([_, count]) => count >= 2 && count >= max * 0.3)
+      .filter(([, count]) => count >= 2 && count >= max * 0.3)
       .map(([family]) => family),
   )
 }
