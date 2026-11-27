@@ -9,29 +9,25 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as IconRouteImport } from './routes/icon'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as PlanRouteImport } from './routes/plan'
-import { Route as AuthNovelsRouteImport } from './routes/_auth/novels'
+import { Route as AuthAppRouteImport } from './routes/_auth/_app'
 import { Route as CoversKeyRouteImport } from './routes/covers.$key'
-import { Route as AuthNovelsIndexRouteImport } from './routes/_auth/novels/index'
-import { Route as AuthNovelsNovelIdRouteImport } from './routes/_auth/novels/$novelId'
+import { Route as AuthAppIndexRouteImport } from './routes/_auth/_app/index'
+import { Route as AuthAppNovelsRouteImport } from './routes/_auth/_app/novels'
 import { Route as AuthReadNovelIdRouteImport } from './routes/_auth/read.$novelId'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
-import { Route as AuthNovelsNovelIdIndexRouteImport } from './routes/_auth/novels/$novelId/index'
+import { Route as AuthAppNovelsIndexRouteImport } from './routes/_auth/_app/novels/index'
+import { Route as AuthAppNovelsNovelIdRouteImport } from './routes/_auth/_app/novels/$novelId'
 import { Route as AuthReadNovelIdIndexRouteImport } from './routes/_auth/read.$novelId.index'
 import { Route as AuthReadNovelIdChapterIdRouteImport } from './routes/_auth/read.$novelId.$chapterId'
-import { Route as AuthNovelsNovelIdChaptersChapterIdRouteImport } from './routes/_auth/novels/$novelId/chapters/$chapterId'
-import { Route as AuthNovelsNovelIdChaptersNewRouteImport } from './routes/_auth/novels/$novelId/chapters/new'
+import { Route as AuthAppNovelsNovelIdIndexRouteImport } from './routes/_auth/_app/novels/$novelId/index'
+import { Route as AuthAppNovelsNovelIdChaptersChapterIdRouteImport } from './routes/_auth/_app/novels/$novelId/chapters/$chapterId'
+import { Route as AuthAppNovelsNovelIdChaptersNewRouteImport } from './routes/_auth/_app/novels/$novelId/chapters/new'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/_auth',
   getParentRoute: () => rootRouteImport,
@@ -56,9 +52,8 @@ const PlanRoute = PlanRouteImport.update({
   path: '/plan',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthNovelsRoute = AuthNovelsRouteImport.update({
-  id: '/novels',
-  path: '/novels',
+const AuthAppRoute = AuthAppRouteImport.update({
+  id: '/_app',
   getParentRoute: () => AuthRoute,
 } as any)
 const CoversKeyRoute = CoversKeyRouteImport.update({
@@ -66,15 +61,15 @@ const CoversKeyRoute = CoversKeyRouteImport.update({
   path: '/covers/$key',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthNovelsIndexRoute = AuthNovelsIndexRouteImport.update({
+const AuthAppIndexRoute = AuthAppIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => AuthNovelsRoute,
+  getParentRoute: () => AuthAppRoute,
 } as any)
-const AuthNovelsNovelIdRoute = AuthNovelsNovelIdRouteImport.update({
-  id: '/$novelId',
-  path: '/$novelId',
-  getParentRoute: () => AuthNovelsRoute,
+const AuthAppNovelsRoute = AuthAppNovelsRouteImport.update({
+  id: '/novels',
+  path: '/novels',
+  getParentRoute: () => AuthAppRoute,
 } as any)
 const AuthReadNovelIdRoute = AuthReadNovelIdRouteImport.update({
   id: '/read/$novelId',
@@ -86,10 +81,15 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthNovelsNovelIdIndexRoute = AuthNovelsNovelIdIndexRouteImport.update({
+const AuthAppNovelsIndexRoute = AuthAppNovelsIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => AuthNovelsNovelIdRoute,
+  getParentRoute: () => AuthAppNovelsRoute,
+} as any)
+const AuthAppNovelsNovelIdRoute = AuthAppNovelsNovelIdRouteImport.update({
+  id: '/$novelId',
+  path: '/$novelId',
+  getParentRoute: () => AuthAppNovelsRoute,
 } as any)
 const AuthReadNovelIdIndexRoute = AuthReadNovelIdIndexRouteImport.update({
   id: '/',
@@ -102,71 +102,78 @@ const AuthReadNovelIdChapterIdRoute =
     path: '/$chapterId',
     getParentRoute: () => AuthReadNovelIdRoute,
   } as any)
-const AuthNovelsNovelIdChaptersChapterIdRoute =
-  AuthNovelsNovelIdChaptersChapterIdRouteImport.update({
+const AuthAppNovelsNovelIdIndexRoute =
+  AuthAppNovelsNovelIdIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthAppNovelsNovelIdRoute,
+  } as any)
+const AuthAppNovelsNovelIdChaptersChapterIdRoute =
+  AuthAppNovelsNovelIdChaptersChapterIdRouteImport.update({
     id: '/chapters/$chapterId',
     path: '/chapters/$chapterId',
-    getParentRoute: () => AuthNovelsNovelIdRoute,
+    getParentRoute: () => AuthAppNovelsNovelIdRoute,
   } as any)
-const AuthNovelsNovelIdChaptersNewRoute =
-  AuthNovelsNovelIdChaptersNewRouteImport.update({
+const AuthAppNovelsNovelIdChaptersNewRoute =
+  AuthAppNovelsNovelIdChaptersNewRouteImport.update({
     id: '/chapters/new',
     path: '/chapters/new',
-    getParentRoute: () => AuthNovelsNovelIdRoute,
+    getParentRoute: () => AuthAppNovelsNovelIdRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof AuthAppIndexRoute
   '/icon': typeof IconRoute
   '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
   '/plan': typeof PlanRoute
-  '/novels': typeof AuthNovelsRouteWithChildren
   '/covers/$key': typeof CoversKeyRoute
-  '/novels/$novelId': typeof AuthNovelsNovelIdRouteWithChildren
+  '/novels': typeof AuthAppNovelsRouteWithChildren
   '/read/$novelId': typeof AuthReadNovelIdRouteWithChildren
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/novels/': typeof AuthNovelsIndexRoute
+  '/novels/$novelId': typeof AuthAppNovelsNovelIdRouteWithChildren
   '/read/$novelId/$chapterId': typeof AuthReadNovelIdChapterIdRoute
-  '/novels/$novelId/': typeof AuthNovelsNovelIdIndexRoute
+  '/novels/': typeof AuthAppNovelsIndexRoute
   '/read/$novelId/': typeof AuthReadNovelIdIndexRoute
-  '/novels/$novelId/chapters/$chapterId': typeof AuthNovelsNovelIdChaptersChapterIdRoute
-  '/novels/$novelId/chapters/new': typeof AuthNovelsNovelIdChaptersNewRoute
+  '/novels/$novelId/': typeof AuthAppNovelsNovelIdIndexRoute
+  '/novels/$novelId/chapters/$chapterId': typeof AuthAppNovelsNovelIdChaptersChapterIdRoute
+  '/novels/$novelId/chapters/new': typeof AuthAppNovelsNovelIdChaptersNewRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/': typeof AuthAppIndexRoute
   '/icon': typeof IconRoute
   '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
   '/plan': typeof PlanRoute
   '/covers/$key': typeof CoversKeyRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/novels': typeof AuthNovelsIndexRoute
   '/read/$novelId/$chapterId': typeof AuthReadNovelIdChapterIdRoute
-  '/novels/$novelId': typeof AuthNovelsNovelIdIndexRoute
+  '/novels': typeof AuthAppNovelsIndexRoute
   '/read/$novelId': typeof AuthReadNovelIdIndexRoute
-  '/novels/$novelId/chapters/$chapterId': typeof AuthNovelsNovelIdChaptersChapterIdRoute
-  '/novels/$novelId/chapters/new': typeof AuthNovelsNovelIdChaptersNewRoute
+  '/novels/$novelId': typeof AuthAppNovelsNovelIdIndexRoute
+  '/novels/$novelId/chapters/$chapterId': typeof AuthAppNovelsNovelIdChaptersChapterIdRoute
+  '/novels/$novelId/chapters/new': typeof AuthAppNovelsNovelIdChaptersNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
   '/_auth': typeof AuthRouteWithChildren
   '/icon': typeof IconRoute
   '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
   '/plan': typeof PlanRoute
-  '/_auth/novels': typeof AuthNovelsRouteWithChildren
+  '/_auth/_app': typeof AuthAppRouteWithChildren
   '/covers/$key': typeof CoversKeyRoute
-  '/_auth/novels/$novelId': typeof AuthNovelsNovelIdRouteWithChildren
+  '/_auth/_app/novels': typeof AuthAppNovelsRouteWithChildren
   '/_auth/read/$novelId': typeof AuthReadNovelIdRouteWithChildren
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/_auth/novels/': typeof AuthNovelsIndexRoute
+  '/_auth/_app/': typeof AuthAppIndexRoute
+  '/_auth/_app/novels/$novelId': typeof AuthAppNovelsNovelIdRouteWithChildren
   '/_auth/read/$novelId/$chapterId': typeof AuthReadNovelIdChapterIdRoute
-  '/_auth/novels/$novelId/': typeof AuthNovelsNovelIdIndexRoute
+  '/_auth/_app/novels/': typeof AuthAppNovelsIndexRoute
   '/_auth/read/$novelId/': typeof AuthReadNovelIdIndexRoute
-  '/_auth/novels/$novelId/chapters/$chapterId': typeof AuthNovelsNovelIdChaptersChapterIdRoute
-  '/_auth/novels/$novelId/chapters/new': typeof AuthNovelsNovelIdChaptersNewRoute
+  '/_auth/_app/novels/$novelId/': typeof AuthAppNovelsNovelIdIndexRoute
+  '/_auth/_app/novels/$novelId/chapters/$chapterId': typeof AuthAppNovelsNovelIdChaptersChapterIdRoute
+  '/_auth/_app/novels/$novelId/chapters/new': typeof AuthAppNovelsNovelIdChaptersNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -176,15 +183,15 @@ export interface FileRouteTypes {
     | '/login'
     | '/mcp'
     | '/plan'
-    | '/novels'
     | '/covers/$key'
-    | '/novels/$novelId'
+    | '/novels'
     | '/read/$novelId'
     | '/api/auth/$'
-    | '/novels/'
+    | '/novels/$novelId'
     | '/read/$novelId/$chapterId'
-    | '/novels/$novelId/'
+    | '/novels/'
     | '/read/$novelId/'
+    | '/novels/$novelId/'
     | '/novels/$novelId/chapters/$chapterId'
     | '/novels/$novelId/chapters/new'
   fileRoutesByTo: FileRoutesByTo
@@ -196,35 +203,35 @@ export interface FileRouteTypes {
     | '/plan'
     | '/covers/$key'
     | '/api/auth/$'
-    | '/novels'
     | '/read/$novelId/$chapterId'
-    | '/novels/$novelId'
+    | '/novels'
     | '/read/$novelId'
+    | '/novels/$novelId'
     | '/novels/$novelId/chapters/$chapterId'
     | '/novels/$novelId/chapters/new'
   id:
     | '__root__'
-    | '/'
     | '/_auth'
     | '/icon'
     | '/login'
     | '/mcp'
     | '/plan'
-    | '/_auth/novels'
+    | '/_auth/_app'
     | '/covers/$key'
-    | '/_auth/novels/$novelId'
+    | '/_auth/_app/novels'
     | '/_auth/read/$novelId'
     | '/api/auth/$'
-    | '/_auth/novels/'
+    | '/_auth/_app/'
+    | '/_auth/_app/novels/$novelId'
     | '/_auth/read/$novelId/$chapterId'
-    | '/_auth/novels/$novelId/'
+    | '/_auth/_app/novels/'
     | '/_auth/read/$novelId/'
-    | '/_auth/novels/$novelId/chapters/$chapterId'
-    | '/_auth/novels/$novelId/chapters/new'
+    | '/_auth/_app/novels/$novelId/'
+    | '/_auth/_app/novels/$novelId/chapters/$chapterId'
+    | '/_auth/_app/novels/$novelId/chapters/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRouteWithChildren
   IconRoute: typeof IconRoute
   LoginRoute: typeof LoginRoute
@@ -236,13 +243,6 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_auth': {
       id: '/_auth'
       path: ''
@@ -278,11 +278,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlanRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_auth/novels': {
-      id: '/_auth/novels'
-      path: '/novels'
-      fullPath: '/novels'
-      preLoaderRoute: typeof AuthNovelsRouteImport
+    '/_auth/_app': {
+      id: '/_auth/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthAppRouteImport
       parentRoute: typeof AuthRoute
     }
     '/covers/$key': {
@@ -292,19 +292,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoversKeyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_auth/novels/': {
-      id: '/_auth/novels/'
+    '/_auth/_app/': {
+      id: '/_auth/_app/'
       path: '/'
-      fullPath: '/novels/'
-      preLoaderRoute: typeof AuthNovelsIndexRouteImport
-      parentRoute: typeof AuthNovelsRoute
+      fullPath: '/'
+      preLoaderRoute: typeof AuthAppIndexRouteImport
+      parentRoute: typeof AuthAppRoute
     }
-    '/_auth/novels/$novelId': {
-      id: '/_auth/novels/$novelId'
-      path: '/$novelId'
-      fullPath: '/novels/$novelId'
-      preLoaderRoute: typeof AuthNovelsNovelIdRouteImport
-      parentRoute: typeof AuthNovelsRoute
+    '/_auth/_app/novels': {
+      id: '/_auth/_app/novels'
+      path: '/novels'
+      fullPath: '/novels'
+      preLoaderRoute: typeof AuthAppNovelsRouteImport
+      parentRoute: typeof AuthAppRoute
     }
     '/_auth/read/$novelId': {
       id: '/_auth/read/$novelId'
@@ -320,12 +320,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_auth/novels/$novelId/': {
-      id: '/_auth/novels/$novelId/'
+    '/_auth/_app/novels/': {
+      id: '/_auth/_app/novels/'
       path: '/'
-      fullPath: '/novels/$novelId/'
-      preLoaderRoute: typeof AuthNovelsNovelIdIndexRouteImport
-      parentRoute: typeof AuthNovelsNovelIdRoute
+      fullPath: '/novels/'
+      preLoaderRoute: typeof AuthAppNovelsIndexRouteImport
+      parentRoute: typeof AuthAppNovelsRoute
+    }
+    '/_auth/_app/novels/$novelId': {
+      id: '/_auth/_app/novels/$novelId'
+      path: '/$novelId'
+      fullPath: '/novels/$novelId'
+      preLoaderRoute: typeof AuthAppNovelsNovelIdRouteImport
+      parentRoute: typeof AuthAppNovelsRoute
     }
     '/_auth/read/$novelId/': {
       id: '/_auth/read/$novelId/'
@@ -341,52 +348,72 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthReadNovelIdChapterIdRouteImport
       parentRoute: typeof AuthReadNovelIdRoute
     }
-    '/_auth/novels/$novelId/chapters/$chapterId': {
-      id: '/_auth/novels/$novelId/chapters/$chapterId'
+    '/_auth/_app/novels/$novelId/': {
+      id: '/_auth/_app/novels/$novelId/'
+      path: '/'
+      fullPath: '/novels/$novelId/'
+      preLoaderRoute: typeof AuthAppNovelsNovelIdIndexRouteImport
+      parentRoute: typeof AuthAppNovelsNovelIdRoute
+    }
+    '/_auth/_app/novels/$novelId/chapters/$chapterId': {
+      id: '/_auth/_app/novels/$novelId/chapters/$chapterId'
       path: '/chapters/$chapterId'
       fullPath: '/novels/$novelId/chapters/$chapterId'
-      preLoaderRoute: typeof AuthNovelsNovelIdChaptersChapterIdRouteImport
-      parentRoute: typeof AuthNovelsNovelIdRoute
+      preLoaderRoute: typeof AuthAppNovelsNovelIdChaptersChapterIdRouteImport
+      parentRoute: typeof AuthAppNovelsNovelIdRoute
     }
-    '/_auth/novels/$novelId/chapters/new': {
-      id: '/_auth/novels/$novelId/chapters/new'
+    '/_auth/_app/novels/$novelId/chapters/new': {
+      id: '/_auth/_app/novels/$novelId/chapters/new'
       path: '/chapters/new'
       fullPath: '/novels/$novelId/chapters/new'
-      preLoaderRoute: typeof AuthNovelsNovelIdChaptersNewRouteImport
-      parentRoute: typeof AuthNovelsNovelIdRoute
+      preLoaderRoute: typeof AuthAppNovelsNovelIdChaptersNewRouteImport
+      parentRoute: typeof AuthAppNovelsNovelIdRoute
     }
   }
 }
 
-interface AuthNovelsNovelIdRouteChildren {
-  AuthNovelsNovelIdIndexRoute: typeof AuthNovelsNovelIdIndexRoute
-  AuthNovelsNovelIdChaptersChapterIdRoute: typeof AuthNovelsNovelIdChaptersChapterIdRoute
-  AuthNovelsNovelIdChaptersNewRoute: typeof AuthNovelsNovelIdChaptersNewRoute
+interface AuthAppNovelsNovelIdRouteChildren {
+  AuthAppNovelsNovelIdIndexRoute: typeof AuthAppNovelsNovelIdIndexRoute
+  AuthAppNovelsNovelIdChaptersChapterIdRoute: typeof AuthAppNovelsNovelIdChaptersChapterIdRoute
+  AuthAppNovelsNovelIdChaptersNewRoute: typeof AuthAppNovelsNovelIdChaptersNewRoute
 }
 
-const AuthNovelsNovelIdRouteChildren: AuthNovelsNovelIdRouteChildren = {
-  AuthNovelsNovelIdIndexRoute: AuthNovelsNovelIdIndexRoute,
-  AuthNovelsNovelIdChaptersChapterIdRoute:
-    AuthNovelsNovelIdChaptersChapterIdRoute,
-  AuthNovelsNovelIdChaptersNewRoute: AuthNovelsNovelIdChaptersNewRoute,
+const AuthAppNovelsNovelIdRouteChildren: AuthAppNovelsNovelIdRouteChildren = {
+  AuthAppNovelsNovelIdIndexRoute: AuthAppNovelsNovelIdIndexRoute,
+  AuthAppNovelsNovelIdChaptersChapterIdRoute:
+    AuthAppNovelsNovelIdChaptersChapterIdRoute,
+  AuthAppNovelsNovelIdChaptersNewRoute: AuthAppNovelsNovelIdChaptersNewRoute,
 }
 
-const AuthNovelsNovelIdRouteWithChildren =
-  AuthNovelsNovelIdRoute._addFileChildren(AuthNovelsNovelIdRouteChildren)
+const AuthAppNovelsNovelIdRouteWithChildren =
+  AuthAppNovelsNovelIdRoute._addFileChildren(AuthAppNovelsNovelIdRouteChildren)
 
-interface AuthNovelsRouteChildren {
-  AuthNovelsNovelIdRoute: typeof AuthNovelsNovelIdRouteWithChildren
-  AuthNovelsIndexRoute: typeof AuthNovelsIndexRoute
+interface AuthAppNovelsRouteChildren {
+  AuthAppNovelsNovelIdRoute: typeof AuthAppNovelsNovelIdRouteWithChildren
+  AuthAppNovelsIndexRoute: typeof AuthAppNovelsIndexRoute
 }
 
-const AuthNovelsRouteChildren: AuthNovelsRouteChildren = {
-  AuthNovelsNovelIdRoute: AuthNovelsNovelIdRouteWithChildren,
-  AuthNovelsIndexRoute: AuthNovelsIndexRoute,
+const AuthAppNovelsRouteChildren: AuthAppNovelsRouteChildren = {
+  AuthAppNovelsNovelIdRoute: AuthAppNovelsNovelIdRouteWithChildren,
+  AuthAppNovelsIndexRoute: AuthAppNovelsIndexRoute,
 }
 
-const AuthNovelsRouteWithChildren = AuthNovelsRoute._addFileChildren(
-  AuthNovelsRouteChildren,
+const AuthAppNovelsRouteWithChildren = AuthAppNovelsRoute._addFileChildren(
+  AuthAppNovelsRouteChildren,
 )
+
+interface AuthAppRouteChildren {
+  AuthAppNovelsRoute: typeof AuthAppNovelsRouteWithChildren
+  AuthAppIndexRoute: typeof AuthAppIndexRoute
+}
+
+const AuthAppRouteChildren: AuthAppRouteChildren = {
+  AuthAppNovelsRoute: AuthAppNovelsRouteWithChildren,
+  AuthAppIndexRoute: AuthAppIndexRoute,
+}
+
+const AuthAppRouteWithChildren =
+  AuthAppRoute._addFileChildren(AuthAppRouteChildren)
 
 interface AuthReadNovelIdRouteChildren {
   AuthReadNovelIdChapterIdRoute: typeof AuthReadNovelIdChapterIdRoute
@@ -403,19 +430,18 @@ const AuthReadNovelIdRouteWithChildren = AuthReadNovelIdRoute._addFileChildren(
 )
 
 interface AuthRouteChildren {
-  AuthNovelsRoute: typeof AuthNovelsRouteWithChildren
+  AuthAppRoute: typeof AuthAppRouteWithChildren
   AuthReadNovelIdRoute: typeof AuthReadNovelIdRouteWithChildren
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
-  AuthNovelsRoute: AuthNovelsRouteWithChildren,
+  AuthAppRoute: AuthAppRouteWithChildren,
   AuthReadNovelIdRoute: AuthReadNovelIdRouteWithChildren,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   AuthRoute: AuthRouteWithChildren,
   IconRoute: IconRoute,
   LoginRoute: LoginRoute,

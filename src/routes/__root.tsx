@@ -1,13 +1,10 @@
 /// <reference types='vite/client' />
 
-import { createRootRoute, HeadContent, Outlet, Scripts, useLocation } from '@tanstack/react-router'
+import { createRootRoute, HeadContent, Outlet, Scripts } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import type { ReactNode } from 'react'
 import { Toaster } from '~/components/ui/toast'
 import appCss from '~/styles/app.css?url'
-
-// 个人导航固定深色，影视导航沿用原来的浅色
-const lightRoutes = ['/plan']
 
 export const Route = createRootRoute({
   head: () => ({
@@ -31,12 +28,8 @@ function RootComponent() {
 }
 
 function RootDocument({ children }: { children: ReactNode }) {
-  const dark = useLocation({
-    select: ({ pathname }) => !lightRoutes.some((route) => pathname.startsWith(route)),
-  })
-
   return (
-    <html lang='zh-CN' className={dark ? 'dark' : undefined}>
+    <html lang='zh-CN' className='dark'>
       <head>
         <HeadContent />
       </head>

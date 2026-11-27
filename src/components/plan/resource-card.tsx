@@ -1,6 +1,6 @@
+import { ExternalLink } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { Badge } from '~/components/ui/badge'
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '~/components/ui/card'
 import { sendGTMEvent } from '~/lib/analytics'
 
 type IconStage = 'proxy' | 'direct' | 'failed'
@@ -27,23 +27,25 @@ export function ResourceCard({
       target='_blank'
       rel='noreferrer'
       onClick={() => sendGTMEvent({ event: 'link_click', value: href })}
+      className='group bg-card ring-foreground/10 hover:bg-muted/50 flex h-full items-start gap-3 rounded-xl p-4 ring-1 transition-colors'
     >
-      <Card className='flex h-full min-w-52 cursor-pointer items-center hover:-translate-y-1 hover:bg-gray-50'>
-        <ResourceIcon src={icon || `${href}favicon.ico`} />
-        <div>
-          <CardHeader className='pt-4 pb-1.5'>
-            <CardTitle className='text-xl'>{title}</CardTitle>
-          </CardHeader>
-          <CardContent className='flex gap-2 pb-1.5'>
-            {tags.map((tag) => (
-              <Badge key={tag}>{tag}</Badge>
-            ))}
-          </CardContent>
-          <CardFooter className='pb-4'>
-            <p className='text-gray-600'>{description}</p>
-          </CardFooter>
+      <ResourceIcon src={icon || `${href}favicon.ico`} />
+      <div className='min-w-0 flex-1 space-y-1.5'>
+        <div className='flex items-center gap-1.5'>
+          <span className='truncate text-sm font-medium'>{title}</span>
+          <ExternalLink className='text-muted-foreground size-3 shrink-0 opacity-0 transition-opacity group-hover:opacity-100' />
         </div>
-      </Card>
+        {tags.length > 0 ? (
+          <div className='flex flex-wrap gap-1.5'>
+            {tags.map((tag) => (
+              <Badge key={tag} variant='secondary'>
+                {tag}
+              </Badge>
+            ))}
+          </div>
+        ) : null}
+        <p className='text-muted-foreground line-clamp-2 text-xs'>{description}</p>
+      </div>
     </a>
   )
 }
@@ -85,12 +87,16 @@ function IconImage({
       ref={ref}
       src={src}
       alt=''
-      width={50}
-      height={50}
+      width={36}
+      height={36}
       loading='lazy'
       decoding='async'
       referrerPolicy='no-referrer'
-      className={hidden ? 'invisible pl-4' : 'pl-4'}
+      className={
+        hidden
+          ? 'invisible mt-0.5 size-9 shrink-0 rounded-md object-contain'
+          : 'bg-muted mt-0.5 size-9 shrink-0 rounded-md object-contain p-1'
+      }
       onError={onError}
     />
   )
