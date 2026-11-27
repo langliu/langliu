@@ -1,11 +1,12 @@
 import { Link, useRouter } from '@tanstack/react-router'
 import { useServerFn } from '@tanstack/react-start'
-import { BookOpen, ChevronDown, ChevronUp, Pencil, Plus, Trash2 } from 'lucide-react'
+import { BookOpen, ChevronDown, ChevronUp, FileUp, Pencil, Plus, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 import { ChapterGroup } from '~/components/novels/chapter-group'
 import { ConfirmDialog } from '~/components/novels/confirm-dialog'
 import { NovelCover } from '~/components/novels/novel-cover'
 import { NovelForm } from '~/components/novels/novel-form'
+import { TxtImport } from '~/components/novels/txt-import'
 import { VolumeForm } from '~/components/novels/volume-form'
 import { Badge } from '~/components/ui/badge'
 import { Button } from '~/components/ui/button'
@@ -37,6 +38,7 @@ export function NovelManage({ detail }: { detail: NovelDetail }) {
   const [deletingChapter, setDeletingChapter] = useState<ChapterSummary | null>(null)
   const [deletingVolume, setDeletingVolume] = useState<NovelVolumeGroup | null>(null)
   const [deletingNovel, setDeletingNovel] = useState(false)
+  const [importOpen, setImportOpen] = useState(false)
   const [busy, setBusy] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -69,7 +71,7 @@ export function NovelManage({ detail }: { detail: NovelDetail }) {
         <NovelCover src={detail.cover} name={detail.name} className='w-24 shrink-0' />
         <div className='min-w-0 flex-1 space-y-2'>
           <div className='flex flex-wrap items-center gap-2'>
-            <h2 className='font-semibold text-xl'>{detail.name}</h2>
+            <h2 className='text-xl font-semibold'>{detail.name}</h2>
             <Badge variant='secondary'>{novelStatusLabels[detail.status]}</Badge>
           </div>
           <p className='text-muted-foreground text-sm'>
@@ -77,7 +79,7 @@ export function NovelManage({ detail }: { detail: NovelDetail }) {
             字
           </p>
           {detail.intro ? (
-            <p className='line-clamp-3 whitespace-pre-line text-muted-foreground text-sm'>
+            <p className='text-muted-foreground line-clamp-3 text-sm whitespace-pre-line'>
               {detail.intro}
             </p>
           ) : null}
@@ -110,7 +112,7 @@ export function NovelManage({ detail }: { detail: NovelDetail }) {
 
       <div className='space-y-3'>
         <div className='flex flex-wrap items-center justify-between gap-2'>
-          <h3 className='font-medium text-base'>分卷与章节</h3>
+          <h3 className='text-base font-medium'>分卷与章节</h3>
           <div className='flex gap-2'>
             <Button
               size='sm'
@@ -119,6 +121,10 @@ export function NovelManage({ detail }: { detail: NovelDetail }) {
             >
               <Plus />
               新增分卷
+            </Button>
+            <Button size='sm' variant='outline' onClick={() => setImportOpen(true)}>
+              <FileUp />
+              导入 TXT
             </Button>
             <Button size='sm' onClick={() => openNewChapter()}>
               <Plus />
@@ -131,8 +137,8 @@ export function NovelManage({ detail }: { detail: NovelDetail }) {
 
         {detail.chapterCount === 0 && detail.volumes.length === 0 ? (
           <div className='rounded-xl border border-dashed py-12 text-center'>
-            <p className='font-medium text-sm'>还没有章节</p>
-            <p className='mt-1 text-muted-foreground text-sm'>
+            <p className='text-sm font-medium'>还没有章节</p>
+            <p className='text-muted-foreground mt-1 text-sm'>
               可以直接新增章节，也可以先建分卷再往卷里加。
             </p>
             <Button className='mt-4' size='sm' onClick={() => openNewChapter()}>
@@ -240,6 +246,8 @@ export function NovelManage({ detail }: { detail: NovelDetail }) {
         novel={detail}
         onSaved={() => router.invalidate()}
       />
+
+      <TxtImport detail={detail} open={importOpen} onOpenChange={setImportOpen} />
 
       <VolumeForm
         open={volumeForm.open}

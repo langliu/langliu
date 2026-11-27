@@ -1,5 +1,7 @@
 {
   "include": ["**/*.ts", "**/*.tsx", "**/*.d.ts"],
+  // void prepare 生成的 env 类型增强放在点目录里，include 的 glob 匹配不到，显式列出
+  "files": [".void/env.d.ts"],
   "compilerOptions": {
     "strict": true,
     "esModuleInterop": true,
@@ -12,6 +14,8 @@
     "skipLibCheck": true,
     "target": "ES2024",
     "allowJs": true,
+    // .void/env.d.ts 里用 typeof import("../src/env.ts") 引用 schema，需要允许 .ts 后缀
+    "allowImportingTsExtensions": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "~/*": ["./src/*"]

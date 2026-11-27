@@ -16,6 +16,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as PlanRouteImport } from './routes/plan'
 import { Route as AuthNovelsRouteImport } from './routes/_auth/novels'
+import { Route as CoversKeyRouteImport } from './routes/covers.$key'
 import { Route as AuthNovelsIndexRouteImport } from './routes/_auth/novels/index'
 import { Route as AuthNovelsNovelIdRouteImport } from './routes/_auth/novels/$novelId'
 import { Route as AuthReadNovelIdRouteImport } from './routes/_auth/read.$novelId'
@@ -59,6 +60,11 @@ const AuthNovelsRoute = AuthNovelsRouteImport.update({
   id: '/novels',
   path: '/novels',
   getParentRoute: () => AuthRoute,
+} as any)
+const CoversKeyRoute = CoversKeyRouteImport.update({
+  id: '/covers/$key',
+  path: '/covers/$key',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AuthNovelsIndexRoute = AuthNovelsIndexRouteImport.update({
   id: '/',
@@ -116,6 +122,7 @@ export interface FileRoutesByFullPath {
   '/mcp': typeof McpRoute
   '/plan': typeof PlanRoute
   '/novels': typeof AuthNovelsRouteWithChildren
+  '/covers/$key': typeof CoversKeyRoute
   '/novels/$novelId': typeof AuthNovelsNovelIdRouteWithChildren
   '/read/$novelId': typeof AuthReadNovelIdRouteWithChildren
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -132,6 +139,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
   '/plan': typeof PlanRoute
+  '/covers/$key': typeof CoversKeyRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/novels': typeof AuthNovelsIndexRoute
   '/read/$novelId/$chapterId': typeof AuthReadNovelIdChapterIdRoute
@@ -149,6 +157,7 @@ export interface FileRoutesById {
   '/mcp': typeof McpRoute
   '/plan': typeof PlanRoute
   '/_auth/novels': typeof AuthNovelsRouteWithChildren
+  '/covers/$key': typeof CoversKeyRoute
   '/_auth/novels/$novelId': typeof AuthNovelsNovelIdRouteWithChildren
   '/_auth/read/$novelId': typeof AuthReadNovelIdRouteWithChildren
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -168,6 +177,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/plan'
     | '/novels'
+    | '/covers/$key'
     | '/novels/$novelId'
     | '/read/$novelId'
     | '/api/auth/$'
@@ -184,6 +194,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/mcp'
     | '/plan'
+    | '/covers/$key'
     | '/api/auth/$'
     | '/novels'
     | '/read/$novelId/$chapterId'
@@ -200,6 +211,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/plan'
     | '/_auth/novels'
+    | '/covers/$key'
     | '/_auth/novels/$novelId'
     | '/_auth/read/$novelId'
     | '/api/auth/$'
@@ -218,6 +230,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   McpRoute: typeof McpRoute
   PlanRoute: typeof PlanRoute
+  CoversKeyRoute: typeof CoversKeyRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
@@ -271,6 +284,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/novels'
       preLoaderRoute: typeof AuthNovelsRouteImport
       parentRoute: typeof AuthRoute
+    }
+    '/covers/$key': {
+      id: '/covers/$key'
+      path: '/covers/$key'
+      fullPath: '/covers/$key'
+      preLoaderRoute: typeof CoversKeyRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_auth/novels/': {
       id: '/_auth/novels/'
@@ -401,6 +421,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   McpRoute: McpRoute,
   PlanRoute: PlanRoute,
+  CoversKeyRoute: CoversKeyRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport

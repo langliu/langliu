@@ -429,3 +429,51 @@ export async function getChapter(novelId: string, id: string): Promise<ChapterCo
     nextId: order[index + 1]?.id ?? null,
   }
 }
+
+/** TXT 导入：按全书现有最大排序值继续往后排，保证新章节接在末尾。 */
+export async function importChaptersBatch(
+  novelId: string,
+  volumeId: string | null,
+  chapters: { title: string; content: string }[],
+): Promise<number> {
+  const db = getDb()
+  const novelRows = await db.select({ id: novel.id }).from(novel).where(eq(novel.id, novelId))
+  if (!novelRows[0]) {
+    throw new Error('小说不存在')
+  }
+  if (volumeId) {
+    const volumeRows = await db
+      .select({ id: novelVolume.id })
+      .from(novelVolume)
+      .where(and(eq(novelVolume.novelId, novelId), eq(novelVolume.id, volumeId)))
+    if (!volumeRows[0]) {
+      throw new Error('分卷不存在')
+    }
+  }
+  const start =
+    (
+      await db
+        .select({ max: max(novelChapter.sortOrder) })
+        .from(novelChapter)
+        .where(eq(novelChapter.novelId, novelId))
+    )[0]?.max ?? -1
+  const at = new Date()
+  const statements: [BatchItem<'sqlite'>, ...BatchItem<'sqlite'>[]] = [
+    db.update(novel).set({ updatedAt: at }).where(eq(novel.id, novelId)),
+    ...chapters.map((chapter, i) =>
+      db.insert(novelChapter).values({
+        id: crypto.randomUUID(),
+        novelId,
+        volumeId,
+        title: chapter.title,
+        content: chapter.content,
+        wordCount: countWords(chapter.content),
+        sortOrder: start + 1 + i,
+        createdAt: at,
+        updatedAt: at,
+      }),
+    ),
+  ]
+  await db.batch(statements)
+  return chapters.length
+}

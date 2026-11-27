@@ -48,6 +48,14 @@ Thumbs.db
 # TanStack Start
 .tanstack
 
+# 构建产物（void/wrangler 构建中间输出）
+.cloudflare/
+
+# Void（本地状态与生成物；void.lock.json 在根目录，需要提交）
+.void/
+.void-wrangler.jsonc
+
 # Cloudflare / Wrangler
 .wrangler
 .dev.vars
+skills/

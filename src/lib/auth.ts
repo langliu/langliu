@@ -1,7 +1,7 @@
-import { env } from 'cloudflare:workers'
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { tanstackStartCookies } from 'better-auth/tanstack-start'
+import { env } from 'void/env'
 import { getDb } from './db'
 import * as schema from './schema'
 

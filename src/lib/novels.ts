@@ -6,10 +6,32 @@ import { authMiddleware } from './session'
 
 const idSchema = z.string().trim().min(1, '缺少 ID')
 
+const COVER_KEY_RE = /^\/covers\/[a-z0-9-]+\.(png|jpg|webp|gif)$/i
+
+function isValidCoverUrl(value: string): boolean {
+  if (COVER_KEY_RE.test(value)) {
+    return true
+  }
+  try {
+    const parsed = new URL(value)
+    return parsed.protocol === 'http:' || parsed.protocol === 'https:'
+  } catch {
+    return false
+  }
+}
+
 const novelInputSchema = z.object({
   name: z.string().trim().min(1, '请填写名称').max(100, '名称最多 100 个字'),
   author: z.string().trim().max(50, '作者最多 50 个字').optional(),
-  cover: z.url({ error: '封面需要是合法的图片地址' }).max(500, '封面地址过长').optional(),
+  cover: z
+    .string()
+    .trim()
+    .max(500, '封面地址过长')
+    // 上传到对象存储时是站内相对路径（/covers/<key>），也可以手填绝对地址
+    .refine(isValidCoverUrl, {
+      error: '封面需要是合法的图片地址',
+    })
+    .optional(),
   intro: z.string().trim().max(2000, '简介最多 2000 个字').optional(),
   status: z.enum(novelStatuses, { error: '状态不合法' }),
 })
@@ -163,4 +185,71 @@ export const getChapter = createServerFn({ method: 'GET' })
       throw notFound()
     }
     return chapter
+  })
+
+// TXT 导入按批提交：免费版 Worker 单次调用最多跑 50 条 SQL，一批控制在 40 章以内
+export const importChaptersBatch = createServerFn({ method: 'POST' })
+  .middleware([authMiddleware])
+  .validator(
+    validated(
+      z.object({
+        novelId: idSchema,
+        volumeId: idSchema.nullable(),
+        chapters: z
+          .array(
+            z.object({
+              title: z.string().trim().min(1, '章节标题不能为空').max(200, '章节标题最多 200 个字'),
+              content: z.string().max(300000, '单章正文最多 30 万字'),
+            }),
+          )
+          .min(1, '这一批没有章节')
+          .max(40, '一次最多导入 40 章'),
+      }),
+    ),
+  )
+  .handler(async ({ data }) => {
+    const store = await import('./novels.server')
+    return {
+      imported: await store.importChaptersBatch(data.novelId, data.volumeId, data.chapters),
+    }
+  })
+
+const COVER_TYPES: Record<string, string> = {
+  'image/png': 'png',
+  'image/jpeg': 'jpg',
+  'image/webp': 'webp',
+  'image/gif': 'gif',
+}
+const COVER_MAX_BYTES = 2 * 1024 * 1024
+
+export const uploadCover = createServerFn({ method: 'POST' })
+  .middleware([authMiddleware])
+  .validator((data: unknown) => {
+    if (!(data instanceof FormData)) {
+      throw new Error('提交格式不正确')
+    }
+    const file = data.get('file')
+    if (!(file instanceof File)) {
+      throw new Error('缺少封面文件')
+    }
+    if (!(file.type in COVER_TYPES)) {
+      throw new Error('封面只支持 PNG、JPG、WebP 或 GIF')
+    }
+    if (file.size === 0) {
+      throw new Error('封面文件为空')
+    }
+    if (file.size > COVER_MAX_BYTES) {
+      throw new Error('封面图片最大 2MB')
+    }
+    return file
+  })
+  .handler(async ({ data: file }) => {
+    const { getCoverBucket } = await import('./covers')
+    const bucket = getCoverBucket()
+    if (!bucket) {
+      throw new Error('对象存储未配置')
+    }
+    const key = `${crypto.randomUUID()}.${COVER_TYPES[file.type]}`
+    await bucket.put(key, file, { httpMetadata: { contentType: file.type } })
+    return { url: `/covers/${key}` }
   })

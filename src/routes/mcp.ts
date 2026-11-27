@@ -1,6 +1,6 @@
-import { env } from 'cloudflare:workers'
 import { WebStandardStreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js'
 import { createFileRoute } from '@tanstack/react-router'
+import { env } from 'void/env'
 import { createNavMcpServer } from '~/lib/mcp'
 
 function jsonRpcResponse(
@@ -23,7 +23,7 @@ export const Route = createFileRoute('/mcp')({
       GET: methodNotAllowed,
       DELETE: methodNotAllowed,
       POST: async ({ request }) => {
-        const token = (env as { MCP_TOKEN?: string }).MCP_TOKEN
+        const token = env.MCP_TOKEN
         const authorization = request.headers.get('authorization')
         if (!token || authorization !== `Bearer ${token}`) {
           return jsonRpcResponse(401, {

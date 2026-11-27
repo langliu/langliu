@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "source": {
+    "name": "nav",
+    "workers_dev": true,
+    "preview_urls": true,
+    "routes": [],
+    "d1_databases": [
+      {
+        "binding": "DB",
+        "database_name": "nav",
+        "database_id": "9a8476e4-417e-41e3-9125-e0bae72f27c6",
+        "migrations_dir": "./db/migrations"
+      }
+    ],
+    "r2_buckets": [
+      {
+        "binding": "COVERS",
+        "bucket_name": "nav-covers"
+      }
+    ]
+  },
+  "resolved": {
+    "name": "nav",
+    "workers_dev": true,
+    "preview_urls": true,
+    "routes": [],
+    "d1_databases": [
+      {
+        "binding": "DB",
+        "database_name": "nav",
+        "database_id": "9a8476e4-417e-41e3-9125-e0bae72f27c6",
+        "migrations_dir": "./db/migrations"
+      }
+    ],
+    "account_id": "c50226f9c0209f536f431996c521f7c9",
+    "r2_buckets": [
+      {
+        "binding": "COVERS",
+        "bucket_name": "nav-covers"
+      }
+    ]
+  },
+  "text": "{\n  \"name\": \"nav\",\n  \"workers_dev\": true,\n  \"preview_urls\": true,\n  \"routes\": [],\n  \"d1_databases\": [\n    {\n      \"binding\": \"DB\",\n      \"database_name\": \"nav\",\n      \"database_id\": \"9a8476e4-417e-41e3-9125-e0bae72f27c6\",\n      \"migrations_dir\": \"./db/migrations\"\n    }\n  ],\n  \"account_id\": \"c50226f9c0209f536f431996c521f7c9\",\n  \"r2_buckets\": [\n    {\n      \"binding\": \"COVERS\",\n      \"bucket_name\": \"nav-covers\"\n    }\n  ]\n}\n"
+}

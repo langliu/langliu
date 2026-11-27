@@ -10,14 +10,10 @@ type HeadScript = { src: string; async: true } | { children: string }
 /** 读影视导航页的统计配置，没配置或格式不对的 ID 返回 null，页面就不注入对应脚本。 */
 export const getAnalyticsConfig = createServerFn({ method: 'GET' }).handler(
   async (): Promise<AnalyticsConfig> => {
-    const { env } = await import('cloudflare:workers')
-    const bindings = env as typeof env & {
-      GOOGLE_ANALYTICS_ID?: string
-      GOOGLE_TAG_MANAGER_ID?: string
-    }
+    const { env } = await import('void/env')
     return {
-      gaId: bindings.GOOGLE_ANALYTICS_ID?.match(/^G-[A-Z0-9]+$/i)?.[0] ?? null,
-      gtmId: bindings.GOOGLE_TAG_MANAGER_ID?.match(/^GTM-[A-Z0-9]+$/i)?.[0] ?? null,
+      gaId: env.GOOGLE_ANALYTICS_ID?.match(/^G-[A-Z0-9]+$/i)?.[0] ?? null,
+      gtmId: env.GOOGLE_TAG_MANAGER_ID?.match(/^GTM-[A-Z0-9]+$/i)?.[0] ?? null,
     }
   },
 )
