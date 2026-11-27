@@ -1,4 +1,0 @@
-BETTER_AUTH_SECRET=replace-with-at-least-32-random-characters
-BETTER_AUTH_URL=http://localhost:3001
-
-MCP_TOKEN=dev-token

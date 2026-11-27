@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.5.12/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.6.9/schema.json",
   "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "vcs": {
     "useIgnoreFile": true,
@@ -9,8 +9,8 @@
   "files": {
     "includes": [
       "**",
+      "!**/.agents",
       "!**/node_modules",
-      "!**/.next",
       "!**/dist",
       "!**/worker-configuration.d.ts",
       "!**/routeTree.gen.ts",
@@ -30,10 +30,7 @@
         "noUnknownAtRules": "off"
       },
       "nursery": {
-        "useSortedClasses": {
-          "options": {
-            "functions": ["cn", "cva", "clsx", "twMerge", "tw", "tw.*"]
-          },
+        "useTailwindSortedClasses": {
           "level": "warn"
         }
       }
@@ -61,5 +58,9 @@
       "enabled": true,
       "indentStyle": "space"
     }
+  },
+  "tailwind": {
+    "mergeFunctions": ["cn", "clsx", "twMerge", "tw", "tw.*"],
+    "variantFunctions": ["cva"]
   }
 }

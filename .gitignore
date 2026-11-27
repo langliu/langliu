@@ -38,23 +38,24 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Next.js
-.next
+# env
 .env
 .env*.local
-.vercel
 
 # TypeScript
 *.tsbuildinfo
 
-# Turbo
-.turbo
+# TanStack Start
+.tanstack
+
+# 构建产物（void/wrangler 构建中间输出）
+.cloudflare/
+
+# Void（本地状态与生成物；void.lock.json 在根目录，需要提交）
+.void/
+.void-wrangler.jsonc
 
 # Cloudflare / Wrangler
 .wrangler
 .dev.vars
-
-# doc
-*/*/doc_build/*
-# next-agents-md
-.next-docs/
+skills/
