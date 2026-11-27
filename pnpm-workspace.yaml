@@ -1,10 +1,7 @@
 allowBuilds:
-  '@parcel/watcher': true
-  core-js: false
   esbuild: true
   sharp: true
   workerd: true
-  wrangler: true
 catalog:
   vite: npm:@voidzero-dev/vite-plus-core@8.3.8001
   vite-plus: 1.8.0
