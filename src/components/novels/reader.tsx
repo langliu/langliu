@@ -1,6 +1,7 @@
 import { Link, useNavigate } from '@tanstack/react-router'
 import { ArrowLeft, List, Minus, Plus } from 'lucide-react'
 import { useEffect, useState } from 'react'
+
 import { Button } from '~/components/ui/button'
 import { Separator } from '~/components/ui/separator'
 import {
@@ -84,7 +85,7 @@ export function Reader({ detail, chapter }: { detail: NovelDetail; chapter: Chap
       ) : null}
       {detail.volumes.map((volume) => (
         <div key={volume.id}>
-          <h4 className='px-3 py-1.5 font-medium text-muted-foreground text-xs'>{volume.name}</h4>
+          <h4 className='px-3 py-1.5 text-xs font-medium text-muted-foreground'>{volume.name}</h4>
           <ChapterList
             novelId={detail.id}
             chapters={volume.chapters}
@@ -109,7 +110,7 @@ export function Reader({ detail, chapter }: { detail: NovelDetail; chapter: Chap
             返回
           </Button>
           <Separator orientation='vertical' className='h-4' />
-          <span className='truncate font-medium text-sm'>{detail.name}</span>
+          <span className='truncate text-sm font-medium'>{detail.name}</span>
         </div>
         <div className='flex shrink-0 items-center gap-1'>
           <Button
@@ -122,7 +123,7 @@ export function Reader({ detail, chapter }: { detail: NovelDetail; chapter: Chap
           >
             <Minus />
           </Button>
-          <span className='w-6 text-center text-muted-foreground text-xs tabular-nums'>
+          <span className='w-6 text-center text-xs text-muted-foreground tabular-nums'>
             {fontSize}
           </span>
           <Button
@@ -143,12 +144,12 @@ export function Reader({ detail, chapter }: { detail: NovelDetail; chapter: Chap
       </header>
 
       <main className='mx-auto w-full max-w-3xl flex-1 px-4 py-8'>
-        <h1 className='font-semibold text-xl'>{chapter.chapter.title}</h1>
-        <p className='mt-1 text-muted-foreground text-xs'>
+        <h1 className='text-xl font-semibold'>{chapter.chapter.title}</h1>
+        <p className='mt-1 text-xs text-muted-foreground'>
           第 {chapter.index} 章 · {formatWords(chapter.chapter.wordCount)} 字
         </p>
         <article
-          className='mt-6 min-h-[50vh] whitespace-pre-wrap text-foreground/90 leading-loose'
+          className='mt-6 min-h-[50vh] leading-loose whitespace-pre-wrap text-foreground/90'
           style={{ fontSize }}
         >
           {chapter.chapter.content || '这一章还没有内容。'}
@@ -228,7 +229,7 @@ function ChapterList({
               item.id === currentId && 'bg-muted font-medium',
             )}
           >
-            <span className='w-7 shrink-0 text-right text-muted-foreground text-xs tabular-nums'>
+            <span className='w-7 shrink-0 text-right text-xs text-muted-foreground tabular-nums'>
               {item.index}
             </span>
             <span className='truncate'>{item.title}</span>

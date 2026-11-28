@@ -2,6 +2,7 @@ import { Link, useBlocker, useRouter } from '@tanstack/react-router'
 import { useServerFn } from '@tanstack/react-start'
 import { ArrowLeft, Trash2 } from 'lucide-react'
 import { type FormEvent, useRef, useState } from 'react'
+
 import { ConfirmDialog } from '~/components/novels/confirm-dialog'
 import {
   AlertDialog,
@@ -121,12 +122,12 @@ export function ChapterEditor({
       <Link
         to='/novels/$novelId'
         params={{ novelId: detail.id }}
-        className='inline-flex items-center gap-1 text-muted-foreground text-sm hover:text-foreground'
+        className='inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground'
       >
         <ArrowLeft />
         返回《{detail.name}》
       </Link>
-      <h2 className='font-semibold text-xl'>{chapter ? '编辑章节' : '新增章节'}</h2>
+      <h2 className='text-xl font-semibold'>{chapter ? '编辑章节' : '新增章节'}</h2>
 
       <form className='space-y-4' onSubmit={onSubmit}>
         <div className='grid gap-4 sm:grid-cols-[1fr_16rem]'>
@@ -165,7 +166,7 @@ export function ChapterEditor({
         <div className='space-y-2'>
           <div className='flex items-center justify-between'>
             <Label htmlFor='chapter-content'>正文</Label>
-            <span className='text-muted-foreground text-xs tabular-nums'>
+            <span className='text-xs text-muted-foreground tabular-nums'>
               共 {formatWords(words)} 字
             </span>
           </div>
@@ -177,7 +178,7 @@ export function ChapterEditor({
           />
         </div>
 
-        {error ? <p className='text-destructive text-sm'>{error}</p> : null}
+        {error ? <p className='text-sm text-destructive'>{error}</p> : null}
 
         <div className='flex items-center justify-between'>
           {chapter ? (

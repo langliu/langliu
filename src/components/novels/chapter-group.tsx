@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { ChevronDown, ChevronUp, Pencil, Plus, Trash2 } from 'lucide-react'
 import type { ReactNode } from 'react'
+
 import { Button } from '~/components/ui/button'
 import { type ChapterSummary, formatWords, type MoveDirection } from '~/lib/novel-utils'
 
@@ -33,7 +34,7 @@ export function ChapterGroup({
       <header className='flex items-center justify-between gap-3 px-4 py-3'>
         <div className='flex min-w-0 items-baseline gap-2'>
           <h4 className='truncate font-medium'>{title}</h4>
-          <span className='shrink-0 text-muted-foreground text-xs'>{subtitle}</span>
+          <span className='shrink-0 text-xs text-muted-foreground'>{subtitle}</span>
         </div>
         <div className='flex shrink-0 items-center gap-1'>
           {headerActions}
@@ -45,7 +46,7 @@ export function ChapterGroup({
       </header>
 
       {chapters.length === 0 ? (
-        <p className='border-t px-4 py-6 text-muted-foreground text-sm'>这一组还没有章节。</p>
+        <p className='border-t px-4 py-6 text-sm text-muted-foreground'>这一组还没有章节。</p>
       ) : (
         <ul className='divide-y'>
           {chapters.map((chapter, index) => (
@@ -53,7 +54,7 @@ export function ChapterGroup({
               key={chapter.id}
               className='group flex items-center gap-3 px-4 py-1.5 transition-colors hover:bg-muted/50'
             >
-              <span className='w-8 shrink-0 text-right text-muted-foreground text-xs tabular-nums'>
+              <span className='w-8 shrink-0 text-right text-xs text-muted-foreground tabular-nums'>
                 {chapter.index}
               </span>
               <Link
@@ -63,11 +64,11 @@ export function ChapterGroup({
               >
                 {chapter.title}
               </Link>
-              <span className='shrink-0 text-muted-foreground text-xs tabular-nums'>
+              <span className='shrink-0 text-xs text-muted-foreground tabular-nums'>
                 {formatWords(chapter.wordCount)} 字
               </span>
               {/* 触屏没有悬停，所以只在宽屏上收起操作按钮 */}
-              <div className='flex shrink-0 items-center md:opacity-0 md:transition-opacity md:group-hover:opacity-100 md:group-focus-within:opacity-100'>
+              <div className='flex shrink-0 items-center md:opacity-0 md:transition-opacity md:group-focus-within:opacity-100 md:group-hover:opacity-100'>
                 <Button
                   variant='ghost'
                   size='icon-xs'

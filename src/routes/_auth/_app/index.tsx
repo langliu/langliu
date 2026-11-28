@@ -1,5 +1,6 @@
 import { createFileRoute, useLoaderData } from '@tanstack/react-router'
 import { z } from 'zod'
+
 import { NavBoard } from '~/components/nav/nav-board'
 
 export const Route = createFileRoute('/_auth/_app/')({

@@ -1,4 +1,5 @@
 import { Outlet, useLocation } from '@tanstack/react-router'
+
 import { PageHeader } from '~/components/app-shell'
 import { formatWords, type NovelSummary } from '~/lib/novel-utils'
 

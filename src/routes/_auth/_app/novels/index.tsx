@@ -1,4 +1,5 @@
 import { createFileRoute, useLoaderData } from '@tanstack/react-router'
+
 import { NovelList } from '~/components/novels/novel-list'
 
 export const Route = createFileRoute('/_auth/_app/novels/')({

@@ -1,6 +1,7 @@
 import { WebStandardStreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js'
 import { createFileRoute } from '@tanstack/react-router'
 import { env } from 'void/env'
+
 import { createNavMcpServer } from '~/lib/mcp'
 
 function jsonRpcResponse(
